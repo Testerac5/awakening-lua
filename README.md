@@ -1,3 +1,3 @@
-ShardLUA
+Awakening
 ========
-NotHawthorne: Breaking things since August 8, 2014. Removed the wall of text.
+All of the eluna server code is in this repo!
