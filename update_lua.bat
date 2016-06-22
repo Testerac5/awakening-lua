@@ -1,2 +1,2 @@
 cd C:\Users\Administrator\Desktop\Awakening\lua_scripts
-git pull https://bitbucket.org/Sin_Derek/awakening-lua-master
+git pull https://github.com/Serenity-/Awakening_LUA_Master
