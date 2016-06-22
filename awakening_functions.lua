@@ -421,7 +421,7 @@ end
 
 function RestCheck(event, player, spell)
 	if (spell:GetEntry()==818011) then
-		player:SendBroadcastMessage("You are resting")
+		player:SendBroadcastMessage("--You are resting--")
 		if (player:GetAura(818012)) then
 			player:RemoveAura(818012)
 		end
