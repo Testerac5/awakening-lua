@@ -409,7 +409,7 @@ end
 
 RegisterPlayerEvent(32, OnLoot)
 
---[[REST FUNCTIONALITY]]
+--[[REST FUNCTIONALITY
 function BreakRest(eventID, delay, pCall, player)
 	player:SetPower(3, (player:GetPower(3)+10))
 	if (player:IsMoving()) and (player:HasAura(818011)) then
@@ -417,6 +417,7 @@ function BreakRest(eventID, delay, pCall, player)
 		player:RemoveEvents()
 	end
 end
+]]
 
 function RestCheck(event, player, spell)
 	if (spell:GetEntry()==818011) then
@@ -427,8 +428,8 @@ function RestCheck(event, player, spell)
 			spell:Cancel()
 			player:RemoveAura(818011)
 			player:RemoveEvents()
-		else
-			player:RegisterEvent(BreakRest, 50, 0)
+		-- else
+			-- player:RegisterEvent(BreakRest, 50, 0)
 		end
 	end
 end
