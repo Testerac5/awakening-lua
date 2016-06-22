@@ -6,7 +6,7 @@ function update(event, player, msg, Type, lang)
 	
 		if msg == "%lua_update" then
     
-			os.execute('C:\Users\Administrator\Desktop\Awakening\lua_scripts')
+			os.execute(C:\\Users\\Administrator\\Desktop\\Awakening\\lua_scripts\\update_lua.bat')
 			
 		end
     
