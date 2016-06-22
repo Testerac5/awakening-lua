@@ -2,7 +2,7 @@ function update(event, player, msg, Type, lang)
 
     player_type = player:GetGMRank()
     
-    if player_type == 3 or player_type == 2 then 
+    if player_type == 3 then 
 	
 		if msg == "%lua_update" then
     
