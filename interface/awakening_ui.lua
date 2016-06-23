@@ -426,7 +426,7 @@ spell_ids = {10, 17, 53, 66, 71, 72, 75, 78, 99, 100,
 
     --[[STATIC SIDEBAR]]--
         local Frame = AIO:CreateFrame("Frame", "FrameTest", "UIParent", nil)
-        Frame:SetSize(42, 179)
+        Frame:SetSize(42, 200)
         Frame:SetMovable(true)
         Frame:SetEnabledMouse(true)
         Frame:RegisterForDrag("LeftButton")
@@ -439,7 +439,8 @@ spell_ids = {10, 17, 53, 66, 71, 72, 75, 78, 99, 100,
             edgeSize = 10,
             insets = { left = 1, right = 1, top = 1, bottom = 1 }
         })   
-		Frame:SetScript("OnDragStart", Frame.StartMoving)
+		frame:SetScript("OnDragStart", frame.StartMoving)	
+		frame:SetScript("OnDragStop", frame.StopMovingOrSizing)
 
      
     --[[TRAINING FRAME]]--
