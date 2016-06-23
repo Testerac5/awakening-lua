@@ -211,23 +211,38 @@ end
 RegisterPlayerEvent(3, On_LogIn)
 
 -- [[Starts events to constantly check agility and spirit and provide proper stats]]
+
+stat_list = {}
+
 function stat_check_start(event, player)
 	player:RegisterEvent(manaregen, 5000, 0)
 	player:RegisterEvent(abilitypower, 5000, 0)
+	stat_list[player:GetGUIDLow] = {0,0}
 end
 
 --[[APPLY MANA REGEN FROM SPIRIT]]
 function manaregen (event, delay, repeats, player)
-	if player:HasAura(21359) == true then
-		player:RemoveAura(21359)
-	end
-	if (player:GetStat(4)>1) then
-		spirit = player:GetStat(4)
-		repeat
-			player:AddAura(21359, player)
-			spirit = (spirit-2)
-		until (spirit<=1)
-	end
+
+	for k,v in pairs(stat_list) do
+		if player:GetGUIDLow() == k:
+		
+			if player:GetStat(4) != v[0]:
+			
+				stat_list[k] = player:GetStat(4)
+				
+				if player:HasAura(21359) == true then
+					player:RemoveAura(21359)
+				end
+				if (player:GetStat(4)>1) then
+					spirit = player:GetStat(4)
+					repeat
+						player:AddAura(21359, player)
+						spirit = (spirit-2)
+					until (spirit<=1)
+				end
+			end
+		end	
+	end	
 end
 -- [[Apply attack power from agility]]
 function abilitypower (event, delay, repeats, player)
