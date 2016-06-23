@@ -436,8 +436,7 @@ spell_ids = {10, 17, 53, 66, 71, 72, 75, 78, 99, 100,
             bgFile = "Interface/DialogFrame/UI-DialogBox-Background-Dark",
             edgeFile = "Interface/DialogFrame/UI-DialogBox-Border",
             tile = true,
-            edgeSize = 10,
-            insets = { left = 1, right = 1, top = 1, bottom = 1 }
+            edgeSize = 10
         })   
 		Frame:SetScript("OnDragStart", Frame.StartMoving)	
 		Frame:SetScript("OnDragStop", Frame.StopMovingOrSizing)
