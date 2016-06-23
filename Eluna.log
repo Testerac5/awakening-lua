@@ -6,3 +6,273 @@
 2016-06-22_16:55:53 ERROR lua_scripts/Misc/Redeem.lua:100: Couldn't find a creature with (ID: 187005)!
 2016-06-22_16:55:53 ERROR lua_scripts/Tokens/ProfessionToken.lua:176: Couldn't find a item with (ID: 777998)!
 2016-06-22_16:55:53 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_17:16:17 ERROR lua_scripts/Tokens/ProfessionToken.lua:176: Couldn't find a item with (ID: 777998)!
+2016-06-22_17:16:17 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_17:16:17 ERROR [Eluna]: Error loading `lua_scripts/update_lua.lua`
+2016-06-22_17:16:17 ERROR lua_scripts/update_lua.lua:22: <eof> expected near 'end'
+2016-06-22_17:17:30 ERROR lua_scripts/Tokens/ProfessionToken.lua:176: Couldn't find a item with (ID: 777998)!
+2016-06-22_17:17:30 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_17:17:30 ERROR [Eluna]: Error loading `lua_scripts/update_lua.lua`
+2016-06-22_17:17:30 ERROR lua_scripts/update_lua.lua:22: <eof> expected near 'end'
+2016-06-22_17:17:41 ERROR lua_scripts/Tokens/ProfessionToken.lua:176: Couldn't find a item with (ID: 777998)!
+2016-06-22_17:17:41 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_17:17:41 ERROR [Eluna]: Error loading `lua_scripts/update_lua.lua`
+2016-06-22_17:17:41 ERROR lua_scripts/update_lua.lua:22: <eof> expected near 'end'
+2016-06-22_17:21:35 ERROR lua_scripts/Tokens/ProfessionToken.lua:176: Couldn't find a item with (ID: 777998)!
+2016-06-22_17:21:35 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_17:23:09 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_17:33:47 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:33:49 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:33:50 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:33:52 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:33:55 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:34:56 ERROR lua_scripts/interface/awakening_ui.lua:442: attempt to index global 'frame' (a nil value)
+2016-06-22_17:37:55 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_17:39:09 ERROR lua_scripts/interface/awakening_ui.lua:442: attempt to index global 'frame' (a nil value)
+2016-06-22_17:40:02 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_17:40:12 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:40:12 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:40:13 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:40:14 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:40:15 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:40:15 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:40:16 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:40:16 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:40:17 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:40:17 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:40:18 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:40:18 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:40:20 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:40:20 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:40:22 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:40:22 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:40:24 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:40:24 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:43:08 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_17:43:17 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:43:17 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:43:18 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:43:18 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:43:19 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:43:19 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:43:20 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:43:20 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:43:21 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:43:21 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:47:16 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_17:47:26 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:47:26 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:47:27 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:47:28 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:47:28 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:47:28 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:47:38 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:47:38 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:47:39 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:47:39 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:48:35 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_17:48:53 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:48:53 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:48:54 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:48:54 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:50:39 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_17:51:40 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_17:53:31 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_17:54:19 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_17:54:31 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:54:31 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:55:02 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_17:56:10 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:56:10 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:56:19 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_17:56:29 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:56:29 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:56:30 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:56:30 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:56:31 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:56:31 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:56:31 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:56:31 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:56:32 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:56:32 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:56:33 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:56:33 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:57:23 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_17:58:00 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:58:00 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:58:02 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:58:03 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:58:15 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_17:58:55 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_17:59:02 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_17:59:14 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:59:14 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:59:14 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:59:15 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:59:51 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-22_17:59:51 ERROR lua_scripts/AIO_Objects.lua:1016: attempt to call method 'AddBlock' (a nil value)
+2016-06-23_03:49:50 ERROR [Eluna]: Error loading `lua_scripts/awakening_functions.lua`
+2016-06-23_03:49:50 ERROR lua_scripts/awakening_functions.lua:220: function arguments expected near ']'
+2016-06-23_03:49:50 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-23_03:49:56 ERROR lua_scripts/interface/awakening_ui.lua:716: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_03:50:13 ERROR lua_scripts/interface/awakening_ui.lua:716: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_03:50:24 ERROR [Eluna]: Error loading `lua_scripts/awakening_functions.lua`
+2016-06-23_03:50:24 ERROR lua_scripts/awakening_functions.lua:220: function arguments expected near ']'
+2016-06-23_03:50:24 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-23_03:50:32 ERROR lua_scripts/interface/awakening_ui.lua:716: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_03:53:40 ERROR [Eluna]: Error loading `lua_scripts/awakening_functions.lua`
+2016-06-23_03:53:40 ERROR lua_scripts/awakening_functions.lua:1: syntax error near 'to'
+2016-06-23_03:53:41 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-23_03:53:47 ERROR lua_scripts/interface/awakening_ui.lua:716: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_03:53:51 ERROR lua_scripts/interface/awakening_ui.lua:726: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_03:53:52 ERROR lua_scripts/interface/awakening_ui.lua:770: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_03:53:52 ERROR lua_scripts/interface/awakening_ui.lua:814: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_03:53:53 ERROR lua_scripts/interface/awakening_ui.lua:860: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_03:53:53 ERROR lua_scripts/interface/awakening_ui.lua:904: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_03:54:13 ERROR lua_scripts/interface/awakening_ui.lua:726: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_03:54:13 ERROR lua_scripts/interface/awakening_ui.lua:726: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_03:54:13 ERROR lua_scripts/interface/awakening_ui.lua:726: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_03:54:13 ERROR lua_scripts/interface/awakening_ui.lua:726: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_03:54:13 ERROR lua_scripts/interface/awakening_ui.lua:726: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_03:54:14 ERROR lua_scripts/interface/awakening_ui.lua:726: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_03:56:32 ERROR [Eluna]: Error loading `lua_scripts/awakening_functions.lua`
+2016-06-23_03:56:32 ERROR lua_scripts/awakening_functions.lua:1: syntax error near 'to'
+2016-06-23_03:56:32 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-23_03:57:07 ERROR lua_scripts/interface/awakening_ui.lua:716: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_03:57:15 ERROR lua_scripts/interface/awakening_ui.lua:793: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_03:57:15 ERROR lua_scripts/interface/awakening_ui.lua:793: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_03:57:15 ERROR lua_scripts/interface/awakening_ui.lua:793: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_03:57:15 ERROR lua_scripts/interface/awakening_ui.lua:793: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_03:57:16 ERROR lua_scripts/interface/awakening_ui.lua:793: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_03:57:16 ERROR lua_scripts/interface/awakening_ui.lua:793: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_03:57:16 ERROR lua_scripts/interface/awakening_ui.lua:838: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_03:57:16 ERROR lua_scripts/interface/awakening_ui.lua:838: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_03:57:16 ERROR lua_scripts/interface/awakening_ui.lua:838: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_03:57:17 ERROR lua_scripts/interface/awakening_ui.lua:883: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_03:57:17 ERROR lua_scripts/interface/awakening_ui.lua:883: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_03:57:17 ERROR lua_scripts/interface/awakening_ui.lua:883: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_03:57:17 ERROR lua_scripts/interface/awakening_ui.lua:883: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_03:57:17 ERROR lua_scripts/interface/awakening_ui.lua:927: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_03:57:18 ERROR lua_scripts/interface/awakening_ui.lua:927: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_03:57:18 ERROR lua_scripts/interface/awakening_ui.lua:927: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_03:57:18 ERROR lua_scripts/interface/awakening_ui.lua:927: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_03:59:28 ERROR [Eluna]: Error loading `lua_scripts/awakening_functions.lua`
+2016-06-23_03:59:28 ERROR lua_scripts/awakening_functions.lua:1: syntax error near 'to'
+2016-06-23_03:59:28 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-23_03:59:37 ERROR lua_scripts/interface/awakening_ui.lua:716: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_04:01:46 ERROR [Eluna]: Error loading `lua_scripts/awakening_functions.lua`
+2016-06-23_04:01:46 ERROR lua_scripts/awakening_functions.lua:1: syntax error near 'to'
+2016-06-23_04:01:47 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-23_04:01:53 ERROR lua_scripts/interface/awakening_ui.lua:713: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_04:01:57 ERROR lua_scripts/interface/awakening_ui.lua:723: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_04:01:57 ERROR lua_scripts/interface/awakening_ui.lua:723: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_04:01:57 ERROR lua_scripts/interface/awakening_ui.lua:723: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_04:01:57 ERROR lua_scripts/interface/awakening_ui.lua:723: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_04:01:57 ERROR lua_scripts/interface/awakening_ui.lua:723: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_04:01:58 ERROR lua_scripts/interface/awakening_ui.lua:723: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_04:01:58 ERROR lua_scripts/interface/awakening_ui.lua:767: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_04:01:59 ERROR lua_scripts/interface/awakening_ui.lua:767: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_04:01:59 ERROR lua_scripts/interface/awakening_ui.lua:811: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_04:01:59 ERROR lua_scripts/interface/awakening_ui.lua:811: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_04:02:00 ERROR lua_scripts/interface/awakening_ui.lua:857: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_04:02:00 ERROR lua_scripts/interface/awakening_ui.lua:857: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_04:02:00 ERROR lua_scripts/interface/awakening_ui.lua:901: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_04:02:00 ERROR lua_scripts/interface/awakening_ui.lua:901: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_13:41:44 ERROR lua_scripts/interface/awakening_ui.lua:713: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_13:41:58 ERROR lua_scripts/interface/awakening_ui.lua:723: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_13:41:58 ERROR lua_scripts/interface/awakening_ui.lua:723: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_13:41:59 ERROR lua_scripts/interface/awakening_ui.lua:723: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_13:41:59 ERROR lua_scripts/interface/awakening_ui.lua:767: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_13:41:59 ERROR lua_scripts/interface/awakening_ui.lua:767: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_13:41:59 ERROR lua_scripts/interface/awakening_ui.lua:767: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_13:42:00 ERROR lua_scripts/interface/awakening_ui.lua:811: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_13:42:00 ERROR lua_scripts/interface/awakening_ui.lua:811: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_13:42:00 ERROR lua_scripts/interface/awakening_ui.lua:811: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_13:42:00 ERROR lua_scripts/interface/awakening_ui.lua:857: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_13:42:00 ERROR lua_scripts/interface/awakening_ui.lua:857: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_13:42:01 ERROR lua_scripts/interface/awakening_ui.lua:857: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_13:42:01 ERROR lua_scripts/interface/awakening_ui.lua:901: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_13:42:01 ERROR lua_scripts/interface/awakening_ui.lua:901: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_13:42:01 ERROR lua_scripts/interface/awakening_ui.lua:901: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_13:42:01 ERROR lua_scripts/interface/awakening_ui.lua:901: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_13:46:44 ERROR lua_scripts/interface/awakening_ui.lua:713: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_13:46:56 ERROR [Eluna]: Error loading `lua_scripts/awakening_functions.lua`
+2016-06-23_13:46:56 ERROR lua_scripts/awakening_functions.lua:1: syntax error near 'to'
+2016-06-23_13:46:56 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-23_13:47:01 ERROR lua_scripts/interface/awakening_ui.lua:713: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_13:47:06 ERROR lua_scripts/interface/awakening_ui.lua:723: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_14:10:32 ERROR [Eluna]: Error loading `lua_scripts/awakening_functions.lua`
+2016-06-23_14:10:32 ERROR lua_scripts/awakening_functions.lua:1: syntax error near 'to'
+2016-06-23_14:10:32 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-23_14:10:41 ERROR lua_scripts/interface/awakening_ui.lua:713: attempt to concatenate field '?' (a nil value)
+2016-06-23_14:10:45 ERROR lua_scripts/interface/awakening_ui.lua:723: attempt to compare nil with number
+2016-06-23_14:10:45 ERROR lua_scripts/interface/awakening_ui.lua:723: attempt to compare nil with number
+2016-06-23_14:10:45 ERROR lua_scripts/interface/awakening_ui.lua:723: attempt to compare nil with number
+2016-06-23_14:10:45 ERROR lua_scripts/interface/awakening_ui.lua:723: attempt to compare nil with number
+2016-06-23_14:10:46 ERROR lua_scripts/interface/awakening_ui.lua:723: attempt to compare nil with number
+2016-06-23_14:10:46 ERROR lua_scripts/interface/awakening_ui.lua:723: attempt to compare nil with number
+2016-06-23_14:12:07 ERROR [Eluna]: Error loading `lua_scripts/awakening_functions.lua`
+2016-06-23_14:12:07 ERROR lua_scripts/awakening_functions.lua:1: syntax error near 'to'
+2016-06-23_14:12:07 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-23_14:12:12 ERROR lua_scripts/awakening_ui.lua:713: attempt to concatenate field '?' (a nil value)
+2016-06-23_14:12:18 ERROR lua_scripts/awakening_ui.lua:723: attempt to compare nil with number
+2016-06-23_14:12:18 ERROR lua_scripts/awakening_ui.lua:723: attempt to compare nil with number
+2016-06-23_14:12:18 ERROR lua_scripts/awakening_ui.lua:723: attempt to compare nil with number
+2016-06-23_14:12:18 ERROR lua_scripts/awakening_ui.lua:723: attempt to compare nil with number
+2016-06-23_14:12:18 ERROR lua_scripts/awakening_ui.lua:767: attempt to compare nil with number
+2016-06-23_14:12:18 ERROR lua_scripts/awakening_ui.lua:767: attempt to compare nil with number
+2016-06-23_14:12:19 ERROR lua_scripts/awakening_ui.lua:767: attempt to compare nil with number
+2016-06-23_14:12:19 ERROR lua_scripts/awakening_ui.lua:767: attempt to compare nil with number
+2016-06-23_14:12:19 ERROR lua_scripts/awakening_ui.lua:811: attempt to compare nil with number
+2016-06-23_14:12:19 ERROR lua_scripts/awakening_ui.lua:811: attempt to compare nil with number
+2016-06-23_14:12:19 ERROR lua_scripts/awakening_ui.lua:811: attempt to compare nil with number
+2016-06-23_14:12:20 ERROR lua_scripts/awakening_ui.lua:811: attempt to compare nil with number
+2016-06-23_14:12:20 ERROR lua_scripts/awakening_ui.lua:857: attempt to compare nil with number
+2016-06-23_14:12:20 ERROR lua_scripts/awakening_ui.lua:857: attempt to compare nil with number
+2016-06-23_14:12:20 ERROR lua_scripts/awakening_ui.lua:857: attempt to compare nil with number
+2016-06-23_14:12:20 ERROR lua_scripts/awakening_ui.lua:901: attempt to compare nil with number
+2016-06-23_14:12:21 ERROR lua_scripts/awakening_ui.lua:901: attempt to compare nil with number
+2016-06-23_14:12:21 ERROR lua_scripts/awakening_ui.lua:901: attempt to compare nil with number
+2016-06-23_14:12:21 ERROR lua_scripts/awakening_ui.lua:924: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_14:12:21 ERROR lua_scripts/awakening_ui.lua:924: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_14:12:22 ERROR lua_scripts/awakening_ui.lua:880: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_14:12:22 ERROR lua_scripts/awakening_ui.lua:880: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_14:12:22 ERROR lua_scripts/awakening_ui.lua:835: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_14:12:22 ERROR lua_scripts/awakening_ui.lua:835: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_14:12:23 ERROR lua_scripts/awakening_ui.lua:835: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_14:12:23 ERROR lua_scripts/awakening_ui.lua:835: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_14:12:23 ERROR lua_scripts/awakening_ui.lua:790: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_14:12:23 ERROR lua_scripts/awakening_ui.lua:790: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_14:12:23 ERROR lua_scripts/awakening_ui.lua:790: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_14:12:24 ERROR lua_scripts/awakening_ui.lua:790: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_14:12:24 ERROR lua_scripts/awakening_ui.lua:790: attempt to index global 'stat_cache' (a nil value)
+2016-06-23_14:13:22 ERROR [Eluna]: Error loading `lua_scripts/awakening_functions.lua`
+2016-06-23_14:13:22 ERROR lua_scripts/awakening_functions.lua:1: syntax error near 'to'
+2016-06-23_14:13:23 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-23_14:13:28 ERROR lua_scripts/awakening_ui.lua:714: attempt to concatenate field '?' (a nil value)
+2016-06-23_14:13:31 ERROR lua_scripts/awakening_ui.lua:724: attempt to compare nil with number
+2016-06-23_14:13:32 ERROR lua_scripts/awakening_ui.lua:724: attempt to compare nil with number
+2016-06-23_14:13:32 ERROR lua_scripts/awakening_ui.lua:724: attempt to compare nil with number
+2016-06-23_14:19:14 ERROR [Eluna]: Error loading `lua_scripts/awakening_functions.lua`
+2016-06-23_14:19:14 ERROR lua_scripts/awakening_functions.lua:462: syntax error near 'API'
+2016-06-23_14:19:15 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-23_14:19:20 ERROR lua_scripts/awakening_ui.lua:714: attempt to concatenate field '?' (a nil value)
+2016-06-23_14:22:12 ERROR lua_scripts/awakening_ui.lua:714: attempt to concatenate field '?' (a nil value)
+2016-06-23_14:22:42 ERROR lua_scripts/awakening_ui.lua:714: attempt to concatenate field '?' (a nil value)
+2016-06-23_14:25:17 ERROR [Eluna]: Error loading `lua_scripts/awakening_functions.lua`
+2016-06-23_14:25:17 ERROR lua_scripts/awakening_functions.lua:462: syntax error near 'API'
+2016-06-23_14:25:17 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-23_14:25:32 ERROR lua_scripts/awakening_ui.lua:714: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_14:25:36 ERROR lua_scripts/awakening_ui.lua:724: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_14:25:36 ERROR lua_scripts/awakening_ui.lua:724: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_14:25:36 ERROR lua_scripts/awakening_ui.lua:724: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_14:25:37 ERROR lua_scripts/awakening_ui.lua:724: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_14:32:31 ERROR [Eluna]: Error loading `lua_scripts/awakening_functions.lua`
+2016-06-23_14:32:31 ERROR lua_scripts/awakening_functions.lua:462: syntax error near 'API'
+2016-06-23_14:32:31 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-23_14:32:41 ERROR lua_scripts/awakening_ui.lua:714: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_14:34:01 ERROR lua_scripts/awakening_ui.lua:714: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_15:18:42 ERROR lua_scripts/awakening_ui.lua:714: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_15:18:57 ERROR lua_scripts/awakening_ui.lua:714: attempt to index global 'statpoints_cache' (a nil value)
+2016-06-23_15:19:10 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-23_15:54:27 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
