@@ -19,6 +19,7 @@ ClassColorCodes 				= {"C79C6E", "F58CBA", "ABD473", "FFF569", "FFFFFF", "C41F3B
 ]]
 SpellCooldownMult				= 1
 StatPointsPerLevel				= 5
+statpoints_cache = {}
 GroupBonusExpMultiplier			= 0
 GroupBonusExpLevelDiff			= 5
 PvPLevelDiff					= 5
