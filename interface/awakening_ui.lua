@@ -429,7 +429,6 @@ spell_ids = {10, 17, 53, 66, 71, 72, 75, 78, 99, 100,
         Frame:SetSize(42, 200)
         Frame:SetMovable(true)
         Frame:SetEnabledMouse(true)
-		Frame:SetToplevel(true)
         Frame:RegisterForDrag("LeftButton")
         Frame:SetPoint("BOTTOMLEFT", 0, 275)
         Frame:SetClampedToScreen(true)
@@ -437,8 +436,6 @@ spell_ids = {10, 17, 53, 66, 71, 72, 75, 78, 99, 100,
             bgFile = "Interface/DialogFrame/UI-DialogBox-Background-Dark",
             tile = true
         })   
-		Frame:SetScript("OnDragStart", Frame.StartMoving)	
-		Frame:SetScript("OnDragStop", Frame.StopMovingOrSizing)
 
      
     --[[TRAINING FRAME]]--
