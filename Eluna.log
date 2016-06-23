@@ -1,0 +1,8 @@
+2016-06-22_16:54:10 ERROR lua_scripts/Misc/ItemAreaRestrict.lua:12: Couldn't find a item with (ID: 125253)!
+2016-06-22_16:54:10 ERROR lua_scripts/Misc/Redeem.lua:100: Couldn't find a creature with (ID: 187005)!
+2016-06-22_16:54:10 ERROR lua_scripts/Tokens/ProfessionToken.lua:176: Couldn't find a item with (ID: 777998)!
+2016-06-22_16:54:10 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-22_16:55:53 ERROR lua_scripts/Misc/ItemAreaRestrict.lua:12: Couldn't find a item with (ID: 125253)!
+2016-06-22_16:55:53 ERROR lua_scripts/Misc/Redeem.lua:100: Couldn't find a creature with (ID: 187005)!
+2016-06-22_16:55:53 ERROR lua_scripts/Tokens/ProfessionToken.lua:176: Couldn't find a item with (ID: 777998)!
+2016-06-22_16:55:53 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
