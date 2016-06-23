@@ -8,11 +8,17 @@ function update(event, player, msg, Type, lang)
     
 			os.execute('C:\\Users\\Administrator\\Desktop\\Awakening\\lua_scripts\\update_lua.bat')
 			
-		end
+		
 		
 		elseif msg == "%eluna_log_update" then
 		
 			os.execute('C:\\Users\\Administrator\\Desktop\\Awakening\\lua_scripts\\push_log.bat')
+		
+		
+		
+		elseif msg == "%dbc_update" then
+		
+			os.execute('C:\\Users\\Administrator\\Desktop\\Awakening\\lua_scripts\\update_dbc.bat')
 		
 		end
     
