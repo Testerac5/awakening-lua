@@ -17,6 +17,7 @@ ClassColorCodes 				= {"C79C6E", "F58CBA", "ABD473", "FFF569", "FFFFFF", "C41F3B
 	xpdist						- Distance at which group members will gain bonus experience when another group member scores a PvE kill.
 	tokenid						- ID of token to be given to player on levelup
 ]]
+-- blah
 SpellCooldownMult				= 1
 StatPointsPerLevel				= 5
 GroupBonusExpMultiplier			= 0
