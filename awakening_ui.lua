@@ -8,7 +8,7 @@ require("AIO")
 pointgain = 6    --Stat points gained per level
 spell_reset_token = 383082
 talent_reset_token = 383083
---statpoints_cache = {}
+
 
 spell_essence = 383080
 talent_essence = 383081
