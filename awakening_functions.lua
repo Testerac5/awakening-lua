@@ -1,3 +1,19 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Gist
+ @drdread987
+ Unwatch 2
+  Star 0
+  Fork 0 Serenity-/Awakening_LUA_Master PRIVATE
+ Code  Issues 0  Pull requests 0  Wiki  Pulse  Graphs
+Tree: 167cfe005e Find file Copy pathAwakening_LUA_Master/awakening_functions.lua
+167cfe0  13 hours ago
+@drdread987 drdread987 added -- to resting broadcast
+2 contributors @drdread987 @Serenity-
+RawBlameHistory     461 lines (417 sloc)  14.6 KB
 CacheMsg = AIO:CreateMsg()
 
 --[[DYNAMIC SPELL SYSTEM FUNCTIONS]]
@@ -211,38 +227,23 @@ end
 RegisterPlayerEvent(3, On_LogIn)
 
 -- [[Starts events to constantly check agility and spirit and provide proper stats]]
-
-stat_list = {}
-
 function stat_check_start(event, player)
 	player:RegisterEvent(manaregen, 5000, 0)
 	player:RegisterEvent(abilitypower, 5000, 0)
-	stat_list[player:GetGUIDLow] = {0,0}
 end
 
 --[[APPLY MANA REGEN FROM SPIRIT]]
 function manaregen (event, delay, repeats, player)
-
-	for k,v in pairs(stat_list) do
-		if player:GetGUIDLow() == k:
-		
-			if player:GetStat(4) != v[0]:
-			
-				stat_list[k] = player:GetStat(4)
-				
-				if player:HasAura(21359) == true then
-					player:RemoveAura(21359)
-				end
-				if (player:GetStat(4)>1) then
-					spirit = player:GetStat(4)
-					repeat
-						player:AddAura(21359, player)
-						spirit = (spirit-2)
-					until (spirit<=1)
-				end
-			end
-		end	
-	end	
+	if player:HasAura(21359) == true then
+		player:RemoveAura(21359)
+	end
+	if (player:GetStat(4)>1) then
+		spirit = player:GetStat(4)
+		repeat
+			player:AddAura(21359, player)
+			spirit = (spirit-2)
+		until (spirit<=1)
+	end
 end
 -- [[Apply attack power from agility]]
 function abilitypower (event, delay, repeats, player)
@@ -474,3 +475,5 @@ function ShardCommands(event, player, msg, Type, lang)
 	end
 end
 RegisterPlayerEvent(18, ShardCommands)
+Status API Training Shop Blog About
+© 2016 GitHub, Inc. Terms Privacy Security Contact Help
