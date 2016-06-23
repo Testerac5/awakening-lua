@@ -431,7 +431,7 @@ spell_ids = {10, 17, 53, 66, 71, 72, 75, 78, 99, 100,
         Frame:SetEnabledMouse(true)
 		Frame:SetToplevel(true)
         Frame:RegisterForDrag("LeftButton")
-        Frame:SetPoint("BOTTOMRIGHT", 0, 250)
+        Frame:SetPoint("BOTTOMRIGHT", 0, 100)
         Frame:SetClampedToScreen(true)
         Frame:SetBackdrop({
             bgFile = "Interface/DialogFrame/UI-DialogBox-Background-Dark",
