@@ -276,3 +276,7 @@
 2016-06-23_15:18:57 ERROR lua_scripts/awakening_ui.lua:714: attempt to index global 'statpoints_cache' (a nil value)
 2016-06-23_15:19:10 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
 2016-06-23_15:54:27 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-24_13:22:08 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-24_13:26:52 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-24_13:30:59 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-24_13:46:59 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
