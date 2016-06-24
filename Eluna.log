@@ -288,3 +288,4 @@
 2016-06-24_14:08:46 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
 2016-06-24_14:08:46 ERROR lua_scripts/hunger_system/HungerClient.lua:5: attempt to call field 'AddAddon' (a nil value)
 2016-06-24_14:08:46 ERROR lua_scripts/hunger_system/HungerServer.lua:5: attempt to call field 'AddHandlers' (a nil value)
+2016-06-24_14:10:29 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
