@@ -397,3 +397,15 @@
 2016-06-24_16:38:11 ERROR lua_scripts/awakening_ui.lua:727: attempt to compare nil with number
 2016-06-24_16:38:39 ERROR lua_scripts/awakening_functions.lua:185: attempt to index local 'statquery' (a nil value)
 2016-06-24_16:38:39 ERROR lua_scripts/awakening_ui.lua:717: attempt to concatenate field '?' (a nil value)
+2016-06-24_16:38:55 ERROR lua_scripts/awakening_functions.lua:266: attempt to perform arithmetic on field '?' (a nil value)
+2016-06-24_16:39:09 ERROR lua_scripts/awakening_functions.lua:266: attempt to perform arithmetic on field '?' (a nil value)
+2016-06-24_16:39:39 ERROR lua_scripts/awakening_functions.lua:266: attempt to perform arithmetic on field '?' (a nil value)
+2016-06-24_16:40:26 ERROR lua_scripts/awakening_ui.lua:771: attempt to compare nil with number
+2016-06-24_16:40:29 ERROR lua_scripts/awakening_functions.lua:266: attempt to perform arithmetic on field '?' (a nil value)
+2016-06-24_16:40:32 ERROR lua_scripts/awakening_ui.lua:771: attempt to compare nil with number
+2016-06-24_16:40:34 ERROR lua_scripts/awakening_ui.lua:771: attempt to compare nil with number
+2016-06-24_16:40:37 ERROR lua_scripts/awakening_ui.lua:771: attempt to compare nil with number
+2016-06-24_16:40:43 ERROR lua_scripts/awakening_ui.lua:771: attempt to compare nil with number
+2016-06-24_16:40:44 ERROR lua_scripts/awakening_ui.lua:727: attempt to compare nil with number
+2016-06-24_16:40:49 ERROR lua_scripts/awakening_ui.lua:717: attempt to concatenate field '?' (a nil value)
+2016-06-24_16:41:22 ERROR lua_scripts/awakening_functions.lua:266: attempt to perform arithmetic on field '?' (a nil value)
