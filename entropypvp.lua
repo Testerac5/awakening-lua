@@ -198,7 +198,7 @@ local function EntropyPvP(event, pKiller, pKilled)
 			}
 			if (EnableDeathAnnouncer==true) then
 				local DeathAnnounce_Roll = math.random(1,6)
-				SendWorldMessage(DeathAnnounce_Roll)
+				SendWorldMessage(DeathAnnouncements[DeathAnnounce_Roll])
 			end
 		else
 			SendWorldMessage("[PvP]: |cffff0000Everyone give a big round of applause to|r |CFF"..killer_color..""..pKiller:GetName().."|r |cffff0000"..killerguild_name..", whom is level "..pKiller:GetLevel()..", killed|r |CFF"..killed_color..""..pKilled:GetName().."|r|cffff0000, a level "..pKilled:GetLevel()..".|r")
