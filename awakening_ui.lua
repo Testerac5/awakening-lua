@@ -427,7 +427,7 @@ spell_ids = {10, 17, 53, 66, 71, 72, 75, 78, 99, 100,
 
     --[[STATIC SIDEBAR]]--
         local Frame = AIO:CreateFrame("Frame", "FrameTest", "UIParent", nil)
-        Frame:SetSize(42, 200)
+        Frame:SetSize(42, 179)
         Frame:SetMovable(true)
         Frame:SetEnabledMouse(true)
         Frame:RegisterForDrag("LeftButton")
@@ -435,7 +435,10 @@ spell_ids = {10, 17, 53, 66, 71, 72, 75, 78, 99, 100,
         Frame:SetClampedToScreen(true)
         Frame:SetBackdrop({
             bgFile = "Interface/DialogFrame/UI-DialogBox-Background-Dark",
-            tile = true
+			edgeFile = "Interface/DialogFrame/UI-DialogBox-Border",
+            tile = true,
+			edgeSize = 10,
+			insets = { left = 1, right = 1, top = 1, bottom = 1 }
         })   
 
      
