@@ -250,6 +250,11 @@ function On_LevelUp (event, player, oldLevel)
 	player:AddItem(tokenid, 1)
 	player:SetMaxPower(3,1000)
 	player:SetPower(3,1000)
+	
+	if statpoints_cache[player:GetGUIDLow()] == nil then
+				init_stats(3, player)
+			end
+	
 	if (oldLevel>player:GetLevel()) then
 		if ((statpoints_cache[player:GetGUIDLow()]-((oldLevel-player:GetLevel())*StatPointsPerLevel))<0) then
 			statpoints_cache[player:GetGUIDLow()] = 0

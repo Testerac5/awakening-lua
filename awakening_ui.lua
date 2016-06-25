@@ -708,6 +708,10 @@ spell_ids = {10, 17, 53, 66, 71, 72, 75, 78, 99, 100,
         Stat_Value:SetPoint("BOTTOMRIGHT", 115, -8.5)
      
         function init_statvalues(player)
+			if statpoints_cache[player:GetGUIDLow()] == nil then
+				init_stats(3, player)
+			end
+		
             StatFrame:Clear()
             Str_Value:SetText(""..(player:GetStat(0)))
             Sta_Value:SetText(""..(player:GetStat(2)))
