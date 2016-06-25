@@ -146,7 +146,7 @@ local function EntropyPvP(event, pKiller, pKilled)
 			killerguild_name = ", a Lone Wolf"
 		end
 		if (pKilled:GetGuildName()~=nil) then
-			killedguild_name = " of"..killedguild:GetName()..""
+			killedguild_name = " of"..pkilled:GetGuildName()..""
 		else
 			killedguild_name = ", a Lone Wolf"
 		end
