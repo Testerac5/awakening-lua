@@ -139,16 +139,14 @@ local function EntropyPvP(event, pKiller, pKilled)
 	if (playerdeath==true and check_safe == false) then
 		local killed_color = ClassColorCodes[pKilled:GetClass()]
 		local killer_color = ClassColorCodes[pKiller:GetClass()]
+		local killerguild_name = ", a Lone Wolf"
+		local killedguild_name = ", a Lone Wolf"
 		--Fetch Guild Names
 		if (pKiller:GetGuildName()~=nil) then
 			killerguild_name = " of "..pKiller:GetGuildName()..""
-		else
-			killerguild_name = ", a Lone Wolf"
 		end
 		if (pKilled:GetGuildName()~=nil) then
 			killedguild_name = " of"..pkilled:GetGuildName()..""
-		else
-			killedguild_name = ", a Lone Wolf"
 		end
 		
 		if ((pKiller:GetLevel()-pKilled:GetLevel())<=leveldiff) then
