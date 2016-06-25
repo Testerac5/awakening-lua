@@ -129,9 +129,9 @@ end
 
 local function EntropyPvP(event, pKiller, pKilled)
 	local check_safe = false
-	local pKilled_loc = pKilled:GetMap()
+	local pKiller_loc = pKiller:GetMap()
 	for i,v in ipairs(safety_ids) do
-		if v == pKilled_loc then
+		if v == pKiller_loc then
 			check_safe = true
 			break
 		end
