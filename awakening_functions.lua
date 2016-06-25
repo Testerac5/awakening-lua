@@ -234,12 +234,12 @@ function abilitypower (event, delay, repeats, player)
 	if player:HasAura(818015) == true then
 		player:RemoveAura(818015)
 	end
-	if (player:GetStat(1)>3) then
+	if (player:GetStat(1)>1) then
 		agility = player:GetStat(1)
 		repeat
 			player:AddAura(818015, player)
-			agility = (agility-4)
-		until (agility <= 3)
+			agility = (agility-2)
+		until (agility <= 1)
 	end
 end
 
