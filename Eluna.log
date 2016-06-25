@@ -930,3 +930,5 @@
 2016-06-25_04:44:05 ERROR lua_scripts/awakening_functions.lua:185: attempt to index local 'statquery' (a nil value)
 2016-06-25_04:44:05 ERROR lua_scripts/awakening_ui.lua:717: attempt to concatenate field '?' (a nil value)
 2016-06-25_04:49:51 ERROR lua_scripts/entropypvp.lua:204: attempt to concatenate global 'killerguild_name' (a nil value)
+2016-06-25_05:52:48 ERROR lua_scripts/AIO_Objects.lua:889: assertion failed!
+2016-06-25_05:58:12 ERROR lua_scripts/entropypvp.lua:192: attempt to concatenate global 'killerguild_name' (a nil value)
