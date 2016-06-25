@@ -121,8 +121,8 @@ local function Remove_FullLootContainer(event, delay, call, object)
 		v:SendBroadcastMessage("|CFFFF8040The sack of items turns to dust, and blows away with the wind.|r")
 	end
 	object:RemoveEvents()
-	object:Despawn(1)
-	object:RemoveFromWorld(false)
+	object:Despawn()
+	object:RemoveFromWorld(true)
 	FullLootFrame:Hide()
     guid_linking_table[object:GetGUIDLow()] = nil
 	item_table[object:GetGUIDLow()] = nil
@@ -158,7 +158,7 @@ local function EntropyPvP(event, pKiller, pKilled)
 			local x,y,z,o = pKilled:GetX(),pKilled:GetY(),pKilled:GetZ(),pKilled:GetO()
 			local ContainerID = 818001
 			local FullLootContainer = PerformIngameSpawn(spawnType,ContainerID,pKiller_loc,instanceID, x, y, z, o)	--Spawn a Sack of Belongings
-			FullLootContainer:RegisterEvent(Remove_FullLootContainer, 3000000, 0)				--Register the Remove/Despawn event to the Sack of Belongings
+			FullLootContainer:RegisterEvent(Remove_FullLootContainer, 300000, 0, true)				--Register the Remove/Despawn event to the Sack of Belongings
 			guid_linking_table[FullLootContainer:GetGUIDLow()] = pKilled:GetGUIDLow()
 			--Get Items
 			local bagslot = 255
@@ -225,7 +225,7 @@ local function CreatureDeath (event, pKiller, pKilled)
 		local ContainerID = 818001
 		local kill_message = math.random(1,6)
 		local FullLootContainer = PerformIngameSpawn(spawnType,ContainerID,pKilled_loc,instanceID, x, y, z, o)	--Spawn a Sack of Belongings
-		FullLootContainer:RegisterEvent(Remove_FullLootContainer, 3000000, 0)				--Register the Remove/Despawn event to the Sack of Belongings
+		FullLootContainer:RegisterEvent(Remove_FullLootContainer, 300000, 0, true)				--Register the Remove/Despawn event to the Sack of Belongings
 		guid_linking_table[FullLootContainer:GetGUIDLow()] = pKilled:GetGUIDLow()
 		--Get Items
 		local bagslot = 255
