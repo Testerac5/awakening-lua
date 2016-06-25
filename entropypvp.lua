@@ -130,6 +130,8 @@ end
 local function EntropyPvP(event, pKiller, pKilled)
 	local check_safe = false
 	local pKiller_loc = pKiller:GetMap()
+	local spawnType = 2
+	local instanceID = pKiller:GetInstanceId()
 	for i,v in ipairs(safety_ids) do
 		if v == pKiller_loc then
 			check_safe = true
@@ -154,7 +156,7 @@ local function EntropyPvP(event, pKiller, pKilled)
 			local pKillerGUID = pKiller:GetGUIDLow()
 			local x,y,z,o = pKilled:GetX(),pKilled:GetY(),pKilled:GetZ(),pKilled:GetO()
 			local ContainerID = 818001
-			local FullLootContainer = pKiller:SummonGameObject(ContainerID, x, y, z, 2.5)			--Spawn a Sack of Belongings
+			local FullLootContainer = PerformIngameSpawn(spawnType,ContainerID,pKiller_loc,instanceID, x, y, z, o)	--Spawn a Sack of Belongings
 			FullLootContainer:RegisterEvent(Remove_FullLootContainer, decaytime*1000, 0)				--Register the Remove/Despawn event to the Sack of Belongings
 			guid_linking_table[FullLootContainer:GetGUIDLow()] = pKilled:GetGUIDLow()
 			--Get Items
@@ -207,6 +209,8 @@ end
 local function CreatureDeath (event, pKiller, pKilled)
 	local check_safe = false
 	local pKilled_loc = pKilled:GetMap()
+	local spawnType = 2
+	local instanceID = pKilled:GetInstanceId()
 	for i,v in ipairs(safety_ids) do
 		if v == pKilled_loc then
 			check_safe = true
@@ -219,7 +223,7 @@ local function CreatureDeath (event, pKiller, pKilled)
 		local x,y,z,o = pKilled:GetX(),pKilled:GetY(),pKilled:GetZ(),pKilled:GetO()
 		local ContainerID = 818001
 		local kill_message = math.random(1,6)
-		local FullLootContainer = pKilled:SummonGameObject(ContainerID, x, y, z, 2.5)			--Spawn a Sack of Belongings
+		local FullLootContainer = PerformIngameSpawn(spawnType,ContainerID,pKilled_loc,instanceID, x, y, z, o)	--Spawn a Sack of Belongings
 		FullLootContainer:RegisterEvent(Remove_FullLootContainer, decaytime*2000, 0)				--Register the Remove/Despawn event to the Sack of Belongings
 		guid_linking_table[FullLootContainer:GetGUIDLow()] = pKilled:GetGUIDLow()
 		--Get Items
