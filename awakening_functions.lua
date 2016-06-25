@@ -231,13 +231,13 @@ function manaregen (event, delay, repeats, player)
 end
 -- [[Apply attack power from agility]]
 function abilitypower (event, delay, repeats, player)
-	if player:HasAura(9136) == true then
-		player:RemoveAura(9136)
+	if player:HasAura(818015) == true then
+		player:RemoveAura(818015)
 	end
 	if (player:GetStat(1)>3) then
 		agility = player:GetStat(1)
 		repeat
-			player:AddAura(9136, player)
+			player:AddAura(818015, player)
 			agility = (agility-4)
 		until (agility <= 3)
 	end
