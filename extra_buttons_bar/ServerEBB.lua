@@ -127,8 +127,8 @@ local function OnPlayerLogin(event, player)
 	else
 	
 		local stats = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4)}
-		
 		player_stat_auras(player, stats)
+		player:DealHeal(player, 2060, 500000)
 	end
 	
 
@@ -139,12 +139,15 @@ end
 function player_stat_auras(player, stats)
 	local stat_auras = {7464, 7477, 7471, 7468, 7474}
 	for i,v in ipairs(stats) do
-		if v ~= 0 and player:HasAura(stat_auras[i]) == false then
-			player:AddAura(stat_auras[i], player)
-		elseif v == 0 and player:HasAura(stat_auras[i]) == true then
+		if v == 0 and player:HasAura(stat_auras[i]) == true then
 			player:RemoveAura(stat_auras[i], player)
 		
-		elseif v ~= 0 and player:HasAura(stat_auras[i]) == true then
+		elseif v ~= 0 then
+		
+			if player:HasAura(stat_auras[i]) == false then
+				player:AddAura(stat_auras[i], player)
+				print("adding aura")
+			end
 		
 			local stack_amount = stats[i]
 			local aura = player:GetAura(stat_auras[i])
