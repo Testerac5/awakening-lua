@@ -42,7 +42,7 @@ local function EntropyPvP(event, pKiller, pKilled)
 			break
 		end
 	end
-	if (playerdeath==true and check_safe == false) then
+	if (playerdeath==true and check_safe == false and instanceID == 0) then
 		local killed_color = ClassColorCodes[pKilled:GetClass()]
 		local killer_color = ClassColorCodes[pKiller:GetClass()]
 		local killerguild_name = ", a Lone Wolf"
@@ -123,7 +123,7 @@ local function CreatureDeath (event, pKiller, pKilled)
 		end
 	end
 
-	if (creaturedeath==true and check_safe == false) then
+	if (creaturedeath==true and check_safe == false and instanceID == 0) then
 		local pKilledGUID = pKilled:GetGUIDLow()
 		local x,y,z,o = pKilled:GetX(),pKilled:GetY(),pKilled:GetZ(),pKilled:GetO()
 		local ContainerID = 818002
