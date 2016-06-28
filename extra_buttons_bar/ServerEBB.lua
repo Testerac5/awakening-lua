@@ -142,21 +142,17 @@ function player_stat_auras(player, stats)
 		if v ~= 0 and player:HasAura(stat_auras[i]) == false then
 			player:AddAura(stat_auras[i], player)
 		elseif v == 0 and player:HasAura(stat_auras[i]) == true then
-		
 			player:RemoveAura(stat_auras[i], player)
+		
+		elseif v ~= 0 and player:HasAura(stat_auras[i]) == true then
+		
+			local stack_amount = stats[i]
+			local aura = player:GetAura(stat_auras[i])
+			aura:SetStackAmount(stack_amount)
+			
+		
 		end
 	end
-	local player_auras = {player:GetAura(stat_auras[1]), player:GetAura(stat_auras[2]), player:GetAura(stat_auras[3]), 
-							player:GetAura(stat_auras[4]), player:GetAura(stat_auras[5])}
-	for i,v in ipairs(player_auras) do
-		local stack_amount = stats[i]
-		
-		if v ~= nil then
-			v:SetStackAmount(stack_amount)
-		end
-		
-	end
-
 end
 
 local function OnLevelChange(event, player, oldLevel)
