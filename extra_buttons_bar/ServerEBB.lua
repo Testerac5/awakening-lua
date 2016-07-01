@@ -134,7 +134,7 @@ local function OnPlayerLogin(event, player)
 	
 		local stats = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4)}
 		player_stat_auras(player, stats)
-		player:DealHeal(player, 2060, 500000)
+		player:DealHeal(player, 818037, 500000)
 	end
 	
 
