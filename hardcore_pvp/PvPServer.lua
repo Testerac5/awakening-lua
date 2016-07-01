@@ -48,12 +48,12 @@ local function EntropyPvP(event, pKiller, pKilled)
 		local killerguild_name = ", a Lone Wolf"
 		local killedguild_name = ", a Lone Wolf"
 		--Fetch Guild Names
-		if (pKiller:GetGuildName()~=nil) then
-			killerguild_name = " of "..pKiller:GetGuildName()..""
-		end
-		if (pKilled:GetGuildName()~=nil) then
-			killedguild_name = " of"..pkilled:GetGuildName()..""
-		end
+		--if (pKiller:GetGuildName()~=nil) then
+			--killerguild_name = " of "..pKiller:GetGuildName()..""
+		--end
+		--if (pKilled:GetGuildName()~=nil) then
+			--killedguild_name = " of"..pkilled:GetGuildName()..""
+--end
 		
 		if ((pKiller:GetLevel()-pKilled:GetLevel())<=leveldiff) then
 		
