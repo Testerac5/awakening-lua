@@ -23,20 +23,24 @@ function MyHandlers.AddStats(player, stat)
 	
 	local stat_point_query = CharDBQuery("SELECT points FROM character_stat_points WHERE guid = "..player_guid)
 	local points_avail = stat_point_query:GetInt32(0)
+	local stats_query = CharDBQuery("SELECT str, sta, agi, inte, spi FROM character_stat_allocation WHERE guid = "..player_guid)
+	local stats = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4)}
 	
 	if points_avail > 0 then
 		local points_query = CharDBQuery("SELECT points FROM character_stat_points WHERE guid = "..player_guid)
 		local point_val = points_query:GetInt32(0)
 		point_val = point_val - 1
-		if point_val >= (player:GetLevel() * 5) - 5 then
-			point_val = (player:GetLevel() * 5) - 5
+		if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= (player:GetLevel() * 5) - 5 then
+			local point_max = (player:GetLevel() * 5) - 5
+			point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
+			point_val = point_max
 		end
 		CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
 	
 		local stat_use = stat_names[stat]
 
 	
-		local stats_query = CharDBQuery("SELECT "..stat_use.." FROM character_stat_allocation WHERE guid = "..player_guid)
+		stats_query = CharDBQuery("SELECT "..stat_use.." FROM character_stat_allocation WHERE guid = "..player_guid)
 		local stat_value = stats_query:GetInt32(0)
 		
 		
@@ -47,7 +51,7 @@ function MyHandlers.AddStats(player, stat)
 		
 		stats_query = CharDBQuery("SELECT str, sta, agi, inte, spi FROM character_stat_allocation WHERE guid = "..player_guid)
 		
-		local stats = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4), point_val}
+		stats = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4), point_val}
 		stats[stat] = stat_value
 		
 
@@ -80,8 +84,10 @@ function MyHandlers.ReduceStats(player, stat)
 		local points_query = CharDBQuery("SELECT points FROM character_stat_points WHERE guid = "..player_guid)
 		local point_val = points_query:GetInt32(0)
 		point_val = point_val + 1
-		if point_val >= (player:GetLevel() * 5) - 5 then
-			point_val = (player:GetLevel() * 5) - 5
+		if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= (player:GetLevel() * 5) - 5 then
+			local point_max = (player:GetLevel() * 5) - 5
+			point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
+			point_val = point_max
 		end
 		CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
 	
