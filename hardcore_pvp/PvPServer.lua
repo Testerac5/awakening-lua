@@ -60,7 +60,7 @@ local function EntropyPvP(event, pKiller, pKilled)
 			local pKilledGUID = pKilled:GetGUIDLow()
 			local pKillerGUID = pKiller:GetGUIDLow()
 			local x,y,z,o = pKilled:GetX(),pKilled:GetY(),pKilled:GetZ(),pKilled:GetO()
-			local ContainerID = 818002
+			local ContainerID = 818001
 			local FullLootContainer = PerformIngameSpawn(spawnType,ContainerID,pKiller_loc,instanceID, x, y, z, o)	--Spawn a Sack of Belongings
 			guid_linking_table[FullLootContainer:GetGUIDLow()] = pKilled:GetGUIDLow()
 			--Get Items
@@ -126,7 +126,7 @@ local function CreatureDeath (event, pKiller, pKilled)
 	if (creaturedeath==true and check_safe == false and instanceID == 0) then
 		local pKilledGUID = pKilled:GetGUIDLow()
 		local x,y,z,o = pKilled:GetX(),pKilled:GetY(),pKilled:GetZ(),pKilled:GetO()
-		local ContainerID = 818002
+		local ContainerID = 818001
 		local kill_message = math.random(1,6)
 		local FullLootContainer = PerformIngameSpawn(spawnType,ContainerID,pKilled_loc,instanceID, x, y, z, o, false, 10)	--Spawn a Sack of Belongings
 		guid_linking_table[FullLootContainer:GetGUIDLow()] = pKilled:GetGUIDLow()
@@ -231,6 +231,6 @@ end
 
 RegisterPlayerEvent(6, EntropyPvP)	
 RegisterPlayerEvent(8, CreatureDeath)
-RegisterGameObjectGossipEvent(818002, 1, Container_Interact)
+RegisterGameObjectGossipEvent(818001, 1, Container_Interact)
 
 
