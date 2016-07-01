@@ -2,8 +2,6 @@
 local function On_LevelUp (event, player, oldLevel)
 
 	player:AddItem(spell_essence, 1)
-	player:SetMaxPower(3,1000)
-	player:SetPower(3,1000)
 	
 	if oldLevel >= 9 then
 	
@@ -202,8 +200,6 @@ function sprintcheck(event, player, spell)
 		else
 			curen = player:GetPower(3)
 			player:RegisterEvent(EnergyDrain, 1000, 0)
-			player:SetMaxPower(3, 1000)
-			player:SetPower(3, curen)
 		end
 	end
 end
@@ -231,7 +227,6 @@ RegisterPlayerEvent(5, RestCheck)
 
 function On_LogIn (event, player)
 	player:AddAura(7711, player)			--Modded in the DBC files, this is the aura that makes auto attacks cost energy.
-	player:SetMaxPower(3, 1000)
 	player:RemoveSpell(668, player)
 	player:LearnSpell(668, player)			--Language glitch band-aid.
 	if (player:GetAura(818012)) then
@@ -276,7 +271,6 @@ function first_login (event, player)
 	player:LearnSpell(818003)
 	player:LearnSpell(818004)
 	player:LearnSpell(818014)
-	player:SetMaxPower(3, 1000)
 	player:LearnSpell(818012)
 	player:LearnSpell(818011)
 end
