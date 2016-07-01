@@ -28,6 +28,9 @@ function MyHandlers.AddStats(player, stat)
 		local points_query = CharDBQuery("SELECT points FROM character_stat_points WHERE guid = "..player_guid)
 		local point_val = points_query:GetInt32(0)
 		point_val = point_val - 1
+		if point_val >= (player:GetLevel() * 5) - 5 then
+			point_val = (player:GetLevel() * 5) - 5
+		end
 		CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
 	
 		local stat_use = stat_names[stat]
@@ -77,6 +80,9 @@ function MyHandlers.ReduceStats(player, stat)
 		local points_query = CharDBQuery("SELECT points FROM character_stat_points WHERE guid = "..player_guid)
 		local point_val = points_query:GetInt32(0)
 		point_val = point_val + 1
+		if point_val >= (player:GetLevel() * 5) - 5 then
+			point_val = (player:GetLevel() * 5) - 5
+		end
 		CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
 	
 	
