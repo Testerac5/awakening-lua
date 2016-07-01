@@ -224,6 +224,7 @@ end
 local function Container_Interact(event, player, object)
 	Init_FullLootFrame(event, player, object)
 	object:Despawn()
+	object:RemoveFromWorld(false)
 	return false
 end
 
