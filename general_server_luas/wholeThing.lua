@@ -199,7 +199,7 @@ function sprintcheck(event, player, spell)
 			player:RemoveEvents()
 		else
 			curen = player:GetPower(3)
-			player:RegisterEvent(EnergyDrain, 1000, 0)
+			player:RegisterEvent(EnergyDrain, 1700, 0)
 		end
 	end
 end
