@@ -172,18 +172,18 @@ end
 
 
 --[[AUTO ATTACK]]
-function auto_attack(event, player, spell)
-	if (spell:GetEntry()==7712) then
-		if (player:GetPower(3)>=75) then
-			player:CastSpell(player, 818001, false)
-		else
-			player:CastSpell(player, 818013, false)
-			player:SendBroadcastMessage("|cffff0000You have become exhausted!|r")
-			player:RegisterEvent(RemoveExhaustion, 250, 0)
-		end
-	end
-end
-RegisterPlayerEvent(5, auto_attack)
+--function auto_attack(event, player, spell)
+	--if (spell:GetEntry()==7712) then
+		--if (player:GetPower(3)>=75) then
+			--player:CastSpell(player, 818001, false)
+		--else
+			--player:CastSpell(player, 818013, false)
+			--player:SendBroadcastMessage("|cffff0000You have become exhausted!|r")
+			--player:RegisterEvent(RemoveExhaustion, 250, 0)
+		--end
+	--end
+--end
+--RegisterPlayerEvent(5, auto_attack)
 
 
 
