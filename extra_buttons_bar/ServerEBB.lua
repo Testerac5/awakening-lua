@@ -201,6 +201,22 @@ function MyHandlers.ResetSpells(player)
 				player:AddItem(spell_essence, 2)
 			end
 		end	
+		
+		local all_spell_tomes_query = WorldDBQuery("SELECT entry FROM item_template WHERE entry > 1000000 and entry < 1235068")
+		local all_spell_tomes = {}
+		table.insert(all_spell_tomes, all_spell_tomes_query:GetInt32(0))
+		local current_row = all_spell_tomes_query:NextRow()
+		while current_row ~= false do
+		`	table.insert(all_spell_tomes, all_spell_tomes_query:GetInt32(0))
+			current_row = all_spell_tomes_query:NextRow()
+		end
+		
+		for i,v in ipairs(all_spell_tomes) do
+			if player:HasItem(v) then
+				player:RemoveItem(v, 100)
+			end
+		end
+		
 		local player_has = player:GetItemByGUID(spell_essence)
 		local add_amount = (player:GetLevel) - player_has
 		player:AddItem(spell_essence, add_amount)
@@ -223,6 +239,22 @@ function MyHandlers.ResetTalents(player)
 				
 			end
 		end
+		
+		local all_spell_tomes_query = WorldDBQuery("SELECT entry FROM item_template WHERE entry > 2100000 and entry < 2103000")
+		local all_spell_tomes = {}
+		table.insert(all_spell_tomes, all_spell_tomes_query:GetInt32(0))
+		local current_row = all_spell_tomes_query:NextRow()
+		while current_row ~= false do
+		`	table.insert(all_spell_tomes, all_spell_tomes_query:GetInt32(0))
+			current_row = all_spell_tomes_query:NextRow()
+		end
+		
+		for i,v in ipairs(all_spell_tomes) do
+			if player:HasItem(v) then
+				player:RemoveItem(v, 100)
+			end
+		end
+		
 		local player_has = player:GetItemByGUID(talent_essence)
 		local add_amount = (player:GetLevel - 9) - player_has
 		player:AddItem(talent_essence, add_amount)
