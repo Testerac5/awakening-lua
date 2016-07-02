@@ -201,6 +201,9 @@ function MyHandlers.ResetSpells(player)
 				player:AddItem(spell_essence, 2)
 			end
 		end	
+		local player_has = player:GetItemByGUID(spell_essence)
+		local add_amount = (player:GetLevel) - player_has
+		player:AddItem(spell_essence, add_amount)
 		player:SendBroadcastMessage("Refund Complete for Spells")
 	else
 		player:SendBroadcastMessage("You are missing the required token to do this!")
@@ -217,9 +220,12 @@ function MyHandlers.ResetTalents(player)
 		for i, talent in ipairs(talent_ids) do
 			if player:HasSpell(talent) == true then
 				player:RemoveSpell(talent)
-				player:AddItem(talent_essence)
+				
 			end
 		end
+		local player_has = player:GetItemByGUID(talent_essence)
+		local add_amount = (player:GetLevel - 9) - player_has
+		player:AddItem(talent_essence, add_amount)
 		player:SendBroadcastMessage("Refund Complete for talents")
 	else
 		player:SendBroadcastMessage("You are missing the required token to do this!")
