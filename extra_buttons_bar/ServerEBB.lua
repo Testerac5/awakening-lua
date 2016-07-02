@@ -217,7 +217,7 @@ function MyHandlers.ResetSpells(player)
 		end
 		
 		local player_has = player:GetItemByGUID(spell_essence)
-		local add_amount = (player:GetLevel) - player_has
+		local add_amount = (player:GetLevel()) - player_has
 		player:AddItem(spell_essence, add_amount)
 		player:SendBroadcastMessage("Refund Complete for Spells")
 	else
@@ -254,7 +254,7 @@ function MyHandlers.ResetTalents(player)
 		end
 		
 		local player_has = player:GetItemByGUID(talent_essence)
-		local add_amount = (player:GetLevel - 9) - player_has
+		local add_amount = (player:GetLevel() - 9) - player_has
 		player:AddItem(talent_essence, add_amount)
 		player:SendBroadcastMessage("Refund Complete for talents")
 	else
