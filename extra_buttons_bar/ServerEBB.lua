@@ -198,7 +198,6 @@ function MyHandlers.ResetSpells(player)
 		for i,k in ipairs(spell_ids) do
 			if player:HasSpell(k) == true then
 				player:RemoveSpell(k)
-				player:AddItem(spell_essence, 2)
 			end
 		end	
 		
@@ -236,7 +235,6 @@ function MyHandlers.ResetTalents(player)
 		for i, talent in ipairs(talent_ids) do
 			if player:HasSpell(talent) == true then
 				player:RemoveSpell(talent)
-				
 			end
 		end
 		
