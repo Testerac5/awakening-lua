@@ -206,7 +206,7 @@ function MyHandlers.ResetSpells(player)
 		table.insert(all_spell_tomes, all_spell_tomes_query:GetInt32(0))
 		local current_row = all_spell_tomes_query:NextRow()
 		while current_row ~= false do
-		`	table.insert(all_spell_tomes, all_spell_tomes_query:GetInt32(0))
+			table.insert(all_spell_tomes, all_spell_tomes_query:GetInt32(0))
 			current_row = all_spell_tomes_query:NextRow()
 		end
 		
@@ -243,7 +243,7 @@ function MyHandlers.ResetTalents(player)
 		table.insert(all_spell_tomes, all_spell_tomes_query:GetInt32(0))
 		local current_row = all_spell_tomes_query:NextRow()
 		while current_row ~= false do
-		`	table.insert(all_spell_tomes, all_spell_tomes_query:GetInt32(0))
+			table.insert(all_spell_tomes, all_spell_tomes_query:GetInt32(0))
 			current_row = all_spell_tomes_query:NextRow()
 		end
 		
