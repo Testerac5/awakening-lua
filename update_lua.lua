@@ -4,19 +4,19 @@ function update(event, player, msg, Type, lang)
     
     if player_type == 3 then 
 	
-		if msg == "%lua_update" then
+		if msg == ".push lua" then
     
 			os.execute('C:\\Users\\Administrator\\Desktop\\Awakening\\lua_scripts\\update_lua.bat')
 			
 		
 		
-		elseif msg == "%eluna_log_update" then
+		elseif msg == ".push log" then
 		
 			os.execute('C:\\Users\\Administrator\\Desktop\\Awakening\\lua_scripts\\push_log.bat')
 		
 		
 		
-		elseif msg == "%dbc_update" then
+		elseif msg == ".push dbc" then
 		
 			os.execute('C:\\Users\\Administrator\\Desktop\\Awakening\\lua_scripts\\update_dbc.bat')
 		
