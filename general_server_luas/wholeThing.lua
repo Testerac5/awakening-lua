@@ -30,7 +30,6 @@ Enchantment slot test results:
 
 function RollEnchant(item)
 	
-	rarityRoll = math.random(100)
 	local item_level = item:GetRequiredLevel()
 	local itemClass = ""
 	if (item:GetClass() == 2) then
@@ -39,25 +38,25 @@ function RollEnchant(item)
 		itemClass = "ARMOR"
 	end
 	if item_level < 10 then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=1 AND class='"..itemClass.."' OR exclusiveSubClass="..item:GetSubClass().." OR class='ANY' ORDER BY RAND() LIMIT 1")
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=1 AND (class='"..itemClass.."' OR exclusiveSubClass="..item:GetSubClass().." OR class='ANY') ORDER BY RAND() LIMIT 1")
 		return query:GetUInt32(0)
 	elseif item_level < 20 then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=2 AND class='"..itemClass.."' OR exclusiveSubClass="..item:GetSubClass().." OR class='ANY' ORDER BY RAND() LIMIT 1")
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=2 AND (class='"..itemClass.."' OR exclusiveSubClass="..item:GetSubClass().." OR class='ANY') ORDER BY RAND() LIMIT 1")
 		return query:GetUInt32(0)
 	elseif item_level < 30 then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=3 AND class='"..itemClass.."' OR exclusiveSubClass="..item:GetSubClass().." OR class='ANY' ORDER BY RAND() LIMIT 1")
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=3 AND (class='"..itemClass.."' OR exclusiveSubClass="..item:GetSubClass().." OR class='ANY') ORDER BY RAND() LIMIT 1")
 		return query:GetUInt32(0)
 	elseif item_level < 40 then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=4 AND class='"..itemClass.."' OR exclusiveSubClass="..item:GetSubClass().." OR class='ANY' ORDER BY RAND() LIMIT 1")
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=4 AND (class='"..itemClass.."' OR exclusiveSubClass="..item:GetSubClass().." OR class='ANY') ORDER BY RAND() LIMIT 1")
 		return query:GetUInt32(0)
 	elseif item_level < 50 then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=5 AND class='"..itemClass.."' OR exclusiveSubClass="..item:GetSubClass().." OR class='ANY' ORDER BY RAND() LIMIT 1")
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=5 AND (class='"..itemClass.."' OR exclusiveSubClass="..item:GetSubClass().." OR class='ANY') ORDER BY RAND() LIMIT 1")
 		return query:GetUInt32(0)
 	elseif item_level < 60 then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=6 AND class='"..itemClass.."' OR exclusiveSubClass="..item:GetSubClass().." OR class='ANY' ORDER BY RAND() LIMIT 1")
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=6 AND (class='"..itemClass.."' OR exclusiveSubClass="..item:GetSubClass().." OR class='ANY') ORDER BY RAND() LIMIT 1")
 		return query:GetUInt32(0)
 	elseif item_level < 70 then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=7 AND class='"..itemClass.."' OR exclusiveSubClass="..item:GetSubClass().." OR class='ANY' ORDER BY RAND() LIMIT 1")
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=7 AND (class='"..itemClass.."' OR exclusiveSubClass="..item:GetSubClass().." OR class='ANY') ORDER BY RAND() LIMIT 1")
 		return query:GetUInt32(0)
 	end
 end
@@ -75,7 +74,7 @@ function OnLoot(event, player, item, count)
 		6 - red (not used?)
 		7 - gold (bind to account)
 	]]
-	local chance_increaser = {100, 95, 65, 40, 15, 5} -- chances for each quality to get random_enchantments, the lower the number the higher the chance
+	local chance_increaser = {101, 95, 65, 40, 15, 5} -- chances for each quality to get random_enchantments, the lower the number the higher the chance
 	
 	local slotBools		= {}
 	local slotIDs		= {}
@@ -86,7 +85,7 @@ function OnLoot(event, player, item, count)
 	if item_class == 2 or item_class == 4 then
 	
 		local boolRoll1		= math.random(100)
-		if (boolRoll1 >= chance_increaser[(item_quality + 1)]) then 
+		if (boolRoll1 >= chance_increaser[item_quality]) then 
 			slotBools[1]	= true
 			slotIDs[1]		= RollEnchant(item)
 		else 
