@@ -1,3 +1,6 @@
+-- Documentation {5176, 2, 0, 1} {Spellid, Ability Essence,  Talent Essence, Required Level}
+-- Make sure to adjust Count if you add or subtract any spells
+
 druid_balance_spells = {{5176, 2, 0, 1}, {8921, 2, 0, 4}, {467, 2, 0, 6}, {339, 2, 0, 8}, {18960, 2, 0, 10},
 {16689, 2, 0, 10}, {770, 2, 0, 18}, {2637, 2, 0, 18}, {2912, 2, 0, 20}, {2908, 2, 0, 22}, {29166, 2, 0, 40},
 {16914, 2, 0, 40}, {22812, 2, 0, 44}, {50288, 2, 0, 60}, {33786, 2, 0, 70}}
