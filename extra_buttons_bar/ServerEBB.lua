@@ -196,18 +196,23 @@ function MyHandlers.ResetSpells(player)
 	if player:HasItem(spell_reset_token) == true then
 		player:RemoveItem(spell_reset_token, 1)
 		for i,k in ipairs(spell_ids) do
-			local all_spell_tomes_query = WorldDBQuery("SELECT entry FROM item_template WHERE spellid_2 = "..spell_ids)
-			if player:HasItem(all_spell_tomes_query:GetInt32(0)) == true then
-				player:RemoveItem(all_spell_tomes_query:GetInt32(0), 100)
+			local all_spell_tomes_query = WorldDBQuery("SELECT entry FROM item_template WHERE spellid_2 = "..k)
+			if all_spell_tomes_query:GetInt64(0) ~= nil then
+				if player:HasItem(all_spell_tomes_query:GetInt64(0)) == true then
+					local rem_get = player:GetItemByGUID(spell_essence)
+					local rem_amount = rem_get:GetCount()
+					player:RemoveItem(all_spell_tomes_query:GetInt64(0), rem_amount)
+				end
 			end
 			if player:HasSpell(k) == true then
 				player:RemoveSpell(k)
 			end
 		end	
-		
-		
-		local player_has = player:GetItemByGUID(spell_essence)
-		local player_amount = player_has:GetCount()
+		local player_amount = 0
+		if player:HasItem(spell_essence) == true then
+			local player_has = player:GetItemByGUID(spell_essence)
+			player_amount = player_has:GetCount()
+		end
 		local add_amount = (player:GetLevel()) - player_amount
 		player:AddItem(spell_essence, add_amount)
 		player:SendBroadcastMessage("Refund Complete for Spells")
