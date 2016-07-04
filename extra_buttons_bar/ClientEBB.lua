@@ -1075,11 +1075,145 @@ local sideBar = Framework_Base
 		if self == DisplaySpellsButton then
 		
 			frame_displaying = "SPELLS"
+			
+			local all_buttons = {BalanceDruid, FeralDruid, RestorationDruid, BeastMasteryHunter, MarksmanshipHunter, SurvivalHunter,
+				ArcaneMage, FireMage, FrostMage, HolyPaladin, ProtectionPaladin, RetributionPaladin,
+				DisciplinePriest, HolyPriest, ShadowPriest, AssassinationRogue, CombatRogue, SubtletyRogue,
+				ElementalShaman, EnhancementShaman, RestorationShaman, AfflictionWarlock, DemonologyWarlock, DestructionWarlock,
+				ArmsWarrior, FuryWarrior, ProtectionWarrior, GeneralStuff}
+				
+			local all_pass_varis = {{"DRUID", "BALANCE"}, {"DRUID", "FERAL"}, {"DRUID", "RESTORATION"},
+			{"HUNTER", "BEASTMASTERY"},{"HUNTER", "MARKSMANSHIP"}, {"HUNTER", "SURVIVAL"},
+			{"MAGE", "ARCANE"}, {"MAGE", "FIRE"}, {"MAGE", "FROST"},
+			{"PALADIN", "HOLY"}, {"PALADIN", "PROTECTION"}, {"PALADIN", "RETRIBUTION"},
+			{"PRIEST", "DISCIPLINE"}, {"PRIEST", "HOLY"}, {"PRIEST", "SHADOW"},
+			{"ROGUE", "ASSASSINATION"}, {"ROGUE", "COMBAT"}, {"ROGUE", "SUBTLETY"},
+			{"SHAMAN", "ELEMENTAL"}, {"SHAMAN", "ENHANCEMENT"}, {"SHAMAN", "RESTORATION"},
+			{"WARLOCK", "AFFLICTION"}, {"WARLOCK", "DEMONOLOGY"}, {"WARLOCK", "DESTRUCTION"},
+			{"WARRIOR", "ARMS"}, {"WARRIOR", "FURY"}, {"WARRIOR", "PROTECTION"},
+			{"GENERAL", "GENERAL"}}
+			
+			for i,v in ipairs(all_buttons) do
+				if spec_displaying == v then
+					AIO.Handle("sideBar", "SendAmountOfSpells", all_pass_varis[i][1], all_pass_varis[i][2])
+				end
+			end
 		
 		end
 		
 		display_frame_CA()
 	
+	end
+	
+	function MyHandlers.GetSpellCount(player, spellCount, spellList)
+	
+		local start_ticker = 1
+		
+		repeat
+			local spellId = spellList[start_ticker][1]
+			local spellCostAE = spellList[start_ticker][2]
+			local spellCostTE = spellList[start_ticker][3]
+			local RequiredLevel = spellList[start_ticker][4]
+			local name, rank, icon, _,_,_,_ = GetSpellInfo(spellId)
+			local player_knows = IsSpellKnown(spellId)
+			local learn_tooltip = "Cost: "..spellCostAE.." AE "..spellCostTE.." TE"
+			local learn_texture = {.9, .2, .1}
+			local attach_it = {spellId, spellCostAE, spellCostTE}
+			
+			if player_knows == true then
+				learn_tooltip = "Already Known"
+				learn_texture = {.3, .3, .3}
+				attach_it = nil
+			elseif RequiredLevel > UnitLevel("player") then
+				learn_tooltip = "Too High Level: "..RequiredLevel
+				learn_texture = {.3, .3, .3}
+				attach_it = nil
+			end
+			
+			 -- spell_desc = GetSpellDescription(spellId) -- Doesn't work? Added in cata... lame
+		
+			all_spell_slot_buttons[start_ticker]:SetBackdrop({
+				bgFile = icon
+			})
+			local function spell_icon_tooltip_Enter(self, motion)
+				GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+				GameTooltip:SetText(name)
+				GameTooltip:Show()
+			end
+			all_spell_slot_buttons[start_ticker]:SetScript("OnEnter", spell_icon_tooltip_Enter)
+			local function spell_icon_tooltip_OnLeave(self)
+				GameTooltip:Hide()
+			end
+			all_spell_slot_buttons[start_ticker]:SetScript("OnLeave", spell_icon_tooltip_OnLeave)
+			
+			all_learn_spell_buttons_t[start_ticker]:SetTexture(learn_texture[1], learn_texture[2], learn_texture[3], 1)
+			
+			local function learn_button_tooltip_Enter(self, motion)
+				GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+				GameTooltip:SetText(learn_tooltip)
+				GameTooltip:Show()
+			end
+			all_learn_spell_buttons[start_ticker]:SetScript("OnEnter", learn_button_tooltip_Enter)
+			local function learn_button_tooltip_Leave(self, motion)
+				GameTooltip:Hide()
+			end
+			all_learn_spell_buttons[start_ticker]:SetScript("OnLeave", learn_button_tooltip_Leave)
+			
+			all_attached_spells[start_ticker] = attach_it
+			
+			all_learn_spell_buttons[start_ticker]:SetText("Learn")
+
+			start_ticker = start_ticker + 1
+		
+		until start_ticker == spellCount + 1
+		
+		repeat
+			all_spell_slot_buttons[start_ticker]:SetBackdrop({
+				bgFile = "Interface/CHARACTERFRAME/UI-Party-Background"
+			})
+			
+			
+			all_spell_slot_buttons[start_ticker]:SetScript("OnEnter", nil)
+			
+			
+			all_spell_slot_buttons[start_ticker]:SetScript("OnLeave", nil)
+			
+			all_learn_spell_buttons[start_ticker]:SetScript("OnEnter", nil)
+			
+			all_learn_spell_buttons[start_ticker]:SetScript("OnLeave", nil)
+		
+			all_learn_spell_buttons_t[start_ticker]:SetTexture(.3, .3, .3, 1)
+			all_learn_spell_buttons[start_ticker]:SetText("Empty")
+			all_attached_spells[start_ticker] = nil
+			start_ticker = start_ticker + 1
+		until start_ticker == 36 + 1
+	
+	end
+	
+	function learn_spell(self)
+	
+		for i,v in ipairs(all_learn_spell_buttons) do
+			if self == v then
+				local got_spell = all_attached_spells[i]
+				if got_spell ~= nil then
+					AIO.Handle("sideBar", "LearnThisSpell", got_spell, i)
+				end
+			end
+		end
+	
+	end
+	
+	function MyHandlers.ChangeLearnButton(player, i)
+	
+		local function learn_button_tooltip_Enter(self, motion)
+			GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+			GameTooltip:SetText("Already Known")
+			GameTooltip:Show()
+		end
+		all_learn_spell_buttons[i]:SetScript("OnEnter", learn_button_tooltip_Enter)
+
+		all_learn_spell_buttons_t[i]:SetTexture(.3, .3, .3, 1)
+		all_attached_spells[i] = nil
 	end
 	
 	-- ####################################### Basic Frame ##############################	
@@ -1357,21 +1491,70 @@ local sideBar = Framework_Base
 	Spell_slot29_AttachedSpell = nil
 	
 	Spell_slot30 = CreateFrame("Frame", "TrainingFrame_Spell_slot30", TrainingFrame, nil)
-	Spell_slot30Button = CreateFrame("Button", "TrainingFrame_Spell_slot30Button", Spell_slot24, nil)
+	Spell_slot30Button = CreateFrame("Button", "TrainingFrame_Spell_slot30Button", Spell_slot30, nil)
 	Spell_slot30Button = CreateFrame("Button", "TrainingFrame_Spell_slot30Button", Spell_slot30, nil)
 	Spell_slot30ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot30ButtonL", Spell_slot30, nil)
 	Spell_slot30ButtonLT = Spell_slot30ButtonL:CreateTexture("Spell_slot30ButtonLT")
 	Spell_slot30ButtonF = Spell_slot30ButtonL:CreateFontString("Spell_slot30ButtonF")
 	Spell_slot30_AttachedSpell = nil
 	
-	all_spell_slots = {{Spell_slot1, -340, -75},{Spell_slot2, -240, -75},{Spell_slot3, -140, -75},{Spell_slot4, -40, -75},
-	{Spell_slot5, 60, -75},{Spell_slot6, 160, -75}, {Spell_slot7, -340, -225}, {Spell_slot8, -240, -225},
-	{Spell_slot9, -140, -225}, {Spell_slot10, -40, -225}, {Spell_slot11, 60, -225}, {Spell_slot12, 160, -225},
-	{Spell_slot13, -340, -375}, {Spell_slot14, -240, -375}, {Spell_slot15, -140, -375}, {Spell_slot16, -40, -375},
-	{Spell_slot17, 60, -375}, {Spell_slot18, 160, -375}, {Spell_slot19, -340, -525}, {Spell_slot20, -240, -525},
-	{Spell_slot21, -140, -525},{Spell_slot22, -40, -525},{Spell_slot23, 60, -525},{Spell_slot24, 160, -525},
-	{Spell_slot25, -340, -675}, {Spell_slot26, -240, -675}, {Spell_slot27, -140, -675}, {Spell_slot28, -40, -675},
-	{Spell_slot29, 60, -675}, {Spell_slot30, 160, -675}}
+	Spell_slot31 = CreateFrame("Frame", "TrainingFrame_Spell_slot31", TrainingFrame, nil)
+	Spell_slot31Button = CreateFrame("Button", "TrainingFrame_Spell_slot31Button", Spell_slot31, nil)
+	Spell_slot31Button = CreateFrame("Button", "TrainingFrame_Spell_slot31Button", Spell_slot31, nil)
+	Spell_slot31ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot31ButtonL", Spell_slot31, nil)
+	Spell_slot31ButtonLT = Spell_slot31ButtonL:CreateTexture("Spell_slot31ButtonLT")
+	Spell_slot31ButtonF = Spell_slot31ButtonL:CreateFontString("Spell_slot31ButtonF")
+	Spell_slot31_AttachedSpell = nil
+	
+	Spell_slot32 = CreateFrame("Frame", "TrainingFrame_Spell_slot32", TrainingFrame, nil)
+	Spell_slot32Button = CreateFrame("Button", "TrainingFrame_Spell_slot32Button", Spell_slot32, nil)
+	Spell_slot32Button = CreateFrame("Button", "TrainingFrame_Spell_slot32Button", Spell_slot32, nil)
+	Spell_slot32ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot32ButtonL", Spell_slot32, nil)
+	Spell_slot32ButtonLT = Spell_slot32ButtonL:CreateTexture("Spell_slot32ButtonLT")
+	Spell_slot32ButtonF = Spell_slot32ButtonL:CreateFontString("Spell_slot32ButtonF")
+	Spell_slot32_AttachedSpell = nil
+	
+	Spell_slot33 = CreateFrame("Frame", "TrainingFrame_Spell_slot33", TrainingFrame, nil)
+	Spell_slot33Button = CreateFrame("Button", "TrainingFrame_Spell_slot33Button", Spell_slot33, nil)
+	Spell_slot33Button = CreateFrame("Button", "TrainingFrame_Spell_slot33Button", Spell_slot33, nil)
+	Spell_slot33ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot33ButtonL", Spell_slot33, nil)
+	Spell_slot33ButtonLT = Spell_slot33ButtonL:CreateTexture("Spell_slot33ButtonLT")
+	Spell_slot33ButtonF = Spell_slot33ButtonL:CreateFontString("Spell_slot33ButtonF")
+	Spell_slot33_AttachedSpell = nil
+	
+	Spell_slot34 = CreateFrame("Frame", "TrainingFrame_Spell_slot34", TrainingFrame, nil)
+	Spell_slot34Button = CreateFrame("Button", "TrainingFrame_Spell_slot34Button", Spell_slot34, nil)
+	Spell_slot34Button = CreateFrame("Button", "TrainingFrame_Spell_slot34Button", Spell_slot34, nil)
+	Spell_slot34ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot34ButtonL", Spell_slot34, nil)
+	Spell_slot34ButtonLT = Spell_slot34ButtonL:CreateTexture("Spell_slot34ButtonLT")
+	Spell_slot34ButtonF = Spell_slot34ButtonL:CreateFontString("Spell_slot34ButtonF")
+	Spell_slot34_AttachedSpell = nil
+	
+	Spell_slot35 = CreateFrame("Frame", "TrainingFrame_Spell_slot35", TrainingFrame, nil)
+	Spell_slot35Button = CreateFrame("Button", "TrainingFrame_Spell_slot35Button", Spell_slot35, nil)
+	Spell_slot35Button = CreateFrame("Button", "TrainingFrame_Spell_slot35Button", Spell_slot35, nil)
+	Spell_slot35ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot35ButtonL", Spell_slot35, nil)
+	Spell_slot35ButtonLT = Spell_slot35ButtonL:CreateTexture("Spell_slot35ButtonLT")
+	Spell_slot35ButtonF = Spell_slot35ButtonL:CreateFontString("Spell_slot35ButtonF")
+	Spell_slot35_AttachedSpell = nil
+	
+	Spell_slot36 = CreateFrame("Frame", "TrainingFrame_Spell_slot36", TrainingFrame, nil)
+	Spell_slot36Button = CreateFrame("Button", "TrainingFrame_Spell_slot36Button", Spell_slot36, nil)
+	Spell_slot36Button = CreateFrame("Button", "TrainingFrame_Spell_slot36Button", Spell_slot36, nil)
+	Spell_slot36ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot36ButtonL", Spell_slot36, nil)
+	Spell_slot36ButtonLT = Spell_slot36ButtonL:CreateTexture("Spell_slot36ButtonLT")
+	Spell_slot36ButtonF = Spell_slot36ButtonL:CreateFontString("Spell_slot36ButtonF")
+	Spell_slot36_AttachedSpell = nil
+	
+	all_spell_slots = {{Spell_slot1, -340, -25},{Spell_slot2, -240, -25},{Spell_slot3, -140, -25},{Spell_slot4, -40, -25},
+	{Spell_slot5, 60, -25},{Spell_slot6, 160, -25}, {Spell_slot7, -340, -175}, {Spell_slot8, -240, -175},
+	{Spell_slot9, -140, -175}, {Spell_slot10, -40, -175}, {Spell_slot11, 60, -175}, {Spell_slot12, 160, -175},
+	{Spell_slot13, -340, -325}, {Spell_slot14, -240, -325}, {Spell_slot15, -140, -325}, {Spell_slot16, -40, -325},
+	{Spell_slot17, 60, -325}, {Spell_slot18, 160, -325}, {Spell_slot19, -340, -475}, {Spell_slot20, -240, -475},
+	{Spell_slot21, -140, -475},{Spell_slot22, -40, -475},{Spell_slot23, 60, -475},{Spell_slot24, 160, -475},
+	{Spell_slot25, -340, -625}, {Spell_slot26, -240, -625}, {Spell_slot27, -140, -625}, {Spell_slot28, -40, -625},
+	{Spell_slot29, 60, -625}, {Spell_slot30, 160, -625}, {Spell_slot31, -340, -775}, {Spell_slot32, -240, -775},
+	{Spell_slot33, -140, -775}, {Spell_slot34, -40, -775}, {Spell_slot35, 60, -775}, {Spell_slot36, 160, -775}}
 	
 	all_spell_slot_buttons = {Spell_slot1Button, Spell_slot2Button, Spell_slot3Button, Spell_slot4Button,
 	Spell_slot5Button, Spell_slot6Button, Spell_slot7Button, Spell_slot8Button,
@@ -1380,7 +1563,8 @@ local sideBar = Framework_Base
 	Spell_slot17Button, Spell_slot18Button, Spell_slot19Button, Spell_slot20Button,
 	Spell_slot21Button, Spell_slot22Button, Spell_slot23Button, Spell_slot24Button,
 	Spell_slot25Button, Spell_slot26Button, Spell_slot27Button, Spell_slot28Button,
-	Spell_slot29Button, Spell_slot30Button}
+	Spell_slot29Button, Spell_slot30Button, Spell_slot31Button, Spell_slot32Button,
+	Spell_slot33Button, Spell_slot34Button, Spell_slot35Button, Spell_slot36Button}
 	
 	all_learn_spell_buttons = {Spell_slot1ButtonL, Spell_slot2ButtonL, Spell_slot3ButtonL, Spell_slot4ButtonL,
 	Spell_slot5ButtonL, Spell_slot6ButtonL, Spell_slot7ButtonL, Spell_slot8ButtonL,
@@ -1389,7 +1573,8 @@ local sideBar = Framework_Base
 	Spell_slot17ButtonL, Spell_slot18ButtonL, Spell_slot19ButtonL, Spell_slot20ButtonL,
 	Spell_slot21ButtonL, Spell_slot22ButtonL, Spell_slot23ButtonL, Spell_slot24ButtonL,
 	Spell_slot25ButtonL, Spell_slot26ButtonL, Spell_slot27ButtonL, Spell_slot28ButtonL,
-	Spell_slot29ButtonL, Spell_slot30ButtonL}
+	Spell_slot29ButtonL, Spell_slot30ButtonL, Spell_slot31ButtonL, Spell_slot32ButtonL,
+	Spell_slot33ButtonL, Spell_slot34ButtonL, Spell_slot35ButtonL, Spell_slot36ButtonL}
 	
 	all_learn_spell_buttons_t = {Spell_slot1ButtonLT, Spell_slot2ButtonLT, Spell_slot3ButtonLT, Spell_slot4ButtonLT,
 	Spell_slot5ButtonLT, Spell_slot6ButtonLT, Spell_slot7ButtonLT, Spell_slot8ButtonLT,
@@ -1398,7 +1583,8 @@ local sideBar = Framework_Base
 	Spell_slot17ButtonLT, Spell_slot19ButtonLT, Spell_slot18ButtonLT, Spell_slot20ButtonLT,
 	Spell_slot21ButtonLT, Spell_slot22ButtonLT, Spell_slot23ButtonLT, Spell_slot24ButtonLT,
 	Spell_slot25ButtonLT, Spell_slot26ButtonLT, Spell_slot27ButtonLT, Spell_slot28ButtonLT,
-	Spell_slot29ButtonLT, Spell_slot30ButtonLT}
+	Spell_slot29ButtonLT, Spell_slot30ButtonLT, Spell_slot31ButtonLT, Spell_slot32ButtonLT,
+	Spell_slot33ButtonLT, Spell_slot34ButtonLT, Spell_slot35ButtonLT, Spell_slot36ButtonLT}
 	
 	all_learn_spell_buttons_f = {Spell_slot1ButtonF, Spell_slot2ButtonF, Spell_slot3ButtonF, Spell_slot4ButtonF,
 	Spell_slot5ButtonF, Spell_slot6ButtonF, Spell_slot7ButtonF, Spell_slot8ButtonF,
@@ -1407,7 +1593,8 @@ local sideBar = Framework_Base
 	Spell_slot17ButtonF, Spell_slot18ButtonF, Spell_slot19ButtonF, Spell_slot20ButtonF,
 	Spell_slot21ButtonF, Spell_slot22ButtonF, Spell_slot23ButtonF, Spell_slot24ButtonF,
 	Spell_slot25ButtonF, Spell_slot26ButtonF, Spell_slot27ButtonF, Spell_slot28ButtonF,
-	Spell_slot29ButtonF, Spell_slot30ButtonF}
+	Spell_slot29ButtonF, Spell_slot30ButtonF, Spell_slot31ButtonF, Spell_slot32ButtonF,
+	Spell_slot33ButtonF, Spell_slot34ButtonF, Spell_slot35ButtonF, Spell_slot36ButtonF}
 	
 	all_attached_spells = {Spell_slot1_AttachedSpell, Spell_slot2_AttachedSpell, Spell_slot3_AttachedSpell, Spell_slot4_AttachedSpell,
 	Spell_slot5_AttachedSpell, Spell_slot6_AttachedSpell, Spell_slot7_AttachedSpell, Spell_slot8_AttachedSpell,
@@ -1416,7 +1603,8 @@ local sideBar = Framework_Base
 	Spell_slot17_AttachedSpell, Spell_slot18_AttachedSpell, Spell_slot19_AttachedSpell, Spell_slot20_AttachedSpell,
 	Spell_slot21_AttachedSpell, Spell_slot22_AttachedSpell, Spell_slot23_AttachedSpell, Spell_slot24_AttachedSpell,
 	Spell_slot25_AttachedSpell, Spell_slot26_AttachedSpell, Spell_slot27_AttachedSpell, Spell_slot28_AttachedSpell,
-	Spell_slot29_AttachedSpell, Spell_slot30_AttachedSpell}
+	Spell_slot29_AttachedSpell, Spell_slot30_AttachedSpell, Spell_slot31_AttachedSpell, Spell_slot32_AttachedSpell,
+	Spell_slot33_AttachedSpell, Spell_slot34_AttachedSpell, Spell_slot35_AttachedSpell, Spell_slot36_AttachedSpell}
 	
 	for i,v in ipairs(all_spell_slots) do
 		v[1]:SetSize(60, 60)
@@ -1443,7 +1631,7 @@ local sideBar = Framework_Base
 		v:SetSize(50, 20)
         v:SetPoint("CENTER", 0, -52)
         v:EnableMouse(true)
-        v:SetScript("OnMouseUp",  nil)
+        v:SetScript("OnMouseUp",  learn_spell)
 	end
 	
 	for i,v in ipairs(all_learn_spell_buttons_t) do

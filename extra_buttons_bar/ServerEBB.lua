@@ -266,5 +266,156 @@ function MyHandlers.ResetTalents(player)
 end
 
 
+function MyHandlers.SendAmountOfSpells(player, class, Spec)
+
+	local pass_1 = nil
+	local pass_2 = nil
+
+	if class == "DRUID" and Spec == "BALANCE" then
+		pass_1 = druid_balance_spells_count
+		pass_2 = druid_balance_spells
+	elseif class == "DRUID" and Spec == "FERAL" then
+		pass_1 = druid_feral_spells_count
+		pass_2 = druid_feral_spells
+	elseif class == "DRUID" and Spec == "RESTORATION" then
+		pass_1 = druid_restoration_spells_count
+		pass_2 = druid_restoration_spells
+	elseif class == "HUNTER" and Spec == "BEASTMASTERY" then
+		pass_1 = hunter_beastmastery_spells_count
+		pass_2 = hunter_beastmastery_spells
+	elseif class == "HUNTER" and Spec == "MARKSMANSHIP" then
+		pass_1 = hunter_marksmanship_spells_count
+		pass_2 = hunter_marksmanship_spells
+	elseif class == "HUNTER" and Spec == "SURVIVAL" then
+		pass_1 = hunter_survival_spells_count
+		pass_2 = hunter_survival_spells
+	elseif class == "MAGE" and Spec == "ARCANE" then
+		pass_1 = mage_arcane_spells_count
+		pass_2 = mage_arcane_spells
+	elseif class == "MAGE" and Spec == "FIRE" then
+		pass_1 = mage_fire_spells_count
+		pass_2 = mage_fire_spells
+	elseif class == "MAGE" and Spec == "FROST" then
+		pass_1 = mage_frost_spells_count
+		pass_2 = mage_frost_spells
+	elseif class == "PALADIN" and Spec == "HOLY" then
+		pass_1 = paladin_holy_spells_count
+		pass_2 = paladin_holy_spells
+	elseif class == "PALADIN" and Spec == "RETRIBUTION" then
+		pass_1 = paladin_retribution_spells_count
+		pass_2 = paladin_retribution_spells
+	elseif class == "PALADIN" and Spec == "PROTECTION" then
+		pass_1 = paladin_protection_spells_count
+		pass_2 = paladin_protection_spells
+	elseif class == "PRIEST" and Spec == "DISCIPLINE" then
+		pass_1 = priest_discipline_spells_count
+		pass_2 = priest_discipline_spells
+	elseif class == "PRIEST" and Spec == "HOLY" then
+		pass_1 = priest_holy_spells_count
+		pass_2 = priest_holy_spells
+	elseif class == "PRIEST" and Spec == "SHADOW" then
+		pass_1 = priest_shadow_spells_count
+		pass_2 = priest_shadow_spells
+	elseif class == "ROGUE" and Spec == "ASSASSINATION" then
+		pass_1 = rogue_assassination_spells_count
+		pass_2 = rogue_assassination_spells
+	elseif class == "ROGUE" and Spec == "COMBAT" then
+		pass_1 = rogue_combat_spells_count
+		pass_2 = rogue_combat_spells
+	elseif class == "ROGUE" and Spec == "SUBTLETY" then
+		pass_1 = rogue_subtlety_spells_count
+		pass_2 = rogue_subtlety_spells
+	elseif class == "SHAMAN" and Spec == "ELEMENTAL" then
+		pass_1 = shaman_elemental_spells_count
+		pass_2 = shaman_elemental_spells
+	elseif class == "SHAMAN" and Spec == "ENHANCEMENT" then
+		pass_1 = shaman_enhancement_spells_count
+		pass_2 = shaman_enhancement_spells
+	elseif class == "SHAMAN" and Spec == "RESTORATION" then
+		pass_1 = shaman_restoration_spells_count
+		pass_2 = shaman_restoration_spells
+	elseif class == "WARLOCK" and Spec == "AFFLICTION" then
+		pass_1 = warlock_affliction_spells_count
+		pass_2 = warlock_affliction_spells
+	elseif class == "WARLOCK" and Spec == "DEMONOLOGY" then
+		pass_1 = warlock_demonology_spells_count
+		pass_2 = warlock_demonology_spells
+	elseif class == "WARLOCK" and Spec == "DESTRUCTION" then
+		pass_1 = warlock_destruction_spells_count
+		pass_2 = warlock_destruction_spells
+	elseif class == "WARRIOR" and Spec == "ARMS" then
+		pass_1 = warrior_arms_spells_count
+		pass_2 = warrior_arms_spells
+	elseif class == "WARRIOR" and Spec == "FURY" then
+		pass_1 = warrior_fury_spells_count
+		pass_2 = warrior_fury_spells
+	elseif class == "WARRIOR" and Spec == "PROTECTION" then
+		pass_1 = warrior_protection_spells_count
+		pass_2 = warrior_protection_spells
+	elseif class == "GENERAL" and Spec == "GENERAL" then
+		pass_1 = general_spells_count
+		pass_2 = general_spells
+	end
+	
+	sendAmountOfSpells(AIO.Msg(), player, pass_1, pass_2):Send(player)
+
+end
+
+function sendAmountOfSpells(msg, player, spellCount, spellList)
+
+	return msg:Add("sideBar", "GetSpellCount", spellCount, spellList)
+
+end
+
+function sendButtonToChangeSpells(msg, player, i)
+
+	return msg:Add("sideBar", "ChangeLearnButton", i)
+
+end
+
+
+function MyHandlers.LearnThisSpell(player, got_spell, i)
+	local successful = true
+	local player_has_currency = true
+	local currency_one = got_spell[2]
+	local currency_two = got_spell[3]
+	local spellID = got_spell[1]
+	
+	
+	if got_spell[2] ~= 0 then
+		if player:HasItem(spell_essence, currency_one) == false then
+			player_has_currency = false
+			successful = false
+		end
+	end
+	
+	if got_spell[3] ~= 0 then
+		if player:HasItem(talent_essence, currency_two) == false then
+			player_has_currency = false
+			successful = false
+		end
+	end
+	
+	if player_has_currency == true and currency_one ~= 0 then
+		player:RemoveItem(spell_essence, currency_one)
+	end
+	
+	if player_has_currency == true and currency_two ~= 0 then
+		player:RemoveItem(talent_essence, currency_two)
+	end
+	
+	if player_has_currency == true then
+		player:LearnSpell(spellID)
+	end
+	
+	if successful == false then
+		player:SendBroadcastMessage("You do not have the required currency!")
+		
+	else
+		sendButtonToChangeSpells(AIO.Msg(), player, i):Send(player)
+	end
+	
+	return successful
+end
 
 
