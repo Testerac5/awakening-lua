@@ -37,7 +37,7 @@ local sideBar = Framework_Base
 	
 	--[[TRAINING FRAME]]--
     local TrainingFrame = CreateFrame("Frame", "TrainingFrame", UIParent, nil)
-        TrainingFrame:SetSize(900, 890)
+        TrainingFrame:SetSize(900, 735)
         TrainingFrame:SetMovable(true)
         TrainingFrame:EnableMouse(true)
         TrainingFrame:RegisterForDrag("LeftButton")
@@ -593,7 +593,7 @@ local sideBar = Framework_Base
 	-- ####################################### Spec Buttons ##############################	
 	BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame, nil)
         BalanceDruid:SetSize(175, 20)
-        BalanceDruid:SetPoint("TOPRIGHT", -10, -40)
+        BalanceDruid:SetPoint("TOPRIGHT", -10, -30)
         BalanceDruid:EnableMouse(true)
 		texture_BalanceDruid = BalanceDruid:CreateTexture("BalanceDruid")
 		texture_BalanceDruid:SetAllPoints(BalanceDruid)
@@ -611,7 +611,7 @@ local sideBar = Framework_Base
 		
 	FeralDruid = CreateFrame("Button", "TrainingFrame_FeralDruid", TrainingFrame, nil)
         FeralDruid:SetSize(175, 20)
-        FeralDruid:SetPoint("TOPRIGHT", -10, -70)
+        FeralDruid:SetPoint("TOPRIGHT", -10, -55)
         FeralDruid:EnableMouse(true)
 		texture_FeralDruid = BalanceDruid:CreateTexture("FeralDruid")
 		texture_FeralDruid:SetAllPoints(FeralDruid)
@@ -627,7 +627,7 @@ local sideBar = Framework_Base
 		
 	RestorationDruid = CreateFrame("Button", "TrainingFrame_RestorationDruid", TrainingFrame, nil)
         RestorationDruid:SetSize(175, 20)
-        RestorationDruid:SetPoint("TOPRIGHT", -10, -100)
+        RestorationDruid:SetPoint("TOPRIGHT", -10, -80)
         RestorationDruid:EnableMouse(true)
 		texture_RestorationDruid = RestorationDruid:CreateTexture("RestorationDruid")
 		texture_RestorationDruid:SetAllPoints(RestorationDruid)
@@ -643,7 +643,7 @@ local sideBar = Framework_Base
 		
 	BeastMasteryHunter = CreateFrame("Button", "TrainingFrame_BeastMasteryHunter", TrainingFrame, nil)
         BeastMasteryHunter:SetSize(175, 20)
-        BeastMasteryHunter:SetPoint("TOPRIGHT", -10, -130)
+        BeastMasteryHunter:SetPoint("TOPRIGHT", -10, -105)
         BeastMasteryHunter:EnableMouse(true)
 		texture_BeastMasteryHunter = BeastMasteryHunter:CreateTexture("BeastMasteryHunter")
 		texture_BeastMasteryHunter:SetAllPoints(BeastMasteryHunter)
@@ -659,7 +659,7 @@ local sideBar = Framework_Base
 	
 	MarksmanshipHunter = CreateFrame("Button", "TrainingFrame_MarksmanshipHunter", TrainingFrame, nil)
         MarksmanshipHunter:SetSize(175, 20)
-        MarksmanshipHunter:SetPoint("TOPRIGHT", -10, -160)
+        MarksmanshipHunter:SetPoint("TOPRIGHT", -10, -130)
         MarksmanshipHunter:EnableMouse(true)
 		texture_MarksmanshipHunter = MarksmanshipHunter:CreateTexture("MarksmanshipHunter")
 		texture_MarksmanshipHunter:SetAllPoints(MarksmanshipHunter)
@@ -675,7 +675,7 @@ local sideBar = Framework_Base
 		
 	SurvivalHunter = CreateFrame("Button", "TrainingFrame_SurvivalHunter", TrainingFrame, nil)
         SurvivalHunter:SetSize(175, 20)
-        SurvivalHunter:SetPoint("TOPRIGHT", -10, -190)
+        SurvivalHunter:SetPoint("TOPRIGHT", -10, -155)
         SurvivalHunter:EnableMouse(true)
 		texture_SurvivalHunter = MarksmanshipHunter:CreateTexture("SurvivalHunter")
 		texture_SurvivalHunter:SetAllPoints(SurvivalHunter)
@@ -691,7 +691,7 @@ local sideBar = Framework_Base
 		
 	ArcaneMage = CreateFrame("Button", "TrainingFrame_ArcaneMage", TrainingFrame, nil)
         ArcaneMage:SetSize(175, 20)
-        ArcaneMage:SetPoint("TOPRIGHT", -10, -220)
+        ArcaneMage:SetPoint("TOPRIGHT", -10, -180)
         ArcaneMage:EnableMouse(true)
 		texture_ArcaneMage = ArcaneMage:CreateTexture("FireMage")
 		texture_ArcaneMage:SetAllPoints(ArcaneMage)
@@ -707,7 +707,7 @@ local sideBar = Framework_Base
 		
 	FireMage = CreateFrame("Button", "TrainingFrame_FireMage", TrainingFrame, nil)
         FireMage:SetSize(175, 20)
-        FireMage:SetPoint("TOPRIGHT", -10, -250)
+        FireMage:SetPoint("TOPRIGHT", -10, -205)
         FireMage:EnableMouse(true)
 		texture_FireMage = FireMage:CreateTexture("FireMage")
 		texture_FireMage:SetAllPoints(FireMage)
@@ -723,7 +723,7 @@ local sideBar = Framework_Base
 		
 	FrostMage = CreateFrame("Button", "TrainingFrame_FrostMage", TrainingFrame, nil)
         FrostMage:SetSize(175, 20)
-        FrostMage:SetPoint("TOPRIGHT", -10, -280)
+        FrostMage:SetPoint("TOPRIGHT", -10, -230)
         FrostMage:EnableMouse(true)
 		texture_FrostMage = FrostMage:CreateTexture("FrostMage")
 		texture_FrostMage:SetAllPoints(FrostMage)
@@ -738,7 +738,7 @@ local sideBar = Framework_Base
 		
 	HolyPaladin = CreateFrame("Button", "TrainingFrame_HolyPaladin", TrainingFrame, nil)
         HolyPaladin:SetSize(175, 20)
-        HolyPaladin:SetPoint("TOPRIGHT", -10, -310)
+        HolyPaladin:SetPoint("TOPRIGHT", -10, -255)
         HolyPaladin:EnableMouse(true)
 		texture_HolyPaladin = HolyPaladin:CreateTexture("HolyPaladin")
 		texture_HolyPaladin:SetAllPoints(HolyPaladin)
@@ -754,7 +754,7 @@ local sideBar = Framework_Base
 		
 	ProtectionPaladin = CreateFrame("Button", "TrainingFrame_ProtectionPaladin", TrainingFrame, nil)
         ProtectionPaladin:SetSize(175, 20)
-        ProtectionPaladin:SetPoint("TOPRIGHT", -10, -340)
+        ProtectionPaladin:SetPoint("TOPRIGHT", -10, -280)
         ProtectionPaladin:EnableMouse(true)
 		texture_ProtectionPaladin = ProtectionPaladin:CreateTexture("ProtectionPaladin")
 		texture_ProtectionPaladin:SetAllPoints(ProtectionPaladin)
@@ -770,7 +770,7 @@ local sideBar = Framework_Base
 		
 	RetributionPaladin = CreateFrame("Button", "TrainingFrame_RetributionPaladin", TrainingFrame, nil)
         RetributionPaladin:SetSize(175, 20)
-        RetributionPaladin:SetPoint("TOPRIGHT", -10, -370)
+        RetributionPaladin:SetPoint("TOPRIGHT", -10, -305)
         RetributionPaladin:EnableMouse(true)
 		texture_RetributionPaladin = RetributionPaladin:CreateTexture("RetributionPaladin")
 		texture_RetributionPaladin:SetAllPoints(RetributionPaladin)
@@ -786,7 +786,7 @@ local sideBar = Framework_Base
 		
 	DisciplinePriest = CreateFrame("Button", "TrainingFrame_DisciplinePriest", TrainingFrame, nil)
         DisciplinePriest:SetSize(175, 20)
-        DisciplinePriest:SetPoint("TOPRIGHT", -10, -400)
+        DisciplinePriest:SetPoint("TOPRIGHT", -10, -330)
         DisciplinePriest:EnableMouse(true)
 		texture_DisciplinePriest = DisciplinePriest:CreateTexture("DisciplinePriest")
 		texture_DisciplinePriest:SetAllPoints(DisciplinePriest)
@@ -802,7 +802,7 @@ local sideBar = Framework_Base
 		
 	HolyPriest = CreateFrame("Button", "TrainingFrame_HolyPriest", TrainingFrame, nil)
         HolyPriest:SetSize(175, 20)
-        HolyPriest:SetPoint("TOPRIGHT", -10, -430)
+        HolyPriest:SetPoint("TOPRIGHT", -10, -355)
         HolyPriest:EnableMouse(true)
 		texture_HolyPriest = HolyPriest:CreateTexture("HolyPriest")
 		texture_HolyPriest:SetAllPoints(HolyPriest)
@@ -818,7 +818,7 @@ local sideBar = Framework_Base
 		
 	ShadowPriest = CreateFrame("Button", "TrainingFrame_ShadowPriest", TrainingFrame, nil)
         ShadowPriest:SetSize(175, 20)
-        ShadowPriest:SetPoint("TOPRIGHT", -10, -460)
+        ShadowPriest:SetPoint("TOPRIGHT", -10, -380)
         ShadowPriest:EnableMouse(true)
 		texture_ShadowPriest = ShadowPriest:CreateTexture("ShadowPriest")
 		texture_ShadowPriest:SetAllPoints(ShadowPriest)
@@ -834,7 +834,7 @@ local sideBar = Framework_Base
 		
 	AssassinationRogue = CreateFrame("Button", "TrainingFrame_AssassinationRogue", TrainingFrame, nil)
         AssassinationRogue:SetSize(175, 20)
-        AssassinationRogue:SetPoint("TOPRIGHT", -10, -490)
+        AssassinationRogue:SetPoint("TOPRIGHT", -10, -405)
         AssassinationRogue:EnableMouse(true)
 		texture_AssassinationRogue = AssassinationRogue:CreateTexture("AssassinationRogue")
 		texture_AssassinationRogue:SetAllPoints(AssassinationRogue)
@@ -850,7 +850,7 @@ local sideBar = Framework_Base
 		
 	CombatRogue = CreateFrame("Button", "TrainingFrame_CombatRogue", TrainingFrame, nil)
         CombatRogue:SetSize(175, 20)
-        CombatRogue:SetPoint("TOPRIGHT", -10, -520)
+        CombatRogue:SetPoint("TOPRIGHT", -10, -430)
         CombatRogue:EnableMouse(true)
 		texture_CombatRogue = CombatRogue:CreateTexture("CombatRogue")
 		texture_CombatRogue:SetAllPoints(CombatRogue)
@@ -866,7 +866,7 @@ local sideBar = Framework_Base
 		
 	SubtletyRogue = CreateFrame("Button", "TrainingFrame_SubtletyRogue", TrainingFrame, nil)
         SubtletyRogue:SetSize(175, 20)
-        SubtletyRogue:SetPoint("TOPRIGHT", -10, -550)
+        SubtletyRogue:SetPoint("TOPRIGHT", -10, -455)
         SubtletyRogue:EnableMouse(true)
 		texture_SubtletyRogue = SubtletyRogue:CreateTexture("SubtletyRogue")
 		texture_SubtletyRogue:SetAllPoints(SubtletyRogue)
@@ -882,7 +882,7 @@ local sideBar = Framework_Base
 		
 	ElementalShaman = CreateFrame("Button", "TrainingFrame_ElementalShaman", TrainingFrame, nil)
         ElementalShaman:SetSize(175, 20)
-        ElementalShaman:SetPoint("TOPRIGHT", -10, -580)
+        ElementalShaman:SetPoint("TOPRIGHT", -10, -480)
         ElementalShaman:EnableMouse(true)
 		texture_ElementalShaman = ElementalShaman:CreateTexture("ElementalShaman")
 		texture_ElementalShaman:SetAllPoints(ElementalShaman)
@@ -898,7 +898,7 @@ local sideBar = Framework_Base
 		
 	EnhancementShaman = CreateFrame("Button", "TrainingFrame_EnhancementShaman", TrainingFrame, nil)
         EnhancementShaman:SetSize(175, 20)
-        EnhancementShaman:SetPoint("TOPRIGHT", -10, -610)
+        EnhancementShaman:SetPoint("TOPRIGHT", -10, -505)
         EnhancementShaman:EnableMouse(true)
 		texture_EnhancementShaman = EnhancementShaman:CreateTexture("EnhancementShaman")
 		texture_EnhancementShaman:SetAllPoints(EnhancementShaman)
@@ -914,7 +914,7 @@ local sideBar = Framework_Base
 		
 	RestorationShaman = CreateFrame("Button", "TrainingFrame_RestorationShaman", TrainingFrame, nil)
         RestorationShaman:SetSize(175, 20)
-        RestorationShaman:SetPoint("TOPRIGHT", -10, -640)
+        RestorationShaman:SetPoint("TOPRIGHT", -10, -530)
         RestorationShaman:EnableMouse(true)
 		texture_RestorationShaman = RestorationShaman:CreateTexture("RestorationShaman")
 		texture_RestorationShaman:SetAllPoints(RestorationShaman)
@@ -930,7 +930,7 @@ local sideBar = Framework_Base
 		
 	AfflictionWarlock = CreateFrame("Button", "TrainingFrame_AfflictionWarlock", TrainingFrame, nil)
         AfflictionWarlock:SetSize(175, 20)
-        AfflictionWarlock:SetPoint("TOPRIGHT", -10, -670)
+        AfflictionWarlock:SetPoint("TOPRIGHT", -10, -555)
         AfflictionWarlock:EnableMouse(true)
 		texture_AfflictionWarlock = AfflictionWarlock:CreateTexture("AfflictionWarlock")
 		texture_AfflictionWarlock:SetAllPoints(AfflictionWarlock)
@@ -945,7 +945,7 @@ local sideBar = Framework_Base
 		
 	DemonologyWarlock = CreateFrame("Button", "TrainingFrame_DemonologyWarlock", TrainingFrame, nil)
         DemonologyWarlock:SetSize(175, 20)
-        DemonologyWarlock:SetPoint("TOPRIGHT", -10, -700)
+        DemonologyWarlock:SetPoint("TOPRIGHT", -10, -580)
         DemonologyWarlock:EnableMouse(true)
 		texture_DemonologyWarlock = DemonologyWarlock:CreateTexture("DemonologyWarlock")
 		texture_DemonologyWarlock:SetAllPoints(DemonologyWarlock)
@@ -961,7 +961,7 @@ local sideBar = Framework_Base
 		
 	DestructionWarlock = CreateFrame("Button", "TrainingFrame_DestructionWarlock", TrainingFrame, nil)
         DestructionWarlock:SetSize(175, 20)
-        DestructionWarlock:SetPoint("TOPRIGHT", -10, -730)
+        DestructionWarlock:SetPoint("TOPRIGHT", -10, -605)
         DestructionWarlock:EnableMouse(true)
 		texture_DestructionWarlock = DestructionWarlock:CreateTexture("DestructionWarlock")
 		texture_DestructionWarlock:SetAllPoints(DestructionWarlock)
@@ -977,7 +977,7 @@ local sideBar = Framework_Base
 		
 	ArmsWarrior = CreateFrame("Button", "TrainingFrame_ArmsWarrior", TrainingFrame, nil)
         ArmsWarrior:SetSize(175, 20)
-        ArmsWarrior:SetPoint("TOPRIGHT", -10, -760)
+        ArmsWarrior:SetPoint("TOPRIGHT", -10, -630)
         ArmsWarrior:EnableMouse(true)
 		texture_ArmsWarrior = ArmsWarrior:CreateTexture("ArmsWarrior")
 		texture_ArmsWarrior:SetAllPoints(ArmsWarrior)
@@ -993,7 +993,7 @@ local sideBar = Framework_Base
 		
 	FuryWarrior = CreateFrame("Button", "TrainingFrame_FuryWarrior", TrainingFrame, nil)
         FuryWarrior:SetSize(175, 20)
-        FuryWarrior:SetPoint("TOPRIGHT", -10, -790)
+        FuryWarrior:SetPoint("TOPRIGHT", -10, -655)
         FuryWarrior:EnableMouse(true)
 		texture_FuryWarrior = FuryWarrior:CreateTexture("FuryWarrior")
 		texture_FuryWarrior:SetAllPoints(FuryWarrior)
@@ -1009,7 +1009,7 @@ local sideBar = Framework_Base
 		
 	ProtectionWarrior = CreateFrame("Button", "TrainingFrame_ProtectionWarrior", TrainingFrame, nil)
         ProtectionWarrior:SetSize(175, 20)
-        ProtectionWarrior:SetPoint("TOPRIGHT", -10, -820)
+        ProtectionWarrior:SetPoint("TOPRIGHT", -10, -680)
         ProtectionWarrior:EnableMouse(true)
 		texture_ProtectionWarrior = ProtectionWarrior:CreateTexture("ProtectionWarrior")
 		texture_ProtectionWarrior:SetAllPoints(ProtectionWarrior)
@@ -1024,7 +1024,7 @@ local sideBar = Framework_Base
 		
 	GeneralStuff = CreateFrame("Button", "TrainingFrame_GeneralStuff", TrainingFrame, nil)
         GeneralStuff:SetSize(175, 20)
-        GeneralStuff:SetPoint("TOPRIGHT", -10, -850)
+        GeneralStuff:SetPoint("TOPRIGHT", -10, -705)
         GeneralStuff:EnableMouse(true)
 		texture_GeneralStuff = GeneralStuff:CreateTexture("GeneralStuff")
 		texture_GeneralStuff:SetAllPoints(GeneralStuff)
@@ -1546,15 +1546,15 @@ local sideBar = Framework_Base
 	Spell_slot36ButtonF = Spell_slot36ButtonL:CreateFontString("Spell_slot36ButtonF")
 	Spell_slot36_AttachedSpell = nil
 	
-	all_spell_slots = {{Spell_slot1, -340, -25},{Spell_slot2, -240, -25},{Spell_slot3, -140, -25},{Spell_slot4, -40, -25},
-	{Spell_slot5, 60, -25},{Spell_slot6, 160, -25}, {Spell_slot7, -340, -175}, {Spell_slot8, -240, -175},
-	{Spell_slot9, -140, -175}, {Spell_slot10, -40, -175}, {Spell_slot11, 60, -175}, {Spell_slot12, 160, -175},
-	{Spell_slot13, -340, -325}, {Spell_slot14, -240, -325}, {Spell_slot15, -140, -325}, {Spell_slot16, -40, -325},
-	{Spell_slot17, 60, -325}, {Spell_slot18, 160, -325}, {Spell_slot19, -340, -475}, {Spell_slot20, -240, -475},
-	{Spell_slot21, -140, -475},{Spell_slot22, -40, -475},{Spell_slot23, 60, -475},{Spell_slot24, 160, -475},
-	{Spell_slot25, -340, -625}, {Spell_slot26, -240, -625}, {Spell_slot27, -140, -625}, {Spell_slot28, -40, -625},
-	{Spell_slot29, 60, -625}, {Spell_slot30, 160, -625}, {Spell_slot31, -340, -775}, {Spell_slot32, -240, -775},
-	{Spell_slot33, -140, -775}, {Spell_slot34, -40, -775}, {Spell_slot35, 60, -775}, {Spell_slot36, 160, -775}}
+	all_spell_slots = {{Spell_slot1, -340, -15},{Spell_slot2, -240, -15},{Spell_slot3, -140, -15},{Spell_slot4, -40, -15},
+	{Spell_slot5, 60, -15},{Spell_slot6, 160, -15}, {Spell_slot7, -340, -135}, {Spell_slot8, -240, -135},
+	{Spell_slot9, -140, -135}, {Spell_slot10, -40, -135}, {Spell_slot11, 60, -135}, {Spell_slot12, 160, -135},
+	{Spell_slot13, -340, -255}, {Spell_slot14, -240, -255}, {Spell_slot15, -140, -255}, {Spell_slot16, -40, -255},
+	{Spell_slot17, 60, -255}, {Spell_slot18, 160, -255}, {Spell_slot19, -340, -375}, {Spell_slot20, -240, -375},
+	{Spell_slot21, -140, -375},{Spell_slot22, -40, -375},{Spell_slot23, 60, -375},{Spell_slot24, 160, -375},
+	{Spell_slot25, -340, -495}, {Spell_slot26, -240, -495}, {Spell_slot27, -140, -495}, {Spell_slot28, -40, -495},
+	{Spell_slot29, 60, -495}, {Spell_slot30, 160, -495}, {Spell_slot31, -340, -615}, {Spell_slot32, -240, -615},
+	{Spell_slot33, -140, -615}, {Spell_slot34, -40, -615}, {Spell_slot35, 60, -615}, {Spell_slot36, 160, -615}}
 	
 	all_spell_slot_buttons = {Spell_slot1Button, Spell_slot2Button, Spell_slot3Button, Spell_slot4Button,
 	Spell_slot5Button, Spell_slot6Button, Spell_slot7Button, Spell_slot8Button,
