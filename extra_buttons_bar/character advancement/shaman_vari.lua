@@ -4,7 +4,8 @@ shaman_elemental_spells = {{403, 2, 0, 1}, {8042, 2, 0, 4}, {2484, 2, 0, 6}, {57
 {51514, 2, 0, 80}}
 
 shaman_elemental_spells_count = 18
-
+shaman_elemental_bgs = {"Interface\\TalentFrame\\ShamanElementalcombat-TopLeft", "Interface\\TalentFrame\\ShamanElementalcombat-TopRight",
+"Interface\\TalentFrame\\ShamanElementalcombat-BottomLeft", "Interface\\TalentFrame\\ShamanElementalcombat-BottomRight"}
 
 
 shaman_enhancement_spells = {{8017, 2, 0, 1}, {8071, 2, 0, 4}, {324, 2, 0, 8}, {8024, 2, 0, 10}, {8075, 2, 0, 10},
@@ -13,7 +14,8 @@ shaman_enhancement_spells = {{8017, 2, 0, 1}, {8071, 2, 0, 4}, {324, 2, 0, 8}, {
 {8512, 2, 0, 32}, {6495, 2, 0, 34}, {3738, 2, 0, 64}, {2825, 2, 0, 70}, {32182, 2, 0, 70}, {2062, 2, 0, 80}}
 
 shaman_enhancement_spells_count = 23
-
+shaman_enhancement_bgs = {"Interface\\TalentFrame\\ShamanEnhancement-TopLeft", "Interface\\TalentFrame\\ShamanEnhancement-TopRight",
+"Interface\\TalentFrame\\ShamanEnhancement-BottomLeft", "Interface\\TalentFrame\\ShamanEnhancement-BottomRight"}
 
 
 shaman_restoration_spells = {{331, 2, 0 , 1}, {2008, 2, 0, 12}, {526, 2, 0, 16}, {8143, 2, 0, 18}, {5394, 2, 0, 20},
@@ -21,3 +23,5 @@ shaman_restoration_spells = {{331, 2, 0 , 1}, {2008, 2, 0, 12}, {526, 2, 0, 16},
 {1064, 2, 0, 40}}
 
 shaman_restoration_spells_count = 12
+shaman_restoration_bgs = {"Interface\\TalentFrame\\ShamanRestoration-TopLeft", "Interface\\TalentFrame\\ShamanRestoration-TopRight",
+"Interface\\TalentFrame\\ShamanRestoration-BottomLeft", "Interface\\TalentFrame\\ShamanRestoration-BottomRight"}

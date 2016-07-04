@@ -4,6 +4,8 @@ hunter_beastmastery_spells = {{13163, 2, 0, 4}, {883, 2, 0, 10}, {1515, 2, 0, 10
 {61846, 2, 0, 74}, {53271, 2, 0, 75}, {62757, 2, 0, 80}}
 
 hunter_beastmastery_spells_count = 20
+hunter_beastmastery_bgs = {"Interface\\TalentFrame\\HunterBeastmastery-TopLeft", "Interface\\TalentFrame\\HunterBeastmastery-TopRight",
+"Interface\\TalentFrame\\HunterBeastmastery-BottomLeft", "Interface\\TalentFrame\\HunterBeastmastery-BottomRight"}
 
 
 
@@ -12,7 +14,8 @@ hunter_marksmanship_spells = {{75, 2, 0, 1}, {1978, 2, 0, 4}, {3044, 2, 0, 6}, {
 {1510, 2, 0, 40}, {19801, 2, 0, 60}, {53351, 2, 0, 71}, {56641, 2, 0, 80}}
 
 hunter_marksmanship_spells_count = 15
-
+hunter_marksmanship_bgs = {"Interface\\TalentFrame\\HunterMarksmanship-TopLeft", "Interface\\TalentFrame\\HunterMarksmanship-TopRight",
+"Interface\\TalentFrame\\HunterMarksmanship-BottomLeft", "Interface\\TalentFrame\\HunterMarksmanship-BottomRight"}
 
 
 hunter_survival_spells = {{2973, 2, 0, 1}, {1494, 2, 0, 2}, {19883, 2, 0, 10}, {2974, 2, 0, 12}, {13795, 2, 0, 16},
@@ -21,3 +24,5 @@ hunter_survival_spells = {{2973, 2, 0, 1}, {1494, 2, 0, 2}, {19883, 2, 0, 10}, {
 {19263, 2, 0, 60}, {34600, 2, 0, 68}, {34477, 2, 0, 70}, {60192, 2, 0, 80}}
 
 hunter_survival_spells_count = 21
+hunter_survival_bgs = {"Interface\\TalentFrame\\HunterSurvival-TopLeft", "Interface\\TalentFrame\\HunterSurvival-TopRight",
+"Interface\\TalentFrame\\HunterSurvival-BottomLeft", "Interface\\TalentFrame\\HunterSurvival-BottomRight"}

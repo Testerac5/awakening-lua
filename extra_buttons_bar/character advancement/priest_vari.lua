@@ -3,6 +3,8 @@ priest_discipline_spells = {{1243, 2, 0, 1}, {17, 2, 0, 6}, {588, 2, 0, 12}, {52
 {32375, 2, 0, 70}}
 
 priest_discipline_spells_count = 12
+priest_discipline_bgs = {"Interface\\TalentFrame\\PriestDiscipline-TopLeft", "Interface\\TalentFrame\\PriestDiscipline-TopRight",
+"Interface\\TalentFrame\\PriestDiscipline-BottomLeft", "Interface\\TalentFrame\\PriestDiscipline-BottomRight"}
 
 
 
@@ -11,7 +13,8 @@ priest_holy_spells = {{2050, 2, 0, 1}, {585, 2, 0, 1}, {139, 2, 0, 8}, {2006, 2,
 {552, 2, 0, 32}, {2060, 2, 0, 40}, {32546, 2, 0, 64}, {33076, 2, 0, 68}, {64843, 2, 0, 80}}
 
 priest_holy_spells_count = 16
-
+priest_holy_bgs = {"Interface\\TalentFrame\\PriestHoly-TopLeft", "Interface\\TalentFrame\\PriestHoly-TopRight",
+"Interface\\TalentFrame\\PriestHoly-BottomLeft", "Interface\\TalentFrame\\PriestHoly-BottomRight"}
 
 
 
@@ -20,3 +23,5 @@ priest_shadow_spells = {{589, 2, 0, 4}, {586, 2, 0, 8}, {8092, 2, 0, 10}, {8122,
 {34433, 2, 0, 66}, {48045, 2, 0, 75}}
 
 priest_shadow_spells_count = 13
+priest_shadow_bgs = {"Interface\\TalentFrame\\PriestShadow-TopLeft", "Interface\\TalentFrame\\PriestShadow-TopRight",
+"Interface\\TalentFrame\\PriestShadow-BottomLeft", "Interface\\TalentFrame\\PriestShadow-BottomRight"}

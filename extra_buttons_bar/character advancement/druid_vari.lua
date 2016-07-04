@@ -6,6 +6,8 @@ druid_balance_spells = {{5176, 2, 0, 1}, {8921, 2, 0, 4}, {467, 2, 0, 6}, {339, 
 {16914, 2, 0, 40}, {22812, 2, 0, 44}, {33786, 2, 0, 70}}
 
 druid_balance_spells_count = 14
+druid_balance_bgs = {"Interface\\TalentFrame\\DruidBalance-TopLeft", "Interface\\TalentFrame\\DruidBalance-TopRight",
+"Interface\\TalentFrame\\DruidBalance-BottomLeft", "Interface\\TalentFrame\\DruidBalance-BottomRight"}
 
 
 druid_feral_spells = {{99, 2, 0, 10}, {6807, 2, 0, 10}, {6795, 2, 0, 10}, {5487, 2, 0, 10}, {5229, 2, 0, 12},
@@ -16,7 +18,8 @@ druid_feral_spells = {{99, 2, 0, 10}, {6807, 2, 0, 10}, {6795, 2, 0, 10}, {5487,
 {33878, 2, 0, 50}, {33876, 2, 0, 50}, {62078, 2, 0, 80}}
 
 druid_feral_spells_count = 32
-
+druid_feral_bgs = {"Interface\\TalentFrame\\DruidFeralCombat-TopLeft", "Interface\\TalentFrame\\DruidFeralCombat-TopRight",
+"Interface\\TalentFrame\\DruidFeralCombat-BottomLeft", "Interface\\TalentFrame\\DruidFeralCombat-BottomRight"}
 
 
 druid_restoration_spells = {{5185, 2, 0, 1}, {1126, 2, 0, 1}, {774, 2, 0, 4}, {8936, 2, 0, 12}, {50769, 2, 0, 12},
@@ -24,3 +27,5 @@ druid_restoration_spells = {{5185, 2, 0, 1}, {1126, 2, 0, 1}, {774, 2, 0, 4}, {8
 {33763, 2, 0, 64}}
 
 druid_restoration_spells_count = 12
+druid_restoration_bgs = {"Interface\\TalentFrame\\DruidRestoration-TopLeft", "Interface\\TalentFrame\\DruidRestoration-TopRight",
+"Interface\\TalentFrame\\DruidRestoration-BottomLeft", "Interface\\TalentFrame\\DruidRestoration-BottomRight"}

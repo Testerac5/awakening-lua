@@ -3,6 +3,8 @@ warlock_affliction_spells = {{702, 2, 0, 4}, {172, 2, 0, 4}, {1454, 2, 0, 6}, {9
 {6789, 2, 0, 42}, {603, 2, 0, 60}, {27243, 2, 0, 70}}
 
 warlock_affliction_spells_count = 14
+warlock_affliction_bgs = {"Interface\\TalentFrame\\Warlockcurses-TopLeft", "Interface\\TalentFrame\\Warlockcurses-TopRight",
+"Interface\\TalentFrame\\Warlockcurses-BottomLeft", "Interface\\TalentFrame\\Warlockcurses-BottomRight"}
 
 
 
@@ -13,10 +15,13 @@ warlock_demonology_spells = {{687, 2, 0, 1}, {688, 2, 0, 1}, {697, 2, 0, 10}, {6
 {18540, 2, 0, 60}, {28176, 2, 0, 62}, {29858, 2, 0, 66}, {29893, 2, 0, 68}, {48018, 2, 0, 80}, {48020, 2, 0, 80}}
 
 warlock_demonology_spells_count = 29
-
+warlock_demonology_bgs = {"Interface\\TalentFrame\\Warlocksummoning-TopLeft", "Interface\\TalentFrame\\Warlocksummoning-TopRight",
+"Interface\\TalentFrame\\Warlocksummoning-BottomLeft", "Interface\\TalentFrame\\Warlocksummoning-BottomRight"}
 
 
 warlock_destruction_spells = {{686, 2, 0, 1}, {348, 2, 0, 6}, {5676, 2, 0, 18}, {5740, 2, 0, 20}, {1949, 2, 0, 30},
 {6353, 2, 0, 48}, {29722, 2, 0, 64}, {47897, 2, 0, 75}}
 
 warlock_destruction_spells_count = 8
+warlock_destruction_bgs = {"Interface\\TalentFrame\\WarlockDestruction-TopLeft", "Interface\\TalentFrame\\WarlockDestruction-TopRight",
+"Interface\\TalentFrame\\WarlockDestruction-BottomLeft", "Interface\\TalentFrame\\WarlockDestruction-BottomRight"}

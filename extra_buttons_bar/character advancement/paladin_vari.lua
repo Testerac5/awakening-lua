@@ -4,14 +4,16 @@ paladin_holy_spells = {{635, 2, 0, 1}, {20154, 2, 0, 1}, {1152, 2, 0, 8}, {633, 
 {53601, 2, 0, 80}}
 
 paladin_holy_spells_count = 18
-
+paladin_holy_bgs = {"Interface\\TalentFrame\\PaladinHoly-TopLeft", "Interface\\TalentFrame\\PaladinHoly-TopRight",
+"Interface\\TalentFrame\\PaladinHoly-BottomLeft", "Interface\\TalentFrame\\PaladinHoly-BottomRight"}
 
 
 paladin_retribution_spells = {{19740, 2, 0, 4}, {20271, 2, 0 ,4}, {53408, 2, 0, 12}, {7294, 2, 0, 16}, {53407, 2, 0, 28},
 {24275, 2, 0, 44}, {25782, 2, 0, 52}, {32223, 2, 0, 62}, {31801, 2, 0, 64}, {31884, 2, 0, 70}}
 
 paladin_retribution_spells_count = 10
-
+paladin_retribution_bgs = {"Interface\\TalentFrame\\Paladincombat-TopLeft", "Interface\\TalentFrame\\Paladincombat-TopRight",
+"Interface\\TalentFrame\\Paladincombat-BottomLeft", "Interface\\TalentFrame\\Paladincombat-BottomRight"}
 
 
 
@@ -21,3 +23,5 @@ paladin_protection_spells = {{465, 2, 0, 1}, {498, 2, 0, 6}, {853, 2, 0, 8}, {10
 {25898, 2, 0, 60}, {25899, 2, 0, 60}, {53600, 2, 0, 75}}
 
 paladin_protection_spells_count = 20
+paladin_protection_bgs = {"Interface\\TalentFrame\\PaladinProtection-TopLeft", "Interface\\TalentFrame\\PaladinProtection-TopRight",
+"Interface\\TalentFrame\\PaladinProtection-BottomLeft", "Interface\\TalentFrame\\PaladinProtection-BottomRight"}

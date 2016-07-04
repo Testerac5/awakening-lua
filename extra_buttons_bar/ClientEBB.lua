@@ -1054,6 +1054,8 @@ local sideBar = Framework_Base
 			for i,v in ipairs(all_spell_slots) do
 				v[1]:Hide()
 			end
+			scrollframe:Hide()
+			scrollbar:Hide()
 			
 		elseif frame_displaying == "SPELLS" then
 		
@@ -1065,7 +1067,21 @@ local sideBar = Framework_Base
 			--hides
 			DisplaySpellsButton:Hide()
 			DisplayTalentsButton:Hide()
+			scrollframe:Hide()
+			scrollbar:Hide()
 			
+		elseif frame_displaying == "TALENTS" then
+		
+			--shows
+			scrollframe:Show()
+			scrollbar:Show()
+			
+			--hides
+			DisplaySpellsButton:Hide()
+			DisplayTalentsButton:Hide()
+			for i,v in ipairs(all_spell_slots) do
+				v[1]:Hide()
+			end
 		end
 	
 	end
@@ -1103,6 +1119,80 @@ local sideBar = Framework_Base
 		
 		display_frame_CA()
 	
+	end
+	
+	function display_talents(self)
+	
+		if spec_displaying ~= GeneralStuff then
+			frame_displaying = "TALENTS"
+			
+			local all_buttons = {BalanceDruid, FeralDruid, RestorationDruid, BeastMasteryHunter, MarksmanshipHunter, SurvivalHunter,
+				ArcaneMage, FireMage, FrostMage, HolyPaladin, ProtectionPaladin, RetributionPaladin,
+				DisciplinePriest, HolyPriest, ShadowPriest, AssassinationRogue, CombatRogue, SubtletyRogue,
+				ElementalShaman, EnhancementShaman, RestorationShaman, AfflictionWarlock, DemonologyWarlock, DestructionWarlock,
+				ArmsWarrior, FuryWarrior, ProtectionWarrior, GeneralStuff}
+			
+			local all_pass_varis = {"DRUIDBALANCE", "DRUIDFERAL", "DRUIDRESTORATION",
+			"HUNTERBEASTMASTERY", "HUNTERMARKSMANSHIP", "HUNTERSURVIVAL",
+			"MAGEARCANE", "MAGEFIRE", "MAGEFROST",
+			"PALADINHOLY", "PALADINPROTECTION", "PALADINRETRIBUTION",
+			"PRIESTDISCIPLINE", "PRIESTHOLY", "PRIESTSHADOW",
+			"ROGUEASSASSINATION", "ROGUECOMBAT", "ROGUESUBTLETY",
+			"SHAMANELEMENTAL", "SHAMANENHANCEMENT", "SHAMANRESTORATION",
+			"WARLOCKAFFLICTION", "WARLOCK", "DEMONOLOGY", "WARLOCKDESTRUCTION",
+			"WARRIORARMS", "WARRIORFURY", "WARRIORPROTECTION"}
+			local ClassSpec = nil
+			for i,v in ipairs(all_buttons) do
+
+				if v == spec_displaying then
+					ClassSpec = all_pass_varis[i]
+					
+					break
+				end
+			end
+			AIO.Handle("sideBar", "GetAllBGs", ClassSpec)
+
+			display_frame_CA()
+		end
+	
+	end
+	
+	function MyHandlers.SetBackgroundImages(player, ClassSpec, bgList)
+	
+		local all_pass_varis = {"DRUIDBALANCE", "DRUIDFERAL", "DRUIDRESTORATION",
+			"HUNTERBEASTMASTERY", "HUNTERMARKSMANSHIP", "HUNTERSURVIVAL",
+			"MAGEARCANE", "MAGEFIRE", "MAGEFROST",
+			"PALADINHOLY", "PALADINPROTECTION", "PALADINRETRIBUTION",
+			"PRIESTDISCIPLINE", "PRIESTHOLY", "PRIESTSHADOW",
+			"ROGUEASSASSINATION", "ROGUECOMBAT", "ROGUESUBTLETY",
+			"SHAMANELEMENTAL", "SHAMANENHANCEMENT", "SHAMANRESTORATION",
+			"WARLOCKAFFLICTION", "WARLOCK", "DEMONOLOGY", "WARLOCKDESTRUCTION",
+			"WARRIORARMS", "WARRIORFURY", "WARRIORPROTECTION"}
+			
+			
+		for i,v in ipairs(all_pass_varis) do
+		
+			if v == ClassSpec then
+				
+
+				top_left_bg_t:SetTexture(bgList[i][1]) 
+
+				
+
+				top_right_bg_t:SetTexture(bgList[i][2]) 
+
+				
+
+				bottom_left_bg_t:SetTexture(bgList[i][3]) 
+
+				
+
+				bottom_right_bg_t:SetTexture(bgList[i][4]) 
+
+			
+			end
+		
+		end
 	end
 	
 	function MyHandlers.GetSpellCount(player, spellCount, spellList)
@@ -1255,7 +1345,7 @@ local sideBar = Framework_Base
 		font_DisplayTalentsButton:SetShadowOffset(1, -1)
 		DisplayTalentsButton:SetFontString(font_DisplayTalentsButton)
 		DisplayTalentsButton:SetText("Show Talents")
-        DisplayTalentsButton:SetScript("OnMouseUp",  display_next_frame_CA)
+        DisplayTalentsButton:SetScript("OnMouseUp",  display_talents)
 		
 		
 	-- ####################################### Spells Frame ##############################	
@@ -1650,6 +1740,79 @@ local sideBar = Framework_Base
 		
 	-- ####################################### Talents Frame ##############################	
 
+	--scrollframe 
+	scrollframe = CreateFrame("ScrollFrame", nil, TrainingFrame) 
+	scrollframe:SetPoint("TOPLEFT", 75, -50) 
+	scrollframe:SetSize(500, 650)
+	TrainingFrame.scrollframe = scrollframe 
+	scrollframe:Hide()
+	 
+	--scrollbar 
+	scrollbar = CreateFrame("Slider", nil, scrollframe, "UIPanelScrollBarTemplate") 
+	scrollbar:SetPoint("TOPLEFT", scrollframe, "TOPRIGHT", 4, -16) 
+	scrollbar:SetPoint("BOTTOMLEFT", scrollframe, "BOTTOMRIGHT", 4, 16) 
+	scrollbar:SetMinMaxValues(0, 670) 
+	scrollbar:SetValueStep(1) 
+	scrollbar.scrollStep = 1
+	scrollbar:SetValue(0) 
+	scrollbar:SetWidth(16) 
+	scrollbar:SetScript("OnValueChanged", 
+	function (self, value) 
+	self:GetParent():SetVerticalScroll(value) 
+	end) 
+	local scrollbg = scrollbar:CreateTexture(nil, "BACKGROUND") 
+	scrollbg:SetAllPoints(scrollbar) 
+	scrollbg:SetTexture(0, 0, 0, 0.4) 
+	TrainingFrame.scrollbar = scrollbar 
+	scrollbar:Hide()
+	 
+	
+	 -- backgrounds
+	top_left_bg = CreateFrame("Frame", nil, scrollframe) 
+	top_left_bg:SetSize(300, 400) 
+	top_left_bg:SetPoint("TOPLEFT")
+	top_left_bg_t = top_left_bg:CreateTexture() 
+	top_left_bg_t:SetAllPoints() 
+	top_left_bg_t:SetTexture("Interface\\TalentFrame\\MageFire-TopLeft") 
+	top_left_bg.texture = top_left_bg_t 
 
+	
+	top_right_bg = CreateFrame("Frame", nil, scrollframe) 
+	top_right_bg:SetSize(300, 400) 
+	top_right_bg:SetPoint("TOPLEFT", 300, 0)
+	top_right_bg_t = top_right_bg:CreateTexture() 
+	top_right_bg_t:SetAllPoints() 
+	top_right_bg_t:SetTexture("Interface\\TalentFrame\\MageFire-TopRight") 
+	top_right_bg.texture = top_right_bg_t 
+
+	
+	bottom_left_bg = CreateFrame("Frame", nil, scrollframe) 
+	bottom_left_bg:SetSize(300, 400) 
+	bottom_left_bg:SetPoint("TOPLEFT", 0, -400)
+	bottom_left_bg_t = bottom_left_bg:CreateTexture() 
+	bottom_left_bg_t:SetAllPoints() 
+	bottom_left_bg_t:SetTexture("Interface\\TalentFrame\\MageFire-BottomLeft") 
+	bottom_left_bg.texture = bottom_left_bg_t 
+
+	
+	bottom_right_bg = CreateFrame("Frame", nil, scrollframe) 
+	bottom_right_bg:SetSize(300, 400) 
+	bottom_right_bg:SetPoint("TOPLEFT", 300, -400)
+	bottom_right_bg_t = bottom_right_bg:CreateTexture() 
+	bottom_right_bg_t:SetAllPoints() 
+	bottom_right_bg_t:SetTexture("Interface\\TalentFrame\\MageFire-BottomRight") 
+	bottom_right_bg.texture = bottom_right_bg_t 
+
+	
+	--content frame 
+	content = CreateFrame("Frame", nil, scrollframe) 
+	content:SetSize(500, 1320)  
+	scrollframe.content = content 
+	 
+	scrollframe:SetScrollChild(content)
+	
+	
+	
+	
 	
 	

@@ -382,4 +382,28 @@ function MyHandlers.LearnThisSpell(player, got_spell, i)
 	return successful
 end
 
+function MyHandlers.GetAllBGs(player, ClassSpec)
+	local bgList = {druid_balance_bgs, druid_feral_bgs, druid_restoration_bgs,
+	hunter_beastmastery_bgs, hunter_marksmanship_bgs, hunter_survival_bgs,
+	mage_arcane_bgs, mage_fire_bgs, mage_frost_bgs,
+	paladin_holy_bgs, paladin_protection_bgs, paladin_retribution_bgs,
+	priest_discipline_bgs, priest_holy_bgs, priest_shadow_bgs,
+	rogue_assassination_bgs, rogue_combat_bgs, rogue_subtlety_bgs,
+	shaman_elemental_bgs, shaman_enhancement_bgs, shaman_restoration_bgs,
+	warlock_affliction_bgs, warlock_demonology_bgs, warlock_destruction_bgs,
+	warrior_arms_bgs, warrior_fury_bgs, warrior_protection_bgs}
+	
+	
+	
+	sendBGListToPlayer(AIO.Msg(), player, ClassSpec, bgList):Send(player)
+
+end
+
+
+function sendBGListToPlayer(msg, player, ClassSpec, bgList)
+
+	return msg:Add("sideBar", "SetBackgroundImages", ClassSpec, bgList)
+
+end
+
 
