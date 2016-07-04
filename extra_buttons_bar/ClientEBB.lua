@@ -1119,7 +1119,6 @@ local sideBar = Framework_Base
 			local learn_tooltip = "Cost: "..spellCostAE.." AE "..spellCostTE.." TE"
 			local learn_texture = {.9, .2, .1}
 			local attach_it = {spellId, spellCostAE, spellCostTE}
-			
 			if player_knows == true then
 				learn_tooltip = "Already Known"
 				learn_texture = {.3, .3, .3}
@@ -1135,9 +1134,10 @@ local sideBar = Framework_Base
 			all_spell_slot_buttons[start_ticker]:SetBackdrop({
 				bgFile = icon
 			})
+			local get_spell_link = GetSpellLink(spellId)
 			local function spell_icon_tooltip_Enter(self, motion)
 				GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-				GameTooltip:SetText(name)
+				GameTooltip:SetHyperlink(get_spell_link)
 				GameTooltip:Show()
 			end
 			all_spell_slot_buttons[start_ticker]:SetScript("OnEnter", spell_icon_tooltip_Enter)
