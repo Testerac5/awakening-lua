@@ -196,25 +196,12 @@ function MyHandlers.ResetSpells(player)
 	if player:HasItem(spell_reset_token) == true then
 		player:RemoveItem(spell_reset_token, 1)
 		for i,k in ipairs(spell_ids) do
-			local all_spell_tomes_query = WorldDBQuery("SELECT entry FROM item_template WHERE spellid_2 = "..k)
-			if all_spell_tomes_query:GetInt64(0) ~= nil then
-				if player:HasItem(all_spell_tomes_query:GetInt64(0)) == true then
-					local rem_get = player:GetItemByGUID(spell_essence)
-					local rem_amount = rem_get:GetCount()
-					player:RemoveItem(all_spell_tomes_query:GetInt64(0), rem_amount)
-				end
-			end
 			if player:HasSpell(k) == true then
 				player:RemoveSpell(k)
+				player:AddItem(spell_essence, 2)
 			end
 		end	
-		local player_amount = 0
-		if player:HasItem(spell_essence) == true then
-			local player_has = player:GetItemByGUID(spell_essence)
-			player_amount = player_has:GetCount()
-		end
-		local add_amount = (player:GetLevel()) - player_amount
-		player:AddItem(spell_essence, add_amount)
+		
 		player:SendBroadcastMessage("Refund Complete for Spells")
 	else
 		player:SendBroadcastMessage("You are missing the required token to do this!")
@@ -229,27 +216,12 @@ function MyHandlers.ResetTalents(player)
 	if player:HasItem(talent_reset_token) == true then
 		player:RemoveItem(talent_reset_token, 1)
 		for i, talent in ipairs(talent_ids) do
-			local all_spell_tomes_query = WorldDBQuery("SELECT entry FROM item_template WHERE spellid_2 = "..talent)
-			if player:HasItem(all_spell_tomes_query:GetInt32(0)) == true then
-				player:RemoveItem(all_spell_tomes_query:GetInt32(0), 100)
-			end
 			if player:HasSpell(talent) == true then
 				player:RemoveSpell(talent)
+				player:AddItem(talent_essence, 1)
 			end
 		end
-		
-		
-		
-		for i,v in ipairs(all_spell_tomes) do
-			if player:HasItem(v) then
-				player:RemoveItem(v, 100)
-			end
-		end
-		
-		local player_has = player:GetItemByGUID(talent_essence)
-		local player_amount = player_has:GetCount()
-		local add_amount = (player:GetLevel() - 9) - player_amount
-		player:AddItem(talent_essence, add_amount)
+
 		player:SendBroadcastMessage("Refund Complete for talents")
 	else
 		player:SendBroadcastMessage("You are missing the required token to do this!")
