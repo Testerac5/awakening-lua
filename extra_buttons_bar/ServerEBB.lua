@@ -196,25 +196,15 @@ function MyHandlers.ResetSpells(player)
 	if player:HasItem(spell_reset_token) == true then
 		player:RemoveItem(spell_reset_token, 1)
 		for i,k in ipairs(spell_ids) do
+			local all_spell_tomes_query = WorldDBQuery("SELECT entry FROM item_template WHERE spellid_2 = "..spell_ids)
+			if player:HasItem(all_spell_tomes_query:GetInt32(0)) == true then
+				player:RemoveItem(all_spell_tomes_query:GetInt32(0), 100)
+			end
 			if player:HasSpell(k) == true then
 				player:RemoveSpell(k)
 			end
 		end	
 		
-		local all_spell_tomes_query = WorldDBQuery("SELECT entry FROM item_template WHERE entry > 1000000 and entry < 1235068")
-		local all_spell_tomes = {}
-		table.insert(all_spell_tomes, all_spell_tomes_query:GetInt32(0))
-		local current_row = all_spell_tomes_query:NextRow()
-		while current_row ~= false do
-			table.insert(all_spell_tomes, all_spell_tomes_query:GetInt32(0))
-			current_row = all_spell_tomes_query:NextRow()
-		end
-		
-		for i,v in ipairs(all_spell_tomes) do
-			if player:HasItem(v) then
-				player:RemoveItem(v, 100)
-			end
-		end
 		
 		local player_has = player:GetItemByGUID(spell_essence)
 		local player_amount = player_has:GetCount()
@@ -234,19 +224,16 @@ function MyHandlers.ResetTalents(player)
 	if player:HasItem(talent_reset_token) == true then
 		player:RemoveItem(talent_reset_token, 1)
 		for i, talent in ipairs(talent_ids) do
+			local all_spell_tomes_query = WorldDBQuery("SELECT entry FROM item_template WHERE spellid_2 = "..talent)
+			if player:HasItem(all_spell_tomes_query:GetInt32(0)) == true then
+				player:RemoveItem(all_spell_tomes_query:GetInt32(0), 100)
+			end
 			if player:HasSpell(talent) == true then
 				player:RemoveSpell(talent)
 			end
 		end
 		
-		local all_spell_tomes_query = WorldDBQuery("SELECT entry FROM item_template WHERE entry > 2100000 and entry < 2103000")
-		local all_spell_tomes = {}
-		table.insert(all_spell_tomes, all_spell_tomes_query:GetInt32(0))
-		local current_row = all_spell_tomes_query:NextRow()
-		while current_row ~= false do
-			table.insert(all_spell_tomes, all_spell_tomes_query:GetInt32(0))
-			current_row = all_spell_tomes_query:NextRow()
-		end
+		
 		
 		for i,v in ipairs(all_spell_tomes) do
 			if player:HasItem(v) then
