@@ -1125,7 +1125,7 @@ local sideBar = Framework_Base
 				learn_texture = {.3, .3, .3}
 				attach_it = nil
 			elseif RequiredLevel > UnitLevel("player") then
-				learn_tooltip = "Too High Level: "..RequiredLevel
+				learn_tooltip = "Requires: Level "..RequiredLevel
 				learn_texture = {.3, .3, .3}
 				attach_it = nil
 			end
