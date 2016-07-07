@@ -1163,7 +1163,7 @@ local sideBar = Framework_Base
 	
 	end
 	
-	current_talenList = {}
+	current_talentList = {}
 	current_known_talents_list = {}
 	
 	function MyHandlers.SetBackgroundImages(player, ClassSpec, bgList, talentList, known_talents_list, tabIndex)
@@ -1177,7 +1177,7 @@ local sideBar = Framework_Base
 			"SHAMANELEMENTAL", "SHAMANENHANCEMENT", "SHAMANRESTORATION",
 			"WARLOCKAFFLICTION", "WARLOCK", "DEMONOLOGY", "WARLOCKDESTRUCTION",
 			"WARRIORARMS", "WARRIORFURY", "WARRIORPROTECTION"}
-		current_talenList = talentList
+		current_talentList = talentList
 		current_known_talents_list = known_talents_list	
 			
 		for i,v in ipairs(all_pass_varis) do
@@ -1228,7 +1228,7 @@ local sideBar = Framework_Base
 				player_talent_known = known_talents_list[i]
 			end
 			
-			if requiredLevel < UnitLevel("player") then
+			if requiredLevel <= UnitLevel("player") then
 			
 				learn_tooltip = "Cost: "..AE_cost.." AE "..TE_cost.." TE"
 			
@@ -1241,7 +1241,7 @@ local sideBar = Framework_Base
 						learn_texture = {1, 1, 0}
 						learn_text = "Max"
 					else
-						attach_it = {spellIds[player_talent_known + 1],AE_cost,TE_cost,talent_ID}
+						attach_it = {spellIds[player_talent_known + 1],AE_cost,TE_cost,spellIds,number_of_ranks}
 						learn_texture = {0, .5, 0}
 						learn_text = "Upgrade"
 					end
@@ -1249,7 +1249,7 @@ local sideBar = Framework_Base
 				
 					learn_texture = {.9, .2, .1}
 					
-					attach_it = {spellIds[1],AE_cost,TE_cost,talent_ID,talentList}
+					attach_it = {spellIds[1],AE_cost,TE_cost,spellIds,number_of_ranks}
 				
 				end
 			
@@ -1326,21 +1326,72 @@ local sideBar = Framework_Base
 	
 	function upgrade_talent(self)
 		local talent_attached = false
+		local indexAt
 	
 		for i,v in ipairs(all_learn_talent_buttons) do
 			if v == self then
 				talent_attached = all_attached_talent[i]
+				indexAt = i
+				break
 			end
 		end
 		
+		
+		
 		if talent_attached ~= false then
-			-- do stuff here
+			AIO.Handle("sideBar","LearnThisTalent",talent_attached,indexAt)
 		end
 	
 	end
 	
-	function MyHandlers.UpdateTalent(player, attached_talent)
-		-- do stuff here
+	function MyHandlers.UpdateTalent(player, indexAt)
+		
+		local AE_cost = all_attached_talent[indexAt][2]
+		local TE_cost = all_attached_talent[indexAt][3]
+		local all_spellIds = all_attached_talent[indexAt][4]
+		local talents_ranks = all_attached_talent[indexAt][5]
+		local previous_spellId = all_attached_talent[indexAt][1]
+		
+		local texture_changed = {0, .5, 0}
+		local text_changed = "Upgrade"
+		local learn_tooltip = nil
+		local attached_talent = nil
+		local FN = 1
+
+
+		for i,v in ipairs(all_spellIds) do
+			if v == previous_spellId then
+				FN = i
+				if i == talents_ranks then
+					texture_changed = {1, 1, 0}
+					learn_tooltip = "Maxed Out"
+					text_changed = "Max"
+				else
+					attached_talent = {all_spellIds[i + 1],AE_cost, TE_cost,all_spellIds,talents_ranks}
+				end
+				break
+			end
+		end
+		
+		if learn_tooltip ~= nil then
+			local function learn_button_tooltip_Enter(self, motion)
+				GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+				GameTooltip:SetText(learn_tooltip)
+				GameTooltip:Show()
+			end
+			all_learn_talent_buttons[indexAt]:SetScript("OnEnter", learn_button_tooltip_Enter)
+		end
+		
+		if attached_talent ~= nil then
+			all_attached_talent[indexAt] = attached_talent
+		end
+		
+		all_learn_talent_buttons[indexAt]:SetText(text_changed)
+			
+		all_talent_FrameNumber[indexAt]:SetText(FN)
+		
+		all_learn_talent_buttons_t[indexAt]:SetTexture(texture_changed[1], texture_changed[2], texture_changed[3], 1)
+		
 	end
 	
 	function MyHandlers.GetSpellCount(player, spellCount, spellList)
@@ -2016,7 +2067,7 @@ local sideBar = Framework_Base
 		v:SetSize(50, 20)
         v:SetPoint("CENTER", 0, -52)
         v:EnableMouse(true)
-        v:SetScript("OnMouseUp",  nil)
+        v:SetScript("OnMouseUp",  upgrade_talent)
 	end
 	
 	for i,v in ipairs(all_learn_talent_buttons_t) do

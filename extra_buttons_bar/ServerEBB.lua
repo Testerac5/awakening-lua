@@ -379,7 +379,6 @@ function MyHandlers.LearnThisSpell(player, got_spell, i)
 		sendButtonToChangeSpells(AIO.Msg(), player, i):Send(player)
 	end
 	
-	return successful
 end
 
 function MyHandlers.GetAllBGs(player, ClassSpec)
@@ -460,13 +459,53 @@ function sendBGListToPlayer(msg, player, ClassSpec, bgList, talentList, known_ta
 end
 
 
-function MyHandlers.LearnThisTalent(player, attached_talent)
-	--do stuff here
+function MyHandlers.LearnThisTalent(player, attached_talent, indexAt)
+	
+	local successful = true
+	local player_has_currency = true
+	local currency_one = attached_talent[2]
+	local currency_two = attached_talent[3]
+	local spellID = attached_talent[1]
+	
+	
+	if currency_one ~= 0 then
+		if player:HasItem(spell_essence, currency_one) == false then
+			player_has_currency = false
+			successful = false
+		end
+	end
+	
+	if currency_two ~= 0 then
+		if player:HasItem(talent_essence, currency_two) == false then
+			player_has_currency = false
+			successful = false
+		end
+	end
+	
+	if player_has_currency == true and currency_one ~= 0 then
+		player:RemoveItem(spell_essence, currency_one)
+	end
+	
+	if player_has_currency == true and currency_two ~= 0 then
+		player:RemoveItem(talent_essence, currency_two)
+	end
+	
+	if player_has_currency == true then
+		player:LearnSpell(spellID)
+	end
+	
+	if successful == false then
+		player:SendBroadcastMessage("You do not have the required currency!")
+		
+	else
+		sendUpdatedTalent(AIO.Msg(), player, indexAt):Send(player)
+	end
+	
 end
 
-function sendUpdatedTalent(msg, player, attached_talent)
+function sendUpdatedTalent(msg, player, indexAt)
 
-	return msg:Add("sideBar", "UpdateTalent", attached_talent)
+	return msg:Add("sideBar", "UpdateTalent", indexAt)
 
 end
 
