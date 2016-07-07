@@ -393,16 +393,80 @@ function MyHandlers.GetAllBGs(player, ClassSpec)
 	warlock_affliction_bgs, warlock_demonology_bgs, warlock_destruction_bgs,
 	warrior_arms_bgs, warrior_fury_bgs, warrior_protection_bgs}
 	
+	local talentList = {}
+	local tabIndex = 0
 	
+	local ClassSpecList = {"DRUIDBALANCE", "DRUIDFERAL", "DRUIDRESTORATION",
+						   "HUNTERBEASTMASTERY", "HUNTERMARKSMANSHIP", "HUNTERSURVIVAL",
+						   "MAGEARCANE", "MAGEFIRE", "MAGEFROST",
+						   "PALADINHOLY", "PALADINPROTECTION", "PALADINRETRIBUTION",
+						   "PRIESTDISCIPLINE", "PRIESTHOLY", "PRIESTSHADOW",
+						   "ROGUEASSASSINATION", "ROGUECOMBAT", "ROGUESUBTLETY",
+						   "SHAMANELEMENTAL", "SHAMANENHANCEMENT", "SHAMANRESTORATION",
+						   "WARLOCKAFFLICTION", "WARLOCK", "DEMONOLOGY", "WARLOCKDESTRUCTION",
+						   "WARRIORARMS", "WARRIORFURY", "WARRIORPROTECTION"}
+			
+	local ListOfTalentLists = {druid_balance_talents, druid_feral_talents, druid_restoration_talents,
+							   hunter_beastmastery_talents, hunter_marksmanship_talents, hunter_survival_talents,
+							   mage_arcane_talents, mage_fire_talents, mage_frost_talents,
+							   paladin_holy_talents, paladin_protection_talents, paladin_retribution_talents,
+							   priest_discipline_talents, priest_holy_talents, priest_shadow_talents,
+							   rogue_assassination_talents, rogue_combat_talents, rogue_subtlety_talents,
+							   shaman_elemental_talents, shaman_enhancement_talents, shaman_restoration_talents,
+							   warlock_affliction_talents, warlock_demonology_talents, warlock_destruction_talents,
+							   warrior_arms_talents, warrior_fury_talents, warrior_protection_talents}
+	local ListOfTabIndexes = {druid_balance_talents_tab, druid_feral_talents_tab, druid_restoration_talents_tab,
+							   hunter_beastmastery_talents_tab, hunter_marksmanship_talents_tab, hunter_survival_talents_tab,
+							   mage_arcane_talents_tab, mage_fire_talents_tab, mage_frost_talents_tab,
+							   paladin_holy_talents_tab, paladin_protection_talents_tab, paladin_retribution_talents_tab,
+							   priest_discipline_talents_tab, priest_holy_talents_tab, priest_shadow_talents_tab,
+							   rogue_assassination_talents_tab, rogue_combat_talents_tab, rogue_subtlety_talents_tab,
+							   shaman_elemental_talents_tab, shaman_enhancement_talents_tab, shaman_restoration_talents_tab,
+							   warlock_affliction_talents_tab, warlock_demonology_talents_tab, warlock_destruction_talents_tab,
+							   warrior_arms_talents_tab, warrior_fury_talents_tab, warrior_protection_talents_tab}
+							   
+	for i,v in ipairs(ClassSpecList) do
+		if ClassSpec == v then
+			talentList = ListOfTalentLists[i]
+			tabIndex = ListOfTabIndexes[i]
+		end
+	end
 	
-	sendBGListToPlayer(AIO.Msg(), player, ClassSpec, bgList):Send(player)
+	local known_talents_list = {}
+
+	for i,v in ipairs(talentList) do
+		local spellids = v[2]
+		local know_a_spell = false
+		
+		for p,t in ipairs(spellids) do
+			if player:HasSpell(t) == true then
+				know_a_spell = p
+			end
+		end
+		
+		table.insert(known_talents_list, know_a_spell)
+		
+	end
+	
+	sendBGListToPlayer(AIO.Msg(), player, ClassSpec, bgList, talentList, known_talents_list, tabIndex):Send(player)
 
 end
 
 
-function sendBGListToPlayer(msg, player, ClassSpec, bgList)
+function sendBGListToPlayer(msg, player, ClassSpec, bgList, talentList, known_talents_list, tabIndex)
 
-	return msg:Add("sideBar", "SetBackgroundImages", ClassSpec, bgList)
+	return msg:Add("sideBar", "SetBackgroundImages", ClassSpec, bgList, talentList, known_talents_list, tabIndex)
+
+end
+
+
+function MyHandlers.LearnThisTalent(player, attached_talent)
+	--do stuff here
+end
+
+function sendUpdatedTalent(msg, player, attached_talent)
+
+	return msg:Add("sideBar", "UpdateTalent", attached_talent)
 
 end
 
