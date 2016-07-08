@@ -1382,9 +1382,9 @@ local sideBar = Framework_Base
 			all_learn_talent_buttons[indexAt]:SetScript("OnEnter", learn_button_tooltip_Enter)
 		end
 		
-		if attached_talent ~= nil then
-			all_attached_talent[indexAt] = attached_talent
-		end
+		
+		all_attached_talent[indexAt] = attached_talent
+		
 		
 		all_learn_talent_buttons[indexAt]:SetText(text_changed)
 			
