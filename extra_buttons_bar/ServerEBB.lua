@@ -203,7 +203,8 @@ function MyHandlers.ResetSpells(player)
 							   warlock_affliction_spells, warlock_demonology_spells, warlock_destruction_spells,
 							   warrior_arms_spells, warrior_fury_spells, warrior_protection_spells}
 							   
-	if player:HasItem(spell_reset_token) == true or free_spell_reset == true then						   
+	if player:HasItem(spell_reset_token) == true or free_spell_reset == true then		
+		player:RemoveItem(spell_reset_token, 1)
 		for listloc,spec in ipairs(all_spell_lists) do
 			for loc,spell in ipairs(spec) do
 				local AE_cost = spell[2]
