@@ -1331,6 +1331,7 @@ local sideBar = Framework_Base
 		for i,v in ipairs(all_learn_talent_buttons) do
 			if v == self then
 				talent_attached = all_attached_talent[i]
+				all_attached_talent[i] = nil
 				indexAt = i
 				break
 			end
@@ -1344,13 +1345,17 @@ local sideBar = Framework_Base
 	
 	end
 	
-	function MyHandlers.UpdateTalent(player, indexAt)
+	function MyHandlers.TalentGoBack(player, attached_talent, indexAt)
+		all_attached_talent[indexAt] = attached_talent
+	end
+	
+	function MyHandlers.UpdateTalent(player, attached_talent, indexAt)
 		
-		local AE_cost = all_attached_talent[indexAt][2]
-		local TE_cost = all_attached_talent[indexAt][3]
-		local all_spellIds = all_attached_talent[indexAt][4]
-		local talents_ranks = all_attached_talent[indexAt][5]
-		local previous_spellId = all_attached_talent[indexAt][1]
+		local AE_cost = attached_talent[2]
+		local TE_cost = attached_talent[3]
+		local all_spellIds = attached_talent[4]
+		local talents_ranks = attached_talent[5]
+		local previous_spellId = attached_talent[1]
 		
 		local texture_changed = {0, .5, 0}
 		local text_changed = "Upgrade"

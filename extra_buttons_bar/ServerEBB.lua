@@ -496,17 +496,22 @@ function MyHandlers.LearnThisTalent(player, attached_talent, indexAt)
 	
 	if successful == false then
 		player:SendBroadcastMessage("You do not have the required currency!")
+		SendGoBackTalent(AIO.Msg(), player, attached_talent, indexAt):Send(player)
 		
 	else
-		sendUpdatedTalent(AIO.Msg(), player, indexAt):Send(player)
+		sendUpdatedTalent(AIO.Msg(), player, attached_talent, indexAt):Send(player)
 	end
 	
 end
 
-function sendUpdatedTalent(msg, player, indexAt)
+function sendUpdatedTalent(msg, player, attached_talent, indexAt)
 
-	return msg:Add("sideBar", "UpdateTalent", indexAt)
+	return msg:Add("sideBar", "UpdateTalent", attached_talent, indexAt)
 
+end
+
+function SendGoBackTalent(msg, player, attached_talent, indexAt)
+	return msg:Add("sideBar", "TalentGoBack", attached_talent, indexAt)
 end
 
 
