@@ -193,15 +193,35 @@ RegisterPlayerEvent(3, OnPlayerLogin)
 
 function MyHandlers.ResetSpells(player)
 
-	if player:HasItem(spell_reset_token) == true then
-		player:RemoveItem(spell_reset_token, 1)
-		for i,k in ipairs(spell_ids) do
-			if player:HasSpell(k) == true then
-				player:RemoveSpell(k)
-				player:AddItem(spell_essence, 2)
+	local all_spell_lists = {druid_balance_spells, druid_feral_spells, druid_restoration_spells,
+							   hunter_beastmastery_spells, hunter_marksmanship_spells, hunter_survival_spells,
+							   mage_arcane_spells, mage_fire_spells, mage_frost_spells,
+							   paladin_holy_spells, paladin_protection_spells, paladin_retribution_spells,
+							   priest_discipline_spells, priest_holy_spells, priest_shadow_spells,
+							   rogue_assassination_spells, rogue_combat_spells, rogue_subtlety_spells,
+							   shaman_elemental_spells, shaman_enhancement_spells, shaman_restoration_spells,
+							   warlock_affliction_spells, warlock_demonology_spells, warlock_destruction_spells,
+							   warrior_arms_spells, warrior_fury_spells, warrior_protection_spells}
+							   
+	if player:HasItem(spell_reset_token) == true or free_spell_reset == true then						   
+		for listloc,spec in ipairs(all_spell_lists) do
+			for loc,spell in ipairs(spec) do
+				local AE_cost = spell[2]
+				local TE_cost = spell[3]
+				local spellid = spell[1]
+				
+				if player:HasSpell(spellid) == true then
+					player:RemoveSpell(spellid)
+					player:AddItem(spell_essence, AE_cost)
+					if TE_cost ~= 0 then
+						player:Additem(talent_essence, TE_cost)
+					end
+					if player:HasAura(spellid) == true then
+						player:RemoveAura(spellid)
+					end
+				end
 			end
-		end	
-		
+		end
 		player:SendBroadcastMessage("Refund Complete for Spells")
 	else
 		player:SendBroadcastMessage("You are missing the required token to do this!")
@@ -213,15 +233,49 @@ end
 
 function MyHandlers.ResetTalents(player)
 
-	if player:HasItem(talent_reset_token) == true then
+	local all_talent_lists = {druid_balance_talents, druid_feral_talents, druid_restoration_talents,
+							   hunter_beastmastery_talents, hunter_marksmanship_talents, hunter_survival_talents,
+							   mage_arcane_talents, mage_fire_talents, mage_frost_talents,
+							   paladin_holy_talents, paladin_protection_talents, paladin_retribution_talents,
+							   priest_discipline_talents, priest_holy_talents, priest_shadow_talents,
+							   rogue_assassination_talents, rogue_combat_talents, rogue_subtlety_talents,
+							   shaman_elemental_talents, shaman_enhancement_talents, shaman_restoration_talents,
+							   warlock_affliction_talents, warlock_demonology_talents, warlock_destruction_talents,
+							   warrior_arms_talents, warrior_fury_talents, warrior_protection_talents}
+							   
+	if player:HasItem(talent_reset_token) == true or free_talent_reset == true then
 		player:RemoveItem(talent_reset_token, 1)
-		for i, talent in ipairs(talent_ids) do
-			if player:HasSpell(talent) == true then
-				player:RemoveSpell(talent)
-				player:AddItem(talent_essence, 1)
-			end
-		end
+		for i,v in ipairs(all_talent_lists) do
+			
+			for listloc,talent in ipairs(v) do
+				local spell_removed = false
+				local rank_removed = 0
+				local AE_cost = talent[3]
+				local TE_cost = talent[4]
+				for slot,spellid in ipairs(talent[2]) do
+					if player:HasSpell(spellid) == true then
+						spell_removed = true
+						rank_removed = slot
+						player:RemoveSpell(spellid)
+						
+						if player:HasAura(spellid) == true then
+							player:RemoveAura(spellid)
+						end
+						
+						player:SendBroadcastMessage("removing: "..spellid)
+					end
+				end
 
+				if spell_removed == true then
+					player:AddItem(talent_essence, (rank_removed*TE_cost))
+					if AE_cost ~= 0 then
+						player:AddItem(spell_essence, (rank_removed*AE_cost))
+					end
+				end
+			end
+			
+			
+		end
 		player:SendBroadcastMessage("Refund Complete for talents")
 	else
 		player:SendBroadcastMessage("You are missing the required token to do this!")
