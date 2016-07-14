@@ -54,10 +54,10 @@ shaman_enhancement_talents_tab = 15
 
 
 shaman_restoration_spells = {{331, 2, 0 , 1}, {2008, 2, 0, 12}, {526, 2, 0, 16}, {8143, 2, 0, 18}, {5394, 2, 0, 20},
-{8004, 2, 0, 20}, {52127, 2, 0, 20}, {5675, 2, 0, 26}, {51730, 2, 0, 30}, {36936, 2, 0, 30}, {8170, 2, 0, 34},
+{8004, 2, 0, 20}, {52127, 2, 0, 20}, {5675, 2, 0, 26}, {20608, 2, 0, 26}, {51730, 2, 0, 30}, {36936, 2, 0, 30}, {8170, 2, 0, 34},
 {1064, 2, 0, 40}}
 
-shaman_restoration_spells_count = 12
+shaman_restoration_spells_count = 13
 shaman_restoration_bgs = {"Interface\\TalentFrame\\ShamanRestoration-TopLeft", "Interface\\TalentFrame\\ShamanRestoration-TopRight",
 "Interface\\TalentFrame\\ShamanRestoration-BottomLeft", "Interface\\TalentFrame\\ShamanRestoration-BottomRight"}
 
