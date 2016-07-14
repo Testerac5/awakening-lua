@@ -89,7 +89,7 @@ function MassPurgeCheck(event, player)
 		local player_level = player:GetLevel()
 		
 		local AE_add_amount = player_level - AE_count
-		local TE_add_amount = (player_level - 10) - TE_count
+		local TE_add_amount = (player_level - 9) - TE_count
 		
 		if AE_add_amount < 0 then
 			player:RemoveItem(spell_essence, AE_add_amount)
