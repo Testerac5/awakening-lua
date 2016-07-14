@@ -197,19 +197,38 @@ function MyHandlers.ReceiveItems(player,itemNumber, itemList, objectid)
 				local item_rec = "Error, no item found"
 				local item_link = 0
 				local item_stuffy = 0
-				
-				for i, v in ipairs(itemHoldList) do
-					if v[1] == self then
-						item_rec = v[2]
-						item_link = v[3]
-						item_stuffy = v[4]
-						break
-					end
+				local bag1, _ = GetContainerNumFreeSlots(1)
+				local bag2, _ = GetContainerNumFreeSlots(2)
+				local bag3, _ = GetContainerNumFreeSlots(3)
+				local bag4, _ = GetContainerNumFreeSlots(4)
+				local bag5, _ = GetContainerNumFreeSlots(5)
+				local slots_open = bag1+bag2+bag3+bag4+bag5
+				bagslot_free = true
+				if slots_open == 0 then
+					bagslot_free = false
 				end
-				FullLoot_Button:Hide()
-				FullLoot_Text:SetText("|cff9d9d9dLooted Item|r")
-				FullLoot_Button:Disable()
-				AIO.Handle("PvP", "AddPlayerItem", item_rec, item_stuffy, objectPass)
+				
+				
+				
+				if bagslot_free == true then
+					
+					for i, v in ipairs(itemHoldList) do
+						if v[1] == self then
+							item_rec = v[2]
+							item_link = v[3]
+							item_stuffy = v[4]
+							break
+						end
+					end
+					FullLoot_Button:Hide()
+					FullLoot_Text:SetText("|cff9d9d9dLooted Item|r")
+					FullLoot_Button:Disable()
+					AIO.Handle("PvP", "AddPlayerItem", item_rec, item_stuffy, objectPass)
+				else
+				
+					print("Clear a spot in your bags!")
+					
+				end
 			end
 			FullLoot_Button:SetScript("OnMouseUp", ClickItem)
 			
