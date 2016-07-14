@@ -12,7 +12,7 @@ function hunger_ticker(event, timer, delay, player)
 	local level = player:GetLevel()
 	local damage_dealt = 25
 	
-	local deficit = 1
+	local deficit = 5
 	
 	if level > 10 then
 	
@@ -20,12 +20,12 @@ function hunger_ticker(event, timer, delay, player)
 	
 	elseif level > 30 then
 	
-		deficit = 3
+		deficit = 20
 		damage_dealt = level * 30
 		
 	elseif level > 50 then
 	
-		deficit = 5
+		deficit = 40
 		damage_dealt = level * 45
 		
 	end
