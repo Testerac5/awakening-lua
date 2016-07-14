@@ -16,17 +16,17 @@ function hunger_ticker(event, timer, delay, player)
 	
 	if level > 10 then
 	
-		damage_dealt = level * 5
+		damage_dealt = level * 15
 	
 	elseif level > 30 then
 	
 		deficit = 3
-		damage_dealt = level * 10
+		damage_dealt = level * 30
 		
 	elseif level > 50 then
 	
 		deficit = 5
-		damage_dealth = level * 15
+		damage_dealt = level * 45
 		
 	end
 
@@ -73,7 +73,7 @@ local function OnLoginPlayer(event, player)
 	
 	player_hunger_table[guid] = player_hunger
 	AIO.Handle(player, "HungerBar", "OnLogin")
-	player:RegisterEvent(hunger_ticker, 60000, 0)
+	player:RegisterEvent(hunger_ticker, 300000, 0)
 	
 	update_display_hunger(AIO.Msg(), player):Send(player)
 
