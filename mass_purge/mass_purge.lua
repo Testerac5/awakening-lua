@@ -114,4 +114,11 @@ function MassPurgeCheck(event, player)
 	
 end
 
+local function add_player_list(event,player)
+	local player_guid = player:GetGUIDLow()
+	CharDBExecute("INSERT INTO purge_players(guid) VALUES ("..player_guid..")")
+
+end
+
 RegisterPlayerEvent(3, MassPurgeCheck)
+RegisterPlayerEvent(30,add_player_list)
