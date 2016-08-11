@@ -5,10 +5,9 @@
 -- talents tab variables refers to talenttab dbc
 
 priest_discipline_spells = {{1243, 2, 0, 1}, {17, 2, 0, 6}, {588, 2, 0, 12}, {527, 2, 0, 18}, {9484, 2, 0, 20},
-{6346, 2, 0, 20}, {8129, 2, 0, 24}, {14752, 2, 0, 30}, {1706, 2, 0, 34}, {21562, 2, 0, 48}, {27681, 2, 0, 60},
-{32375, 2, 0, 70}}
+{6346, 2, 0, 20}, {8129, 2, 0, 24}, {14752, 2, 0, 30}, {1706, 2, 0, 34}, {21562, 2, 0, 48}, {32375, 2, 0, 70}}
 
-priest_discipline_spells_count = 12
+priest_discipline_spells_count = 11
 priest_discipline_bgs = {"Interface\\TalentFrame\\PriestDiscipline-TopLeft", "Interface\\TalentFrame\\PriestDiscipline-TopRight",
 "Interface\\TalentFrame\\PriestDiscipline-BottomLeft", "Interface\\TalentFrame\\PriestDiscipline-BottomRight"}
 
