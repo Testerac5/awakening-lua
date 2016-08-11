@@ -185,7 +185,7 @@ RegisterPlayerEvent(5, sprintcheck)
 
 function RestCheck(event, player, spell)
 	if (spell:GetEntry()==818011) then
-		player:SendBroadcastMessage("--You are resting--")
+		player:SendBroadcastMessage("I am resting. . .")
 		if (player:GetAura(818012)) then
 			player:RemoveAura(818012)
 		end
@@ -250,6 +250,9 @@ function first_login (event, player)
 	player:LearnSpell(818014)
 	player:LearnSpell(818012)
 	player:LearnSpell(818011)
+	player:LearnSpell(818040)
+	player:LearnSpell(818039)
+
 end
 
 RegisterPlayerEvent(30, first_login)

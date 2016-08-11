@@ -76,7 +76,7 @@ function MyHandlers.GetHungerPct(player,current_hunger)
 	
 	if percent <= 0 then
 	
-		print("I am extremely hungry and have started taking damage")
+		print("I am extremely hungry, and I am beginning to starve.")
 	
 	elseif percent < 25 then
 	
