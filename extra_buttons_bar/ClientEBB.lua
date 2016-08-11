@@ -60,23 +60,19 @@ local sideBar = Framework_Base
 		
 	--[[Skill Frame]]
 	local StatFrame = CreateFrame("Frame", "StatFrame", UIParent, nil)
-        StatFrame:SetSize(200, 300)
+        StatFrame:SetSize(450, 500) --edited
         StatFrame:SetMovable(true)
         StatFrame:EnableMouse(true)
         StatFrame:RegisterForDrag("LeftButton")
         StatFrame:SetPoint("CENTER")
         StatFrame:SetClampedToScreen(true)
         StatFrame:SetBackdrop({
-            bgFile = "Interface/DialogFrame/UI-DialogBox-Background-Dark",
-            edgeFile = "Interface/DialogFrame/UI-DialogBox-Border",
-            edgeSize = 20,
-            insets = { left = 5, right = 5, top = 5, bottom = 5 }
-        })
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Allocation\\allocation"}) --edited
         StatFrame:Hide()
-		
-		StatFrame:SetScript("OnDragStart", StatFrame.StartMoving)
-		StatFrame:SetScript("OnHide", StatFrame.StopMovingOrSizing)
-		StatFrame:SetScript("OnDragStop", StatFrame.StopMovingOrSizing)
+        
+        StatFrame:SetScript("OnDragStart", StatFrame.StartMoving)
+        StatFrame:SetScript("OnHide", StatFrame.StopMovingOrSizing)
+        StatFrame:SetScript("OnDragStop", StatFrame.StopMovingOrSizing)
 		
 		AIO.SavePosition(StatFrame)
 		
@@ -183,12 +179,12 @@ local sideBar = Framework_Base
 	
 	--[[ StatFrame UI ]]
 	
-	local StatFrame_CloseButton = CreateFrame("Button", "StatFrame_CloseButton", StatFrame, "UIPanelCloseButton")
-        StatFrame_CloseButton:SetPoint("TOPRIGHT", -5, -5)
+    local StatFrame_CloseButton = CreateFrame("Button", "StatFrame_CloseButton", StatFrame, "UIPanelCloseButton")
+        StatFrame_CloseButton:SetPoint("TOPRIGHT", -57, -52) --edited
         StatFrame_CloseButton:EnableMouse(true)
-        StatFrame_CloseButton:SetSize(27, 27)
+        StatFrame_CloseButton:SetSize(29, 29) --edited
        
-    local StatFrame_TitleBar = CreateFrame("Frame", "StatFrame_TitleBar", StatFrame, nil)
+    --[[local StatFrame_TitleBar = CreateFrame("Frame", "StatFrame_TitleBar", StatFrame, nil)
         StatFrame_TitleBar:SetSize(135, 25)
         StatFrame_TitleBar:SetBackdrop({
             bgFile = "Interface/CHARACTERFRAME/UI-Party-Background",
@@ -198,26 +194,75 @@ local sideBar = Framework_Base
             tileSize = 16,
             insets = { left = 5, right = 5, top = 5, bottom = 5 }
         })
-        StatFrame_TitleBar:SetPoint("TOP", 0, 9)
-        local StatFrame_TitleText = StatFrame_TitleBar:CreateFontString("StatFrame_TitleText")
-        StatFrame_TitleText:SetFont("Fonts\\FRIZQT__.TTF", 13)
+        StatFrame_TitleBar:SetPoint("TOP", 0, 9)]]-- edited
+         local StatFrame_TitleText = StatFrame:CreateFontString("StatFrame_TitleText") -- edited
+        StatFrame_TitleText:SetFont("Fonts\\MORPHEUS.TTF", 15) -- edited
         StatFrame_TitleText:SetSize(190, 5)
-        StatFrame_TitleText:SetPoint("CENTER", 0, 0)
-        StatFrame_TitleText:SetText("|cffFFC125Stat Allocation|r")
+        StatFrame_TitleText:SetPoint("TOP", 0, -45) -- edited
+        StatFrame_TitleText:SetText("|cff110000Stat Allocation|r") -- edited
        
-    local StatFrame_Panel = CreateFrame("Frame", "StatFrame_Panel", StatFrame, nil)
-        StatFrame_Panel:SetSize(179, 110)
-        StatFrame_Panel:SetPoint("LEFT", 10, 69.5)
-        StatFrame_Panel:SetBackdrop({
-            bgFile = "Interface/DialogFrame/UI-DialogBox-Background",
-            edgeFile = "Interface/DialogFrame/UI-DialogBox-Border",
-            tile = true,
-            edgeSize = 16,
-            tileSize = 16,
-            insets = { left = 5, right = 5, top = 5, bottom = 5 }
-        })
-		
-	local StatFrame_PointsPanel = CreateFrame("Frame", "StatFrame_PointsPanel", StatFrame, nil)
+    local StatFrame_Panel_Str = CreateFrame("Frame", "StatFrame_Panel_Str", StatFrame, nil) -- edited
+        StatFrame_Panel_Str:SetSize(450, 116) -- edited
+        StatFrame_Panel_Str:SetPoint("CENTER", 0, 120) -- edited
+        StatFrame_Panel_Str:SetBackdrop({
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Allocation\\allocationbuttonframe"}) -- edited
+
+        --edited--
+            local StatFrame_Panel_Sta = CreateFrame("Frame", "StatFrame_Panel_Sta", StatFrame, nil)
+        StatFrame_Panel_Sta:SetSize(450, 116) -- edited
+        StatFrame_Panel_Sta:SetPoint("CENTER", 0, 62) -- edited
+        StatFrame_Panel_Sta:SetBackdrop({
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Allocation\\allocationbuttonframe"}) -- edited
+            local StatFrame_Panel_Agi = CreateFrame("Frame", "StatFrame_Panel_Agi", StatFrame, nil)
+        StatFrame_Panel_Agi:SetSize(450, 116) -- edited
+        StatFrame_Panel_Agi:SetPoint("CENTER", 0, 4) -- edited
+        StatFrame_Panel_Agi:SetBackdrop({
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Allocation\\allocationbuttonframe"}) -- edited
+
+            local StatFrame_Panel_Int = CreateFrame("Frame", "StatFrame_Panel_Int", StatFrame, nil)
+        StatFrame_Panel_Int:SetSize(450, 116) -- edited
+        StatFrame_Panel_Int:SetPoint("CENTER", 0, -54) -- edited
+        StatFrame_Panel_Int:SetBackdrop({
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Allocation\\allocationbuttonframe"}) -- edited
+
+            local StatFrame_Panel_Spi = CreateFrame("Frame", "StatFrame_Panel_Spi", StatFrame, nil)
+        StatFrame_Panel_Spi:SetSize(450, 116) -- edited
+        StatFrame_Panel_Spi:SetPoint("CENTER", 0, -112) -- edited
+        StatFrame_Panel_Spi:SetBackdrop({
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Allocation\\allocationbuttonframe"}) -- edited
+
+        --textures
+        local StatFrame_Panel_Str_Ico = StatFrame_Panel_Str:CreateTexture(nil, "ARTWORK")
+        StatFrame_Panel_Str_Ico:SetWidth(58);               
+        StatFrame_Panel_Str_Ico:SetHeight(58);
+        StatFrame_Panel_Str_Ico:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\Allocation\\strength")
+        StatFrame_Panel_Str_Ico:SetPoint("CENTER", -105,4)
+
+            local StatFrame_Panel_Sta_Ico = StatFrame_Panel_Sta:CreateTexture(nil, "ARTWORK")
+        StatFrame_Panel_Sta_Ico:SetWidth(58);               
+        StatFrame_Panel_Sta_Ico:SetHeight(58);
+        StatFrame_Panel_Sta_Ico:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\Allocation\\stamina")
+        StatFrame_Panel_Sta_Ico:SetPoint("CENTER", -105,4)
+
+            local StatFrame_Panel_Agi_Ico = StatFrame_Panel_Agi:CreateTexture(nil, "ARTWORK")
+        StatFrame_Panel_Agi_Ico:SetWidth(58);               
+        StatFrame_Panel_Agi_Ico:SetHeight(58);
+        StatFrame_Panel_Agi_Ico:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\Allocation\\agility")
+        StatFrame_Panel_Agi_Ico:SetPoint("CENTER", -105,4)
+
+            local StatFrame_Panel_Int_Ico = StatFrame_Panel_Int:CreateTexture(nil, "ARTWORK")
+        StatFrame_Panel_Int_Ico:SetWidth(58);               
+        StatFrame_Panel_Int_Ico:SetHeight(58);
+        StatFrame_Panel_Int_Ico:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\Allocation\\intellect")
+        StatFrame_Panel_Int_Ico:SetPoint("CENTER", -105,4)
+
+            local StatFrame_Panel_Spi_Ico = StatFrame_Panel_Spi:CreateTexture(nil, "ARTWORK")
+        StatFrame_Panel_Spi_Ico:SetWidth(58);               
+        StatFrame_Panel_Spi_Ico:SetHeight(58);
+        StatFrame_Panel_Spi_Ico:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\Allocation\\spirit")
+        StatFrame_Panel_Spi_Ico:SetPoint("CENTER", -105,4)
+        --edited--
+        --[[local StatFrame_PointsPanel = CreateFrame("Frame", "StatFrame_PointsPanel", StatFrame, nil)
         StatFrame_PointsPanel:SetSize(170, 25)
         StatFrame_PointsPanel:SetBackdrop({
             bgFile = "Interface/CHARACTERFRAME/UI-Party-Background",
@@ -227,70 +272,70 @@ local sideBar = Framework_Base
             tileSize = 16,
             insets = { left = 5, right = 5, top = 5, bottom = 5 }
         })
-		StatFrame_PointsPanel:SetPoint("LEFT", 14, 6)
+		StatFrame_PointsPanel:SetPoint("LEFT", 14, 6)]]--
 		
 		
 	-- Stat Names
-        local StatNames = CreateFrame("Button", "StatNames", StatFrame, nil)
+        --[[local StatNames = CreateFrame("Button", "StatNames", StatFrame, nil)
         StatNames:SetSize(60, 100)
-        StatNames:SetPoint("TOPLEFT", 15, -37.5)
-        local Strength_Text = StatNames:CreateFontString("Strength_Text")
-        Strength_Text:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        StatNames:SetPoint("TOPLEFT", 15, -37.5)]]-- edited
+        local Strength_Text = StatFrame_Panel_Str:CreateFontString("Strength_Text") -- edited
+        Strength_Text:SetFont("Fonts\\MORPHEUS.TTF", 14, "OUTLINE") -- edited
         Strength_Text:SetSize(137, 5)
-        Strength_Text:SetPoint("TOP", 0, 0)
-        Strength_Text:SetText("Strength")
-        local Stamina_Text = StatNames:CreateFontString("Stamina_Text")
-        Stamina_Text:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        Strength_Text:SetPoint("TOP", 0, -35)
+        Strength_Text:SetText("|cffE1AB18Strength|r")
+        local Stamina_Text = StatFrame_Panel_Sta:CreateFontString("Stamina_Text") -- edited
+        Stamina_Text:SetFont("Fonts\\MORPHEUS.TTF", 14, "OUTLINE") -- edited
         Stamina_Text:SetSize(137, 5)
-        Stamina_Text:SetPoint("TOP", -1, -20)
-        Stamina_Text:SetText("Stamina")
-        local Agility_Text = StatNames:CreateFontString("Agility_Text")
-        Agility_Text:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        Stamina_Text:SetPoint("TOP", 0, -35)
+        Stamina_Text:SetText("|cffE1AB18Stamina|r")
+        local Agility_Text = StatFrame_Panel_Agi:CreateFontString("Agility_Text") -- edited
+        Agility_Text:SetFont("Fonts\\MORPHEUS.TTF", 14, "OUTLINE") -- edited
         Agility_Text:SetSize(137, 5)
-        Agility_Text:SetPoint("TOP", -7, -40)
-        Agility_Text:SetText("Agility")
-        local Intellect_Text = StatNames:CreateFontString("Intellect_Text")
-        Intellect_Text:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        Agility_Text:SetPoint("TOP", 0, -35)
+        Agility_Text:SetText("|cffE1AB18Agility|r")
+        local Intellect_Text = StatFrame_Panel_Int:CreateFontString("Intellect_Text") -- edited
+        Intellect_Text:SetFont("Fonts\\MORPHEUS.TTF", 14, "OUTLINE") -- edited
         Intellect_Text:SetSize(137, 5)
-        Intellect_Text:SetPoint("TOP", -2.2, -60)
-        Intellect_Text:SetText("Intellect")
-        local Spirit_Text = StatNames:CreateFontString("Spirit_Text")
-        Spirit_Text:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        Intellect_Text:SetPoint("TOP", 0, -35)
+        Intellect_Text:SetText("|cffE1AB18Intellect|r")
+        local Spirit_Text = StatFrame_Panel_Spi:CreateFontString("Spirit_Text") -- edited
+        Spirit_Text:SetFont("Fonts\\MORPHEUS.TTF", 14, "OUTLINE") -- edited
         Spirit_Text:SetSize(137, 5)
-        Spirit_Text:SetPoint("TOP", -10.5, -80)
-        Spirit_Text:SetText("Spirit")
-        local Stat_Text = StatNames:CreateFontString("Stat_Text")
-        Stat_Text:SetFont("Fonts\\FRIZQT__.TTF", 11)
-        Stat_Text:SetSize(137, 5)
-        Stat_Text:SetPoint("BOTTOMLEFT", -4, -8.5)
-        Stat_Text:SetText("Available Stat Points:")
+        Spirit_Text:SetPoint("TOP", 0, -35)
+        Spirit_Text:SetText("|cffE1AB18Spirit|r")
+        local Stat_Text = StatFrame:CreateFontString("Stat_Text") -- edited
+        Stat_Text:SetFont("Fonts\\MORPHEUS.TTF", 16, "OUTLINE") -- edited
+        Stat_Text:SetSize(160, 5)
+        Stat_Text:SetPoint("BOTTOM", 0, 76)
+        Stat_Text:SetText("|cffE1AB18Available Stat Points:|r")
        
         --FontStrings for stat values
-        local Str_Value = StatNames:CreateFontString("Str_Value")
-        Str_Value:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        local Str_Value = StatFrame_Panel_Str:CreateFontString("Str_Value")
+        Str_Value:SetFont("Fonts\\MORPHEUS.TTF", 16, "OUTLINE")
         Str_Value:SetSize(137, 5)
-        Str_Value:SetPoint("TOP", 104.8, 0)
-        local Sta_Value = StatNames:CreateFontString("Sta_Value")
-        Sta_Value:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        Str_Value:SetPoint("TOP", 0, -56)
+        local Sta_Value = StatFrame_Panel_Sta:CreateFontString("Sta_Value")
+        Sta_Value:SetFont("Fonts\\MORPHEUS.TTF", 16, "OUTLINE")
         Sta_Value:SetSize(137, 5)
-        Sta_Value:SetPoint("TOP", 104.8, -20)
-        local Agi_Value = StatNames:CreateFontString("Agi_Value")
-        Agi_Value:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        Sta_Value:SetPoint("TOP", 0, -56)
+        local Agi_Value = StatFrame_Panel_Agi:CreateFontString("Agi_Value")
+        Agi_Value:SetFont("Fonts\\MORPHEUS.TTF", 16, "OUTLINE")
         Agi_Value:SetSize(137, 5)
-        Agi_Value:SetPoint("TOP", 104.8, -40)
-        local Inte_Value = StatNames:CreateFontString("Inte_Value")
-        Inte_Value:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        Agi_Value:SetPoint("TOP", 0, -56)
+        local Inte_Value = StatFrame_Panel_Int:CreateFontString("Inte_Value")
+        Inte_Value:SetFont("Fonts\\MORPHEUS.TTF", 16, "OUTLINE")
         Inte_Value:SetSize(137, 5)
-        Inte_Value:SetPoint("TOP", 104.8, -60)
-        local Spi_Value = StatNames:CreateFontString("Spi_Value")
-        Spi_Value:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        Inte_Value:SetPoint("TOP", 0, -56)
+        local Spi_Value = StatFrame_Panel_Spi:CreateFontString("Spi_Value")
+        Spi_Value:SetFont("Fonts\\MORPHEUS.TTF", 16, "OUTLINE")
         Spi_Value:SetSize(137, 5)
-        Spi_Value:SetPoint("TOP", 104.8, -80)
-		
-		local Stat_Value = StatNames:CreateFontString("Stat_Value")
-        Stat_Value:SetFont("Fonts\\FRIZQT__.TTF", 11)
-        Stat_Value:SetSize(50, 5)
-        Stat_Value:SetPoint("BOTTOMRIGHT", 115, -8.5)
+        Spi_Value:SetPoint("TOP", 0, -56)
+        
+        local Stat_Value = StatFrame:CreateFontString("Stat_Value")
+        Stat_Value:SetFont("Fonts\\MORPHEUS.TTF", 18, "OUTLINE")
+        Stat_Value:SetSize(70, 5)
+        Stat_Value:SetPoint("BOTTOM", 0, 46)--edited all
 		
 		
 	function MyHandlers.GetStatValues(player, stats)
@@ -364,95 +409,125 @@ local sideBar = Framework_Base
 	
 	end
 	
-	
-	Inc_Str = CreateFrame("Button", "Inc_Str", StatFrame, nil)
-        Inc_Str:SetSize(20, 20)
-        Inc_Str:SetPoint("TOPRIGHT", -20, -30)
+	Inc_Str = CreateFrame("Button", "Inc_Str", StatFrame_Panel_Str, nil)
+        Inc_Str:SetSize(23, 23)
+        Inc_Str:SetPoint("CENTER", 60, -2)
         Inc_Str:EnableMouse(true)
         Inc_Str:SetNormalTexture("Interface/BUTTONS/UI-SpellbookIcon-NextPage-Up")
         Inc_Str:SetHighlightTexture("Interface/BUTTONS/UI-Panel-MinimizeButton-Highlight")
         Inc_Str:SetPushedTexture("Interface/BUTTONS/UI-SpellbookIcon-NextPage-Down")
-        Inc_Str:SetScript("OnMouseUp", Increase_stats)
+        --Inc_Str:SetScript("OnMouseUp", Increase_stats)
        
-    Dec_Str = CreateFrame("Button", "Dec_Str", StatFrame, nil)
-        Dec_Str:SetSize(20, 20)
-        Dec_Str:SetPoint("TOPRIGHT", -60, -30)
+    Dec_Str = CreateFrame("Button", "Dec_Str", StatFrame_Panel_Str, nil)
+        Dec_Str:SetSize(23, 23)
+        Dec_Str:SetPoint("CENTER", -60, -2)
         Dec_Str:EnableMouse(true)
         Dec_Str:SetNormalTexture("Interface/BUTTONS/UI-SpellbookIcon-PrevPage-Up")
         Dec_Str:SetHighlightTexture("Interface/BUTTONS/UI-Panel-MinimizeButton-Highlight")
         Dec_Str:SetPushedTexture("Interface/BUTTONS/UI-SpellbookIcon-PrevPage-Down")
-        Dec_Str:SetScript("OnMouseUp", Reduce_stats)
+        --Dec_Str:SetScript("OnMouseUp", Reduce_stats)
        
-    Inc_Sta = CreateFrame("Button", "Inc_Sta", StatFrame, nil)
-        Inc_Sta:SetSize(20, 20)
-        Inc_Sta:SetPoint("TOPRIGHT", -20, -50)
+    Inc_Sta = CreateFrame("Button", "Inc_Sta", StatFrame_Panel_Sta, nil)
+        Inc_Sta:SetSize(23, 23)
+        Inc_Sta:SetPoint("CENTER", 60, -2)
         Inc_Sta:EnableMouse(true)
         Inc_Sta:SetNormalTexture("Interface/BUTTONS/UI-SpellbookIcon-NextPage-Up")
         Inc_Sta:SetHighlightTexture("Interface/BUTTONS/UI-Panel-MinimizeButton-Highlight")
         Inc_Sta:SetPushedTexture("Interface/BUTTONS/UI-SpellbookIcon-NextPage-Down")
-        Inc_Sta:SetScript("OnMouseUp", Increase_stats)
+        --Inc_Sta:SetScript("OnMouseUp", Increase_stats)
        
-    Dec_Sta = CreateFrame("Button", "Dec_Sta", StatFrame, nil)
-        Dec_Sta:SetSize(20, 20)
-        Dec_Sta:SetPoint("TOPRIGHT", -60, -50)
+    Dec_Sta = CreateFrame("Button", "Dec_Sta", StatFrame_Panel_Sta, nil)
+        Dec_Sta:SetSize(23, 23)
+        Dec_Sta:SetPoint("CENTER", -60, -2)
         Dec_Sta:EnableMouse(true)
         Dec_Sta:SetNormalTexture("Interface/BUTTONS/UI-SpellbookIcon-PrevPage-Up")
         Dec_Sta:SetHighlightTexture("Interface/BUTTONS/UI-Panel-MinimizeButton-Highlight")
         Dec_Sta:SetPushedTexture("Interface/BUTTONS/UI-SpellbookIcon-PrevPage-Down")
-        Dec_Sta:SetScript("OnMouseUp", Reduce_stats)
+        --Dec_Sta:SetScript("OnMouseUp", Reduce_stats)
        
-    Inc_Agi = CreateFrame("Button", "Inc_Agi", StatFrame, nil)
-        Inc_Agi:SetSize(20, 20)
-        Inc_Agi:SetPoint("TOPRIGHT", -20, -70)
+    Inc_Agi = CreateFrame("Button", "Inc_Agi", StatFrame_Panel_Agi, nil)
+        Inc_Agi:SetSize(23, 23)
+        Inc_Agi:SetPoint("CENTER", 60, -2)
         Inc_Agi:EnableMouse(true)
         Inc_Agi:SetNormalTexture("Interface/BUTTONS/UI-SpellbookIcon-NextPage-Up")
         Inc_Agi:SetHighlightTexture("Interface/BUTTONS/UI-Panel-MinimizeButton-Highlight")
         Inc_Agi:SetPushedTexture("Interface/BUTTONS/UI-SpellbookIcon-NextPage-Down")
-        Inc_Agi:SetScript("OnMouseUp", Increase_stats)
+        --Inc_Agi:SetScript("OnMouseUp", Increase_stats)
        
-    Dec_Agi = CreateFrame("Button", "Dec_Agi", StatFrame, nil)
-        Dec_Agi:SetSize(20, 20)
-        Dec_Agi:SetPoint("TOPRIGHT", -60, -70)
+    Dec_Agi = CreateFrame("Button", "Dec_Agi", StatFrame_Panel_Agi, nil)
+        Dec_Agi:SetSize(23, 23)
+        Dec_Agi:SetPoint("CENTER", -60, -2)
         Dec_Agi:EnableMouse(true)
         Dec_Agi:SetNormalTexture("Interface/BUTTONS/UI-SpellbookIcon-PrevPage-Up")
         Dec_Agi:SetHighlightTexture("Interface/BUTTONS/UI-Panel-MinimizeButton-Highlight")
         Dec_Agi:SetPushedTexture("Interface/BUTTONS/UI-SpellbookIcon-PrevPage-Down")
-        Dec_Agi:SetScript("OnMouseUp", Reduce_stats)
+        --Dec_Agi:SetScript("OnMouseUp", Reduce_stats)
        
-    Inc_Inte = CreateFrame("Button", "Inc_Inte", StatFrame, nil)
-        Inc_Inte:SetSize(20, 20)
-        Inc_Inte:SetPoint("TOPRIGHT", -20, -90)
+    Inc_Inte = CreateFrame("Button", "Inc_Inte", StatFrame_Panel_Int, nil)
+        Inc_Inte:SetSize(23, 23)
+        Inc_Inte:SetPoint("CENTER", 60, -2)
         Inc_Inte:EnableMouse(true)
         Inc_Inte:SetNormalTexture("Interface/BUTTONS/UI-SpellbookIcon-NextPage-Up")
         Inc_Inte:SetHighlightTexture("Interface/BUTTONS/UI-Panel-MinimizeButton-Highlight")
         Inc_Inte:SetPushedTexture("Interface/BUTTONS/UI-SpellbookIcon-NextPage-Down")
-        Inc_Inte:SetScript("OnMouseUp", Increase_stats)
+        --Inc_Inte:SetScript("OnMouseUp", Increase_stats)
        
-    Dec_Inte = CreateFrame("Button", "Dec_Inte", StatFrame, nil)
-        Dec_Inte:SetSize(20, 20)
-        Dec_Inte:SetPoint("TOPRIGHT", -60, -90)
+    Dec_Inte = CreateFrame("Button", "Dec_Inte", StatFrame_Panel_Int, nil)
+        Dec_Inte:SetSize(23, 23)
+        Dec_Inte:SetPoint("CENTER", -60, -2)
         Dec_Inte:EnableMouse(true)
         Dec_Inte:SetNormalTexture("Interface/BUTTONS/UI-SpellbookIcon-PrevPage-Up")
         Dec_Inte:SetHighlightTexture("Interface/BUTTONS/UI-Panel-MinimizeButton-Highlight")
         Dec_Inte:SetPushedTexture("Interface/BUTTONS/UI-SpellbookIcon-PrevPage-Down")
-        Dec_Inte:SetScript("OnMouseUp", Reduce_stats)
+        --Dec_Inte:SetScript("OnMouseUp", Reduce_stats)
        
-    Inc_Spi = CreateFrame("Button", "Inc_Spi", StatFrame, nil)
-        Inc_Spi:SetSize(20, 20)
-        Inc_Spi:SetPoint("TOPRIGHT", -20, -110)
+    Inc_Spi = CreateFrame("Button", "Inc_Spi", StatFrame_Panel_Spi, nil)
+        Inc_Spi:SetSize(23, 23)
+        Inc_Spi:SetPoint("CENTER", 60, -2)
         Inc_Spi:EnableMouse(true)
         Inc_Spi:SetNormalTexture("Interface/BUTTONS/UI-SpellbookIcon-NextPage-Up")
         Inc_Spi:SetHighlightTexture("Interface/BUTTONS/UI-Panel-MinimizeButton-Highlight")
         Inc_Spi:SetPushedTexture("Interface/BUTTONS/UI-SpellbookIcon-NextPage-Down")
-        Inc_Spi:SetScript("OnMouseUp", Increase_stats)
+        --Inc_Spi:SetScript("OnMouseUp", Increase_stats)
        
-    Dec_Spi = CreateFrame("Button", "Dec_Spi", StatFrame, nil)
-        Dec_Spi:SetSize(20, 20)
-        Dec_Spi:SetPoint("TOPRIGHT", -60, -110)
+    Dec_Spi = CreateFrame("Button", "Dec_Spi", StatFrame_Panel_Spi, nil)
+        Dec_Spi:SetSize(23, 23)
+        Dec_Spi:SetPoint("CENTER", -60, -2)
         Dec_Spi:EnableMouse(true)
         Dec_Spi:SetNormalTexture("Interface/BUTTONS/UI-SpellbookIcon-PrevPage-Up")
         Dec_Spi:SetHighlightTexture("Interface/BUTTONS/UI-Panel-MinimizeButton-Highlight")
         Dec_Spi:SetPushedTexture("Interface/BUTTONS/UI-SpellbookIcon-PrevPage-Down")
+        --Dec_Spi:SetScript("OnMouseUp", Reduce_stats)
+        --edited all
+        
+	
+        Inc_Str:SetScript("OnMouseUp", Increase_stats)
+       
+    
+        Dec_Str:SetScript("OnMouseUp", Reduce_stats)
+       
+    
+        Inc_Sta:SetScript("OnMouseUp", Increase_stats)
+       
+   
+        Dec_Sta:SetScript("OnMouseUp", Reduce_stats)
+       
+   
+        Inc_Agi:SetScript("OnMouseUp", Increase_stats)
+       
+ 
+        Dec_Agi:SetScript("OnMouseUp", Reduce_stats)
+       
+   
+        Inc_Inte:SetScript("OnMouseUp", Increase_stats)
+       
+  
+        Dec_Inte:SetScript("OnMouseUp", Reduce_stats)
+       
+   
+        Inc_Spi:SetScript("OnMouseUp", Increase_stats)
+       
+   
         Dec_Spi:SetScript("OnMouseUp", Reduce_stats)
 		
 		
