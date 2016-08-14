@@ -74,7 +74,7 @@ function OnLoot(event, player, item, count)
 		6 - red (not used?)
 		7 - gold (bind to account)
 	]]
-	local chance_increaser = {101, 95, 65, 40, 15, 5} -- chances for each quality to get random_enchantments, the lower the number the higher the chance
+	local chance_increaser = {101, 95, 30, 20, 0, 0} -- chances for each quality to get random_enchantments, the lower the number the higher the chance
 	
 	local slotBools		= {}
 	local slotIDs		= {}
