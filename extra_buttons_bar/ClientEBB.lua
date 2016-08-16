@@ -9,6 +9,59 @@ end
 local MyHandlers = AIO.AddHandlers("sideBar", {})
 
 
+--fading function
+
+local FramesToFade = {}
+
+local function BaseFrameFade(frame, mode)
+    if (frame) then
+        frame.FadeTimer = 0
+        if (frame.time) then
+          frame.TimeToFade = frame.time
+        else
+        frame.TimeToFade = 3
+      end
+        frame.FadeMode = mode
+        table.insert(FramesToFade, frame)
+    end
+end
+
+local function BaseFrameFadeIn(frame, mode)
+    BaseFrameFade(frame, "IN")
+    frame:Show()
+end
+
+local function BaseFrameFadeOut(frame, mode)
+    BaseFrameFade(frame, "OUT")
+    --frame:Show()
+end
+
+local function BaseFading(elapsed)
+    for k,frame in pairs(FramesToFade) do
+        frame.FadeTimer = frame.FadeTimer + 0.1
+        if (frame.FadeTimer < frame.TimeToFade) then
+            if (frame.FadeMode == "IN") then
+            frame:SetAlpha(frame.FadeTimer/frame.TimeToFade)
+            elseif (frame.FadeMode == "OUT") then
+                frame:SetAlpha((frame.TimeToFade-frame.FadeTimer)/frame.TimeToFade)
+            end
+        else
+            if ( frame.FadeMode == "IN" ) then
+                frame:SetAlpha(1.0);
+            elseif ( frame.FadeMode == "OUT" ) then
+                frame:SetAlpha(0);
+                frame:Hide()
+            end
+            table.remove(FramesToFade, k)
+        end
+    end
+    end
+
+local fadingFunc = CreateFrame("FRAME")
+fadingFunc:SetScript("OnUpdate", BaseFading)
+
+AIO.SavePosition(fadingFunc)
+--end of fading function
 
 Framework_Base = CreateFrame("Frame", "sideBar", UIParent, nil)
 local sideBar = Framework_Base
@@ -35,25 +88,22 @@ local sideBar = Framework_Base
 	sideBar:Show()
 	
 	
-	--[[TRAINING FRAME]]--
+    --[[TRAINING FRAME]]--
     local TrainingFrame = CreateFrame("Frame", "TrainingFrame", UIParent, nil)
-        TrainingFrame:SetSize(900, 735)
-        TrainingFrame:SetMovable(true)
+        TrainingFrame:SetSize(950, 860)
+        --TrainingFrame:SetMovable(true)
         TrainingFrame:EnableMouse(true)
-        TrainingFrame:RegisterForDrag("LeftButton")
-        TrainingFrame:SetPoint("CENTER")
-        TrainingFrame:SetClampedToScreen(true)
+        --TrainingFrame:RegisterForDrag("LeftButton")
+        TrainingFrame:SetPoint("CENTER", 0, 45)
+        TrainingFrame:SetFrameStrata("DIALOG")
+        --TrainingFrame:SetClampedToScreen(true)
         TrainingFrame:SetBackdrop({
-            bgFile = "Interface/DialogFrame/UI-DialogBox-Background-Dark",
-            edgeFile = "Interface/DialogFrame/UI-DialogBox-Gold-Border",
-            edgeSize = 20,
-            insets = { left = 5, right = 5, top = 5, bottom = 5 }
-        })
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\progress",}) --edited
         TrainingFrame:Hide()
-		
-		TrainingFrame:SetScript("OnDragStart", TrainingFrame.StartMoving)
-		TrainingFrame:SetScript("OnHide", TrainingFrame.StopMovingOrSizing)
-		TrainingFrame:SetScript("OnDragStop", TrainingFrame.StopMovingOrSizing)
+        
+        --TrainingFrame:SetScript("OnDragStart", TrainingFrame.StartMoving)
+        --TrainingFrame:SetScript("OnHide", TrainingFrame.StopMovingOrSizing)
+        --TrainingFrame:SetScript("OnDragStop", TrainingFrame.StopMovingOrSizing)
 		
 		AIO.SavePosition(TrainingFrame)
 		
@@ -628,10 +678,12 @@ local sideBar = Framework_Base
 	
 		for i,v in ipairs(all_buttons) do
 			if self == v then
-				all_textures[i]:SetTexture(all_texture_values[i][1], all_texture_values[i][2], all_texture_values[i][3], .4)
+				 all_textures[i]:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button")
+                all_textures[i]:SetVertexColor(all_texture_values[i][1], all_texture_values[i][2], all_texture_values[i][3], .8)
 				spec_displaying = v
 			else
-				all_textures[i]:SetTexture(all_texture_values[i][1], all_texture_values[i][2], all_texture_values[i][3], .8)
+				  all_textures[i]:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+                all_textures[i]:SetVertexColor(all_texture_values[i][1], all_texture_values[i][2], all_texture_values[i][3], .8)
 			end
 		end
 		
@@ -642,13 +694,14 @@ local sideBar = Framework_Base
 	
 	
 	
-	local TrainingFrame_CloseButton = CreateFrame("Button", "TrainingFrame_CloseButton", TrainingFrame, "UIPanelCloseButton")
-		TrainingFrame_CloseButton:SetPoint("TOPRIGHT", -5, -5)
-		TrainingFrame_CloseButton:EnableMouse(true)
-		TrainingFrame_CloseButton:SetSize(27, 27)
+    local TrainingFrame_CloseButton = CreateFrame("Button", "TrainingFrame_CloseButton", TrainingFrame, "UIPanelCloseButton")
+        TrainingFrame_CloseButton:SetPoint("TOPRIGHT", -63, -112)
+        TrainingFrame_CloseButton:EnableMouse(true)
+        TrainingFrame_CloseButton:SetSize(31, 31)
+        TrainingFrame_CloseButton:SetFrameStrata("FULLSCREEN_DIALOG")
 		
 		
-	local TrainingFrame_TitleBar = CreateFrame("Frame", "TrainingFrame_TitleBar", TrainingFrame, nil)
+	--[[local TrainingFrame_TitleBar = CreateFrame("Frame", "TrainingFrame_TitleBar", TrainingFrame, nil)
         TrainingFrame_TitleBar:SetSize(180, 25)
         TrainingFrame_TitleBar:SetBackdrop({
             bgFile = "Interface/CHARACTERFRAME/UI-Party-Background",
@@ -658,458 +711,482 @@ local sideBar = Framework_Base
             tileSize = 16,
             insets = { left = 5, right = 5, top = 5, bottom = 5 }
         })
-		TrainingFrame_TitleBar:SetPoint("TOP", -90, 9)
-		local TrainingFrame_TitleText = TrainingFrame_TitleBar:CreateFontString("TrainingFrame_TitleText")
-        TrainingFrame_TitleText:SetFont("Fonts\\FRIZQT__.TTF", 13)
-        TrainingFrame_TitleText:SetSize(225, 5)
-        TrainingFrame_TitleText:SetPoint("CENTER", 0, 0)
-        TrainingFrame_TitleText:SetText("|cffFFC125Character Progression|r")
+		TrainingFrame_TitleBar:SetPoint("TOP", -90, 9)]]--
+		 local TrainingFrame_TitleText = TrainingFrame:CreateFontString("TrainingFrame_TitleText")
+        TrainingFrame_TitleText:SetFont("Fonts\\MORPHEUS.TTF", 17, "OUTLINE")
+        --TrainingFrame_TitleText:SetSize(225, 255)
+        TrainingFrame_TitleText:SetPoint("TOPRIGHT",-135, -97)
+        TrainingFrame_TitleText:SetText("|cffFFC125Character|nProgression|r")
 
-	-- ####################################### Spec Buttons ##############################	
-	BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame, nil)
-        BalanceDruid:SetSize(175, 20)
-        BalanceDruid:SetPoint("TOPRIGHT", -10, -30)
+	 -- ####################################### Spec Buttons ##############################  
+BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame, nil)
+        BalanceDruid:SetSize(234, 25.5)
+        BalanceDruid:SetPoint("TOPRIGHT", -68.5, -136)
         BalanceDruid:EnableMouse(true)
-		texture_BalanceDruid = BalanceDruid:CreateTexture("BalanceDruid")
-		texture_BalanceDruid:SetAllPoints(BalanceDruid)
-		texture_BalanceDruid:SetTexture(1, .49, .04, .8)
+        texture_BalanceDruid = BalanceDruid:CreateTexture("BalanceDruid")
+        texture_BalanceDruid:SetAllPoints(BalanceDruid)
+                texture_BalanceDruid:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_BalanceDruid:SetVertexColor(1, .49, .04, .8)
         BalanceDruid:SetNormalTexture(texture_BalanceDruid)
-		font_BalanceDruid = BalanceDruid:CreateFontString("BalanceDruid_Font")
-		font_BalanceDruid:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_BalanceDruid:SetShadowOffset(1, -1)
-		BalanceDruid:SetFontString(font_BalanceDruid)
-		BalanceDruid:SetText("Balance Druid")
-        BalanceDruid:SetScript("OnMouseUp",  display_stuff)
-		
-		
-		
-		
-	FeralDruid = CreateFrame("Button", "TrainingFrame_FeralDruid", TrainingFrame, nil)
-        FeralDruid:SetSize(175, 20)
-        FeralDruid:SetPoint("TOPRIGHT", -10, -55)
+        font_BalanceDruid = BalanceDruid:CreateFontString("BalanceDruid_Font")
+        font_BalanceDruid:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_BalanceDruid:SetShadowOffset(1, -1)
+        BalanceDruid:SetFontString(font_BalanceDruid)
+        BalanceDruid:SetText("Balance Druid")
+        BalanceDruid:SetScript("OnMouseUp",  display_stuff) 
+        
+    FeralDruid = CreateFrame("Button", "TrainingFrame_FeralDruid", TrainingFrame, nil)
+        FeralDruid:SetSize(234, 25.5)
+        FeralDruid:SetPoint("TOPRIGHT", -68.5, -159.5)
         FeralDruid:EnableMouse(true)
-		texture_FeralDruid = BalanceDruid:CreateTexture("FeralDruid")
-		texture_FeralDruid:SetAllPoints(FeralDruid)
-		texture_FeralDruid:SetTexture(1, .49, .04, .8)
+        texture_FeralDruid = BalanceDruid:CreateTexture("FeralDruid")
+        texture_FeralDruid:SetAllPoints(FeralDruid)
+                texture_FeralDruid:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_FeralDruid:SetVertexColor(1, .49, .04, .8)
         FeralDruid:SetNormalTexture(texture_FeralDruid)
-		font_FeralDruid = FeralDruid:CreateFontString("FeralDruid_Font")
-		font_FeralDruid:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_FeralDruid:SetShadowOffset(1, -1)
-		FeralDruid:SetFontString(font_FeralDruid)
-		FeralDruid:SetText("Feral Druid")
+        font_FeralDruid = FeralDruid:CreateFontString("FeralDruid_Font")
+        font_FeralDruid:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_FeralDruid:SetShadowOffset(1, -1)
+        FeralDruid:SetFontString(font_FeralDruid)
+        FeralDruid:SetText("Feral Druid")
         FeralDruid:SetScript("OnMouseUp",  display_stuff)
-		
-		
-	RestorationDruid = CreateFrame("Button", "TrainingFrame_RestorationDruid", TrainingFrame, nil)
-        RestorationDruid:SetSize(175, 20)
-        RestorationDruid:SetPoint("TOPRIGHT", -10, -80)
+
+    RestorationDruid = CreateFrame("Button", "TrainingFrame_RestorationDruid", TrainingFrame, nil)
+        RestorationDruid:SetSize(234, 25.5)
+        RestorationDruid:SetPoint("TOPRIGHT", -68.5, -183)
         RestorationDruid:EnableMouse(true)
-		texture_RestorationDruid = RestorationDruid:CreateTexture("RestorationDruid")
-		texture_RestorationDruid:SetAllPoints(RestorationDruid)
-		texture_RestorationDruid:SetTexture(1, .49, .04, .8)
+        texture_RestorationDruid = RestorationDruid:CreateTexture("RestorationDruid")
+        texture_RestorationDruid:SetAllPoints(RestorationDruid)
+                texture_RestorationDruid:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_RestorationDruid:SetVertexColor(1, .49, .04, .8)
         RestorationDruid:SetNormalTexture(texture_RestorationDruid)
-		font_RestorationDruid = RestorationDruid:CreateFontString("RestorationDruid_Font")
-		font_RestorationDruid:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_RestorationDruid:SetShadowOffset(1, -1)
-		RestorationDruid:SetFontString(font_RestorationDruid)
-		RestorationDruid:SetText("Restoration Druid")
-        RestorationDruid:SetScript("OnMouseUp",  display_stuff)	
-		
-		
-	BeastMasteryHunter = CreateFrame("Button", "TrainingFrame_BeastMasteryHunter", TrainingFrame, nil)
-        BeastMasteryHunter:SetSize(175, 20)
-        BeastMasteryHunter:SetPoint("TOPRIGHT", -10, -105)
+        font_RestorationDruid = RestorationDruid:CreateFontString("RestorationDruid_Font")
+        font_RestorationDruid:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_RestorationDruid:SetShadowOffset(1, -1)
+        RestorationDruid:SetFontString(font_RestorationDruid)
+        RestorationDruid:SetText("Restoration Druid")
+        RestorationDruid:SetScript("OnMouseUp",  display_stuff) 
+        
+        
+    BeastMasteryHunter = CreateFrame("Button", "TrainingFrame_BeastMasteryHunter", TrainingFrame, nil)
+        BeastMasteryHunter:SetSize(234, 25.5)
+        BeastMasteryHunter:SetPoint("TOPRIGHT", -68.5, -206,5)
         BeastMasteryHunter:EnableMouse(true)
-		texture_BeastMasteryHunter = BeastMasteryHunter:CreateTexture("BeastMasteryHunter")
-		texture_BeastMasteryHunter:SetAllPoints(BeastMasteryHunter)
-		texture_BeastMasteryHunter:SetTexture(.67, .83, .45, .8)
+        texture_BeastMasteryHunter = BeastMasteryHunter:CreateTexture("BeastMasteryHunter")
+        texture_BeastMasteryHunter:SetAllPoints(BeastMasteryHunter)
+                texture_BeastMasteryHunter:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_BeastMasteryHunter:SetVertexColor(.67, .83, .45, .8)
         BeastMasteryHunter:SetNormalTexture(texture_BeastMasteryHunter)
-		font_BeastMasteryHunter = BeastMasteryHunter:CreateFontString("BeastMasteryHunter_Font")
-		font_BeastMasteryHunter:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_BeastMasteryHunter:SetShadowOffset(1, -1)
-		BeastMasteryHunter:SetFontString(font_BeastMasteryHunter)
-		BeastMasteryHunter:SetText("Beast Mastery Hunter")
+        font_BeastMasteryHunter = BeastMasteryHunter:CreateFontString("BeastMasteryHunter_Font")
+        font_BeastMasteryHunter:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_BeastMasteryHunter:SetShadowOffset(1, -1)
+        BeastMasteryHunter:SetFontString(font_BeastMasteryHunter)
+        BeastMasteryHunter:SetText("Beast Mastery Hunter")
         BeastMasteryHunter:SetScript("OnMouseUp",  display_stuff)
-		
-	
-	MarksmanshipHunter = CreateFrame("Button", "TrainingFrame_MarksmanshipHunter", TrainingFrame, nil)
-        MarksmanshipHunter:SetSize(175, 20)
-        MarksmanshipHunter:SetPoint("TOPRIGHT", -10, -130)
+        
+    
+    MarksmanshipHunter = CreateFrame("Button", "TrainingFrame_MarksmanshipHunter", TrainingFrame, nil)
+        MarksmanshipHunter:SetSize(234, 25.5)
+        MarksmanshipHunter:SetPoint("TOPRIGHT", -68.5, -230)
         MarksmanshipHunter:EnableMouse(true)
-		texture_MarksmanshipHunter = MarksmanshipHunter:CreateTexture("MarksmanshipHunter")
-		texture_MarksmanshipHunter:SetAllPoints(MarksmanshipHunter)
-		texture_MarksmanshipHunter:SetTexture(.67, .83, .45, .8)
+        texture_MarksmanshipHunter = MarksmanshipHunter:CreateTexture("MarksmanshipHunter")
+        texture_MarksmanshipHunter:SetAllPoints(MarksmanshipHunter)
+                texture_MarksmanshipHunter:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_MarksmanshipHunter:SetVertexColor(.67, .83, .45, .8)
         MarksmanshipHunter:SetNormalTexture(texture_MarksmanshipHunter)
-		font_MarksmanshipHunter = MarksmanshipHunter:CreateFontString("MarksmanshipHunter_Font")
-		font_MarksmanshipHunter:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_MarksmanshipHunter:SetShadowOffset(1, -1)
-		MarksmanshipHunter:SetFontString(font_MarksmanshipHunter)
-		MarksmanshipHunter:SetText("Marksmanship Hunter")
+        font_MarksmanshipHunter = MarksmanshipHunter:CreateFontString("MarksmanshipHunter_Font")
+        font_MarksmanshipHunter:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_MarksmanshipHunter:SetShadowOffset(1, -1)
+        MarksmanshipHunter:SetFontString(font_MarksmanshipHunter)
+        MarksmanshipHunter:SetText("Marksmanship Hunter")
         MarksmanshipHunter:SetScript("OnMouseUp",  display_stuff)
-		
-		
-	SurvivalHunter = CreateFrame("Button", "TrainingFrame_SurvivalHunter", TrainingFrame, nil)
-        SurvivalHunter:SetSize(175, 20)
-        SurvivalHunter:SetPoint("TOPRIGHT", -10, -155)
+        
+        
+    SurvivalHunter = CreateFrame("Button", "TrainingFrame_SurvivalHunter", TrainingFrame, nil)
+        SurvivalHunter:SetSize(234, 25.5)
+        SurvivalHunter:SetPoint("TOPRIGHT", -68.5, -253,5)
         SurvivalHunter:EnableMouse(true)
-		texture_SurvivalHunter = MarksmanshipHunter:CreateTexture("SurvivalHunter")
-		texture_SurvivalHunter:SetAllPoints(SurvivalHunter)
-		texture_SurvivalHunter:SetTexture(.67, .83, .45, .8)
+        texture_SurvivalHunter = MarksmanshipHunter:CreateTexture("SurvivalHunter")
+        texture_SurvivalHunter:SetAllPoints(SurvivalHunter)
+                texture_SurvivalHunter:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_SurvivalHunter:SetVertexColor(.67, .83, .45, .8)
         SurvivalHunter:SetNormalTexture(texture_SurvivalHunter)
-		font_SurvivalHunter = SurvivalHunter:CreateFontString("SurvivalHunter_Font")
-		font_SurvivalHunter:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_SurvivalHunter:SetShadowOffset(1, -1)
-		SurvivalHunter:SetFontString(font_SurvivalHunter)
-		SurvivalHunter:SetText("Survival Hunter")
+        font_SurvivalHunter = SurvivalHunter:CreateFontString("SurvivalHunter_Font")
+        font_SurvivalHunter:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_SurvivalHunter:SetShadowOffset(1, -1)
+        SurvivalHunter:SetFontString(font_SurvivalHunter)
+        SurvivalHunter:SetText("Survival Hunter")
         SurvivalHunter:SetScript("OnMouseUp",  display_stuff)
-		
-		
-	ArcaneMage = CreateFrame("Button", "TrainingFrame_ArcaneMage", TrainingFrame, nil)
-        ArcaneMage:SetSize(175, 20)
-        ArcaneMage:SetPoint("TOPRIGHT", -10, -180)
+        
+        
+    ArcaneMage = CreateFrame("Button", "TrainingFrame_ArcaneMage", TrainingFrame, nil)
+        ArcaneMage:SetSize(234, 25.5)
+        ArcaneMage:SetPoint("TOPRIGHT", -68.5, -277)
         ArcaneMage:EnableMouse(true)
-		texture_ArcaneMage = ArcaneMage:CreateTexture("FireMage")
-		texture_ArcaneMage:SetAllPoints(ArcaneMage)
-		texture_ArcaneMage:SetTexture(.41, .8, .94, .8)
+        texture_ArcaneMage = ArcaneMage:CreateTexture("FireMage")
+        texture_ArcaneMage:SetAllPoints(ArcaneMage)
+                texture_ArcaneMage:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_ArcaneMage:SetVertexColor(.41, .8, .94, .8)
         ArcaneMage:SetNormalTexture(texture_ArcaneMage)
-		font_ArcaneMage = ArcaneMage:CreateFontString("ArcaneMage_Font")
-		font_ArcaneMage:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_ArcaneMage:SetShadowOffset(1, -1)
-		ArcaneMage:SetFontString(font_ArcaneMage)
-		ArcaneMage:SetText("Arcane Mage")
+        font_ArcaneMage = ArcaneMage:CreateFontString("ArcaneMage_Font")
+        font_ArcaneMage:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_ArcaneMage:SetShadowOffset(1, -1)
+        ArcaneMage:SetFontString(font_ArcaneMage)
+        ArcaneMage:SetText("Arcane Mage")
         ArcaneMage:SetScript("OnMouseUp",  display_stuff)
-	
-		
-	FireMage = CreateFrame("Button", "TrainingFrame_FireMage", TrainingFrame, nil)
-        FireMage:SetSize(175, 20)
-        FireMage:SetPoint("TOPRIGHT", -10, -205)
+    
+        
+    FireMage = CreateFrame("Button", "TrainingFrame_FireMage", TrainingFrame, nil)
+        FireMage:SetSize(234, 25.5)
+        FireMage:SetPoint("TOPRIGHT", -68.5, -300.5)
         FireMage:EnableMouse(true)
-		texture_FireMage = FireMage:CreateTexture("FireMage")
-		texture_FireMage:SetAllPoints(FireMage)
-		texture_FireMage:SetTexture(.41, .8, .94, .8)
+        texture_FireMage = FireMage:CreateTexture("FireMage")
+        texture_FireMage:SetAllPoints(FireMage)
+                texture_FireMage:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_FireMage:SetVertexColor(.41, .8, .94, .8)
         FireMage:SetNormalTexture(texture_FireMage)
-		font_FireMage = FireMage:CreateFontString("FireMage_Font")
-		font_FireMage:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_FireMage:SetShadowOffset(1, -1)
-		FireMage:SetFontString(font_FireMage)
-		FireMage:SetText("Fire Mage")
+        font_FireMage = FireMage:CreateFontString("FireMage_Font")
+        font_FireMage:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_FireMage:SetShadowOffset(1, -1)
+        FireMage:SetFontString(font_FireMage)
+        FireMage:SetText("Fire Mage")
         FireMage:SetScript("OnMouseUp",  display_stuff)
-		
-		
-	FrostMage = CreateFrame("Button", "TrainingFrame_FrostMage", TrainingFrame, nil)
-        FrostMage:SetSize(175, 20)
-        FrostMage:SetPoint("TOPRIGHT", -10, -230)
+        
+        
+    FrostMage = CreateFrame("Button", "TrainingFrame_FrostMage", TrainingFrame, nil)
+        FrostMage:SetSize(234, 25.5)
+        FrostMage:SetPoint("TOPRIGHT", -68.5, -324)
         FrostMage:EnableMouse(true)
-		texture_FrostMage = FrostMage:CreateTexture("FrostMage")
-		texture_FrostMage:SetAllPoints(FrostMage)
-		texture_FrostMage:SetTexture(.41, .8, .94, .8)
+        texture_FrostMage = FrostMage:CreateTexture("FrostMage")
+        texture_FrostMage:SetAllPoints(FrostMage)
+                texture_FrostMage:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_FrostMage:SetVertexColor(.41, .8, .94, .8)
         FrostMage:SetNormalTexture(texture_FrostMage)
-		font_FrostMage = FrostMage:CreateFontString("FrostMage_Font")
-		font_FrostMage:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_FrostMage:SetShadowOffset(1, -1)
-		FrostMage:SetFontString(font_FrostMage)
-		FrostMage:SetText("Frost Mage")
+        font_FrostMage = FrostMage:CreateFontString("FrostMage_Font")
+        font_FrostMage:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_FrostMage:SetShadowOffset(1, -1)
+        FrostMage:SetFontString(font_FrostMage)
+        FrostMage:SetText("Frost Mage")
         FrostMage:SetScript("OnMouseUp",  display_stuff)
-		
-	HolyPaladin = CreateFrame("Button", "TrainingFrame_HolyPaladin", TrainingFrame, nil)
-        HolyPaladin:SetSize(175, 20)
-        HolyPaladin:SetPoint("TOPRIGHT", -10, -255)
+        
+    HolyPaladin = CreateFrame("Button", "TrainingFrame_HolyPaladin", TrainingFrame, nil)
+        HolyPaladin:SetSize(234, 25.5)
+        HolyPaladin:SetPoint("TOPRIGHT", -68.5, -347,5)
         HolyPaladin:EnableMouse(true)
-		texture_HolyPaladin = HolyPaladin:CreateTexture("HolyPaladin")
-		texture_HolyPaladin:SetAllPoints(HolyPaladin)
-		texture_HolyPaladin:SetTexture(.96, .55, .73, .8)
+        texture_HolyPaladin = HolyPaladin:CreateTexture("HolyPaladin")
+        texture_HolyPaladin:SetAllPoints(HolyPaladin)
+                texture_HolyPaladin:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_HolyPaladin:SetVertexColor(.96, .55, .73, .8)
         HolyPaladin:SetNormalTexture(texture_HolyPaladin)
-		font_HolyPaladin = HolyPaladin:CreateFontString("HolyPaladin_Font")
-		font_HolyPaladin:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_HolyPaladin:SetShadowOffset(1, -1)
-		HolyPaladin:SetFontString(font_HolyPaladin)
-		HolyPaladin:SetText("Holy Paladin")
+        font_HolyPaladin = HolyPaladin:CreateFontString("HolyPaladin_Font")
+        font_HolyPaladin:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_HolyPaladin:SetShadowOffset(1, -1)
+        HolyPaladin:SetFontString(font_HolyPaladin)
+        HolyPaladin:SetText("Holy Paladin")
         HolyPaladin:SetScript("OnMouseUp",  display_stuff)
-		
-		
-	ProtectionPaladin = CreateFrame("Button", "TrainingFrame_ProtectionPaladin", TrainingFrame, nil)
-        ProtectionPaladin:SetSize(175, 20)
-        ProtectionPaladin:SetPoint("TOPRIGHT", -10, -280)
+        
+        
+    ProtectionPaladin = CreateFrame("Button", "TrainingFrame_ProtectionPaladin", TrainingFrame, nil)
+        ProtectionPaladin:SetSize(234, 25.5)
+        ProtectionPaladin:SetPoint("TOPRIGHT", -68.5, -371)
         ProtectionPaladin:EnableMouse(true)
-		texture_ProtectionPaladin = ProtectionPaladin:CreateTexture("ProtectionPaladin")
-		texture_ProtectionPaladin:SetAllPoints(ProtectionPaladin)
-		texture_ProtectionPaladin:SetTexture(.96, .55, .73, .8)
+        texture_ProtectionPaladin = ProtectionPaladin:CreateTexture("ProtectionPaladin")
+        texture_ProtectionPaladin:SetAllPoints(ProtectionPaladin)
+                texture_ProtectionPaladin:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_ProtectionPaladin:SetVertexColor(.96, .55, .73, .8)
         ProtectionPaladin:SetNormalTexture(texture_ProtectionPaladin)
-		font_ProtectionPaladin = ProtectionPaladin:CreateFontString("ProtectionPaladin_Font")
-		font_ProtectionPaladin:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_ProtectionPaladin:SetShadowOffset(1, -1)
-		ProtectionPaladin:SetFontString(font_ProtectionPaladin)
-		ProtectionPaladin:SetText("Protection Paladin")
+        font_ProtectionPaladin = ProtectionPaladin:CreateFontString("ProtectionPaladin_Font")
+        font_ProtectionPaladin:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_ProtectionPaladin:SetShadowOffset(1, -1)
+        ProtectionPaladin:SetFontString(font_ProtectionPaladin)
+        ProtectionPaladin:SetText("Protection Paladin")
         ProtectionPaladin:SetScript("OnMouseUp",  display_stuff)
-		
-		
-	RetributionPaladin = CreateFrame("Button", "TrainingFrame_RetributionPaladin", TrainingFrame, nil)
-        RetributionPaladin:SetSize(175, 20)
-        RetributionPaladin:SetPoint("TOPRIGHT", -10, -305)
+        
+        
+    RetributionPaladin = CreateFrame("Button", "TrainingFrame_RetributionPaladin", TrainingFrame, nil)
+        RetributionPaladin:SetSize(234, 25.5)
+        RetributionPaladin:SetPoint("TOPRIGHT", -68.5, -394,5)
         RetributionPaladin:EnableMouse(true)
-		texture_RetributionPaladin = RetributionPaladin:CreateTexture("RetributionPaladin")
-		texture_RetributionPaladin:SetAllPoints(RetributionPaladin)
-		texture_RetributionPaladin:SetTexture(.96, .55, .73, .8)
+        texture_RetributionPaladin = RetributionPaladin:CreateTexture("RetributionPaladin")
+        texture_RetributionPaladin:SetAllPoints(RetributionPaladin)
+                texture_RetributionPaladin:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_RetributionPaladin:SetVertexColor(.96, .55, .73, .8)
         RetributionPaladin:SetNormalTexture(texture_RetributionPaladin)
-		font_RetributionPaladin = RetributionPaladin:CreateFontString("RetributionPaladin_Font")
-		font_RetributionPaladin:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_RetributionPaladin:SetShadowOffset(1, -1)
-		RetributionPaladin:SetFontString(font_RetributionPaladin)
-		RetributionPaladin:SetText("Retribution Paladin")
+        font_RetributionPaladin = RetributionPaladin:CreateFontString("RetributionPaladin_Font")
+        font_RetributionPaladin:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_RetributionPaladin:SetShadowOffset(1, -1)
+        RetributionPaladin:SetFontString(font_RetributionPaladin)
+        RetributionPaladin:SetText("Retribution Paladin")
         RetributionPaladin:SetScript("OnMouseUp",  display_stuff)
-		
-		
-	DisciplinePriest = CreateFrame("Button", "TrainingFrame_DisciplinePriest", TrainingFrame, nil)
-        DisciplinePriest:SetSize(175, 20)
-        DisciplinePriest:SetPoint("TOPRIGHT", -10, -330)
+        
+        
+    DisciplinePriest = CreateFrame("Button", "TrainingFrame_DisciplinePriest", TrainingFrame, nil)
+        DisciplinePriest:SetSize(234, 25.5)
+        DisciplinePriest:SetPoint("TOPRIGHT", -68.5, -418)
         DisciplinePriest:EnableMouse(true)
-		texture_DisciplinePriest = DisciplinePriest:CreateTexture("DisciplinePriest")
-		texture_DisciplinePriest:SetAllPoints(DisciplinePriest)
-		texture_DisciplinePriest:SetTexture(1, 1, 1, .8)
+        texture_DisciplinePriest = DisciplinePriest:CreateTexture("DisciplinePriest")
+        texture_DisciplinePriest:SetAllPoints(DisciplinePriest)
+                texture_DisciplinePriest:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_DisciplinePriest:SetVertexColor(1, 1, 1, .8)
         DisciplinePriest:SetNormalTexture(texture_DisciplinePriest)
-		font_DisciplinePriest = DisciplinePriest:CreateFontString("DisciplinePriest_Font")
-		font_DisciplinePriest:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_DisciplinePriest:SetShadowOffset(1, -1)
-		DisciplinePriest:SetFontString(font_DisciplinePriest)
-		DisciplinePriest:SetText("Discipline Priest")
+        font_DisciplinePriest = DisciplinePriest:CreateFontString("DisciplinePriest_Font")
+        font_DisciplinePriest:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_DisciplinePriest:SetShadowOffset(1, -1)
+        DisciplinePriest:SetFontString(font_DisciplinePriest)
+        DisciplinePriest:SetText("Discipline Priest")
         DisciplinePriest:SetScript("OnMouseUp",  display_stuff)
-		
-		
-	HolyPriest = CreateFrame("Button", "TrainingFrame_HolyPriest", TrainingFrame, nil)
-        HolyPriest:SetSize(175, 20)
-        HolyPriest:SetPoint("TOPRIGHT", -10, -355)
+        
+        
+    HolyPriest = CreateFrame("Button", "TrainingFrame_HolyPriest", TrainingFrame, nil)
+        HolyPriest:SetSize(234, 25.5)
+        HolyPriest:SetPoint("TOPRIGHT", -68.5, -441,5)
         HolyPriest:EnableMouse(true)
-		texture_HolyPriest = HolyPriest:CreateTexture("HolyPriest")
-		texture_HolyPriest:SetAllPoints(HolyPriest)
-		texture_HolyPriest:SetTexture(1, 1, 1, .8)
+        texture_HolyPriest = HolyPriest:CreateTexture("HolyPriest")
+        texture_HolyPriest:SetAllPoints(HolyPriest)
+                texture_HolyPriest:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_HolyPriest:SetVertexColor(1, 1, 1, .8)
         HolyPriest:SetNormalTexture(texture_HolyPriest)
-		font_HolyPriest = HolyPriest:CreateFontString("HolyPriest_Font")
-		font_HolyPriest:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_HolyPriest:SetShadowOffset(1, -1)
-		HolyPriest:SetFontString(font_HolyPriest)
-		HolyPriest:SetText("Holy Priest")
+        font_HolyPriest = HolyPriest:CreateFontString("HolyPriest_Font")
+        font_HolyPriest:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_HolyPriest:SetShadowOffset(1, -1)
+        HolyPriest:SetFontString(font_HolyPriest)
+        HolyPriest:SetText("Holy Priest")
         HolyPriest:SetScript("OnMouseUp",  display_stuff)
-		
-		
-	ShadowPriest = CreateFrame("Button", "TrainingFrame_ShadowPriest", TrainingFrame, nil)
-        ShadowPriest:SetSize(175, 20)
-        ShadowPriest:SetPoint("TOPRIGHT", -10, -380)
+        
+        
+    ShadowPriest = CreateFrame("Button", "TrainingFrame_ShadowPriest", TrainingFrame, nil)
+        ShadowPriest:SetSize(234, 25.5)
+        ShadowPriest:SetPoint("TOPRIGHT", -68.5, -465)
         ShadowPriest:EnableMouse(true)
-		texture_ShadowPriest = ShadowPriest:CreateTexture("ShadowPriest")
-		texture_ShadowPriest:SetAllPoints(ShadowPriest)
-		texture_ShadowPriest:SetTexture(1, 1, 1, .8)
+        texture_ShadowPriest = ShadowPriest:CreateTexture("ShadowPriest")
+        texture_ShadowPriest:SetAllPoints(ShadowPriest)
+                texture_ShadowPriest:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_ShadowPriest:SetVertexColor(1, 1, 1, .8)
         ShadowPriest:SetNormalTexture(texture_ShadowPriest)
-		font_ShadowPriest = ShadowPriest:CreateFontString("ShadowPriest_Font")
-		font_ShadowPriest:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_ShadowPriest:SetShadowOffset(1, -1)
-		ShadowPriest:SetFontString(font_ShadowPriest)
-		ShadowPriest:SetText("Shadow Priest")
+        font_ShadowPriest = ShadowPriest:CreateFontString("ShadowPriest_Font")
+        font_ShadowPriest:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_ShadowPriest:SetShadowOffset(1, -1)
+        ShadowPriest:SetFontString(font_ShadowPriest)
+        ShadowPriest:SetText("Shadow Priest")
         ShadowPriest:SetScript("OnMouseUp",  display_stuff)
-		
-		
-	AssassinationRogue = CreateFrame("Button", "TrainingFrame_AssassinationRogue", TrainingFrame, nil)
-        AssassinationRogue:SetSize(175, 20)
-        AssassinationRogue:SetPoint("TOPRIGHT", -10, -405)
+        
+        
+    AssassinationRogue = CreateFrame("Button", "TrainingFrame_AssassinationRogue", TrainingFrame, nil)
+        AssassinationRogue:SetSize(234, 25.5)
+        AssassinationRogue:SetPoint("TOPRIGHT", -68.5, -488,5)
         AssassinationRogue:EnableMouse(true)
-		texture_AssassinationRogue = AssassinationRogue:CreateTexture("AssassinationRogue")
-		texture_AssassinationRogue:SetAllPoints(AssassinationRogue)
-		texture_AssassinationRogue:SetTexture(1, .96, .41, .8)
+        texture_AssassinationRogue = AssassinationRogue:CreateTexture("AssassinationRogue")
+        texture_AssassinationRogue:SetAllPoints(AssassinationRogue)
+                texture_AssassinationRogue:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_AssassinationRogue:SetVertexColor(1, .96, .41, .8)
         AssassinationRogue:SetNormalTexture(texture_AssassinationRogue)
-		font_AssassinationRogue = AssassinationRogue:CreateFontString("AssassinationRogue_Font")
-		font_AssassinationRogue:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_AssassinationRogue:SetShadowOffset(1, -1)
-		AssassinationRogue:SetFontString(font_AssassinationRogue)
-		AssassinationRogue:SetText("Assassination Rogue")
+        font_AssassinationRogue = AssassinationRogue:CreateFontString("AssassinationRogue_Font")
+        font_AssassinationRogue:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_AssassinationRogue:SetShadowOffset(1, -1)
+        AssassinationRogue:SetFontString(font_AssassinationRogue)
+        AssassinationRogue:SetText("Assassination Rogue")
         AssassinationRogue:SetScript("OnMouseUp",  display_stuff)
-		
-		
-	CombatRogue = CreateFrame("Button", "TrainingFrame_CombatRogue", TrainingFrame, nil)
-        CombatRogue:SetSize(175, 20)
-        CombatRogue:SetPoint("TOPRIGHT", -10, -430)
+        
+        
+    CombatRogue = CreateFrame("Button", "TrainingFrame_CombatRogue", TrainingFrame, nil)
+        CombatRogue:SetSize(234, 25.5)
+        CombatRogue:SetPoint("TOPRIGHT", -68.5, -512)
         CombatRogue:EnableMouse(true)
-		texture_CombatRogue = CombatRogue:CreateTexture("CombatRogue")
-		texture_CombatRogue:SetAllPoints(CombatRogue)
-		texture_CombatRogue:SetTexture(1, .96, .41, .8)
+        texture_CombatRogue = CombatRogue:CreateTexture("CombatRogue")
+        texture_CombatRogue:SetAllPoints(CombatRogue)
+                texture_CombatRogue:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_CombatRogue:SetVertexColor(1, .96, .41, .8)
         CombatRogue:SetNormalTexture(texture_CombatRogue)
-		font_CombatRogue = CombatRogue:CreateFontString("CombatRogue_Font")
-		font_CombatRogue:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_CombatRogue:SetShadowOffset(1, -1)
-		CombatRogue:SetFontString(font_CombatRogue)
-		CombatRogue:SetText("Combat Rogue")
+        font_CombatRogue = CombatRogue:CreateFontString("CombatRogue_Font")
+        font_CombatRogue:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_CombatRogue:SetShadowOffset(1, -1)
+        CombatRogue:SetFontString(font_CombatRogue)
+        CombatRogue:SetText("Combat Rogue")
         CombatRogue:SetScript("OnMouseUp",  display_stuff)
-		
-		
-	SubtletyRogue = CreateFrame("Button", "TrainingFrame_SubtletyRogue", TrainingFrame, nil)
-        SubtletyRogue:SetSize(175, 20)
-        SubtletyRogue:SetPoint("TOPRIGHT", -10, -455)
+        
+        
+    SubtletyRogue = CreateFrame("Button", "TrainingFrame_SubtletyRogue", TrainingFrame, nil)
+        SubtletyRogue:SetSize(234, 25.5)
+        SubtletyRogue:SetPoint("TOPRIGHT", -68.5, -535,5)
         SubtletyRogue:EnableMouse(true)
-		texture_SubtletyRogue = SubtletyRogue:CreateTexture("SubtletyRogue")
-		texture_SubtletyRogue:SetAllPoints(SubtletyRogue)
-		texture_SubtletyRogue:SetTexture(1, .96, .41, .8)
+        texture_SubtletyRogue = SubtletyRogue:CreateTexture("SubtletyRogue")
+        texture_SubtletyRogue:SetAllPoints(SubtletyRogue)
+                texture_SubtletyRogue:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_SubtletyRogue:SetVertexColor(1, .96, .41, .8)
         SubtletyRogue:SetNormalTexture(texture_SubtletyRogue)
-		font_SubtletyRogue = SubtletyRogue:CreateFontString("SubtletyRogue_Font")
-		font_SubtletyRogue:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_SubtletyRogue:SetShadowOffset(1, -1)
-		SubtletyRogue:SetFontString(font_SubtletyRogue)
-		SubtletyRogue:SetText("Subtlety Rogue")
+        font_SubtletyRogue = SubtletyRogue:CreateFontString("SubtletyRogue_Font")
+        font_SubtletyRogue:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_SubtletyRogue:SetShadowOffset(1, -1)
+        SubtletyRogue:SetFontString(font_SubtletyRogue)
+        SubtletyRogue:SetText("Subtlety Rogue")
         SubtletyRogue:SetScript("OnMouseUp",  display_stuff)
-		
-		
-	ElementalShaman = CreateFrame("Button", "TrainingFrame_ElementalShaman", TrainingFrame, nil)
-        ElementalShaman:SetSize(175, 20)
-        ElementalShaman:SetPoint("TOPRIGHT", -10, -480)
+        
+        
+    ElementalShaman = CreateFrame("Button", "TrainingFrame_ElementalShaman", TrainingFrame, nil)
+        ElementalShaman:SetSize(234, 25.5)
+        ElementalShaman:SetPoint("TOPRIGHT", -68.5, -559)
         ElementalShaman:EnableMouse(true)
-		texture_ElementalShaman = ElementalShaman:CreateTexture("ElementalShaman")
-		texture_ElementalShaman:SetAllPoints(ElementalShaman)
-		texture_ElementalShaman:SetTexture(0, .44, .87, .8)
+        texture_ElementalShaman = ElementalShaman:CreateTexture("ElementalShaman")
+        texture_ElementalShaman:SetAllPoints(ElementalShaman)
+                texture_ElementalShaman:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_ElementalShaman:SetVertexColor(0, .44, .87, .8)
         ElementalShaman:SetNormalTexture(texture_ElementalShaman)
-		font_ElementalShaman = ElementalShaman:CreateFontString("ElementalShaman_Font")
-		font_ElementalShaman:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_ElementalShaman:SetShadowOffset(1, -1)
-		ElementalShaman:SetFontString(font_ElementalShaman)
-		ElementalShaman:SetText("Elemental Shaman")
+        font_ElementalShaman = ElementalShaman:CreateFontString("ElementalShaman_Font")
+        font_ElementalShaman:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_ElementalShaman:SetShadowOffset(1, -1)
+        ElementalShaman:SetFontString(font_ElementalShaman)
+        ElementalShaman:SetText("Elemental Shaman")
         ElementalShaman:SetScript("OnMouseUp",  display_stuff)
-		
-		
-	EnhancementShaman = CreateFrame("Button", "TrainingFrame_EnhancementShaman", TrainingFrame, nil)
-        EnhancementShaman:SetSize(175, 20)
-        EnhancementShaman:SetPoint("TOPRIGHT", -10, -505)
+        
+        
+    EnhancementShaman = CreateFrame("Button", "TrainingFrame_EnhancementShaman", TrainingFrame, nil)
+        EnhancementShaman:SetSize(234, 25.5)
+        EnhancementShaman:SetPoint("TOPRIGHT", -68.5, -582,5)
         EnhancementShaman:EnableMouse(true)
-		texture_EnhancementShaman = EnhancementShaman:CreateTexture("EnhancementShaman")
-		texture_EnhancementShaman:SetAllPoints(EnhancementShaman)
-		texture_EnhancementShaman:SetTexture(0, .44, .87, .8)
+        texture_EnhancementShaman = EnhancementShaman:CreateTexture("EnhancementShaman")
+        texture_EnhancementShaman:SetAllPoints(EnhancementShaman)
+                texture_EnhancementShaman:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_EnhancementShaman:SetVertexColor(0, .44, .87, .8)
         EnhancementShaman:SetNormalTexture(texture_EnhancementShaman)
-		font_EnhancementShaman = EnhancementShaman:CreateFontString("EnhancementShaman_Font")
-		font_EnhancementShaman:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_EnhancementShaman:SetShadowOffset(1, -1)
-		EnhancementShaman:SetFontString(font_EnhancementShaman)
-		EnhancementShaman:SetText("Enhancement Shaman")
+        font_EnhancementShaman = EnhancementShaman:CreateFontString("EnhancementShaman_Font")
+        font_EnhancementShaman:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_EnhancementShaman:SetShadowOffset(1, -1)
+        EnhancementShaman:SetFontString(font_EnhancementShaman)
+        EnhancementShaman:SetText("Enhancement Shaman")
         EnhancementShaman:SetScript("OnMouseUp",  display_stuff)
-		
-		
-	RestorationShaman = CreateFrame("Button", "TrainingFrame_RestorationShaman", TrainingFrame, nil)
-        RestorationShaman:SetSize(175, 20)
-        RestorationShaman:SetPoint("TOPRIGHT", -10, -530)
+        
+        
+    RestorationShaman = CreateFrame("Button", "TrainingFrame_RestorationShaman", TrainingFrame, nil)
+        RestorationShaman:SetSize(234, 25.5)
+        RestorationShaman:SetPoint("TOPRIGHT", -68.5, -606)
         RestorationShaman:EnableMouse(true)
-		texture_RestorationShaman = RestorationShaman:CreateTexture("RestorationShaman")
-		texture_RestorationShaman:SetAllPoints(RestorationShaman)
-		texture_RestorationShaman:SetTexture(0, .44, .87, .8)
+        texture_RestorationShaman = RestorationShaman:CreateTexture("RestorationShaman")
+        texture_RestorationShaman:SetAllPoints(RestorationShaman)
+                texture_RestorationShaman:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_RestorationShaman:SetVertexColor(0, .44, .87, .8)
         RestorationShaman:SetNormalTexture(texture_RestorationShaman)
-		font_RestorationShaman = RestorationShaman:CreateFontString("RestorationShaman_Font")
-		font_RestorationShaman:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_RestorationShaman:SetShadowOffset(1, -1)
-		RestorationShaman:SetFontString(font_RestorationShaman)
-		RestorationShaman:SetText("Restoration Shaman")
+        font_RestorationShaman = RestorationShaman:CreateFontString("RestorationShaman_Font")
+        font_RestorationShaman:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_RestorationShaman:SetShadowOffset(1, -1)
+        RestorationShaman:SetFontString(font_RestorationShaman)
+        RestorationShaman:SetText("Restoration Shaman")
         RestorationShaman:SetScript("OnMouseUp",  display_stuff)
-		
-		
-	AfflictionWarlock = CreateFrame("Button", "TrainingFrame_AfflictionWarlock", TrainingFrame, nil)
-        AfflictionWarlock:SetSize(175, 20)
-        AfflictionWarlock:SetPoint("TOPRIGHT", -10, -555)
+        
+        
+    AfflictionWarlock = CreateFrame("Button", "TrainingFrame_AfflictionWarlock", TrainingFrame, nil)
+        AfflictionWarlock:SetSize(234, 25.5)
+        AfflictionWarlock:SetPoint("TOPRIGHT", -68.5, -629,5)
         AfflictionWarlock:EnableMouse(true)
-		texture_AfflictionWarlock = AfflictionWarlock:CreateTexture("AfflictionWarlock")
-		texture_AfflictionWarlock:SetAllPoints(AfflictionWarlock)
-		texture_AfflictionWarlock:SetTexture(.58, .51, .79, .8)
+        texture_AfflictionWarlock = AfflictionWarlock:CreateTexture("AfflictionWarlock")
+        texture_AfflictionWarlock:SetAllPoints(AfflictionWarlock)
+                texture_AfflictionWarlock:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_AfflictionWarlock:SetVertexColor(.58, .51, .79, .8)
         AfflictionWarlock:SetNormalTexture(texture_AfflictionWarlock)
-		font_AfflictionWarlock = AfflictionWarlock:CreateFontString("AfflictionWarlock_Font")
-		font_AfflictionWarlock:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_AfflictionWarlock:SetShadowOffset(1, -1)
-		AfflictionWarlock:SetFontString(font_AfflictionWarlock)
-		AfflictionWarlock:SetText("Affliction Warlock")
+        font_AfflictionWarlock = AfflictionWarlock:CreateFontString("AfflictionWarlock_Font")
+        font_AfflictionWarlock:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_AfflictionWarlock:SetShadowOffset(1, -1)
+        AfflictionWarlock:SetFontString(font_AfflictionWarlock)
+        AfflictionWarlock:SetText("Affliction Warlock")
         AfflictionWarlock:SetScript("OnMouseUp",  display_stuff)
-		
-	DemonologyWarlock = CreateFrame("Button", "TrainingFrame_DemonologyWarlock", TrainingFrame, nil)
-        DemonologyWarlock:SetSize(175, 20)
-        DemonologyWarlock:SetPoint("TOPRIGHT", -10, -580)
+        
+    DemonologyWarlock = CreateFrame("Button", "TrainingFrame_DemonologyWarlock", TrainingFrame, nil)
+        DemonologyWarlock:SetSize(234, 25.5)
+        DemonologyWarlock:SetPoint("TOPRIGHT", -68.5, -653)
         DemonologyWarlock:EnableMouse(true)
-		texture_DemonologyWarlock = DemonologyWarlock:CreateTexture("DemonologyWarlock")
-		texture_DemonologyWarlock:SetAllPoints(DemonologyWarlock)
-		texture_DemonologyWarlock:SetTexture(.58, .51, .79, .8)
+        texture_DemonologyWarlock = DemonologyWarlock:CreateTexture("DemonologyWarlock")
+        texture_DemonologyWarlock:SetAllPoints(DemonologyWarlock)
+                texture_DemonologyWarlock:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_DemonologyWarlock:SetVertexColor(.58, .51, .79, .8)
         DemonologyWarlock:SetNormalTexture(texture_DemonologyWarlock)
-		font_DemonologyWarlock = DemonologyWarlock:CreateFontString("DemonologyWarlock_Font")
-		font_DemonologyWarlock:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_DemonologyWarlock:SetShadowOffset(1, -1)
-		DemonologyWarlock:SetFontString(font_DemonologyWarlock)
-		DemonologyWarlock:SetText("Demonology Warlock")
+        font_DemonologyWarlock = DemonologyWarlock:CreateFontString("DemonologyWarlock_Font")
+        font_DemonologyWarlock:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_DemonologyWarlock:SetShadowOffset(1, -1)
+        DemonologyWarlock:SetFontString(font_DemonologyWarlock)
+        DemonologyWarlock:SetText("Demonology Warlock")
         DemonologyWarlock:SetScript("OnMouseUp",  display_stuff)
-		
-		
-	DestructionWarlock = CreateFrame("Button", "TrainingFrame_DestructionWarlock", TrainingFrame, nil)
-        DestructionWarlock:SetSize(175, 20)
-        DestructionWarlock:SetPoint("TOPRIGHT", -10, -605)
+        
+        
+    DestructionWarlock = CreateFrame("Button", "TrainingFrame_DestructionWarlock", TrainingFrame, nil)
+        DestructionWarlock:SetSize(234, 25.5)
+        DestructionWarlock:SetPoint("TOPRIGHT", -68.5, -676,5)
         DestructionWarlock:EnableMouse(true)
-		texture_DestructionWarlock = DestructionWarlock:CreateTexture("DestructionWarlock")
-		texture_DestructionWarlock:SetAllPoints(DestructionWarlock)
-		texture_DestructionWarlock:SetTexture(.58, .51, .79, .8)
+        texture_DestructionWarlock = DestructionWarlock:CreateTexture("DestructionWarlock")
+        texture_DestructionWarlock:SetAllPoints(DestructionWarlock)
+                texture_DestructionWarlock:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_DestructionWarlock:SetVertexColor(.58, .51, .79, .8)
         DestructionWarlock:SetNormalTexture(texture_DestructionWarlock)
-		font_DestructionWarlock = DestructionWarlock:CreateFontString("DestructionWarlock_Font")
-		font_DestructionWarlock:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_DestructionWarlock:SetShadowOffset(1, -1)
-		DestructionWarlock:SetFontString(font_DestructionWarlock)
-		DestructionWarlock:SetText("Destruction Warlock")
+        font_DestructionWarlock = DestructionWarlock:CreateFontString("DestructionWarlock_Font")
+        font_DestructionWarlock:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_DestructionWarlock:SetShadowOffset(1, -1)
+        DestructionWarlock:SetFontString(font_DestructionWarlock)
+        DestructionWarlock:SetText("Destruction Warlock")
         DestructionWarlock:SetScript("OnMouseUp",  display_stuff)
-		
-		
-	ArmsWarrior = CreateFrame("Button", "TrainingFrame_ArmsWarrior", TrainingFrame, nil)
-        ArmsWarrior:SetSize(175, 20)
-        ArmsWarrior:SetPoint("TOPRIGHT", -10, -630)
+        
+        
+    ArmsWarrior = CreateFrame("Button", "TrainingFrame_ArmsWarrior", TrainingFrame, nil)
+        ArmsWarrior:SetSize(234, 25.5)
+        ArmsWarrior:SetPoint("TOPRIGHT", -68.5, -700)
         ArmsWarrior:EnableMouse(true)
-		texture_ArmsWarrior = ArmsWarrior:CreateTexture("ArmsWarrior")
-		texture_ArmsWarrior:SetAllPoints(ArmsWarrior)
-		texture_ArmsWarrior:SetTexture(.78, .61, .43, .8)
+        texture_ArmsWarrior = ArmsWarrior:CreateTexture("ArmsWarrior")
+        texture_ArmsWarrior:SetAllPoints(ArmsWarrior)
+                texture_ArmsWarrior:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_ArmsWarrior:SetVertexColor(.78, .61, .43, .8)
         ArmsWarrior:SetNormalTexture(texture_ArmsWarrior)
-		font_ArmsWarrior = ArmsWarrior:CreateFontString("ArmsWarrior_Font")
-		font_ArmsWarrior:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_ArmsWarrior:SetShadowOffset(1, -1)
-		ArmsWarrior:SetFontString(font_ArmsWarrior)
-		ArmsWarrior:SetText("Arms Warrior")
+        font_ArmsWarrior = ArmsWarrior:CreateFontString("ArmsWarrior_Font")
+        font_ArmsWarrior:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_ArmsWarrior:SetShadowOffset(1, -1)
+        ArmsWarrior:SetFontString(font_ArmsWarrior)
+        ArmsWarrior:SetText("Arms Warrior")
         ArmsWarrior:SetScript("OnMouseUp",  display_stuff)
-		
-		
-	FuryWarrior = CreateFrame("Button", "TrainingFrame_FuryWarrior", TrainingFrame, nil)
-        FuryWarrior:SetSize(175, 20)
-        FuryWarrior:SetPoint("TOPRIGHT", -10, -655)
+        
+        
+    FuryWarrior = CreateFrame("Button", "TrainingFrame_FuryWarrior", TrainingFrame, nil)
+        FuryWarrior:SetSize(234, 25.5)
+        FuryWarrior:SetPoint("TOPRIGHT", -68.5, -723,5)
         FuryWarrior:EnableMouse(true)
-		texture_FuryWarrior = FuryWarrior:CreateTexture("FuryWarrior")
-		texture_FuryWarrior:SetAllPoints(FuryWarrior)
-		texture_FuryWarrior:SetTexture(.78, .61, .43, .8)
+        texture_FuryWarrior = FuryWarrior:CreateTexture("FuryWarrior")
+        texture_FuryWarrior:SetAllPoints(FuryWarrior)
+                texture_FuryWarrior:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_FuryWarrior:SetVertexColor(.78, .61, .43, .8)
         FuryWarrior:SetNormalTexture(texture_FuryWarrior)
-		font_FuryWarrior = FuryWarrior:CreateFontString("FuryWarrior_Font")
-		font_FuryWarrior:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_FuryWarrior:SetShadowOffset(1, -1)
-		FuryWarrior:SetFontString(font_FuryWarrior)
-		FuryWarrior:SetText("Fury Warrior")
+        font_FuryWarrior = FuryWarrior:CreateFontString("FuryWarrior_Font")
+        font_FuryWarrior:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_FuryWarrior:SetShadowOffset(1, -1)
+        FuryWarrior:SetFontString(font_FuryWarrior)
+        FuryWarrior:SetText("Fury Warrior")
         FuryWarrior:SetScript("OnMouseUp",  display_stuff)
-		
-		
-	ProtectionWarrior = CreateFrame("Button", "TrainingFrame_ProtectionWarrior", TrainingFrame, nil)
-        ProtectionWarrior:SetSize(175, 20)
-        ProtectionWarrior:SetPoint("TOPRIGHT", -10, -680)
+        
+        
+    ProtectionWarrior = CreateFrame("Button", "TrainingFrame_ProtectionWarrior", TrainingFrame, nil)
+        ProtectionWarrior:SetSize(234, 25.5)
+        ProtectionWarrior:SetPoint("TOPRIGHT", -68.5, -747)
         ProtectionWarrior:EnableMouse(true)
-		texture_ProtectionWarrior = ProtectionWarrior:CreateTexture("ProtectionWarrior")
-		texture_ProtectionWarrior:SetAllPoints(ProtectionWarrior)
-		texture_ProtectionWarrior:SetTexture(.78, .61, .43, .8)
+        texture_ProtectionWarrior = ProtectionWarrior:CreateTexture("ProtectionWarrior")
+        texture_ProtectionWarrior:SetAllPoints(ProtectionWarrior)
+                texture_ProtectionWarrior:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_ProtectionWarrior:SetVertexColor(.78, .61, .43, .8)
         ProtectionWarrior:SetNormalTexture(texture_ProtectionWarrior)
-		font_ProtectionWarrior = ProtectionWarrior:CreateFontString("ProtectionWarrior_Font")
-		font_ProtectionWarrior:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_ProtectionWarrior:SetShadowOffset(1, -1)
-		ProtectionWarrior:SetFontString(font_ProtectionWarrior)
-		ProtectionWarrior:SetText("Protection Warrior")
+        font_ProtectionWarrior = ProtectionWarrior:CreateFontString("ProtectionWarrior_Font")
+        font_ProtectionWarrior:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_ProtectionWarrior:SetShadowOffset(1, -1)
+        ProtectionWarrior:SetFontString(font_ProtectionWarrior)
+        ProtectionWarrior:SetText("Protection Warrior")
         ProtectionWarrior:SetScript("OnMouseUp",  display_stuff)
-		
-	GeneralStuff = CreateFrame("Button", "TrainingFrame_GeneralStuff", TrainingFrame, nil)
-        GeneralStuff:SetSize(175, 20)
-        GeneralStuff:SetPoint("TOPRIGHT", -10, -705)
+        
+    GeneralStuff = CreateFrame("Button", "TrainingFrame_GeneralStuff", TrainingFrame, nil)
+        GeneralStuff:SetSize(234, 25.5)
+        GeneralStuff:SetPoint("TOPRIGHT", -68.5, -770,5)
         GeneralStuff:EnableMouse(true)
-		texture_GeneralStuff = GeneralStuff:CreateTexture("GeneralStuff")
-		texture_GeneralStuff:SetAllPoints(GeneralStuff)
-		texture_GeneralStuff:SetTexture(.4, .4, .4, .4)
+        texture_GeneralStuff = GeneralStuff:CreateTexture("GeneralStuff")
+        texture_GeneralStuff:SetAllPoints(GeneralStuff)
+                texture_GeneralStuff:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+        texture_GeneralStuff:SetVertexColor(.4, .4, .4, .8)
         GeneralStuff:SetNormalTexture(texture_GeneralStuff)
-		font_GeneralStuff = GeneralStuff:CreateFontString("GeneralStuff_Font")
-		font_GeneralStuff:SetFont("Fonts\\FRIZQT__.TTF", 11)
-		font_GeneralStuff:SetShadowOffset(1, -1)
-		GeneralStuff:SetFontString(font_GeneralStuff)
-		GeneralStuff:SetText("General")
+        font_GeneralStuff = GeneralStuff:CreateFontString("GeneralStuff_Font")
+        font_GeneralStuff:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        font_GeneralStuff:SetShadowOffset(1, -1)
+        GeneralStuff:SetFontString(font_GeneralStuff)
+        GeneralStuff:SetText("General")
         GeneralStuff:SetScript("OnMouseUp",  display_stuff)
 		
 		spec_displaying = GeneralStuff
@@ -1120,10 +1197,14 @@ local sideBar = Framework_Base
 	function display_frame_CA()
 	
 		if frame_displaying == "BASIC" then
-		
+		TrainingFrame:SetBackdrop({
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\progress",})
 			-- shows
 			DisplaySpellsButton:Show()
 			DisplayTalentsButton:Show()
+
+            ProgressionBlueBookBorder:Hide()
+            ProgressionPurpleBookBorder:Hide()
 			
 			--hides
 			for i,v in ipairs(all_spell_slots) do
@@ -1172,6 +1253,10 @@ local sideBar = Framework_Base
 		if self == DisplaySpellsButton then
 		
 			frame_displaying = "SPELLS"
+            TrainingFrame:SetBackdrop({
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\progress_inside_blue",})
+            ProgressionBlueBookBorder:Show()
+            TrainingFrameBorder:SetFrameStrata("FULLSCREEN")
 			
 			local all_buttons = {BalanceDruid, FeralDruid, RestorationDruid, BeastMasteryHunter, MarksmanshipHunter, SurvivalHunter,
 				ArcaneMage, FireMage, FrostMage, HolyPaladin, ProtectionPaladin, RetributionPaladin,
@@ -1206,6 +1291,10 @@ local sideBar = Framework_Base
 	
 		if spec_displaying ~= GeneralStuff then
 			frame_displaying = "TALENTS"
+            TrainingFrame:SetBackdrop({
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\progress_inside_purple",})
+            ProgressionPurpleBookBorder:Show()
+            TrainingFrameBorder:SetFrameStrata("FULLSCREEN")
 			
 			local all_buttons = {BalanceDruid, FeralDruid, RestorationDruid, BeastMasteryHunter, MarksmanshipHunter, SurvivalHunter,
 				ArcaneMage, FireMage, FrostMage, HolyPaladin, ProtectionPaladin, RetributionPaladin,
@@ -1587,44 +1676,93 @@ local sideBar = Framework_Base
 	
 	-- ####################################### Basic Frame ##############################	
 	
-	DisplaySpellsButton = CreateFrame("Button", "TrainingFrame_DisplaySpellsButton", TrainingFrame, nil)
+ local ProgressionPurpleCovertexture = TrainingFrame:CreateTexture() 
+    ProgressionPurpleCovertexture:SetAllPoints() 
+    ProgressionPurpleCovertexture:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\progress_cover_purple") 
+    ProgressionPurpleCovertexture:SetSize(TrainingFrame:GetSize())
+    ProgressionPurpleCovertexture:Hide()
+
+    local ProgressionBlueCovertexture = TrainingFrame:CreateTexture() 
+    ProgressionBlueCovertexture:SetAllPoints() 
+    ProgressionBlueCovertexture:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\progress_cover_Blue") 
+    ProgressionBlueCovertexture:SetSize(TrainingFrame:GetSize())
+    ProgressionBlueCovertexture:Hide()
+
+    CreateFrame("Frame", "TrainingFrameBorder", TrainingFrame, nil)
+    TrainingFrameBorder:SetFrameStrata("DIALOG")
+    TrainingFrameBorder:SetBackdrop({
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\progress_frame",})
+    TrainingFrameBorder:SetSize(TrainingFrame:GetSize())
+    TrainingFrameBorder:SetPoint("CENTER",0,0)
+    TrainingFrameBorder:SetFrameStrata("FULLSCREEN") -- a bit tricky, but I lost huge part of my work in photoshop so I had to do that ._.
+
+
+    local ProgressionBlueBookBorder = TrainingFrameBorder:CreateTexture("ProgressionBlueBookBorder", "BACKGROUND") 
+    ProgressionBlueBookBorder:SetAllPoints() 
+    ProgressionBlueBookBorder:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\progress_add_blue") 
+    ProgressionBlueBookBorder:SetSize(TrainingFrame:GetSize())
+    ProgressionBlueBookBorder:SetVertexColor(1,1, 1, .7)
+    ProgressionBlueBookBorder:Hide()
+
+        local ProgressionPurpleBookBorder = TrainingFrameBorder:CreateTexture("ProgressionPurpleBookBorder", "BACKGROUND") 
+    ProgressionPurpleBookBorder:SetAllPoints() 
+    ProgressionPurpleBookBorder:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\progress_add_Purple") 
+    ProgressionPurpleBookBorder:SetSize(TrainingFrame:GetSize())
+    ProgressionPurpleBookBorder:SetVertexColor(1,1, 1, 1)
+    ProgressionPurpleBookBorder:Hide()
+    --ProgressionFrametexture:ClearAllPoints()
+    
+    DisplaySpellsButton = CreateFrame("Button", "TrainingFrame_DisplaySpellsButton", TrainingFrame, nil)
         DisplaySpellsButton:SetSize(150, 75)
-        DisplaySpellsButton:SetPoint("CENTER", -200, 0)
+        DisplaySpellsButton:SetPoint("CENTER", -250, -20)
         DisplaySpellsButton:EnableMouse(true)
-		texture_DisplaySpellsButton = DisplaySpellsButton:CreateTexture("DisplaySpellsButton")
-		texture_DisplaySpellsButton:SetAllPoints(DisplaySpellsButton)
-		texture_DisplaySpellsButton:SetTexture(.9, .2, .2, 1)
-		texture_DisplaySpellsButton_p = DisplaySpellsButton:CreateTexture("DisplaySpellsButton_p")
-		texture_DisplaySpellsButton_p:SetAllPoints(DisplaySpellsButton)
-		texture_DisplaySpellsButton_p:SetTexture(.9, .2, .2, .5)
+        texture_DisplaySpellsButton = DisplaySpellsButton:CreateTexture("DisplaySpellsButton")
+        texture_DisplaySpellsButton:SetAllPoints(DisplaySpellsButton)
+        texture_DisplaySpellsButton:SetTexture(.9, .2, .2, 0)
+        texture_DisplaySpellsButton_p = DisplaySpellsButton:CreateTexture("DisplaySpellsButton_p")
+        texture_DisplaySpellsButton_p:SetAllPoints(DisplaySpellsButton)
+        texture_DisplaySpellsButton_p:SetTexture(.9, .2, .2, 0)
         DisplaySpellsButton:SetNormalTexture(texture_DisplaySpellsButton)
-		DisplaySpellsButton:SetPushedTexture(texture_DisplaySpellsButton_p)
-		font_DisplaySpellsButton = DisplaySpellsButton:CreateFontString("DisplaySpellsButton_Font")
-		font_DisplaySpellsButton:SetFont("Fonts\\FRIZQT__.TTF", 15)
-		font_DisplaySpellsButton:SetShadowOffset(1, -1)
-		DisplaySpellsButton:SetFontString(font_DisplaySpellsButton)
-		DisplaySpellsButton:SetText("Show Spells")
+        DisplaySpellsButton:SetPushedTexture(texture_DisplaySpellsButton_p)
+        font_DisplaySpellsButton = DisplaySpellsButton:CreateFontString("DisplaySpellsButton_Font")
+        font_DisplaySpellsButton:SetFont("Fonts\\MORPHEUS.TTF", 30, "OUTLINE")
+        font_DisplaySpellsButton:SetShadowOffset(1, -1)
+        DisplaySpellsButton:SetFontString(font_DisplaySpellsButton)
+        --DisplaySpellsButton:SetText("Show|nSpells")
         DisplaySpellsButton:SetScript("OnMouseUp",  display_next_frame_CA)
-		
-		
-	DisplayTalentsButton = CreateFrame("Button", "TrainingFrame_DisplayTalentsButton", TrainingFrame, nil)
+        DisplaySpellsButton:SetScript("OnEnter", function(self)
+           BaseFrameFadeIn(ProgressionBlueCovertexture)
+            end)
+        DisplaySpellsButton:SetScript("OnLeave", function()
+           BaseFrameFadeOut(ProgressionBlueCovertexture)
+            end)
+        
+        
+    DisplayTalentsButton = CreateFrame("Button", "TrainingFrame_DisplayTalentsButton", TrainingFrame, nil)
         DisplayTalentsButton:SetSize(150, 75)
-        DisplayTalentsButton:SetPoint("CENTER", 0, 0)
+        DisplayTalentsButton:SetPoint("CENTER", 22, -20)
         DisplayTalentsButton:EnableMouse(true)
-		texture_DisplayTalentsButton = DisplayTalentsButton:CreateTexture("DisplayTalentsButton")
-		texture_DisplayTalentsButton:SetAllPoints(DisplayTalentsButton)
-		texture_DisplayTalentsButton:SetTexture(.9, .2, .2, 1)
-		texture_DisplayTalentsButton_p = DisplayTalentsButton:CreateTexture("DisplayTalentsButton_p")
-		texture_DisplayTalentsButton_p:SetAllPoints(DisplayTalentsButton)
-		texture_DisplayTalentsButton_p:SetTexture(.9, .2, .2, .5)
+        texture_DisplayTalentsButton = DisplayTalentsButton:CreateTexture("DisplayTalentsButton")
+        texture_DisplayTalentsButton:SetAllPoints(DisplayTalentsButton)
+        texture_DisplayTalentsButton:SetTexture(.9, .2, .2, 0)
+        texture_DisplayTalentsButton_p = DisplayTalentsButton:CreateTexture("DisplayTalentsButton_p")
+        texture_DisplayTalentsButton_p:SetAllPoints(DisplayTalentsButton)
+        texture_DisplayTalentsButton_p:SetTexture(.9, .2, .2, 0)
         DisplayTalentsButton:SetNormalTexture(texture_DisplayTalentsButton)
-		DisplayTalentsButton:SetPushedTexture(texture_DisplayTalentsButton_p)
-		font_DisplayTalentsButton = DisplayTalentsButton:CreateFontString("DisplayTalentsButton_Font")
-		font_DisplayTalentsButton:SetFont("Fonts\\FRIZQT__.TTF", 15)
-		font_DisplayTalentsButton:SetShadowOffset(1, -1)
-		DisplayTalentsButton:SetFontString(font_DisplayTalentsButton)
-		DisplayTalentsButton:SetText("Show Talents")
+        DisplayTalentsButton:SetPushedTexture(texture_DisplayTalentsButton_p)
+        font_DisplayTalentsButton = DisplayTalentsButton:CreateFontString("DisplayTalentsButton_Font")
+        font_DisplayTalentsButton:SetFont("Fonts\\MORPHEUS.TTF", 30, "OUTLINE")
+        font_DisplayTalentsButton:SetShadowOffset(1, -1)
+        DisplayTalentsButton:SetFontString(font_DisplayTalentsButton)
+        --DisplayTalentsButton:SetText("Show\nTalents")
         DisplayTalentsButton:SetScript("OnMouseUp",  display_talents)
+        DisplayTalentsButton:SetScript("OnEnter", function(self)
+           BaseFrameFadeIn(ProgressionPurpleCovertexture)
+            end)
+        DisplayTalentsButton:SetScript("OnLeave", function()
+           BaseFrameFadeOut(ProgressionPurpleCovertexture)
+            end)
+        
 		
 		
 	-- ####################################### Spells Frame ##############################	
@@ -1881,15 +2019,13 @@ local sideBar = Framework_Base
 	Spell_slot36ButtonF = Spell_slot36ButtonL:CreateFontString("Spell_slot36ButtonF")
 	Spell_slot36_AttachedSpell = nil
 	
-	all_spell_slots = {{Spell_slot1, -340, -15},{Spell_slot2, -240, -15},{Spell_slot3, -140, -15},{Spell_slot4, -40, -15},
-	{Spell_slot5, 60, -15},{Spell_slot6, 160, -15}, {Spell_slot7, -340, -135}, {Spell_slot8, -240, -135},
-	{Spell_slot9, -140, -135}, {Spell_slot10, -40, -135}, {Spell_slot11, 60, -135}, {Spell_slot12, 160, -135},
-	{Spell_slot13, -340, -255}, {Spell_slot14, -240, -255}, {Spell_slot15, -140, -255}, {Spell_slot16, -40, -255},
-	{Spell_slot17, 60, -255}, {Spell_slot18, 160, -255}, {Spell_slot19, -340, -375}, {Spell_slot20, -240, -375},
-	{Spell_slot21, -140, -375},{Spell_slot22, -40, -375},{Spell_slot23, 60, -375},{Spell_slot24, 160, -375},
-	{Spell_slot25, -340, -495}, {Spell_slot26, -240, -495}, {Spell_slot27, -140, -495}, {Spell_slot28, -40, -495},
-	{Spell_slot29, 60, -495}, {Spell_slot30, 160, -495}, {Spell_slot31, -340, -615}, {Spell_slot32, -240, -615},
-	{Spell_slot33, -140, -615}, {Spell_slot34, -40, -615}, {Spell_slot35, 60, -615}, {Spell_slot36, 160, -615}}
+	all_spell_slots = {
+    {Spell_slot1, -300, -160}, {Spell_slot2, -220, -160}, {Spell_slot3, -140, -160}, {Spell_slot4, -60, -160}, {Spell_slot5, 20, -160}, {Spell_slot6, 100, -160}, 
+    {Spell_slot7, -300, -260}, {Spell_slot8, -220, -260}, {Spell_slot9, -140, -260}, {Spell_slot10, -60, -260}, {Spell_slot11, 20, -260}, {Spell_slot12, 100, -260},
+    {Spell_slot13, -300, -360}, {Spell_slot14, -220, -360}, {Spell_slot15, -140, -360}, {Spell_slot16, -60, -360}, {Spell_slot17, 20, -360}, {Spell_slot18, 100, -360}, 
+    {Spell_slot19, -300, -460}, {Spell_slot20, -220, -460}, {Spell_slot21, -140, -460}, {Spell_slot22, -60, -460}, {Spell_slot23, 20, -460}, {Spell_slot24, 100, -460},
+    {Spell_slot25, -300, -560}, {Spell_slot26, -220, -560}, {Spell_slot27, -140, -560}, {Spell_slot28, -60, -560}, {Spell_slot29, 20, -560}, {Spell_slot30, 100, -560},
+    {Spell_slot31, -300, -660}, {Spell_slot32, -220, -660}, {Spell_slot33, -140, -660}, {Spell_slot34, -60, -660}, {Spell_slot35, 20, -660}, {Spell_slot36, 100, -660}}
 	
 	all_spell_slot_buttons = {Spell_slot1Button, Spell_slot2Button, Spell_slot3Button, Spell_slot4Button,
 	Spell_slot5Button, Spell_slot6Button, Spell_slot7Button, Spell_slot8Button,
@@ -1942,9 +2078,9 @@ local sideBar = Framework_Base
 	Spell_slot33_AttachedSpell, Spell_slot34_AttachedSpell, Spell_slot35_AttachedSpell, Spell_slot36_AttachedSpell}
 	
 	for i,v in ipairs(all_spell_slots) do
-		v[1]:SetSize(60, 60)
+		 v[1]:SetSize(50, 50)
         v[1]:SetBackdrop({
-			bgFile = "Interface/CHARACTERFRAME/UI-Party-Background",
+            bgFile = "Interface/CHARACTERFRAME/UI-Party-Background",
             edgeFile = "Interface/DialogFrame/UI-DialogBox-Border",
             edgeSize = 15
         })
@@ -1953,11 +2089,11 @@ local sideBar = Framework_Base
 	end
 	
 	for i,v in ipairs(all_spell_slot_buttons) do
-		v:SetSize(50, 50)
+		 v:SetSize(40, 40)
         v:SetPoint("CENTER")
         v:EnableMouse(true)
-		v:SetBackdrop({
-			bgFile = "Interface/CHARACTERFRAME/UI-Party-Background"
+        v:SetBackdrop({
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\buttonbackground"
         })
         v:SetScript("OnMouseUp",  nil)
 	end
@@ -1971,15 +2107,15 @@ local sideBar = Framework_Base
 	
 	for i,v in ipairs(all_learn_spell_buttons_t) do
 		v:SetAllPoints(all_learn_spell_buttons[i])
-		v:SetTexture(.9, .2, .2, 1)
+		v:SetTexture(.9, .2, .2, 0)
 		all_learn_spell_buttons[i]:SetNormalTexture(v)
 	end
 	
 	for i,v in ipairs(all_learn_spell_buttons_f) do
-		v:SetFont("Fonts\\FRIZQT__.TTF", 12)
-		v:SetShadowOffset(1, -1)
-		all_learn_spell_buttons[i]:SetFontString(v)
-		all_learn_spell_buttons[i]:SetText("Learn")
+		 v:SetFont("Fonts\\MORPHEUS.TTF", 15, "OUTLINE")
+        v:SetShadowOffset(1, -1)
+        all_learn_spell_buttons[i]:SetFontString(v)
+        all_learn_spell_buttons[i]:SetText("|cffFFFFFFLearn|r")
 	end
 		
 		
@@ -1987,7 +2123,7 @@ local sideBar = Framework_Base
 
 	--scrollframe 
 	scrollframe = CreateFrame("ScrollFrame", nil, TrainingFrame) 
-	scrollframe:SetPoint("TOPLEFT", 75, -50) 
+	scrollframe:SetPoint("TOPLEFT", 95, -135) 
 	scrollframe:SetSize(500, 650)
 	TrainingFrame.scrollframe = scrollframe 
 	scrollframe:Hide()
@@ -2001,6 +2137,7 @@ local sideBar = Framework_Base
 	scrollbar.scrollStep = 1
 	scrollbar:SetValue(0) 
 	scrollbar:SetWidth(16) 
+     scrollbar:SetFrameStrata("FULLSCREEN")
 	scrollbar:SetScript("OnValueChanged", 
 	function (self, value) 
 	self:GetParent():SetVerticalScroll(value) 
