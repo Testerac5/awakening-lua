@@ -57,7 +57,7 @@ local function BaseFading(elapsed)
     end
     end
 
-local fadingFunc = CreateFrame("FRAME")
+local fadingFunc = CreateFrame("FRAME", "fadingFunc")
 fadingFunc:SetScript("OnUpdate", BaseFading)
 
 AIO.SavePosition(fadingFunc)
