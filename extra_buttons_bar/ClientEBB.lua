@@ -59,8 +59,6 @@ local function BaseFading(elapsed)
 
 local fadingFunc = CreateFrame("FRAME", "fadingFunc")
 fadingFunc:SetScript("OnUpdate", BaseFading)
-
-AIO.SavePosition(fadingFunc)
 --end of fading function
 
 Framework_Base = CreateFrame("Frame", "sideBar", UIParent, nil)
