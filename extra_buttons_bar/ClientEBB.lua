@@ -1251,6 +1251,9 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			DisplaySpellsButton:Show()
 			DisplayTalentsButton:Show()
 
+            TrainingFrame.Text_Talent:Hide()
+            TrainingFrame.Text_Ability:Hide()
+
             ProgressionBlueBookBorder:Hide()
             ProgressionPurpleBookBorder:Hide()
             TrainingFrame_model:Hide()
@@ -1305,6 +1308,8 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
             TrainingFrame:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\progress_inside_blue",})
             ProgressionBlueBookBorder:Show()
+            TrainingFrame.Text_Talent:Hide()
+            TrainingFrame.Text_Ability:Show()
             --TrainingFrameBorder:SetFrameStrata("FULLSCREEN")
 			
 			local all_buttons = {BalanceDruid, FeralDruid, RestorationDruid, BeastMasteryHunter, MarksmanshipHunter, SurvivalHunter,
@@ -1343,6 +1348,8 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
             TrainingFrame:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\progress_inside_purple",})
             ProgressionPurpleBookBorder:Show()
+            TrainingFrame.Text_Talent:Show()
+            TrainingFrame.Text_Ability:Hide()
             --TrainingFrameBorder:SetFrameStrata("FULLSCREEN")
 			
 			local all_buttons = {BalanceDruid, FeralDruid, RestorationDruid, BeastMasteryHunter, MarksmanshipHunter, SurvivalHunter,
@@ -1489,7 +1496,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			end
 			all_talent_slot_buttons[button_using]:SetScript("OnLeave", talent_icon_tooltip_OnLeave)
 			
-			all_learn_talent_buttons_t[button_using]:SetTexture(learn_texture[1], learn_texture[2], learn_texture[3], 1)
+			--all_learn_talent_buttons_t[button_using]:SetTexture(learn_texture[1], learn_texture[2], learn_texture[3], 1)
 			
 			local function learn_button_tooltip_Enter(self, motion)
 				GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
@@ -1608,7 +1615,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			
 		all_talent_FrameNumber[indexAt]:SetText(FN)
 		
-		all_learn_talent_buttons_t[indexAt]:SetTexture(texture_changed[1], texture_changed[2], texture_changed[3], 1)
+		--all_learn_talent_buttons_t[indexAt]:SetTexture(texture_changed[1], texture_changed[2], texture_changed[3], 1)
 		
 	end
 	
@@ -1653,7 +1660,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			end
 			all_spell_slot_buttons[start_ticker]:SetScript("OnLeave", spell_icon_tooltip_OnLeave)
 			
-			all_learn_spell_buttons_t[start_ticker]:SetTexture(learn_texture[1], learn_texture[2], learn_texture[3], 1)
+			--all_learn_spell_buttons_t[start_ticker]:SetTexture(learn_texture[1], learn_texture[2], learn_texture[3], 1)
 			
 			local function learn_button_tooltip_Enter(self, motion)
 				GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
@@ -1689,7 +1696,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			
 			all_learn_spell_buttons[start_ticker]:SetScript("OnLeave", nil)
 		
-			all_learn_spell_buttons_t[start_ticker]:SetTexture(.3, .3, .3, 1)
+			--all_learn_spell_buttons_t[start_ticker]:SetTexture(.3, .3, .3, 1)
 			all_learn_spell_buttons[start_ticker]:SetText("Empty")
 			all_attached_spells[start_ticker] = nil
 			start_ticker = start_ticker + 1
@@ -1719,7 +1726,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 		end
 		all_learn_spell_buttons[i]:SetScript("OnEnter", learn_button_tooltip_Enter)
 
-		all_learn_spell_buttons_t[i]:SetTexture(.3, .3, .3, 1)
+		--all_learn_spell_buttons_t[i]:SetTexture(.3, .3, .3, 1)
 		all_attached_spells[i] = nil
 	end
 	
@@ -1743,6 +1750,21 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
     TrainingFrameBorder:SetSize(TrainingFrame:GetSize())
     TrainingFrameBorder:SetPoint("CENTER",0,0)
     TrainingFrameBorder:SetFrameStrata("FULLSCREEN") -- a bit tricky, but I lost huge part of my work in photoshop so I had to do that ._.
+
+        TrainingFrame.Text_Ability = TrainingFrameBorder:CreateFontString()
+TrainingFrame.Text_Ability:SetFontObject(GameFontNormal)
+TrainingFrame.Text_Ability:SetPoint("BOTTOM", TrainingFrame,  30, 75);
+TrainingFrame.Text_Ability:SetFont("Fonts\\MORPHEUS.TTF", 18, "OUTLINE")
+local itemCount = GetItemCount(383080) or 0
+TrainingFrame.Text_Ability:SetText("|cffE1AB18Ability Essence: |cffFFFFFF"..itemCount)
+TrainingFrame.Text_Ability:Hide()
+    TrainingFrame.Text_Talent = TrainingFrameBorder:CreateFontString()
+TrainingFrame.Text_Talent:SetFontObject(GameFontNormal)
+TrainingFrame.Text_Talent:SetPoint("BOTTOM", TrainingFrame,  30, 75);
+TrainingFrame.Text_Talent:SetFont("Fonts\\MORPHEUS.TTF", 18, "OUTLINE")
+local itemCount2 = GetItemCount(383080) or 0
+TrainingFrame.Text_Talent:SetText("|cffE1AB18Talent Essence: |cffFFFFFF"..itemCount2)
+TrainingFrame.Text_Talent:Hide()
 
 
     local ProgressionBlueBookBorder = TrainingFrameBorder:CreateTexture("ProgressionBlueBookBorder", "BACKGROUND") 
@@ -2310,12 +2332,12 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 	 all_talent_coords = {{-165, -103}, {-40, -103}, {85, -103}, {210, -103},
                          {-165, -223}, {-40, -223}, {85, -223}, {210, -223},
                          {-165, -343}, {-40, -343}, {85, -343}, {210, -343},
-                         {-165, -463}, {-40, -375}, {85, -375}, {210, -375},
-                         {-165, -583}, {-40, -495}, {85, -495}, {210, -495},
+                         {-165, -463}, {-40, -463}, {85, -463}, {210, -463},
+                         {-165, -583}, {-40, -583}, {85, -583}, {210, -583},
                          {-165, -703}, {-40, -703}, {85, -703}, {210, -703},
                          {-165, -823}, {-40, -823}, {85, -823}, {210, -823},
                          {-165, -943}, {-40, -943}, {85, -943}, {210, -943},
-                         {-165, -1063}, {-40, -975}, {85, -975}, {210, -975},
+                         {-165, -1063}, {-40, -1063}, {85, -1063}, {210, -1063},
                          {-165, -1183}, {-40, -1183}, {85, -1183}, {210, -1183},
                          {-165, -1303}, {-40, -1303}, {85, -1303}, {210, -1303}}
 	
@@ -2350,12 +2372,12 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
     
     for i,v in ipairs(all_learn_talent_buttons_t) do
         v:SetAllPoints(all_learn_talent_buttons[i])
-        v:SetTexture(.9, .2, .2, 1)
+        all_learn_talent_buttons[i]:SetText("|cffE1AB18Learn|r")
         all_learn_talent_buttons[i]:SetNormalTexture(v)
     end
     
     for i,v in ipairs(all_learn_talent_buttons_f) do
-        v:SetFont("Fonts\\FRIZQT__.TTF", 12)
+        v:SetFont("Fonts\\MORPHEUS.TTF", 15, "OUTLINE")
         v:SetShadowOffset(1, -1)
         all_learn_talent_buttons[i]:SetFontString(v)
         all_learn_talent_buttons[i]:SetText("Learn")
@@ -2372,7 +2394,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
     end
     
     for i,v in ipairs(all_talent_FNF) do
-        v:SetFont("Fonts\\FRIZQT__.TTF", 12)
+        v:SetFont("Fonts\\MORPHEUS.TTF", 15, "OUTLINE")
         v:SetShadowOffset(1, -1)
         all_talent_FrameNumber[i]:SetFontString(v)
         all_talent_FrameNumber[i]:SetText(" ")
