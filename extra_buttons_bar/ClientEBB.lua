@@ -110,6 +110,116 @@ local sideBar = Framework_Base
         TrainingFrame_model:SetAlpha(0.002)
         TrainingFrame_model:SetFacing(0.1)
         TrainingFrame_model:Hide()
+
+        TrainingFrame_model2 = CreateFrame("Model", "TrainingFrame_model2", TrainingFrame)
+        TrainingFrame_model2:SetWidth(560);               
+        TrainingFrame_model2:SetHeight(655);
+        TrainingFrame_model2:SetPoint("CENTER", TrainingFrame, "CENTER", -105, -30)
+        TrainingFrame_model2:SetModel("World\\Expansion01\\doodads\\netherstorm\\crackeffects\\netherstormcracksmokeblue.m2")
+        TrainingFrame_model2:SetModelScale(0.2)
+        TrainingFrame_model2:SetCamera(0)
+        TrainingFrame_model2:SetPosition(0.18,0.20,0)
+        TrainingFrame_model2:SetAlpha(0.8)
+        TrainingFrame_model2:SetFacing(0.1)
+        TrainingFrame_model2:Hide()
+
+
+        TrainingFrame_SelectedTitle = CreateFrame("Frame", "TrainingFrame_SelectedTitle", TrainingFrame, nil)
+        TrainingFrame_SelectedTitle:SetSize(TrainingFrame:GetSize())
+        TrainingFrame_SelectedTitle:SetPoint("CENTER",0,0)
+
+        local TrainingFrame_SelectedTitle_Stars1 = CreateFrame("Model", "TrainingFrame_SelectedTitle_Stars1", TrainingFrame_SelectedTitle)
+        TrainingFrame_SelectedTitle_Stars1:SetWidth(560);               
+        TrainingFrame_SelectedTitle_Stars1:SetHeight(655);
+        TrainingFrame_SelectedTitle_Stars1:SetPoint("CENTER", TrainingFrame, "CENTER", -105, -30)
+        TrainingFrame_SelectedTitle_Stars1:SetModel("Creature\\Tempscarletcrusaderheavy\\scarletcrusaderheavy.m2")
+        TrainingFrame_SelectedTitle_Stars1:SetModelScale(0.3)
+        TrainingFrame_SelectedTitle_Stars1:SetCamera(0)
+        TrainingFrame_SelectedTitle_Stars1:SetPosition(0.0,0.0,2)
+        TrainingFrame_SelectedTitle_Stars1:SetAlpha(0.4)
+        TrainingFrame_SelectedTitle_Stars1:SetFacing(0.1)
+        TrainingFrame_SelectedTitle_Stars1:Hide()
+
+
+        local TrainingFrame_SelectedTitle_Stars1_glow = CreateFrame("Model", "TrainingFrame_SelectedTitle_Stars1_glow", TrainingFrame_SelectedTitle)
+        TrainingFrame_SelectedTitle_Stars1_glow:SetWidth(256);               
+        TrainingFrame_SelectedTitle_Stars1_glow:SetHeight(256);
+        TrainingFrame_SelectedTitle_Stars1_glow:SetPoint("CENTER", TrainingFrame_SelectedTitle_Stars1, "CENTER", -160, 0)
+        TrainingFrame_SelectedTitle_Stars1_glow:SetModel("World\\Kalimdor\\silithus\\passivedoodads\\ahnqirajglow\\quirajglow.m2")
+        TrainingFrame_SelectedTitle_Stars1_glow:SetModelScale(0.02)
+        TrainingFrame_SelectedTitle_Stars1_glow:SetCamera(0)
+        TrainingFrame_SelectedTitle_Stars1_glow:SetPosition(0.075,0.09,0)
+        TrainingFrame_SelectedTitle_Stars1_glow:SetAlpha(0.7)
+        TrainingFrame_SelectedTitle_Stars1_glow:SetFacing(0)
+        TrainingFrame_SelectedTitle_Stars1_glow:Hide()
+
+        local TrainingFrame_SelectedTitle_Stars2 = CreateFrame("Model", "TrainingFrame_SelectedTitle_Stars2", TrainingFrame_SelectedTitle)
+        TrainingFrame_SelectedTitle_Stars2:SetWidth(560);               
+        TrainingFrame_SelectedTitle_Stars2:SetHeight(655);
+        TrainingFrame_SelectedTitle_Stars2:SetPoint("CENTER", TrainingFrame, "CENTER", 230, -30)
+        TrainingFrame_SelectedTitle_Stars2:SetModel("Creature\\Tempscarletcrusaderheavy\\scarletcrusaderheavy.m2")
+        TrainingFrame_SelectedTitle_Stars2:SetModelScale(0.3)
+        TrainingFrame_SelectedTitle_Stars2:SetCamera(0)
+        TrainingFrame_SelectedTitle_Stars2:SetPosition(0.0,0.0,2)
+        TrainingFrame_SelectedTitle_Stars2:SetAlpha(0.4)
+        TrainingFrame_SelectedTitle_Stars2:SetFacing(0.1)
+        TrainingFrame_SelectedTitle_Stars2:Hide()
+
+
+        local TrainingFrame_SelectedTitle_Stars2_glow = CreateFrame("Model", "TrainingFrame_SelectedTitle_Stars2_glow", TrainingFrame_SelectedTitle)
+        TrainingFrame_SelectedTitle_Stars2_glow:SetWidth(256);               
+        TrainingFrame_SelectedTitle_Stars2_glow:SetHeight(256);
+        TrainingFrame_SelectedTitle_Stars2_glow:SetPoint("CENTER", TrainingFrame_SelectedTitle_Stars2, "CENTER", -160, 0)
+        TrainingFrame_SelectedTitle_Stars2_glow:SetModel("World\\Kalimdor\\silithus\\passivedoodads\\ahnqirajglow\\quirajglow.m2")
+        TrainingFrame_SelectedTitle_Stars2_glow:SetModelScale(0.02)
+        TrainingFrame_SelectedTitle_Stars2_glow:SetCamera(0)
+        TrainingFrame_SelectedTitle_Stars2_glow:SetPosition(0.075,0.09,0)
+        TrainingFrame_SelectedTitle_Stars2_glow:SetAlpha(0.7)
+        TrainingFrame_SelectedTitle_Stars2_glow:SetFacing(0)
+        TrainingFrame_SelectedTitle_Stars2_glow:Hide()
+
+        TrainingFrame_SelectedTitle:SetScript("OnShow", function()
+            TrainingFrame_SelectedTitle_Stars1:SetModel("Particles\\Lootfx2.m2")
+            TrainingFrame_SelectedTitle_Stars1:SetModelScale(0.1)
+            TrainingFrame_SelectedTitle_Stars1:SetPosition(0.2,0.0,1.95)
+            TrainingFrame_SelectedTitle_Stars1:SetAlpha(0.8)
+            TrainingFrame_SelectedTitle_Stars2:SetModel("Particles\\Lootfx2.m2")
+            TrainingFrame_SelectedTitle_Stars2:SetModelScale(0.1)
+            TrainingFrame_SelectedTitle_Stars2:SetPosition(0.2,0.0,1.95)
+            TrainingFrame_SelectedTitle_Stars2:SetAlpha(0.8)
+            end)
+
+        local TrainingFrame_SelectedTitle_Glow = TrainingFrame_SelectedTitle:CreateTexture("TrainingFrame_SelectedTitle_Glow") 
+        TrainingFrame_SelectedTitle_Glow:SetAllPoints() 
+        TrainingFrame_SelectedTitle_Glow:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\progress_cover_glow") 
+        TrainingFrame_SelectedTitle_Glow:SetSize(TrainingFrame_SelectedTitle:GetSize())
+        TrainingFrame_SelectedTitle_Glow:Hide()
+
+        local TrainingFrame_SelectedTitle_Spells = TrainingFrame_SelectedTitle:CreateTexture("TrainingFrame_SelectedTitle_Spells") 
+        --TrainingFrame_SelectedTitle_Spells:SetAllPoints() 
+        TrainingFrame_SelectedTitle_Spells:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\spellicon") 
+        TrainingFrame_SelectedTitle_Spells:SetPoint("CENTER", TrainingFrame_SelectedTitle, "CENTER", -114, 55)
+        TrainingFrame_SelectedTitle_Spells:SetSize(64,64)
+        font_TrainingFrame_SelectedTitle_Spells = TrainingFrame_SelectedTitle:CreateFontString("TrainingFrame_SelectedTitle_Spells")
+        font_TrainingFrame_SelectedTitle_Spells:SetFont("Fonts\\MORPHEUS.TTF", 22, "OUTLINE")
+        font_TrainingFrame_SelectedTitle_Spells:SetShadowOffset(1, -1)
+        font_TrainingFrame_SelectedTitle_Spells:SetText("Show Spells")
+        font_TrainingFrame_SelectedTitle_Spells:SetPoint("CENTER", TrainingFrame_SelectedTitle_Spells, "CENTER", 0, -38)
+        font_TrainingFrame_SelectedTitle_Spells:Hide()
+        TrainingFrame_SelectedTitle_Spells:Hide()
+
+        local TrainingFrame_SelectedTitle_Talents = TrainingFrame_SelectedTitle:CreateTexture("TrainingFrame_SelectedTitle_Talents") 
+        --TrainingFrame_SelectedTitle_Talents:SetAllPoints() 
+        TrainingFrame_SelectedTitle_Talents:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\talenticon") 
+        TrainingFrame_SelectedTitle_Talents:SetPoint("CENTER", TrainingFrame_SelectedTitle, "CENTER", -114, 55)
+        TrainingFrame_SelectedTitle_Talents:SetSize(64,64)
+        font_TrainingFrame_SelectedTitle_Talents = TrainingFrame_SelectedTitle:CreateFontString("TrainingFrame_SelectedTitle_Talents")
+        font_TrainingFrame_SelectedTitle_Talents:SetFont("Fonts\\MORPHEUS.TTF", 22, "OUTLINE")
+        font_TrainingFrame_SelectedTitle_Talents:SetShadowOffset(1, -1)
+        font_TrainingFrame_SelectedTitle_Talents:SetText("Show Talents")
+        font_TrainingFrame_SelectedTitle_Talents:SetPoint("CENTER", TrainingFrame_SelectedTitle_Talents, "CENTER", 0, -38)
+        font_TrainingFrame_SelectedTitle_Talents:Hide()
+        TrainingFrame_SelectedTitle_Talents:Hide()
         
         --TrainingFrame:SetScript("OnDragStart", TrainingFrame.StartMoving)
         --TrainingFrame:SetScript("OnHide", TrainingFrame.StopMovingOrSizing)
@@ -706,6 +816,14 @@ local sideBar = Framework_Base
                 all_textures[i]:SetVertexColor(all_texture_values[i][1], all_texture_values[i][2], all_texture_values[i][3], .8)
 			end
 		end
+
+        DisplaySpellsButton:Enable()
+        DisplayTalentsButton:Enable()
+        BaseFrameFadeIn(TrainingFrame_SelectedTitle_Stars1)
+        TrainingFrame_SelectedTitle_Stars1_glow:Show()
+        BaseFrameFadeIn(TrainingFrame_SelectedTitle_Stars2)
+        TrainingFrame_SelectedTitle_Stars2_glow:Show()
+        BaseFrameFadeIn(TrainingFrame_SelectedTitle_Glow)
 		
 		frame_displaying = "BASIC"
 		display_frame_CA()
@@ -1257,6 +1375,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
             ProgressionBlueBookBorder:Hide()
             ProgressionPurpleBookBorder:Hide()
             TrainingFrame_model:Hide()
+            TrainingFrame_model2:Hide()
 			
 			--hides
 			for i,v in ipairs(all_spell_slots) do
@@ -1809,11 +1928,25 @@ TrainingFrame.Text_Talent:Hide()
         DisplaySpellsButton:SetScript("OnMouseUp",  display_next_frame_CA)
         DisplaySpellsButton:SetScript("OnEnter", function(self)
            BaseFrameFadeIn(ProgressionBlueCovertexture)
-           BaseFrameFadeIn(TrainingFrame_model)
+            BaseFrameFadeIn(TrainingFrame_model2)
+             BaseFrameFadeOut(TrainingFrame_SelectedTitle_Stars1)
+            TrainingFrame_SelectedTitle_Stars1_glow:Hide()
+            BaseFrameFadeOut(TrainingFrame_SelectedTitle_Stars2)
+            TrainingFrame_SelectedTitle_Stars2_glow:Hide()
+            BaseFrameFadeOut(TrainingFrame_SelectedTitle_Glow)
+            BaseFrameFadeIn(font_TrainingFrame_SelectedTitle_Spells)
+            BaseFrameFadeIn(TrainingFrame_SelectedTitle_Spells)
             end)
         DisplaySpellsButton:SetScript("OnLeave", function()
            BaseFrameFadeOut(ProgressionBlueCovertexture)
-          BaseFrameFadeOut(TrainingFrame_model)
+          BaseFrameFadeOut(TrainingFrame_model2)
+            BaseFrameFadeIn(TrainingFrame_SelectedTitle_Stars1)
+            TrainingFrame_SelectedTitle_Stars1_glow:Show()
+            BaseFrameFadeIn(TrainingFrame_SelectedTitle_Stars2)
+            TrainingFrame_SelectedTitle_Stars2_glow:Show()
+            BaseFrameFadeIn(TrainingFrame_SelectedTitle_Glow)
+            BaseFrameFadeOut(font_TrainingFrame_SelectedTitle_Spells)
+            BaseFrameFadeOut(TrainingFrame_SelectedTitle_Spells)
             end)
         
         
@@ -1838,10 +1971,41 @@ TrainingFrame.Text_Talent:Hide()
         DisplayTalentsButton:SetScript("OnEnter", function(self)
            BaseFrameFadeIn(ProgressionPurpleCovertexture)
            BaseFrameFadeIn(TrainingFrame_model)
+           BaseFrameFadeOut(TrainingFrame_SelectedTitle_Stars1)
+            TrainingFrame_SelectedTitle_Stars1_glow:Hide()
+            BaseFrameFadeOut(TrainingFrame_SelectedTitle_Stars2)
+            TrainingFrame_SelectedTitle_Stars2_glow:Hide()
+            BaseFrameFadeOut(TrainingFrame_SelectedTitle_Glow)
+            BaseFrameFadeIn(font_TrainingFrame_SelectedTitle_Talents)
+            BaseFrameFadeIn(TrainingFrame_SelectedTitle_Talents)
             end)
         DisplayTalentsButton:SetScript("OnLeave", function()
            BaseFrameFadeOut(ProgressionPurpleCovertexture)
            BaseFrameFadeOut(TrainingFrame_model)
+                      BaseFrameFadeIn(TrainingFrame_SelectedTitle_Stars1)
+            TrainingFrame_SelectedTitle_Stars1_glow:Show()
+            BaseFrameFadeIn(TrainingFrame_SelectedTitle_Stars2)
+            TrainingFrame_SelectedTitle_Stars2_glow:Show()
+            BaseFrameFadeIn(TrainingFrame_SelectedTitle_Glow)
+            BaseFrameFadeOut(font_TrainingFrame_SelectedTitle_Talents)
+            BaseFrameFadeOut(TrainingFrame_SelectedTitle_Talents)
+            end)
+        DisplaySpellsButton:Disable()
+DisplayTalentsButton:Disable()
+
+TrainingFrame:SetScript("OnUpdate" , function() 
+                    local itemCount_t = GetItemCount(383080) or 0
+    local itemCount2_t = GetItemCount(383081) or 0
+    TrainingFrame.Text_Ability:SetText("|cffE1AB18Ability Essence: |cffFFFFFF"..itemCount_t)
+    TrainingFrame.Text_Talent:SetText("|cffE1AB18Talent Essence: |cffFFFFFF"..itemCount2_t)
+
+                if not(DisplaySpellsButton:IsVisible()) then
+            TrainingFrame_SelectedTitle_Stars1:Hide()
+            TrainingFrame_SelectedTitle_Stars1_glow:Hide()
+            TrainingFrame_SelectedTitle_Stars2:Hide()
+            TrainingFrame_SelectedTitle_Stars2_glow:Hide()
+            TrainingFrame_SelectedTitle_Glow:Hide()
+        end
             end)
         
 		
