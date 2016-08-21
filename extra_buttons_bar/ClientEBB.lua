@@ -1586,7 +1586,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 					end
 				else
 				
-					learn_texture = {.9, .2, .1}
+					learn_text="|cffFFC125Learn|r"
 					
 					attach_it = {spellIds[1],AE_cost,TE_cost,spellIds,number_of_ranks}
 				
@@ -1615,7 +1615,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			end
 			all_talent_slot_buttons[button_using]:SetScript("OnLeave", talent_icon_tooltip_OnLeave)
 			
-			--all_learn_talent_buttons_t[button_using]:SetTexture(learn_texture[1], learn_texture[2], learn_texture[3], 1)
+			all_learn_talent_buttons_t[button_using]:SetTexture(learn_texture[1], learn_texture[2], learn_texture[3], 0)
 			
 			local function learn_button_tooltip_Enter(self, motion)
 				GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
@@ -2493,21 +2493,21 @@ TrainingFrame:SetScript("OnUpdate" , function()
 	
 	
 	
-	 all_talent_coords = {{-165, -103}, {-40, -103}, {85, -103}, {210, -103},
-                         {-165, -223}, {-40, -223}, {85, -223}, {210, -223},
-                         {-165, -343}, {-40, -343}, {85, -343}, {210, -343},
-                         {-165, -463}, {-40, -463}, {85, -463}, {210, -463},
-                         {-165, -583}, {-40, -583}, {85, -583}, {210, -583},
-                         {-165, -703}, {-40, -703}, {85, -703}, {210, -703},
-                         {-165, -823}, {-40, -823}, {85, -823}, {210, -823},
-                         {-165, -943}, {-40, -943}, {85, -943}, {210, -943},
-                         {-165, -1063}, {-40, -1063}, {85, -1063}, {210, -1063},
-                         {-165, -1183}, {-40, -1183}, {85, -1183}, {210, -1183},
-                         {-165, -1303}, {-40, -1303}, {85, -1303}, {210, -1303}}
+	 all_talent_coords = {{-165, -83}, {-40, -83}, {85, -83}, {210, -83},
+                         {-165, -191}, {-40, -191}, {85, -191}, {210, -191},
+                         {-165, -299}, {-40, -299}, {85, -299}, {210, -299},
+                         {-165, -407}, {-40, -407}, {85, -407}, {210, -407},
+                         {-165, -515}, {-40, -515}, {85, -515}, {210, -515},
+                         {-165, -623}, {-40, -623}, {85, -623}, {210, -623},
+                         {-165, -731}, {-40, -731}, {85, -731}, {210, -731},
+                         {-165, -839}, {-40, -839}, {85, -839}, {210, -839},
+                         {-165, -947}, {-40, -947}, {85, -947}, {210, -947},
+                         {-165, -1055}, {-40, -1055}, {85, -1055}, {210, -1055},
+                         {-165, -1163}, {-40, -1163}, {85, -1163}, {210, -1163}}
 	
 	
 	for i,v in ipairs(all_talent_slots) do
-        v:SetSize(60, 60)
+        v:SetSize(56, 56)
         v:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\buttonbackgroundold",
             edgeFile = "Interface/DialogFrame/UI-DialogBox-Border",
@@ -2518,7 +2518,7 @@ TrainingFrame:SetScript("OnUpdate" , function()
     end
     
     for i,v in ipairs(all_talent_slot_buttons) do
-        v:SetSize(50, 50)
+        v:SetSize(48, 48)
         v:SetPoint("CENTER")
         v:EnableMouse(true)
         v:SetBackdrop({
@@ -2529,7 +2529,7 @@ TrainingFrame:SetScript("OnUpdate" , function()
     
     for i,v in ipairs(all_learn_talent_buttons) do
         v:SetSize(50, 20)
-        v:SetPoint("CENTER", 0, -52)
+        v:SetPoint("CENTER", 0, -42)
         v:EnableMouse(true)
         v:SetScript("OnMouseUp",  upgrade_talent)
     end
