@@ -2,7 +2,7 @@ local AIO = AIO or require("AIO")
 
 
 local MyHandlers = AIO.AddHandlers("sideBar", {})
-
+local ghost = {8326}
 
 
 function MyHandlers.ReceivePlayerStats(player)
@@ -20,48 +20,54 @@ function MyHandlers.AddStats(player, stat)
 
 	local stat_names = {"str", "sta", "agi", "inte", "spi"}
 	local player_guid = player:GetGUIDLow()
-	
 	local stat_point_query = CharDBQuery("SELECT points FROM character_stat_points WHERE guid = "..player_guid)
 	local point_val = stat_point_query:GetInt32(0)
 	local stats_query = CharDBQuery("SELECT str, sta, agi, inte, spi FROM character_stat_allocation WHERE guid = "..player_guid)
 	local stats = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4)}
 	
-	if point_val > 0 then
+	
+	for _, v in ipairs(ghost) do
+		if (player:HasAura(v) == false and player:IsDead() == false) then
+			if point_val > 0 then
 		
-		if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= (player:GetLevel() * 5) - 5 then
-			local point_max = (player:GetLevel() * 5) - 5
-			point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
-			point_val = point_max
+				if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= (player:GetLevel() * 5) - 5 then
+					local point_max = (player:GetLevel() * 5) - 5
+					point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
+					point_val = point_max
+				end
+				point_val = point_val - 1
+				CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+	
+				local stat_use = stat_names[stat]
+
+	
+				stats_query = CharDBQuery("SELECT "..stat_use.." FROM character_stat_allocation WHERE guid = "..player_guid)
+				local stat_value = stats_query:GetInt32(0)
+		
+		
+				stat_value = stat_value + 1
+		
+				CharDBExecute("UPDATE character_stat_allocation set "..stat_use.." = "..stat_value.." WHERE guid = "..player_guid)
+		
+		
+				stats_query = CharDBQuery("SELECT str, sta, agi, inte, spi FROM character_stat_allocation WHERE guid = "..player_guid)
+		
+				stats = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4), point_val}
+				stats[stat] = stat_value
+		
+
+		
+				sendStatsToPlayer(AIO.Msg(), player, stats):Send(player)
+				player_stat_auras(player, stats)
+			
+			
+			else
+	
+				player:SendBroadcastMessage("You do not have enough points to do that!")
+			end
+		else
+			player:SendBroadcastMessage("You cannot do that while dead!")
 		end
-		point_val = point_val - 1
-		CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
-	
-		local stat_use = stat_names[stat]
-
-	
-		stats_query = CharDBQuery("SELECT "..stat_use.." FROM character_stat_allocation WHERE guid = "..player_guid)
-		local stat_value = stats_query:GetInt32(0)
-		
-		
-		stat_value = stat_value + 1
-		
-		CharDBExecute("UPDATE character_stat_allocation set "..stat_use.." = "..stat_value.." WHERE guid = "..player_guid)
-		
-		
-		stats_query = CharDBQuery("SELECT str, sta, agi, inte, spi FROM character_stat_allocation WHERE guid = "..player_guid)
-		
-		stats = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4), point_val}
-		stats[stat] = stat_value
-		
-
-		
-		sendStatsToPlayer(AIO.Msg(), player, stats):Send(player)
-		player_stat_auras(player, stats)
-		
-	
-	else
-	
-		player:SendBroadcastMessage("You do not have enough points to do that!")
 		
 	end
 	
@@ -80,38 +86,43 @@ function MyHandlers.ReduceStats(player, stat)
 	local point_val = points_query:GetInt32(0)
 	local stats = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4)}
 	
-	if stats[stat] > 0 then
+	for _, v in ipairs(ghost) do
+		if (player:HasAura(v) == false and player:IsDead() == false) then
+			if stats[stat] > 0 then
 
 		
-		if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= (player:GetLevel() * 5) - 5 then
-			local point_max = (player:GetLevel() * 5) - 5
-			point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
-			point_val = point_max
+				if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= (player:GetLevel() * 5) - 5 then
+					local point_max = (player:GetLevel() * 5) - 5
+					point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
+					point_val = point_max
+				end
+				point_val = point_val + 1
+				CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+	
+	
+				local stat_value = stats[stat] - 1
+				CharDBExecute("UPDATE character_stat_allocation set "..stat_names[stat].." = "..stat_value.." WHERE guid = "..player_guid)
+		
+				stats_query = CharDBQuery("SELECT str, sta, agi, inte, spi FROM character_stat_allocation WHERE guid = "..player_guid)
+				local stats = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4), point_val}
+		
+				stats[stat] = stat_value
+		
+
+		
+				sendStatsToPlayer(AIO.Msg(), player, stats):Send(player)
+				player_stat_auras(player, stats)
+		
+		
+		
+			else
+				player:SendBroadcastMessage("You do not have any points in that stat")	
+			end
+		else
+			player:SendBroadcastMessage("You cannot do that while dead!")
 		end
-		point_val = point_val + 1
-		CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
-	
-	
-		local stat_value = stats[stat] - 1
-		CharDBExecute("UPDATE character_stat_allocation set "..stat_names[stat].." = "..stat_value.." WHERE guid = "..player_guid)
-		
-		stats_query = CharDBQuery("SELECT str, sta, agi, inte, spi FROM character_stat_allocation WHERE guid = "..player_guid)
-		local stats = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4), point_val}
-		
-		stats[stat] = stat_value
-		
-
-		
-		sendStatsToPlayer(AIO.Msg(), player, stats):Send(player)
-		player_stat_auras(player, stats)
-		
-		
-		
-	else
-	
-		player:SendBroadcastMessage("You do not have any points in that stat")
-	
 	end
+	
 
 end
 
