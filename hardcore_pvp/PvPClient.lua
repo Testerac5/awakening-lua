@@ -202,7 +202,7 @@ function MyHandlers.ReceiveItems(player,itemNumber, itemList, objectid)
 				local bag3, _ = GetContainerNumFreeSlots(3)
 				local bag4, _ = GetContainerNumFreeSlots(4)
 				local bag5, _ = GetContainerNumFreeSlots(5)
-				local slots_open = bag1+bag2+bag3+bag4+bag5
+				local slots_open = bag1+bag2+bag3+bag4+bag5+15
 				bagslot_free = true
 				if slots_open == 0 then
 					bagslot_free = false
