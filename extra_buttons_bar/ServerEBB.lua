@@ -5,6 +5,7 @@ local MyHandlers = AIO.AddHandlers("sideBar", {})
 local ghost = {8326}
 
 
+
 function MyHandlers.ReceivePlayerStats(player)
 	local player_guid = player:GetGUIDLow()
 	local stats_query = CharDBQuery("SELECT str, sta, agi, inte, spi FROM character_stat_allocation WHERE guid = "..player_guid)
@@ -24,19 +25,62 @@ function MyHandlers.AddStats(player, stat)
 	local point_val = stat_point_query:GetInt32(0)
 	local stats_query = CharDBQuery("SELECT str, sta, agi, inte, spi FROM character_stat_allocation WHERE guid = "..player_guid)
 	local stats = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4)}
+	local range = {[9]=(player:GetLevel() + 4), [19]=((player:GetLevel() * 2) - 5), [29]=((player:GetLevel() * 3) - 24), [39]=((player:GetLevel() * 4) - 53), [59]=((player:GetLevel() * 5) - 92), [69]=((player:GetLevel() * 10) - 387)}
+	local levels = {9, 19, 29, 39, 59, 69}
 	
-	
-	for _, v in ipairs(ghost) do
-		if (player:HasAura(v) == false and player:IsDead() == false) then
+	--for _, v in ipairs(ghost) do
+		--if (player:HasAura(v) == false and player:IsDead() == false) then
+		if (player:IsAlive() == true) then
 			if point_val > 0 then
-		
-				if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= (player:GetLevel() * 5) - 5 then
-					local point_max = (player:GetLevel() * 5) - 5
-					point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
-					point_val = point_max
-				end
-				point_val = point_val - 1
-				CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+					if (player:GetLevel() <= 9) then
+						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[9] then
+							local point_max = range[9]
+							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
+							point_val = point_max
+						end
+						point_val = point_val - 1
+						CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+					elseif (player:GetLevel() <= 19) then
+						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[19] then
+							local point_max = range[19]
+							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
+							point_val = point_max
+						end
+						point_val = point_val - 1
+						CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+					elseif (player:GetLevel() <= 29) then
+						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[29] then
+							local point_max = range[29]
+							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
+							point_val = point_max
+						end
+						point_val = point_val - 1
+						CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+					elseif (player:GetLevel() <= 39) then
+						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[39] then
+							local point_max = range[39]
+							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
+							point_val = point_max
+						end
+							point_val = point_val - 1
+							CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+					elseif (player:GetLevel() <= 59) then
+						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[59] then
+							local point_max = range[59]
+							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
+							point_val = point_max
+						end
+							point_val = point_val - 1
+							CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+					else--if (player:GetLevel() <= 69) then
+						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[69] then
+							local point_max = range[69]
+							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
+							point_val = point_max
+						end
+							point_val = point_val - 1
+							CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+					end
 	
 				local stat_use = stat_names[stat]
 
@@ -68,10 +112,6 @@ function MyHandlers.AddStats(player, stat)
 		else
 			player:SendBroadcastMessage("You cannot do that while dead!")
 		end
-		
-	end
-	
-
 end
 
 
@@ -85,19 +125,62 @@ function MyHandlers.ReduceStats(player, stat)
 	local points_query = CharDBQuery("SELECT points FROM character_stat_points WHERE guid = "..player_guid)
 	local point_val = points_query:GetInt32(0)
 	local stats = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4)}
+	local range = {[9]=(player:GetLevel() + 4), [19]=((player:GetLevel() * 2) - 5), [29]=((player:GetLevel() * 3) - 24), [39]=((player:GetLevel() * 4) - 53), [59]=((player:GetLevel() * 5) - 92), [69]=((player:GetLevel() * 10) - 387)}
+	local levels = {9, 19, 29, 39, 59, 69}
 	
-	for _, v in ipairs(ghost) do
-		if (player:HasAura(v) == false and player:IsDead() == false) then
+	--for _, v in ipairs(ghost) do
+		--if (player:HasAura(v) == false and player:IsDead() == false) then
+		if (player:IsAlive() == true) then
 			if stats[stat] > 0 then
-
-		
-				if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= (player:GetLevel() * 5) - 5 then
-					local point_max = (player:GetLevel() * 5) - 5
-					point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
-					point_val = point_max
-				end
-				point_val = point_val + 1
-				CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+					if (player:GetLevel() <= 9) then
+						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[9] then
+							local point_max = range[9]
+							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
+							point_val = point_max
+						end
+						point_val = point_val + 1
+						CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+					elseif (player:GetLevel() <= 19) then
+						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[19] then
+							local point_max = range[19]
+							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
+							point_val = point_max
+						end
+						point_val = point_val + 1
+						CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+					elseif (player:GetLevel() <= 29) then
+						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[29] then
+							local point_max = range[29]
+							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
+							point_val = point_max
+						end
+						point_val = point_val + 1
+						CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+					elseif (player:GetLevel() <= 39) then
+						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[39] then
+							local point_max = range[39]
+							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
+							point_val = point_max
+						end
+							point_val = point_val + 1
+							CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+					elseif (player:GetLevel() <= 59) then
+						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[59] then
+							local point_max = range[59]
+							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
+							point_val = point_max
+						end
+							point_val = point_val + 1
+							CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+					else--if (player:GetLevel() <= 69) then
+						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[69] then
+							local point_max = range[69]
+							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
+							point_val = point_max
+						end
+							point_val = point_val + 1
+							CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+					end
 	
 	
 				local stat_value = stats[stat] - 1
@@ -120,11 +203,11 @@ function MyHandlers.ReduceStats(player, stat)
 			end
 		else
 			player:SendBroadcastMessage("You cannot do that while dead!")
-		end
 	end
+end
 	
 
-end
+	
 
 
 
@@ -137,25 +220,39 @@ end
 
 
 
-local function OnPlayerLogin(event, player)
-	
+local function OnPlayerLogin(event, player) -- Caps out at 302 stats wont show beyond level 69, NEVER WIPE AGAIN unless no one has reached level 70:D
 	local player_guid = player:GetGUIDLow()
-	local stats_query = CharDBQuery("SELECT str, sta, agi, inte, spi FROM character_stat_allocation WHERE guid = "..player_guid)
-	local points_query = CharDBQuery("SELECT points FROM character_stat_points WHERE guid = "..player_guid)
-	if stats_query == nil or points_query == nil then
-		CharDBExecute("INSERT INTO character_stat_allocation(guid, str, sta, agi, inte, spi) VALUES ("..player_guid..", 0, 0, 0, 0, 0)")
-		local init_points = player:GetLevel() * 5
-		CharDBExecute("INSERT INTO character_stat_points(guid, points) VALUES("..player_guid..","..init_points..")")
-		
-	else
-	
-		local stats = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4)}
-		player_stat_auras(player, stats)
-		player:DealHeal(player, 818037, 500000)
-	end
-	
+	local stats_query = CharDBQuery("SELECT str, sta, agi, inte, spi FROM character_stat_allocation WHERE guid = "..player_guid.."")
+	local points_query = CharDBQuery("SELECT points FROM character_stat_points WHERE guid = "..player_guid.."")
+	local statsq = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4)}
+	--for _,v in pairs(statsq) do
+		if ((statsq[1] + statsq[2] + statsq[3] + statsq[4]) == 0) then
+			if (player:GetLevel() <= 9) then
+				local init_points = player:GetLevel() + 4
+				CharDBExecute("REPLACE INTO character_stat_points(guid, points) VALUES("..player_guid..","..init_points..")")
+			elseif (player:GetLevel() <= 19) then
+				local init_points = ((player:GetLevel() * 2) - 5)
+				CharDBExecute("REPLACE INTO character_stat_points(guid, points) VALUES("..player_guid..","..init_points..")")
+			elseif (player:GetLevel() <= 29) then
+				local init_points = ((player:GetLevel() * 3) - 24)
+				CharDBExecute("REPLACE INTO character_stat_points(guid, points) VALUES("..player_guid..","..init_points..")")
+			elseif (player:GetLevel() <= 39) then
+				local init_points = ((player:GetLevel() * 4) - 53)
+				CharDBExecute("REPLACE INTO character_stat_points(guid, points) VALUES("..player_guid..","..init_points..")")
+			elseif (player:GetLevel() <= 59) then
+				local init_points = ((player:GetLevel() * 5) - 92)
+				CharDBExecute("REPLACE INTO character_stat_points(guid, points) VALUES("..player_guid..","..init_points..")")
+			else--if (player:GetLevel() <= 69) then
+				local init_points = ((player:GetLevel() * 10) - 387)
+				CharDBExecute("REPLACE INTO character_stat_points(guid, points) VALUES("..player_guid..","..init_points..")")
+			end
+		else
+			local stats = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4)}
+			player_stat_auras(player, stats)
+			player:DealHeal(player, 818037, 500000)
+		end
 
-end
+		end
 
 
 
@@ -169,7 +266,7 @@ function player_stat_auras(player, stats)
 		
 			if player:HasAura(stat_auras[i]) == false then
 				player:AddAura(stat_auras[i], player)
-				print("adding aura")
+				--print("adding aura")
 			end
 		
 			local stack_amount = stats[i]
@@ -187,8 +284,28 @@ local function OnLevelChange(event, player, oldLevel)
 
 	local points_query = CharDBQuery("SELECT points FROM character_stat_points WHERE guid = "..player_guid)
 	local point_val = points_query:GetInt32(0)
-	point_val = point_val + 5
-	CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+	if (player:GetLevel() <= 9) then
+		point_val = point_val + 1
+		CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+	elseif (player:GetLevel() <= 19) then
+		point_val = point_val + 2
+		CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+	elseif (player:GetLevel() <= 29) then
+		point_val = point_val + 3
+		CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+	elseif (player:GetLevel() <= 39) then
+		point_val = point_val + 4
+		CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+	elseif (player:GetLevel() <= 59) then
+		point_val = point_val + 5
+		CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+	elseif (player:GetLevel() <= 69) then
+		point_val = point_val + 10
+		CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+	else--if (player:GetLevel() <= 80) then
+		point_val = point_val + 20
+		CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
+	end
 	
 	local stats_query = CharDBQuery("SELECT str, sta, agi, inte, spi FROM character_stat_allocation WHERE guid = "..player_guid)
 	local stats = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4), point_val}
