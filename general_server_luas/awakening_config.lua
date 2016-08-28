@@ -3,9 +3,11 @@
 	CustomClasses				- Are Shard's custom classes installed?
 	EnableDeathAnnouncer		- Set to true if you wish PvP deaths to be announced globally.
 	ClassColorCodes				- Table of color codes, correspond to default WoW classes.
+	PvPExpRate					- Experience Rate of the PvP Kill system. (Default: 1)
 ]]
 EnableDeathAnnouncer			= true
 ClassColorCodes 				= {"C79C6E", "F58CBA", "ABD473", "FFF569", "FFFFFF", "C41F3B", "0070DE", "69CCF0", "9482C9", nil, "FF7D0A"}
+PvPExpRate						= 1
 
 --[[AWAKENING PREFERENCES
 	-----------------
