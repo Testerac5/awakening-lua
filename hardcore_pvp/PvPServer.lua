@@ -42,6 +42,7 @@ local function EntropyPvP(event, pKiller, pKilled)
 			break
 		end
 	end
+	if not (pKilled == pKiller) then
 	if (playerdeath==true and check_safe == false and instanceID == 0) then
 		local killed_color = ClassColorCodes[pKilled:GetClass()]
 		local killer_color = ClassColorCodes[pKiller:GetClass()]
@@ -79,16 +80,18 @@ local function EntropyPvP(event, pKiller, pKilled)
 					bagToTake = 255
 				else
 					bagToTake = math.random(4)
-					bagToTake = bagToTake + 18
-				end
+					bagToTake = bagToTake + 6 --Modify this number to change # of items that drop, 1-4 is the base, 6 is the additional items
+				end								--Controls max items dropped in pvp. Is additive with creature drop amount
 				local slotToTake = math.random(SlotRange)
 				
 				local checkitem = pKilled:GetItemByPos(bagToTake, slotToTake)
+				if (checkitem ~= 0) then -- Checks to make sure player has an item
 				if (checkitem~=nil) and (checkitem:IsBag()==false) and (checkitem:GetEntry()~=6948) then
 					item_ticker = item_ticker+1
 					table.insert (item_table[FullLootContainer:GetGUIDLow()], {checkitem:GetItemLink(), checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()), pKilled:GetName()})
 					table.insert (remove_table[FullLootContainer:GetGUIDLow()], {item_ticker, false})
 					pKilled:RemoveItem(checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()))
+				end
 				end
 			until (inven_ticker>=38) or (item_ticker>=maxitems)
 			--Kill Announcer
@@ -100,16 +103,23 @@ local function EntropyPvP(event, pKiller, pKilled)
 				"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", died a swift death, courtesy of |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name..".",
 				"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", wanted a piece of |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name..", but bit off a little more than they could chew!"
 			}
+			if (pKilled == pKiller) then
+				EnableDeathAnnouncer = false
+				
+			else
 			if (EnableDeathAnnouncer==true) then
 				local DeathAnnounce_Roll = math.random(1,6)
 				SendWorldMessage(DeathAnnouncements[DeathAnnounce_Roll])
+			end
 			end
 		else
 			SendWorldMessage("[PvP]: |cffff0000Everyone give a big round of applause to|r |CFF"..killer_color..""..pKiller:GetName().."|r |cffff0000"..killerguild_name..", whom is level "..pKiller:GetLevel()..", killed|r |CFF"..killed_color..""..pKilled:GetName().."|r|cffff0000, a level "..pKilled:GetLevel()..".|r")
 		end
 	end
+	else
+		pKilled:SendBroadcastMessage("You have committed suicide, none of your items were lost.")
 end
-
+end
 
 local function CreatureDeath (event, pKiller, pKilled)
 	local check_safe = false
@@ -122,7 +132,7 @@ local function CreatureDeath (event, pKiller, pKilled)
 			break
 		end
 	end
-
+if (pKilled ~= 0 or pKilled ~= nil) then
 	if (creaturedeath==true and check_safe == false and instanceID == 0) then
 		local pKilledGUID = pKilled:GetGUIDLow()
 		local x,y,z,o = pKilled:GetX(),pKilled:GetY(),pKilled:GetZ(),pKilled:GetO()
@@ -173,7 +183,7 @@ local function CreatureDeath (event, pKiller, pKilled)
 		until (inven_ticker>=38) or (item_ticker>=maxitems)
 	end
 end
-
+end
 
 
 
