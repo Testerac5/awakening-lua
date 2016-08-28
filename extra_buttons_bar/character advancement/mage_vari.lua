@@ -54,9 +54,9 @@ mage_fire_talents_tab = 1
 
 
 mage_frost_spells = {{168, 2, 0, 1}, {116, 2, 0, 4}, {122, 2, 0, 10}, {10, 2, 0, 20}, {6143, 2, 0, 22},
-{120, 2, 0, 26}, {7302, 2, 0, 30}, {45438, 2, 0, 30}, {30455, 2, 0, 66}}
+{120, 2, 0, 26}, {45438, 2, 0, 30}, {30455, 2, 0, 66}}
 
-mage_frost_spells_count = 9
+mage_frost_spells_count = 8
 mage_frost_bgs = {"Interface\\TalentFrame\\MageFrost-TopLeft", "Interface\\TalentFrame\\MageFrost-TopRight",
 "Interface\\TalentFrame\\MageFrost-BottomLeft", "Interface\\TalentFrame\\MageFrost-BottomRight"}
 
