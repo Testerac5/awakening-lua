@@ -73,7 +73,7 @@ function OnLoot(event, player, item, count)
 		5 - orange
 		6 - red (not used?)
 		7 - gold (bind to account)
-	]]
+	]]                     --  0   1   2   3   4  5
 	local chance_increaser = {101, 95, 30, 20, 0, 0} -- chances for each quality to get random_enchantments, the lower the number the higher the chance
 	
 	local slotBools		= {}
@@ -130,7 +130,7 @@ function SendAura(player, target, spellID, duration)				--Sets the duration of t
 	end
 end
 
---[[ENERGY DRAIN]]
+--[[ENERGY DRAIN Obsolete]]
 function EnergyDrain(eventID, delay, pCall, player)
 	local CurrentEnergy = player:GetPower(3)
 	if (player:GetAura(818012)) then
@@ -155,7 +155,7 @@ end
 			--player:CastSpell(player, 818001, false)
 		--else
 			--player:CastSpell(player, 818013, false)
-			--player:SendBroadcastMessage("|cffff0000You have become exhausted!|r")
+			--player:SendBroadcastMessage("|cffff0000I am exhausted!|r")
 			--player:RegisterEvent(RemoveExhaustion, 250, 0)
 		--end
 	--end
@@ -203,9 +203,9 @@ RegisterPlayerEvent(5, RestCheck)
 
 
 function On_LogIn (event, player)
-	player:AddAura(7711, player)			--Modded in the DBC files, this is the aura that makes auto attacks cost energy.
+ player:AddAura(7711, player)			--Modded in the DBC files, this is the aura that makes auto attacks cost energy.
 	player:RemoveSpell(668, player)
-	player:LearnSpell(668, player)			--Language glitch band-aid.
+	player:LearnSpell(668, player)			--Language glitch band-aid. Teaches Player common
 	if (player:GetAura(818012)) then
 		player:RegisterEvent(EnergyDrain, 1000, 0)
 	end
