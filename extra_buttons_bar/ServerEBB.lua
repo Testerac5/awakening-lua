@@ -30,8 +30,14 @@ function MyHandlers.AddStats(player, stat)
 	
 	--for _, v in ipairs(ghost) do
 		--if (player:HasAura(v) == false and player:IsDead() == false) then
-		if (player:IsAlive() == true) then
-			if point_val > 0 then
+	if (player:InArena() ==	true or player:InBattleground() == 	true) then
+		player:SendBroadcastMessage("You can't do that in Battlegrounds and Arenas.")
+	else
+		if (player:IsInCombat() == true) then
+			player:SendBroadcastMessage("You cannot do that while in combat!")
+		else
+			if (player:IsAlive() == true) then
+				if point_val > 0 then
 					if (player:GetLevel() <= 9) then
 						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[9] then
 							local point_max = range[9]
@@ -112,6 +118,8 @@ function MyHandlers.AddStats(player, stat)
 		else
 			player:SendBroadcastMessage("You cannot do that while dead!")
 		end
+	end
+	end
 end
 
 
@@ -127,11 +135,16 @@ function MyHandlers.ReduceStats(player, stat)
 	local stats = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4)}
 	local range = {[9]=(player:GetLevel() + 4), [19]=((player:GetLevel() * 2) - 5), [29]=((player:GetLevel() * 3) - 24), [39]=((player:GetLevel() * 4) - 53), [59]=((player:GetLevel() * 5) - 92), [69]=((player:GetLevel() * 10) - 387)}
 	local levels = {9, 19, 29, 39, 59, 69}
-	
 	--for _, v in ipairs(ghost) do
 		--if (player:HasAura(v) == false and player:IsDead() == false) then
-		if (player:IsAlive() == true) then
-			if stats[stat] > 0 then
+	if (player:InArena() ==	true or player:InBattleground() == 	true) then
+		player:SendBroadcastMessage("You can't do that in Battlegrounds and Arenas.")
+	else
+		if (player:IsInCombat() == true) then
+			player:SendBroadcastMessage("You cannot do that while in combat!")
+		else
+			if (player:IsAlive() == true) then
+				if stats[stat] > 0 then
 					if (player:GetLevel() <= 9) then
 						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[9] then
 							local point_max = range[9]
@@ -203,9 +216,10 @@ function MyHandlers.ReduceStats(player, stat)
 			end
 		else
 			player:SendBroadcastMessage("You cannot do that while dead!")
+		end
+	end
 	end
 end
-	
 
 	
 
@@ -330,30 +344,33 @@ function MyHandlers.ResetSpells(player)
 							   shaman_elemental_spells, shaman_enhancement_spells, shaman_restoration_spells,
 							   warlock_affliction_spells, warlock_demonology_spells, warlock_destruction_spells,
 							   warrior_arms_spells, warrior_fury_spells, warrior_protection_spells}
-							   
-	if player:HasItem(spell_reset_token) == true or free_spell_reset == true then		
-		player:RemoveItem(spell_reset_token, 1)
-		for listloc,spec in ipairs(all_spell_lists) do
-			for loc,spell in ipairs(spec) do
-				local AE_cost = spell[2]
-				local TE_cost = spell[3]
-				local spellid = spell[1]
+	if (player:InArena() ==	true or player:InBattleground() == 	true) then
+		player:SendBroadcastMessage("You can't do that in Battlegrounds and Arenas.")
+	else
+		if player:HasItem(spell_reset_token) == true or free_spell_reset == true then		
+			player:RemoveItem(spell_reset_token, 1)
+			for listloc,spec in ipairs(all_spell_lists) do
+				for loc,spell in ipairs(spec) do
+					local AE_cost = spell[2]
+					local TE_cost = spell[3]
+					local spellid = spell[1]
 				
-				if player:HasSpell(spellid) == true then
-					player:RemoveSpell(spellid)
-					player:AddItem(spell_essence, AE_cost)
-					if TE_cost ~= 0 then
-						player:Additem(talent_essence, TE_cost)
-					end
-					if player:HasAura(spellid) == true then
-						player:RemoveAura(spellid)
+					if player:HasSpell(spellid) == true then
+						player:RemoveSpell(spellid)
+						player:AddItem(spell_essence, AE_cost)
+						if TE_cost ~= 0 then
+							player:Additem(talent_essence, TE_cost)
+						end
+						if player:HasAura(spellid) == true then
+							player:RemoveAura(spellid)
+						end
 					end
 				end
 			end
+			player:SendBroadcastMessage("Refund Complete for Spells")
+		else
+			player:SendBroadcastMessage("You are missing the required token to do this!")
 		end
-		player:SendBroadcastMessage("Refund Complete for Spells")
-	else
-		player:SendBroadcastMessage("You are missing the required token to do this!")
 	end
 end
 
@@ -371,45 +388,48 @@ function MyHandlers.ResetTalents(player)
 							   shaman_elemental_talents, shaman_enhancement_talents, shaman_restoration_talents,
 							   warlock_affliction_talents, warlock_demonology_talents, warlock_destruction_talents,
 							   warrior_arms_talents, warrior_fury_talents, warrior_protection_talents}
-							   
-	if player:HasItem(talent_reset_token) == true or free_talent_reset == true then
-		player:RemoveItem(talent_reset_token, 1)
-		for i,v in ipairs(all_talent_lists) do
+	if (player:InArena() ==	true or player:InBattleground() == 	true) then
+		player:SendBroadcastMessage("You can't do that in Battlegrounds and Arenas.")
+	else						   
+		if player:HasItem(talent_reset_token) == true or free_talent_reset == true then
+			player:RemoveItem(talent_reset_token, 1)
+			for i,v in ipairs(all_talent_lists) do
 			
-			for listloc,talent in ipairs(v) do
-				local spell_removed = false
-				local rank_removed = 0
-				local AE_cost = talent[3]
-				local TE_cost = talent[4]
-				for slot,spellid in ipairs(talent[2]) do
-					if player:HasSpell(spellid) == true then
-						spell_removed = true
-						rank_removed = slot
-						player:RemoveSpell(spellid)
+				for listloc,talent in ipairs(v) do
+					local spell_removed = false
+					local rank_removed = 0
+					local AE_cost = talent[3]
+					local TE_cost = talent[4]
+					for slot,spellid in ipairs(talent[2]) do
+						if player:HasSpell(spellid) == true then
+							spell_removed = true
+							rank_removed = slot
+							player:RemoveSpell(spellid)
 						
-						if player:HasAura(spellid) == true then
-							player:RemoveAura(spellid)
+							if player:HasAura(spellid) == true then
+								player:RemoveAura(spellid)
+							end
+						
+							player:SendBroadcastMessage("removing: "..spellid)
 						end
-						
-						player:SendBroadcastMessage("removing: "..spellid)
 					end
-				end
 
-				if spell_removed == true then
-					player:AddItem(talent_essence, (rank_removed*TE_cost))
-					if AE_cost ~= 0 then
-						player:AddItem(spell_essence, (rank_removed*AE_cost))
+					if spell_removed == true then
+						player:AddItem(talent_essence, (rank_removed*TE_cost))
+						if AE_cost ~= 0 then
+							player:AddItem(spell_essence, (rank_removed*AE_cost))
+						end
 					end
 				end
+			
+			
 			end
-			
-			
+			player:SendBroadcastMessage("Refund Complete for talents")
+		else
+			player:SendBroadcastMessage("You are missing the required token to do this!")
 		end
-		player:SendBroadcastMessage("Refund Complete for talents")
-	else
-		player:SendBroadcastMessage("You are missing the required token to do this!")
-	end
 
+	end
 end
 
 
