@@ -339,6 +339,7 @@ sideBar:SetFrameStrata("LOW")
         StatFrame:SetScript("OnDragStart", StatFrame.StartMoving)
         StatFrame:SetScript("OnHide", StatFrame.StopMovingOrSizing)
         StatFrame:SetScript("OnDragStop", StatFrame.StopMovingOrSizing)
+        StatFrame:SetScript("OnShow", MyHandlers.GetStatValues)
         StatFrame_model = CreateFrame("Model", "StatFrame_model", StatFrame)
         StatFrame_model:SetWidth(256);               
         StatFrame_model:SetHeight(256);
