@@ -62,28 +62,124 @@ fadingFunc:SetScript("OnUpdate", BaseFading)
 --end of fading function
 
 Framework_Base = CreateFrame("Frame", "sideBar", UIParent, nil)
-local sideBar = Framework_Base
-        sideBar:SetSize(42, 106)
-        sideBar:SetMovable(true)
-        sideBar:EnableMouse(true)
-        sideBar:RegisterForDrag("LeftButton")
-        sideBar:SetPoint("BOTTOMLEFT", 0, 275)
+ local sideBar = Framework_Base
+sideBar:SetFrameStrata("LOW")
+        sideBar:SetSize(912, 456)
+        --sideBar:SetMovable(true)
+        --sideBar:EnableMouse(true)
+        --sideBar:RegisterForDrag("LeftButton")
+        sideBar:SetPoint("CENTER", 0, 0)
         sideBar:SetClampedToScreen(true)
         sideBar:SetBackdrop({
-            bgFile = "Interface/DialogFrame/UI-DialogBox-Background-Dark",
-			edgeFile = "Interface/DialogFrame/UI-DialogBox-Gold-Border",
-            tile = true,
-			edgeSize = 10,
-			insets = { left = 1, right = 1, top = 1, bottom = 1 }
-        }) 
-		
-	sideBar:SetScript("OnDragStart", sideBar.StartMoving)
-	sideBar:SetScript("OnHide", sideBar.StopMovingOrSizing)
-	sideBar:SetScript("OnDragStop", sideBar.StopMovingOrSizing)
-	
-	AIO.SavePosition(sideBar)
-	
-	sideBar:Show()
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\misc\\main",}) 
+
+    sideBar:SetScript("OnUpdate" , function() 
+    local itemCount_sb = GetItemCount(383080) or 0
+    sideBar.Text_Ability:SetText("|cffE1AB18Ability Essence: |cffFFFFFF"..itemCount_sb)
+    local itemCount_sb2 = GetItemCount(383081) or 0
+    sideBar.Text_Talent:SetText("|cffE1AB18Talent Essence: |cffFFFFFF"..itemCount_sb2)
+    local itemCount_sb_r = GetItemCount(383082) or 0
+    sideBar.Text_Ability_Reset:SetText("|cffE1AB18Ability Resets: |cffFFFFFF"..itemCount_sb_r)
+    local itemCount_sb2_r = GetItemCount(383083) or 0
+    sideBar.Text_Talent_Reset:SetText("|cffE1AB18Talent Resets: |cffFFFFFF"..itemCount_sb2_r)
+    end)
+        
+    --sideBar:SetScript("OnDragStart", sideBar.StartMoving)
+    --sideBar:SetScript("OnHide", sideBar.StopMovingOrSizing)
+    --sideBar:SetScript("OnDragStop", sideBar.StopMovingOrSizing)
+
+        local MainFrame_ButtonModels_Ulduar1 = CreateFrame("Model", "MainFrame_ButtonModels_Ulduar1", sideBar)
+        MainFrame_ButtonModels_Ulduar1:SetWidth(655);               
+        MainFrame_ButtonModels_Ulduar1:SetHeight(500);
+        MainFrame_ButtonModels_Ulduar1:SetPoint("CENTER", sideBar, "CENTER", 410, -13)
+        MainFrame_ButtonModels_Ulduar1:SetModel("Creature\\Tempscarletcrusaderheavy\\scarletcrusaderheavy.m2")
+        MainFrame_ButtonModels_Ulduar1:SetModelScale(0.3)
+        MainFrame_ButtonModels_Ulduar1:SetCamera(0)
+        MainFrame_ButtonModels_Ulduar1:SetPosition(0.0,0.0,2)
+        MainFrame_ButtonModels_Ulduar1:SetAlpha(0.4)
+        MainFrame_ButtonModels_Ulduar1:SetFacing(0.1)
+
+        local MainFrame_ButtonModels_Ulduar2 = CreateFrame("Model", "MainFrame_ButtonModels_Ulduar2", sideBar)
+        MainFrame_ButtonModels_Ulduar2:SetWidth(655);               
+        MainFrame_ButtonModels_Ulduar2:SetHeight(600);
+        MainFrame_ButtonModels_Ulduar2:SetPoint("CENTER", sideBar, "CENTER", -80, -7)
+        MainFrame_ButtonModels_Ulduar2:SetModel("Creature\\Tempscarletcrusaderheavy\\scarletcrusaderheavy.m2")
+        MainFrame_ButtonModels_Ulduar2:SetModelScale(0.3)
+        MainFrame_ButtonModels_Ulduar2:SetCamera(0)
+        MainFrame_ButtonModels_Ulduar2:SetPosition(0.0,0.0,2)
+        MainFrame_ButtonModels_Ulduar2:SetAlpha(0.4)
+        MainFrame_ButtonModels_Ulduar2:SetFacing(0.1)
+
+        local MainFrame_ButtonModels_Ulduar3 = CreateFrame("Model", "MainFrame_ButtonModels_Ulduar3", sideBar)
+        MainFrame_ButtonModels_Ulduar3:SetWidth(655);               
+        MainFrame_ButtonModels_Ulduar3:SetHeight(500);
+        MainFrame_ButtonModels_Ulduar3:SetPoint("CENTER", sideBar, "CENTER", 140, -10)
+        MainFrame_ButtonModels_Ulduar3:SetModel("Creature\\Tempscarletcrusaderheavy\\scarletcrusaderheavy.m2")
+        MainFrame_ButtonModels_Ulduar3:SetModelScale(0.3)
+        MainFrame_ButtonModels_Ulduar3:SetCamera(0)
+        MainFrame_ButtonModels_Ulduar3:SetPosition(0.0,0.0,2)
+        MainFrame_ButtonModels_Ulduar3:SetAlpha(0.4)
+        MainFrame_ButtonModels_Ulduar3:SetFacing(0.1)
+        --MainFrame_ButtonModels_Ulduar1:Hide()
+        sideBar:Hide()
+        sideBar:SetScript("OnShow", function()
+            MainFrame_ButtonModels_Ulduar1:SetModel("World\\Expansion02\\doodads\\ulduar\\ul_statue_03.m2")
+            MainFrame_ButtonModels_Ulduar1:SetModelScale(0.092)
+            MainFrame_ButtonModels_Ulduar1:SetPosition(0.2,0.0,1.95)
+            MainFrame_ButtonModels_Ulduar1:SetFacing(-0.5)
+            MainFrame_ButtonModels_Ulduar1:SetAlpha(0.8)
+
+            MainFrame_ButtonModels_Ulduar2:SetModel("World\\Expansion02\\doodads\\ulduar\\ul_smallstatue_druid.m2")
+            MainFrame_ButtonModels_Ulduar2:SetModelScale(0.085)
+            MainFrame_ButtonModels_Ulduar2:SetPosition(0.15,0.0,1.95)
+            MainFrame_ButtonModels_Ulduar2:SetFacing(3.9)
+            MainFrame_ButtonModels_Ulduar2:SetAlpha(0.8)
+
+            MainFrame_ButtonModels_Ulduar3:SetModel("World\\Expansion02\\doodads\\ulduar\\ul_statue_02.m2")
+            MainFrame_ButtonModels_Ulduar3:SetModelScale(0.105)
+            MainFrame_ButtonModels_Ulduar3:SetPosition(0.2,0.0,1.91)
+            MainFrame_ButtonModels_Ulduar3:SetFacing(3.6)
+            MainFrame_ButtonModels_Ulduar3:SetAlpha(0.8)
+            end)
+    
+    sideBar.Text_Ability = sideBar:CreateFontString()
+    sideBar.Text_Ability:SetFontObject(GameFontNormal)
+    sideBar.Text_Ability:SetPoint("BOTTOM", sideBar,  -190, 90);
+    sideBar.Text_Ability:SetFont("Fonts\\MORPHEUS.TTF", 15, "OUTLINE")
+    --MainFrame.Text_Ability:Hide()
+
+    sideBar.Text_Talent = sideBar:CreateFontString()
+    sideBar.Text_Talent:SetFontObject(GameFontNormal)
+    sideBar.Text_Talent:SetPoint("BOTTOM", sideBar,  -190, 65);
+    sideBar.Text_Talent:SetFont("Fonts\\MORPHEUS.TTF", 15, "OUTLINE")
+    --MainFrame.Text_Talent:Hide()
+
+        sideBar.Text_Ability_Reset = sideBar:CreateFontString()
+    sideBar.Text_Ability_Reset:SetFontObject(GameFontNormal)
+    sideBar.Text_Ability_Reset:SetPoint("BOTTOM", sideBar,  190, 90);
+    sideBar.Text_Ability_Reset:SetFont("Fonts\\MORPHEUS.TTF", 15, "OUTLINE")
+    --MainFrame.Text_Ability_Reset:Hide()
+
+    sideBar.Text_Talent_Reset = sideBar:CreateFontString()
+    sideBar.Text_Talent_Reset:SetFontObject(GameFontNormal)
+    sideBar.Text_Talent_Reset:SetPoint("BOTTOM", sideBar,  190, 65);
+    sideBar.Text_Talent_Reset:SetFont("Fonts\\MORPHEUS.TTF", 15, "OUTLINE")
+    --MainFrame.Text_Talent_Reset:Hide()
+
+        sideBar.Text_Title = sideBar:CreateFontString()
+    sideBar.Text_Title:SetFontObject(GameFontNormal)
+    sideBar.Text_Title:SetPoint("BOTTOM", sideBar,  -2, 120);
+    sideBar.Text_Title:SetFont("Fonts\\MORPHEUS.TTF", 15)
+    sideBar.Text_Title:SetShadowOffset(0, -1)
+    sideBar.Text_Title:SetText("|cff230d21Character Upgrades|r")
+    --MainFrame.Text_Title:Hide()
+
+   local sideBar_CloseButton = CreateFrame("Button", "sideBar_CloseButton", sideBar, "UIPanelCloseButton")
+    sideBar_CloseButton:SetPoint("TOPRIGHT", -121, -57) --edited
+    sideBar_CloseButton:EnableMouse(true)
+    sideBar_CloseButton:SetSize(29, 29) --edited
+    --edited
+    --edited
 	
 	
     --[[TRAINING FRAME]]--
@@ -280,80 +376,160 @@ local sideBar = Framework_Base
 		
 		
 	-- training button
+        local sideBarOpeningFrameButton = CreateFrame("Button", "sideBarOpeningFrameButton", UIParent)
+        sideBarOpeningFrameButton:SetSize(256, 128)
+        sideBarOpeningFrameButton:SetPoint("CENTER", -60, 50)
+        sideBarOpeningFrameButton:EnableMouse(true)
+        sideBarOpeningFrameButton:SetMovable(true)
+        sideBarOpeningFrameButton:EnableMouse(true)
+        sideBarOpeningFrameButton:RegisterForDrag("LeftButton")
+        sideBarOpeningFrameButton:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\mainb")
+        sideBarOpeningFrameButton:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\mainb_h")
+
+        local sideBarOpeningFrameButton_text = sideBarOpeningFrameButton:CreateFontString("sideBarOpeningFrameButton_text") -- edited
+        sideBarOpeningFrameButton_text:SetFont("Fonts\\MORPHEUS.TTF", 16, "OUTLINE") -- edited
+        sideBarOpeningFrameButton_text:SetSize(250, 5)
+        sideBarOpeningFrameButton_text:SetPoint("CENTER", 0, 3) -- edited
+        sideBarOpeningFrameButton_text:SetText("Character Upgrades") -- edited
+        sideBarOpeningFrameButton:SetFontString(sideBarOpeningFrameButton_text)
+        --sideBarOpeningFrameButton:SetPushedTexture("Interface/Buttons/CheckButtonHilight")
+        local function sideBarOpeningFrameButton_pushed(self)
+            if not(sideBar:IsVisible()) then
+            BaseFrameFadeIn(sideBar)
+        else
+            BaseFrameFadeOut(sideBar)
+        end
+        end
+        sideBarOpeningFrameButton:SetScript("OnMouseUp", sideBarOpeningFrameButton_pushed)
+        sideBarOpeningFrameButton:SetScript("OnDragStart", sideBar.StartMoving)
+        sideBarOpeningFrameButton:SetScript("OnHide", sideBar.StopMovingOrSizing)
+        sideBarOpeningFrameButton:SetScript("OnDragStop", sideBar.StopMovingOrSizing)
+
+        AIO.SavePosition(sideBarOpeningFrameButton)
+        
     local TrainingButton = CreateFrame("Button", "TrainingButton", sideBar)
-        TrainingButton:SetSize(32, 32)
-        TrainingButton:SetPoint("CENTER", 0, 33)
+        TrainingButton:SetSize(128, 64)
+        TrainingButton:SetPoint("CENTER", -60, 50)
         TrainingButton:EnableMouse(true)
-        TrainingButton:SetNormalTexture("Interface/ICONS/INV_Misc_Book_11")
-        TrainingButton:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
-        TrainingButton:SetPushedTexture("Interface/Buttons/CheckButtonHilight")
-		local function Training_button_pushed(self)
-			TrainingFrame:Show() StatFrame:Hide() ResetFrame:Hide()
-		end
-		
+        TrainingButton:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b")
+        TrainingButton:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b_h")
+        TrainingButton:SetFrameLevel(3)
+
+        local TrainingButton_text = TrainingButton:CreateFontString("TrainingButton_text") -- edited
+        TrainingButton_text:SetFont("Fonts\\MORPHEUS.TTF", 16, "OUTLINE") -- edited
+        TrainingButton_text:SetSize(250, 5)
+        TrainingButton_text:SetPoint("CENTER", 0, 0) -- edited
+        TrainingButton_text:SetText("Character Advancement") -- edited
+        TrainingButton:SetFontString(TrainingButton_text)
+        --TrainingButton:SetPushedTexture("Interface/Buttons/CheckButtonHilight")
+        local function Training_button_pushed(self)
+            TrainingFrame:Show() StatFrame:Hide() --ResetFrame:Hide()
+        end
+        
         TrainingButton:SetScript("OnMouseUp", Training_button_pushed)
-		
-		local function TrainingButton_Tooltip_OnEnter(self, motion)
+        
+        local function TrainingButton_Tooltip_OnEnter(self, motion)
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
             GameTooltip:SetText("|cffFFFFFFCharacter Advancement|r\nLearn new skills, or allocate skill points\nto improve existing ones.")
             GameTooltip:Show()
         end
-		TrainingButton:SetScript("OnEnter", TrainingButton_Tooltip_OnEnter)
-		local function TrainingButton_Tooltip_OnLeave(self, motion)
-			GameTooltip:Hide()
-		end
+        TrainingButton:SetScript("OnEnter", TrainingButton_Tooltip_OnEnter)
+        local function TrainingButton_Tooltip_OnLeave(self, motion)
+            GameTooltip:Hide()
+        end
         TrainingButton:SetScript("OnLeave", TrainingButton_Tooltip_OnLeave)
-		
-		
-	-- stat allocation button
+        
+        
+    -- stat allocation button
     local StatAllocationButton = CreateFrame("Button", StatAllocationButton, sideBar)
-        StatAllocationButton:SetSize(32, 32)
-        StatAllocationButton:SetPoint("CENTER", 0, 0)
+        StatAllocationButton:SetSize(128, 64)
+        StatAllocationButton:SetPoint("CENTER", 90, 20)
         StatAllocationButton:EnableMouse(true)
-        StatAllocationButton:SetNormalTexture("Interface/ICONS/Ability_Warrior_StrengthOfArms")
-        StatAllocationButton:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
-        StatAllocationButton:SetPushedTexture("Interface/Buttons/CheckButtonHilight")
-		local function StatAllocation_button_pushed(self)
-			BaseFrameFadeIn(StatFrame) TrainingFrame:Hide() ResetFrame:Hide()
-			AIO.Handle("sideBar", "ReceivePlayerStats")
-		end
+        StatAllocationButton:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b")
+        StatAllocationButton:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b_h")
+        StatAllocationButton:SetFrameLevel(3)
+local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAllocationButton_text") -- edited
+        StatAllocationButton_text:SetFont("Fonts\\MORPHEUS.TTF", 17, "OUTLINE") -- edited
+        StatAllocationButton_text:SetSize(190, 5)
+        StatAllocationButton_text:SetPoint("CENTER", 0, 0) -- edited
+        StatAllocationButton_text:SetText("Stat Allocation") -- edited
+        StatAllocationButton:SetFontString(StatAllocationButton_text)
+        local function StatAllocation_button_pushed(self)
+            BaseFrameFadeIn(StatFrame) TrainingFrame:Hide() --ResetFrame:Hide()
+            
+        end
         StatAllocationButton:SetScript("OnMouseUp",StatAllocation_button_pushed)
-		local function StatAllocationButton_Tooltip_OnEnter(self, motion)
-			GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+        local function StatAllocationButton_Tooltip_OnEnter(self, motion)
+            GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
             GameTooltip:SetText("|cffFFFFFFStat Allocation|r\nManage allocation of your attribute\npoints.")
             GameTooltip:Show()
-		end
+        end
         StatAllocationButton:SetScript("OnEnter", StatAllocationButton_Tooltip_OnEnter)
-		local function StatAllocationButton_Tooltip_OnLeave(self, motion)
-			GameTooltip:Hide()
-		end
+        local function StatAllocationButton_Tooltip_OnLeave(self, motion)
+            GameTooltip:Hide()
+        end
 
         StatAllocationButton:SetScript("OnLeave", StatAllocationButton_Tooltip_OnLeave)
-		
-		
-	-- ResetGui button
-    local ResetButton = CreateFrame("Button", "ResetButton", sideBar)
-        ResetButton:SetSize(32, 32)
-        ResetButton:SetPoint("CENTER", 0, -33)
+        
+        
+    -- ResetGui button
+   local ResetButton = CreateFrame("Button", "ResetButton", sideBar)
+        ResetButton:SetSize(128, 64)
+        ResetButton:SetPoint("CENTER", 230, -43)
         ResetButton:EnableMouse(true)
-        ResetButton:SetNormalTexture("Interface/ICONS/Achievement_Dungeon_PlagueWing")
-        ResetButton:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
-        ResetButton:SetPushedTexture("Interface/Buttons/CheckButtonHilight")
-		local function ResetButton_button_pushed(self)
-			ResetFrame:Show() TrainingFrame:Hide() StatFrame:Hide()
-		end
-		ResetButton:SetScript("OnMouseUp", ResetButton_button_pushed)
-		local function ResetButton_Tooltip_OnEnter(self, motion)
-			GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-			GameTooltip:SetText("|cffFFFFFFReset Spells/Talents|r\nUse your tokens to refund your\nSpells or Talents.")
-			GameTooltip:Show()
-		end
-		ResetButton:SetScript("OnEnter", ResetButton_Tooltip_OnEnter)
-		local function ResetButton_Tooltip_OnLeave(self)
+        ResetButton:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b")
+        ResetButton:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b_h")
+        ResetButton:SetFrameLevel(3)
+        local ResetButton_text = ResetButton:CreateFontString("ResetButton_text") -- edited
+        ResetButton_text:SetFont("Fonts\\MORPHEUS.TTF", 17, "OUTLINE") -- edited
+        ResetButton_text:SetSize(190, 5)
+        ResetButton_text:SetPoint("CENTER", 0, 0) -- edited
+        ResetButton_text:SetText("Reset abilities") -- edited
+        ResetButton:SetFontString(ResetButton_text)
+        local function ResetButton_button_pushed(self)
+            Reset_spells_button()
+         TrainingFrame:Hide() StatFrame:Hide()
+        end
+        ResetButton:SetScript("OnMouseUp", ResetButton_button_pushed)
+        local function ResetButton_Tooltip_OnEnter(self, motion)
+            GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+            GameTooltip:SetText("|cffFFFFFFReset Spells|r\nUse your tokens to refund your Spells.")
+            GameTooltip:Show()
+        end
+        ResetButton:SetScript("OnEnter", ResetButton_Tooltip_OnEnter)
+        local function ResetButton_Tooltip_OnLeave(self)
             GameTooltip:Hide()
-		end
-		ResetButton:SetScript("OnLeave", ResetButton_Tooltip_OnLeave)
-		
+        end
+        ResetButton:SetScript("OnLeave", ResetButton_Tooltip_OnLeave)
+
+        local ResetButton_t = CreateFrame("Button", "ResetButton_t", sideBar)
+        ResetButton_t:SetSize(128, 64)
+        ResetButton_t:SetPoint("CENTER", -200, -43)
+        ResetButton_t:EnableMouse(true)
+        ResetButton_t:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b")
+        ResetButton_t:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b_h")
+        ResetButton_t:SetFrameLevel(3)
+        local ResetButton_t_text = ResetButton_t:CreateFontString("ResetButton_t_text") -- edited
+        ResetButton_t_text:SetFont("Fonts\\MORPHEUS.TTF", 17, "OUTLINE") -- edited
+        ResetButton_t_text:SetSize(190, 5)
+        ResetButton_t_text:SetPoint("CENTER", 0, 0) -- edited
+        ResetButton_t_text:SetText("Reset talents") -- edited
+        ResetButton_t:SetFontString(ResetButton_t_text)
+        local function ResetButton_t_button_pushed(self)
+            Reset_talents_button()
+            TrainingFrame:Hide() StatFrame:Hide()
+        end
+        ResetButton_t:SetScript("OnMouseUp", ResetButton_t_button_pushed)
+        local function ResetButton_t_Tooltip_OnEnter(self, motion)
+            GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+            GameTooltip:SetText("|cffFFFFFFReset Talents|r\nUse your tokens to refund your Talents.")
+            GameTooltip:Show()
+        end
+        ResetButton_t:SetScript("OnEnter", ResetButton_t_Tooltip_OnEnter)
+        local function ResetButton_t_Tooltip_OnLeave(self)
+            GameTooltip:Hide()
+        end
+        ResetButton_t:SetScript("OnLeave", ResetButton_t_Tooltip_OnLeave)
 		
 	-- ================================ SPECIFIC UI SECTIONS ==============================================
 	
