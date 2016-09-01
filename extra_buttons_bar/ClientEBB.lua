@@ -2024,6 +2024,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			GameTooltip:SetText("Already Known")
 			GameTooltip:Show()
 		end
+        all_learn_spell_buttons[i]:SetText = "|cff6b625bLearn|r"
 		all_learn_spell_buttons[i]:SetScript("OnEnter", learn_button_tooltip_Enter)
 
 		--all_learn_spell_buttons_t[i]:SetTexture(.3, .3, .3, 1)
