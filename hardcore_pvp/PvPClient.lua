@@ -157,7 +157,7 @@ function MyHandlers.ReceiveItems(player,itemNumber, itemList, objectid)
 			local FullLoot_Text = FullLoot_TextTable[itemNumber]
 			
 			FullLoot_Button:SetSize(200, 13)
-			FullLoot_Button:SetPoint("TOP", 0, (-50-(itemNumber*15)))
+			FullLoot_Button:SetPoint("TOPLEFT", 25, (-10-(itemNumber*15)))
 			FullLoot_Button:EnableMouse(true)
 			FullLoot_Button:SetHighlightTexture("Interface/Buttons/UI-Listbox-Highlight")
 			FullLoot_Button:SetPushedTexture("Interface/Buttons/CheckButtonHilight") 
