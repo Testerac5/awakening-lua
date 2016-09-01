@@ -12,7 +12,7 @@ local MyHandlers = AIO.AddHandlers("PvP", {})
 
 Framework = CreateFrame("Frame", "first_frame", UIParent, nil)
 local FullLootFrame = Framework
-FullLootFrame:SetSize(500, 500)
+FullLootFrame:SetSize(350, 500)
 FullLootFrame:SetMovable(true)
 FullLootFrame:EnableMouse(true)
 FullLootFrame:RegisterForDrag("LeftButton")
@@ -20,23 +20,38 @@ FullLootFrame:SetPoint("BOTTOMRIGHT", -270, 60)
 FullLootFrame:SetToplevel(true)
 FullLootFrame:SetClampedToScreen(true)
 FullLootFrame:SetBackdrop({
-	bgFile = "Interface\\AddOns\\AwAddons\\Textures\\misc\\loot",})
+	bgFile = "Interface/DialogFrame/UI-DialogBox-Background-Dark",
+	edgeFile = "Interface/DialogFrame/UI-DialogBox-Gold-Border",
+	edgeSize = 20,
+	--tile = true,
+	--tilesize = 256,
+	insets = { left = 5, right = 5, top = 5, bottom = 5 }
+})
 FullLootFrame:SetScript("OnDragStart", FullLootFrame.StartMoving)
 FullLootFrame:SetScript("OnHide", FullLootFrame.StopMovingOrSizing)
 FullLootFrame:SetScript("OnDragStop", FullLootFrame.StopMovingOrSizing)
 
 FullLootFrame:Hide()
 
-local FullLootFrame_TitleText = FullLootFrame:CreateFontString("FullLootFrame_TitleText")
-FullLootFrame_TitleText:SetFont("Fonts\\MORPHEUS.TTF", 15)
-FullLootFrame_TitleText:SetSize(300, 5)
-FullLootFrame_TitleText:SetPoint("TOP", 0, -18)
-FullLootFrame_TitleText:SetShadowOffset(0, -1)
-FullLootFrame_TitleText:SetText("|cff230d21Unclaimed Belongings|r")
+local FullLootFrame_TitleBar = CreateFrame("Frame", "FullLootFrame_TitleBar", FullLootFrame, nil)
+FullLootFrame_TitleBar:SetSize(255, 25)
+FullLootFrame_TitleBar:SetBackdrop({
+	bgFile = "Interface/CHARACTERFRAME/UI-Party-Background",
+	edgeFile = "Interface/DialogFrame/UI-DialogBox-Border",
+	tile = true,
+	edgeSize = 16,
+	tileSize = 16,
+	insets = { left = 5, right = 5, top = 5, bottom = 5 }
+})
+FullLootFrame_TitleBar:SetPoint("TOP", 0, 9)
+local FullLootFrame_TitleText = FullLootFrame_TitleBar:CreateFontString("FullLootFrame_TitleText")
+FullLootFrame_TitleText:SetFont("Fonts\\FRIZQT__.TTF", 13)
+FullLootFrame_TitleText:SetSize(190, 5)
+FullLootFrame_TitleText:SetPoint("CENTER", 0, 0)
 local FullLootFrame_CloseButton = CreateFrame("Button", "FullLootFrame_CloseButton", FullLootFrame, "UIPanelCloseButton")
-FullLootFrame_CloseButton:SetPoint("TOPRIGHT", -65.9, -12)
+FullLootFrame_CloseButton:SetPoint("TOPRIGHT", -5, -5)
 FullLootFrame_CloseButton:EnableMouse(true)
-FullLootFrame_CloseButton:SetSize(31, 30)
+FullLootFrame_CloseButton:SetSize(27, 27)
 
 
 
@@ -113,11 +128,11 @@ function MyHandlers.ReceiveItems(player,itemNumber, itemList, objectid)
 	
 	if playerKilledName ~= nil then
 	
-		FullLootFrame_TitleText:SetText("|cff230d21"..playerKilledName.."'s Belongings|r")
+		FullLootFrame_TitleText:SetText("|cffFFC125"..playerKilledName.."'s Belongings|r")
 		
 	else
 	
-		FullLootFrame_TitleText:SetText("|cff230d21Unclaimed Belongings|r")
+		FullLootFrame_TitleText:SetText("|cffFFC125Unclaimed Belongings|r")
 	
 	end
 	

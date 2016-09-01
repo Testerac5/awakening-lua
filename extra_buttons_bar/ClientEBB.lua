@@ -1761,7 +1761,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 					else
 						attach_it = {spellIds[player_talent_known + 1],AE_cost,TE_cost,spellIds,number_of_ranks}
 						learn_texture = {0, .5, 0}
-						learn_text = "|cffE1AB18Upgrade|r"
+						learn_text = "Upgrade"
 					end
 				else
 				
@@ -1876,7 +1876,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 		local previous_spellId = attached_talent[1]
 		
 		local texture_changed = {0, .5, 0}
-		local text_changed = "|cffE1AB18Upgrade|r"
+		local text_changed = "Upgrade"
 		local learn_tooltip = nil
 		local attached_talent = nil
 		local FN = 1
@@ -1995,7 +1995,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			all_learn_spell_buttons[start_ticker]:SetScript("OnLeave", nil)
 		
 			--all_learn_spell_buttons_t[start_ticker]:SetTexture(.3, .3, .3, 1)
-			all_learn_spell_buttons[start_ticker]:SetText("|cff6b625bEmpty|r")
+			all_learn_spell_buttons[start_ticker]:SetText("Empty")
 			all_attached_spells[start_ticker] = nil
 			start_ticker = start_ticker + 1
 		until start_ticker == 36 + 1
