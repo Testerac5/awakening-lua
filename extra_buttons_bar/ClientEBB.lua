@@ -456,7 +456,8 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         StatAllocationButton:SetFontString(StatAllocationButton_text)
         local function StatAllocation_button_pushed(self)
             BaseFrameFadeIn(StatFrame) TrainingFrame:Hide()
-            AIO.Handle("sideBar", "ReceivePlayerStats")
+            Increase_stats(Inc_Str)
+            Reduce_stats(Dec_Str)
              --ResetFrame:Hide()
             
         end
@@ -1723,7 +1724,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 		for i,v in ipairs(talentList) do
 			local player_knows_a_talent = false
 			local player_talent_known = 0
-			local learn_text = "|cff6b625bLearn|r"
+			local learn_text = "Learn"
 			local learn_tooltip = "Requires: Level "..v[5]
 			local learn_texture = {.3, .3, .3}
 			local attach_it = false
@@ -1756,7 +1757,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 					if player_talent_known == number_of_ranks then
 						learn_tooltip = "Maxed Out"
 						learn_texture = {1, 1, 0}
-						learn_text = "|cff6b625bMax|r"
+						learn_text = "Max"
 					else
 						attach_it = {spellIds[player_talent_known + 1],AE_cost,TE_cost,spellIds,number_of_ranks}
 						learn_texture = {0, .5, 0}
@@ -1764,7 +1765,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 					end
 				else
 				
-					learn_text="Learn" -- used for talent texts
+					learn_text="|cffFFC125Learn|r"
 					
 					attach_it = {spellIds[1],AE_cost,TE_cost,spellIds,number_of_ranks}
 				
@@ -1886,8 +1887,8 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 				FN = i
 				if i == talents_ranks then
 					texture_changed = {1, 1, 0}
-					learn_tooltip = "Maxed Out" -- used for talent texts
-					text_changed = "|cff6b625bMax|r"
+					learn_tooltip = "Maxed Out"
+					text_changed = "Max"
 				else
 					attached_talent = {all_spellIds[i + 1],AE_cost, TE_cost,all_spellIds,talents_ranks}
 				end
@@ -1929,16 +1930,13 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			local player_knows = IsSpellKnown(spellId)
 			local learn_tooltip = "Cost: "..spellCostAE.." AE "..spellCostTE.." TE"
 			local learn_texture = {.9, .2, .1}
-            local learn_text = "Learn" -- used for spell texts
 			local attach_it = {spellId, spellCostAE, spellCostTE}
 			if player_knows == true then
 				learn_tooltip = "Already Known"
-                learn_text = "|cff6b625bLearn|r"
 				learn_texture = {.3, .3, .3}
 				attach_it = nil
 			elseif RequiredLevel > UnitLevel("player") then
 				learn_tooltip = "Requires: Level "..RequiredLevel
-                learn_text = "|cff6b625bLearn|r"
 				learn_texture = {.3, .3, .3}
 				attach_it = nil
 			end
@@ -1975,7 +1973,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			
 			all_attached_spells[start_ticker] = attach_it
 			
-			all_learn_spell_buttons[start_ticker]:SetText(learn_text)
+			all_learn_spell_buttons[start_ticker]:SetText("Learn")
 
 			start_ticker = start_ticker + 1
 		
