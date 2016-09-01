@@ -1,4 +1,4 @@
-local aura = 19742
+local aura = 1
 
 function onUse(event, player, item, target)
     RegisterPlayerEvent(5, AuraEvent)
@@ -11,6 +11,7 @@ function AuraEvent(event, player, spell, skipcheck)
             player:RemoveSpell(sCasted)
             player:RemoveAura(aura)
             player:Say("Unlearned Spell ID: "..sCasted.."", 7) --Add comment identifier once tested and put live
+	    player:AddItem(383080, 2)
         end
 end
 RegisterItemEvent(1101243, 2, onUse)

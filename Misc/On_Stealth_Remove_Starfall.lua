@@ -1,5 +1,5 @@
 local stealth = {1784, 58984, 66}
-local starfall = {48505, 53199, 53200, 53201}
+local starfall = {48505, 53199, 53200, 53201, 75}
 
 local function OnStealth(event, player, spell, skipCheck)
 	for _, t in pairs(stealth) do
