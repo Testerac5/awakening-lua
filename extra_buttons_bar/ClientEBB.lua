@@ -443,7 +443,7 @@ sideBar:SetFrameStrata("LOW")
         --SetBinding("I", togglesiderframe())
 
         --fast acces to frames--
-        local fastaccessframe = CreateFrame("frame", nil, UIParent)
+        local fastaccessframe = CreateFrame("frame", "fastaccessframe", UIParent)
         fastaccessframe:SetSize(200,200)
         fastaccessframe:SetPoint("CENTER")
         fastaccessframe:EnableMouse(true)
