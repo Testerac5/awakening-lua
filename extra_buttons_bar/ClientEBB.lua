@@ -527,7 +527,7 @@ sideBar:SetFrameStrata("LOW")
     elseif (fastacc_var == 1) then
         fastaccessframe:Hide()
     end
-    AIO.AddSavedVarChar(fastacc_var)
+    AIO.AddSavedVar(fastacc_var)
 
 
         --end of fast acces--
@@ -581,6 +581,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         StatAllocationButton:SetFontString(StatAllocationButton_text)
         local function StatAllocation_button_pushed(self)
             BaseFrameFadeIn(StatFrame) TrainingFrame:Hide() --ResetFrame:Hide()
+            AIO.Handle("sideBar", "ReceivePlayerStats")
             
         end
         StatAllocationButton:SetScript("OnMouseUp",StatAllocation_button_pushed)
