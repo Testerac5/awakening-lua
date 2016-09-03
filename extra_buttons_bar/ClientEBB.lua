@@ -62,12 +62,12 @@ fadingFunc:SetScript("OnUpdate", BaseFading)
 --end of fading function
 
 Framework_Base = CreateFrame("Frame", "sideBar", UIParent, nil)
- local sideBar = Framework_Base
+local sideBar = Framework_Base
 sideBar:SetFrameStrata("LOW")
         sideBar:SetSize(912, 456)
-        --sideBar:SetMovable(true)
-        --sideBar:EnableMouse(true)
-        --sideBar:RegisterForDrag("LeftButton")
+        sideBar:SetMovable(true)
+        sideBar:EnableMouse(true)
+        sideBar:RegisterForDrag("LeftButton")
         sideBar:SetPoint("CENTER", 0, 0)
         sideBar:SetClampedToScreen(true)
         sideBar:SetBackdrop({
@@ -84,25 +84,26 @@ sideBar:SetFrameStrata("LOW")
     sideBar.Text_Talent_Reset:SetText("|cffE1AB18Talent Resets: |cffFFFFFF"..itemCount_sb2_r)
     end)
         
-    --sideBar:SetScript("OnDragStart", sideBar.StartMoving)
-    --sideBar:SetScript("OnHide", sideBar.StopMovingOrSizing)
-    --sideBar:SetScript("OnDragStop", sideBar.StopMovingOrSizing)
+    sideBar:SetScript("OnDragStart", sideBar.StartMoving)
+    sideBar:SetScript("OnHide", sideBar.StopMovingOrSizing)
+    sideBar:SetScript("OnDragStop", sideBar.StopMovingOrSizing)
+
+    AIO.SavePosition(sideBar)
 
         local MainFrame_ButtonModels_Ulduar1 = CreateFrame("Model", "MainFrame_ButtonModels_Ulduar1", sideBar)
-        MainFrame_ButtonModels_Ulduar1:SetWidth(655);               
-        MainFrame_ButtonModels_Ulduar1:SetHeight(500);
-        MainFrame_ButtonModels_Ulduar1:SetPoint("CENTER", sideBar, "CENTER", 410, -13)
+        MainFrame_ButtonModels_Ulduar1:SetWidth(300);               
+        MainFrame_ButtonModels_Ulduar1:SetHeight(320);
+        MainFrame_ButtonModels_Ulduar1:SetPoint("CENTER", sideBar, "CENTER", 170, -5)
         MainFrame_ButtonModels_Ulduar1:SetModel("Creature\\Tempscarletcrusaderheavy\\scarletcrusaderheavy.m2")
         MainFrame_ButtonModels_Ulduar1:SetModelScale(0.3)
         MainFrame_ButtonModels_Ulduar1:SetCamera(0)
         MainFrame_ButtonModels_Ulduar1:SetPosition(0.0,0.0,2)
         MainFrame_ButtonModels_Ulduar1:SetAlpha(0.4)
-        MainFrame_ButtonModels_Ulduar1:SetFacing(0.1)
 
         local MainFrame_ButtonModels_Ulduar2 = CreateFrame("Model", "MainFrame_ButtonModels_Ulduar2", sideBar)
-        MainFrame_ButtonModels_Ulduar2:SetWidth(655);               
-        MainFrame_ButtonModels_Ulduar2:SetHeight(600);
-        MainFrame_ButtonModels_Ulduar2:SetPoint("CENTER", sideBar, "CENTER", -80, -7)
+        MainFrame_ButtonModels_Ulduar2:SetWidth(300);               
+        MainFrame_ButtonModels_Ulduar2:SetHeight(320);
+        MainFrame_ButtonModels_Ulduar2:SetPoint("CENTER", sideBar, "CENTER", -180, 5)
         MainFrame_ButtonModels_Ulduar2:SetModel("Creature\\Tempscarletcrusaderheavy\\scarletcrusaderheavy.m2")
         MainFrame_ButtonModels_Ulduar2:SetModelScale(0.3)
         MainFrame_ButtonModels_Ulduar2:SetCamera(0)
@@ -111,9 +112,9 @@ sideBar:SetFrameStrata("LOW")
         MainFrame_ButtonModels_Ulduar2:SetFacing(0.1)
 
         local MainFrame_ButtonModels_Ulduar3 = CreateFrame("Model", "MainFrame_ButtonModels_Ulduar3", sideBar)
-        MainFrame_ButtonModels_Ulduar3:SetWidth(655);               
-        MainFrame_ButtonModels_Ulduar3:SetHeight(500);
-        MainFrame_ButtonModels_Ulduar3:SetPoint("CENTER", sideBar, "CENTER", 140, -10)
+        MainFrame_ButtonModels_Ulduar3:SetWidth(470);               
+        MainFrame_ButtonModels_Ulduar3:SetHeight(400);
+        MainFrame_ButtonModels_Ulduar3:SetPoint("CENTER", sideBar, "CENTER", 0, 10)
         MainFrame_ButtonModels_Ulduar3:SetModel("Creature\\Tempscarletcrusaderheavy\\scarletcrusaderheavy.m2")
         MainFrame_ButtonModels_Ulduar3:SetModelScale(0.3)
         MainFrame_ButtonModels_Ulduar3:SetCamera(0)
@@ -124,20 +125,20 @@ sideBar:SetFrameStrata("LOW")
         sideBar:Hide()
         sideBar:SetScript("OnShow", function()
             MainFrame_ButtonModels_Ulduar1:SetModel("World\\Expansion02\\doodads\\ulduar\\ul_statue_03.m2")
-            MainFrame_ButtonModels_Ulduar1:SetModelScale(0.092)
-            MainFrame_ButtonModels_Ulduar1:SetPosition(0.2,0.0,1.95)
-            MainFrame_ButtonModels_Ulduar1:SetFacing(-0.5)
+            MainFrame_ButtonModels_Ulduar1:SetModelScale(0.28)
+            MainFrame_ButtonModels_Ulduar1:SetPosition(-0.27,0.0,1.77)
+            MainFrame_ButtonModels_Ulduar1:SetFacing(-0.3)
             MainFrame_ButtonModels_Ulduar1:SetAlpha(0.8)
 
             MainFrame_ButtonModels_Ulduar2:SetModel("World\\Expansion02\\doodads\\ulduar\\ul_smallstatue_druid.m2")
-            MainFrame_ButtonModels_Ulduar2:SetModelScale(0.085)
-            MainFrame_ButtonModels_Ulduar2:SetPosition(0.15,0.0,1.95)
+            MainFrame_ButtonModels_Ulduar2:SetModelScale(0.17)
+            MainFrame_ButtonModels_Ulduar2:SetPosition(0.1,0.0,1.89)
             MainFrame_ButtonModels_Ulduar2:SetFacing(3.9)
             MainFrame_ButtonModels_Ulduar2:SetAlpha(0.8)
 
             MainFrame_ButtonModels_Ulduar3:SetModel("World\\Expansion02\\doodads\\ulduar\\ul_statue_02.m2")
-            MainFrame_ButtonModels_Ulduar3:SetModelScale(0.105)
-            MainFrame_ButtonModels_Ulduar3:SetPosition(0.2,0.0,1.91)
+            MainFrame_ButtonModels_Ulduar3:SetModelScale(0.17)
+            MainFrame_ButtonModels_Ulduar3:SetPosition(0.05,0.0,1.8)
             MainFrame_ButtonModels_Ulduar3:SetFacing(3.6)
             MainFrame_ButtonModels_Ulduar3:SetAlpha(0.8)
             end)
@@ -178,6 +179,13 @@ sideBar:SetFrameStrata("LOW")
     sideBar_CloseButton:SetPoint("TOPRIGHT", -121, -57) --edited
     sideBar_CloseButton:EnableMouse(true)
     sideBar_CloseButton:SetSize(29, 29) --edited
+
+    sideBar.Text_CheckBox = sideBar:CreateFontString()
+    sideBar.Text_CheckBox:SetFontObject(GameFontNormal)
+    sideBar.Text_CheckBox:SetPoint("BOTTOM", sideBar,  -2, 70);
+    sideBar.Text_CheckBox:SetFont("Fonts\\FRIZQT__.TTF", 12)
+    sideBar.Text_CheckBox:SetShadowOffset(0, -1)
+    sideBar.Text_CheckBox:SetText("|cffFFFFFFEnable/disable fast acces to\ncharacter upgrades menu|r")
     --edited
     --edited
 	
@@ -376,7 +384,7 @@ sideBar:SetFrameStrata("LOW")
 		
 		
 	-- training button
-        local sideBarOpeningFrameButton = CreateFrame("Button", "sideBarOpeningFrameButton", UIParent)
+        --[[local sideBarOpeningFrameButton = CreateFrame("Button", "sideBarOpeningFrameButton", UIParent)
         sideBarOpeningFrameButton:SetSize(256, 128)
         sideBarOpeningFrameButton:SetPoint("CENTER", -60, 50)
         sideBarOpeningFrameButton:EnableMouse(true)
@@ -403,9 +411,126 @@ sideBar:SetFrameStrata("LOW")
         sideBarOpeningFrameButton:SetScript("OnMouseUp", sideBarOpeningFrameButton_pushed)
         sideBarOpeningFrameButton:SetScript("OnDragStart", sideBar.StartMoving)
         sideBarOpeningFrameButton:SetScript("OnHide", sideBar.StopMovingOrSizing)
-        sideBarOpeningFrameButton:SetScript("OnDragStop", sideBar.StopMovingOrSizing)
+        sideBarOpeningFrameButton:SetScript("OnDragStop", sideBar.StopMovingOrSizing)]]--
+        LFDMicroButton:Hide()
+        local TOOLTIP_AWAKENING = "|cffFFFFFFOpen Character Upgrades|r\nUsing this menu you'll be\nable to reset your spells or talents,\nto get new abilities and allocate\nstats of your character"
+        function togglesiderframe()
+            TrainingFrame:Hide() StatFrame:Hide()
+            if not(sideBar:IsVisible()) then
+            BaseFrameFadeIn(sideBar)
+        else
+            BaseFrameFadeOut(sideBar)
+        end
+        end
+        CharUpdatesMicroButton = CreateFrame("Button","CharUpdatesMicroButton",MainMenuBarArtFrame, "MainMenuBarMicroButton") 
+        CharUpdatesMicroButton:SetPoint("BOTTOMLEFT", PVPMicroButton, "BOTTOMRIGHT", -3, 0)
+                    CharUpdatesMicroButton:SetNormalTexture("Interface/Buttons/UI-MicroButton-Abilities-Up")
+            CharUpdatesMicroButton:SetPushedTexture("Interface/Buttons/UI-MicroButton-Abilities-Down")
+            CharUpdatesMicroButton:SetDisabledTexture("Interface/Buttons/UI-MicroButton-Abilities-Disabled")
+            CharUpdatesMicroButton:SetHighlightTexture("Interface\\Buttons\\UI-MicroButton-Hilight");
+        
+        CharUpdatesMicroButton:SetScript("OnClick",function(self)
+             togglesiderframe()
+            end)
+        CharUpdatesMicroButton:SetScript("OnEnter",function(self)
+            GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+            GameTooltip:SetText(TOOLTIP_AWAKENING)
+            GameTooltip:Show()
+            end)
+        CharUpdatesMicroButton:SetScript("OnLeave",function(self)
+            GameTooltip:Hide()
+            end)
+        --SetBinding("I", togglesiderframe())
 
-        AIO.SavePosition(sideBarOpeningFrameButton)
+        --fast acces to frames--
+        local fastaccessframe = CreateFrame("frame", nil, UIParent)
+        fastaccessframe:SetSize(200,200)
+        fastaccessframe:SetPoint("CENTER")
+        fastaccessframe:EnableMouse(true)
+        fastaccessframe:SetMovable(true)
+        fastaccessframe:EnableMouse(true)
+        fastaccessframe:RegisterForDrag("LeftButton")
+        fastaccessframe:SetScript("OnDragStart", fastaccessframe.StartMoving)
+        fastaccessframe:SetScript("OnHide", fastaccessframe.StopMovingOrSizing)
+        fastaccessframe:SetScript("OnDragStop", fastaccessframe.StopMovingOrSizing)
+        fastaccessframe:SetFrameStrata("BACKGROUND")
+        fastaccessframe:Hide()
+        AIO.SavePosition(fastaccessframe)
+        --fastaccessframe:SetScript
+
+            local TrainingButton_fast = CreateFrame("Button", "TrainingButton_fast", fastaccessframe)
+        TrainingButton_fast:SetSize(70, 70)
+        TrainingButton_fast:SetPoint("CENTER", 0, -20)
+        TrainingButton_fast:EnableMouse(true)
+        TrainingButton_fast:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbutton")
+        TrainingButton_fast:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbuttonhighlight")
+        TrainingButton_fast:SetBackdrop({
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Misc\\spell_Paladin_divinecircle",
+             insets = {
+            left = 15,
+            right = 15,
+            top = 15,
+            bottom = 15}
+                }) -- edited
+
+
+            local AllocateButton_fast = CreateFrame("Button", "AllocateButton_fast", fastaccessframe)
+        AllocateButton_fast:SetSize(70, 70)
+        AllocateButton_fast:SetPoint("CENTER", 80, -10)
+        AllocateButton_fast:EnableMouse(true)
+        AllocateButton_fast:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbutton")
+        AllocateButton_fast:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbuttonhighlight")
+        AllocateButton_fast:SetBackdrop({
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Misc\\Spell_Priest_Chakra",
+             insets = {
+            left = 15,
+            right = 15,
+            top = 15,
+            bottom = 15}
+                }) -- edited
+
+
+            local ResetButton_fast = CreateFrame("Button", "ResetButton_fast", fastaccessframe)
+        ResetButton_fast:SetSize(60, 60)
+        ResetButton_fast:SetPoint("CENTER", 20, -40)
+        ResetButton_fast:EnableMouse(true)
+        ResetButton_fast:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbutton")
+        ResetButton_fast:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbuttonhighlight")
+        ResetButton_fast:SetBackdrop({
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Misc\\TimelessCoin-Bloody",
+             insets = {
+            left = 15,
+            right = 15,
+            top = 15,
+            bottom = 15}
+                }) -- edited
+        ResetButton_fast:SetFrameLevel(3)
+
+        local sideBar_CheckBox = CreateFrame("CheckButton", "sideBar_CheckBox", sideBar, "ChatConfigSmallCheckButtonTemplate")
+    sideBar_CheckBox:ClearAllPoints()
+    sideBar_CheckBox:SetPoint("LEFT", sideBar.Text_CheckBox, -20, 0)
+    sideBar_CheckBox:RegisterForClicks("AnyUp")
+    sideBar_CheckBox:SetScript("OnClick", function(self)
+        if not(self:GetChecked()) then
+        fastaccessframe:Hide()
+        fastacc_var = 1
+    else
+        fastaccessframe:Show()
+        fastacc_var = 2
+    end
+        end)
+
+    if not(fastacc_var) or (fastacc_var == 2) then
+        sideBar_CheckBox:SetChecked(1)
+        fastacc_var = 2
+        fastaccessframe:Show()
+    elseif (fastacc_var == 1) then
+        fastaccessframe:Hide()
+    end
+    AIO.AddSavedVarChar(fastacc_var)
+
+
+        --end of fast acces--
         
     local TrainingButton = CreateFrame("Button", "TrainingButton", sideBar)
         TrainingButton:SetSize(128, 64)
@@ -455,9 +580,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         StatAllocationButton_text:SetText("Stat Allocation") -- edited
         StatAllocationButton:SetFontString(StatAllocationButton_text)
         local function StatAllocation_button_pushed(self)
-            BaseFrameFadeIn(StatFrame) TrainingFrame:Hide()
-            AIO.Handle("sideBar", "ReceivePlayerStats")
-             --ResetFrame:Hide()
+            BaseFrameFadeIn(StatFrame) TrainingFrame:Hide() --ResetFrame:Hide()
             
         end
         StatAllocationButton:SetScript("OnMouseUp",StatAllocation_button_pushed)
@@ -532,6 +655,17 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
             GameTooltip:Hide()
         end
         ResetButton_t:SetScript("OnLeave", ResetButton_t_Tooltip_OnLeave)
+
+        --scritps for fast buttons
+        TrainingButton_fast:SetScript("OnMouseUp", Training_button_pushed)
+        TrainingButton_fast:SetScript("OnEnter", TrainingButton_Tooltip_OnEnter)
+        TrainingButton_fast:SetScript("OnLeave", TrainingButton_Tooltip_OnLeave)
+        AllocateButton_fast:SetScript("OnMouseUp",StatAllocation_button_pushed)
+        AllocateButton_fast:SetScript("OnEnter", StatAllocationButton_Tooltip_OnEnter)
+        AllocateButton_fast:SetScript("OnLeave", StatAllocationButton_Tooltip_OnLeave)
+        ResetButton_fast:SetScript("OnMouseUp", togglesiderframe)
+        ResetButton_fast:SetScript("OnEnter", ResetButton_Tooltip_OnEnter)
+        ResetButton_fast:SetScript("OnLeave", ResetButton_Tooltip_OnLeave)
 		
 	-- ================================ SPECIFIC UI SECTIONS ==============================================
 	
