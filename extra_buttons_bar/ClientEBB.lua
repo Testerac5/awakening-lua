@@ -444,7 +444,7 @@ sideBar:SetFrameStrata("LOW")
 
         --fast acces to frames--
         local fastaccessframe = CreateFrame("frame", "fastaccessframe", UIParent)
-        fastaccessframe:SetSize(200,200)
+        fastaccessframe:SetSize(210,210)
         fastaccessframe:SetPoint("CENTER")
         fastaccessframe:EnableMouse(true)
         fastaccessframe:SetMovable(true)
@@ -454,57 +454,62 @@ sideBar:SetFrameStrata("LOW")
         fastaccessframe:SetScript("OnHide", fastaccessframe.StopMovingOrSizing)
         fastaccessframe:SetScript("OnDragStop", fastaccessframe.StopMovingOrSizing)
         fastaccessframe:SetFrameStrata("BACKGROUND")
+        fastaccessframe:SetBackdrop({
+           bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Misc\\fastbuttonHighlight",
+                }) -- edited
         fastaccessframe:Hide()
         AIO.SavePosition(fastaccessframe)
         --fastaccessframe:SetScript
 
             local TrainingButton_fast = CreateFrame("Button", "TrainingButton_fast", fastaccessframe)
         TrainingButton_fast:SetSize(70, 70)
-        TrainingButton_fast:SetPoint("CENTER", 0, -20)
+        TrainingButton_fast:SetPoint("CENTER", -40, 0)
         TrainingButton_fast:EnableMouse(true)
         TrainingButton_fast:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbutton")
         TrainingButton_fast:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbuttonhighlight")
         TrainingButton_fast:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Misc\\spell_Paladin_divinecircle",
              insets = {
-            left = 15,
-            right = 15,
-            top = 15,
-            bottom = 15}
+            left = 16,
+            right = 16,
+            top = 16,
+            bottom = 16}
                 }) -- edited
 
 
             local AllocateButton_fast = CreateFrame("Button", "AllocateButton_fast", fastaccessframe)
-        AllocateButton_fast:SetSize(70, 70)
-        AllocateButton_fast:SetPoint("CENTER", 80, -10)
+        AllocateButton_fast:SetSize(64, 64)
+        AllocateButton_fast:SetPoint("CENTER", 40, 10)
         AllocateButton_fast:EnableMouse(true)
         AllocateButton_fast:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbutton")
         AllocateButton_fast:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbuttonhighlight")
         AllocateButton_fast:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Misc\\Spell_Priest_Chakra",
              insets = {
-            left = 15,
-            right = 15,
-            top = 15,
-            bottom = 15}
+            left = 14,
+            right = 14,
+            top = 14,
+            bottom = 14}
                 }) -- edited
 
 
             local ResetButton_fast = CreateFrame("Button", "ResetButton_fast", fastaccessframe)
-        ResetButton_fast:SetSize(60, 60)
-        ResetButton_fast:SetPoint("CENTER", 20, -40)
+        ResetButton_fast:SetSize(54.4, 54.4)
+        ResetButton_fast:SetPoint("CENTER", -18, -23)
         ResetButton_fast:EnableMouse(true)
         ResetButton_fast:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbutton")
         ResetButton_fast:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbuttonhighlight")
         ResetButton_fast:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Misc\\TimelessCoin-Bloody",
              insets = {
-            left = 15,
-            right = 15,
-            top = 15,
-            bottom = 15}
+            left = 12,
+            right = 12,
+            top = 12,
+            bottom = 12}
                 }) -- edited
         ResetButton_fast:SetFrameLevel(3)
+
+        fastacc_var = {}
 
         local sideBar_CheckBox = CreateFrame("CheckButton", "sideBar_CheckBox", sideBar, "ChatConfigSmallCheckButtonTemplate")
     sideBar_CheckBox:ClearAllPoints()
@@ -513,18 +518,20 @@ sideBar:SetFrameStrata("LOW")
     sideBar_CheckBox:SetScript("OnClick", function(self)
         if not(self:GetChecked()) then
         fastaccessframe:Hide()
-        fastacc_var = 1
+        table.remove(fastacc_var,1)
+        table.insert(fastacc_var,1, 1)
     else
         fastaccessframe:Show()
-        fastacc_var = 2
+        table.remove(fastacc_var,1)
+        table.insert(fastacc_var,1, 2)
     end
         end)
 
-    if not(fastacc_var) or (fastacc_var == 2) then
+    if not(fastacc_var[1]) or (fastacc_var[1] == 2) then
         sideBar_CheckBox:SetChecked(1)
-        fastacc_var = 2
+        fastacc_var[1] = 2
         fastaccessframe:Show()
-    elseif (fastacc_var == 1) then
+    elseif (fastacc_var[1] == 1) then
         fastaccessframe:Hide()
     end
     AIO.AddSavedVar(fastacc_var)
