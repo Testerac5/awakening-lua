@@ -185,7 +185,7 @@ sideBar:SetFrameStrata("LOW")
     sideBar.Text_CheckBox:SetPoint("BOTTOM", sideBar,  -2, 70);
     sideBar.Text_CheckBox:SetFont("Fonts\\FRIZQT__.TTF", 12)
     sideBar.Text_CheckBox:SetShadowOffset(0, -1)
-    sideBar.Text_CheckBox:SetText("|cffFFFFFFEnable/disable fast acces to\ncharacter upgrades menu|r")
+    sideBar.Text_CheckBox:SetText("|cffFFFFFFEnable/disable quick access to\ncharacter progression menu|r")
     --edited
     --edited
 	
