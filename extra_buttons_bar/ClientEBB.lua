@@ -583,6 +583,7 @@ sideBar:SetFrameStrata("LOW")
         else
             TrainingFrame:Hide()
         end
+        end
         
         TrainingButton:SetScript("OnMouseUp", Training_button_pushed)
         
