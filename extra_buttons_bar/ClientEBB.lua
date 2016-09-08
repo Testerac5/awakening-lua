@@ -87,13 +87,20 @@ sideBar:SetFrameStrata("LOW")
     sideBar:SetScript("OnDragStart", sideBar.StartMoving)
     sideBar:SetScript("OnHide", sideBar.StopMovingOrSizing)
     sideBar:SetScript("OnDragStop", sideBar.StopMovingOrSizing)
+    sideBar:EnableKeyboard(1)
+    sideBar:SetScript("OnKeyDown", function(self, arg1)
+    if (arg1 == "ESCAPE") then
+        self:Hide()
+    end
+    end)
 
     AIO.SavePosition(sideBar)
+    local ui_w, ui_h = UIParent:GetSize()
 
         local MainFrame_ButtonModels_Ulduar1 = CreateFrame("Model", "MainFrame_ButtonModels_Ulduar1", sideBar)
-        MainFrame_ButtonModels_Ulduar1:SetWidth(300);               
-        MainFrame_ButtonModels_Ulduar1:SetHeight(320);
-        MainFrame_ButtonModels_Ulduar1:SetPoint("CENTER", sideBar, "CENTER", 170, -5)
+        MainFrame_ButtonModels_Ulduar1:SetWidth(ui_w*30/100);               
+        MainFrame_ButtonModels_Ulduar1:SetHeight(ui_h*41.5/100);
+        MainFrame_ButtonModels_Ulduar1:SetPoint("CENTER", sideBar, "CENTER", 170, 5)
         MainFrame_ButtonModels_Ulduar1:SetModel("Creature\\Tempscarletcrusaderheavy\\scarletcrusaderheavy.m2")
         MainFrame_ButtonModels_Ulduar1:SetModelScale(0.3)
         MainFrame_ButtonModels_Ulduar1:SetCamera(0)
@@ -101,8 +108,8 @@ sideBar:SetFrameStrata("LOW")
         MainFrame_ButtonModels_Ulduar1:SetAlpha(0.4)
 
         local MainFrame_ButtonModels_Ulduar2 = CreateFrame("Model", "MainFrame_ButtonModels_Ulduar2", sideBar)
-        MainFrame_ButtonModels_Ulduar2:SetWidth(300);               
-        MainFrame_ButtonModels_Ulduar2:SetHeight(320);
+        MainFrame_ButtonModels_Ulduar2:SetWidth(ui_w*22/100);               
+        MainFrame_ButtonModels_Ulduar2:SetHeight(ui_h*41.5/100);
         MainFrame_ButtonModels_Ulduar2:SetPoint("CENTER", sideBar, "CENTER", -180, 5)
         MainFrame_ButtonModels_Ulduar2:SetModel("Creature\\Tempscarletcrusaderheavy\\scarletcrusaderheavy.m2")
         MainFrame_ButtonModels_Ulduar2:SetModelScale(0.3)
@@ -112,8 +119,8 @@ sideBar:SetFrameStrata("LOW")
         MainFrame_ButtonModels_Ulduar2:SetFacing(0.1)
 
         local MainFrame_ButtonModels_Ulduar3 = CreateFrame("Model", "MainFrame_ButtonModels_Ulduar3", sideBar)
-        MainFrame_ButtonModels_Ulduar3:SetWidth(470);               
-        MainFrame_ButtonModels_Ulduar3:SetHeight(400);
+        MainFrame_ButtonModels_Ulduar3:SetWidth(ui_w*34.4/100);               
+        MainFrame_ButtonModels_Ulduar3:SetHeight(ui_h*52/100);
         MainFrame_ButtonModels_Ulduar3:SetPoint("CENTER", sideBar, "CENTER", 0, 10)
         MainFrame_ButtonModels_Ulduar3:SetModel("Creature\\Tempscarletcrusaderheavy\\scarletcrusaderheavy.m2")
         MainFrame_ButtonModels_Ulduar3:SetModelScale(0.3)
@@ -125,7 +132,7 @@ sideBar:SetFrameStrata("LOW")
         sideBar:Hide()
         sideBar:SetScript("OnShow", function()
             MainFrame_ButtonModels_Ulduar1:SetModel("World\\Expansion02\\doodads\\ulduar\\ul_statue_03.m2")
-            MainFrame_ButtonModels_Ulduar1:SetModelScale(0.28)
+            MainFrame_ButtonModels_Ulduar1:SetModelScale(0.23)
             MainFrame_ButtonModels_Ulduar1:SetPosition(-0.27,0.0,1.77)
             MainFrame_ButtonModels_Ulduar1:SetFacing(-0.3)
             MainFrame_ButtonModels_Ulduar1:SetAlpha(0.8)
@@ -328,6 +335,14 @@ sideBar:SetFrameStrata("LOW")
         --TrainingFrame:SetScript("OnDragStart", TrainingFrame.StartMoving)
         --TrainingFrame:SetScript("OnHide", TrainingFrame.StopMovingOrSizing)
         --TrainingFrame:SetScript("OnDragStop", TrainingFrame.StopMovingOrSizing)
+        TrainingFrame:EnableKeyboard(1)
+        TrainingFrame:SetScript("OnKeyDown", function(self, arg1)
+        if (arg1 == "ESCAPE") then
+        self:Hide()
+        end
+        end)
+
+    AIO.SavePosition(sideBar)
 		
 		--AIO.SavePosition(TrainingFrame)
 		
@@ -357,6 +372,13 @@ sideBar:SetFrameStrata("LOW")
         StatFrame_model:SetPosition(0.075,0.09,0)
         StatFrame_model:SetAlpha(0.7)
         StatFrame_model:SetFacing(0)
+
+        StatFrame:EnableKeyboard(1)
+        StatFrame:SetScript("OnKeyDown", function(self, arg1)
+        if (arg1 == "ESCAPE") then
+        self:Hide()
+        end
+        end)
 		
 		AIO.SavePosition(StatFrame)
 		
@@ -555,7 +577,11 @@ sideBar:SetFrameStrata("LOW")
         TrainingButton:SetFontString(TrainingButton_text)
         --TrainingButton:SetPushedTexture("Interface/Buttons/CheckButtonHilight")
         local function Training_button_pushed(self)
+            PlaySound("igMainMenuOptionCheckBoxOn")
+            if not(TrainingFrame:IsVisible()) then
             TrainingFrame:Show() StatFrame:Hide() --ResetFrame:Hide()
+        else
+            TrainingFrame:Hide()
         end
         
         TrainingButton:SetScript("OnMouseUp", Training_button_pushed)
@@ -587,9 +613,13 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         StatAllocationButton_text:SetText("Stat Allocation") -- edited
         StatAllocationButton:SetFontString(StatAllocationButton_text)
         local function StatAllocation_button_pushed(self)
+            PlaySound("igQuestCancel")
+            if not(StatFrame:IsVisible()) then
             BaseFrameFadeIn(StatFrame) TrainingFrame:Hide() --ResetFrame:Hide()
             AIO.Handle("sideBar", "ReceivePlayerStats")
-            
+        else
+            BaseFrameFadeOut(StatFrame)
+        end
         end
         StatAllocationButton:SetScript("OnMouseUp",StatAllocation_button_pushed)
         local function StatAllocationButton_Tooltip_OnEnter(self, motion)
@@ -850,6 +880,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
 	end
 	
 	function Increase_stats(self)
+        PlaySound("igMainMenuOptionCheckBoxOn")
 	
 		local stat = nil
 	
@@ -880,6 +911,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
 	end
 	
 	function Reduce_stats(self)
+        PlaySound("igMainMenuOptionCheckBoxOn")
 	
 		local stat = nil
 	
@@ -1106,6 +1138,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
 	spec_displaying = "ALL"
 	frame_displaying = "BASIC"
 	function display_stuff(self)
+        PlaySound("igMainMenuOptionCheckBoxOn")
 	
 		local all_buttons = {BalanceDruid, FeralDruid, RestorationDruid, BeastMasteryHunter, MarksmanshipHunter, SurvivalHunter,
 		ArcaneMage, FireMage, FrostMage, HolyPaladin, ProtectionPaladin, RetributionPaladin,
@@ -1740,6 +1773,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 	end
 	
 	function display_next_frame_CA(self)
+        PlaySound("igMainMenuOptionCheckBoxOn")
 	
 		if self == DisplaySpellsButton then
 		
@@ -1781,6 +1815,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 	end
 	
 	function display_talents(self)
+        PlaySound("igMainMenuOptionCheckBoxOn")
 	
 		if spec_displaying ~= GeneralStuff then
 			frame_displaying = "TALENTS"
