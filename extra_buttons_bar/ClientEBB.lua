@@ -384,25 +384,98 @@ sideBar:SetFrameStrata("LOW")
 		
 		
 	--[[Reset Frame]]
-	local ResetFrame = CreateFrame("Frame", "ResetFrame", UIParent, nil)
-		ResetFrame:SetSize(300,200)
-		ResetFrame:SetMovable(true)
-		ResetFrame:EnableMouse(true)
-		ResetFrame:SetPoint("CENTER")
-		ResetFrame:SetClampedToScreen(true)
-		ResetFrame:SetBackdrop({
-			bgFile = "Interface/DialogFrame/UI-DialogBox-Background-Dark",
-			edgeFile = "Interface/DialogFrame/UI-DialogBox-Border",
-			edgeSize = 20,
-			insets = { left = 5, right = 5, top = 5, bottom = 5}
-		})
-		ResetFrame:Hide()
-		
-		ResetFrame:SetScript("OnDragStart", ResetFrame.StartMoving)
-		ResetFrame:SetScript("OnHide", ResetFrame.StopMovingOrSizing)
-		ResetFrame:SetScript("OnDragStop", ResetFrame.StopMovingOrSizing)
-		
-		AIO.SavePosition(ResetFrame)
+	   local ResetFrame = CreateFrame("Frame", "ResetFrame", sideBar, nil)
+        ResetFrame:SetSize(256,100)
+        ResetFrame:SetPoint("BOTTOM", 0, -60)
+        ResetFrame:SetClampedToScreen(true)
+        ResetFrame:SetBackdrop({
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\misc\\dialogframe",})
+        --ResetFrame:Hide()
+        
+
+        local ResetDialog_text = ResetFrame:CreateFontString("ResetDialog_text") -- edited
+        ResetDialog_text:SetFont("Fonts\\MORPHEUS.TTF", 15, "OUTLINE") -- edited
+        ResetDialog_text:SetSize(250, 500)
+        ResetDialog_text:SetPoint("CENTER", 0, 22) -- edited
+        ResetDialog_text:SetText("|cffE1AB18You are going to reset spells|r") -- edited
+
+                local ResetButton_yes = CreateFrame("Button", "ResetButton_yes", ResetFrame)
+        ResetButton_yes:SetSize(64, 30)
+        ResetButton_yes:SetPoint("CENTER", -30, -15)
+        ResetButton_yes:EnableMouse(true)
+        --ResetButton_yes:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b")
+        ResetButton_yes:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h2")
+        ResetButton_yes:SetFrameLevel(3)
+        ResetButton_yes:Hide()
+
+        local ResetButton_yes_text = ResetButton_yes:CreateFontString("ResetButton_yes_text") -- edited
+        ResetButton_yes_text:SetFont("Fonts\\MORPHEUS.TTF", 19, "OUTLINE") -- edited
+        ResetButton_yes_text:SetSize(250, 5)
+        ResetButton_yes_text:SetPoint("CENTER", 0, 0) -- edited
+        ResetButton_yes_text:SetText("Yes") -- edited
+        ResetButton_yes:SetFontString(ResetButton_yes_text)
+
+        local ResetButton_yesTalents = CreateFrame("Button", "ResetButton_yesTalents", ResetFrame)
+        ResetButton_yesTalents:SetSize(64, 30)
+        ResetButton_yesTalents:SetPoint("CENTER", -30, -15)
+        ResetButton_yesTalents:EnableMouse(true)
+        --ResetButton_yesTalents:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b")
+        ResetButton_yesTalents:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h2")
+        ResetButton_yesTalents:SetFrameLevel(3)
+        ResetButton_yesTalents:Hide()
+
+        local ResetButton_yesTalents_text = ResetButton_yesTalents:CreateFontString("ResetButton_yesTalents_text") -- edited
+        ResetButton_yesTalents_text:SetFont("Fonts\\MORPHEUS.TTF", 19, "OUTLINE") -- edited
+        ResetButton_yesTalents_text:SetSize(250, 5)
+        ResetButton_yesTalents_text:SetPoint("CENTER", 0, 0) -- edited
+        ResetButton_yesTalents_text:SetText("Yes") -- edited
+        ResetButton_yesTalents:SetFontString(ResetButton_yesTalents_text)
+
+        ResetButton_yes:SetScript("OnMouseUp", function()
+         Reset_spells_button()
+         ResetFrame:Hide()
+         end)
+        ResetButton_yesTalents:SetScript("OnMouseUp", function()
+         Reset_talents_button()
+         ResetFrame:Hide()
+         end)
+
+
+        local ResetButton_No = CreateFrame("Button", "ResetButton_No", ResetFrame)
+        ResetButton_No:SetSize(64, 30)
+        ResetButton_No:SetPoint("CENTER", 30, -15)
+        ResetButton_No:EnableMouse(true)
+        --ResetButton_No:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b")
+        ResetButton_No:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h2")
+        ResetButton_No:SetFrameLevel(3)
+        ResetButton_No:SetScript("OnMouseUp", function()
+            ResetFrame:Hide()
+            end)
+
+        local ResetButton_No_text = ResetButton_No:CreateFontString("ResetButton_No_text") -- edited
+        ResetButton_No_text:SetFont("Fonts\\MORPHEUS.TTF", 19, "OUTLINE") -- edited
+        ResetButton_No_text:SetSize(250, 5)
+        ResetButton_No_text:SetPoint("CENTER", 0, 0) -- edited
+        ResetButton_No_text:SetText("No") -- edited
+        ResetButton_No:SetFontString(ResetButton_No_text)
+        ResetFrame:Hide()
+
+        ResetFrame_Animgroup2 = ResetFrame:CreateAnimationGroup()
+        local ResetFrame_Scale2 = ResetFrame_Animgroup2:CreateAnimation("Scale")
+        ResetFrame_Scale2:SetDuration(0.5)
+        ResetFrame_Scale2:SetOrder(1)
+        ResetFrame_Scale2:SetEndDelay(0)
+        ResetFrame_Scale2:SetScale(10,1)
+
+        ResetFrame_Animgroup = ResetFrame:CreateAnimationGroup()
+        local ResetFrame_Scale1 = ResetFrame_Animgroup:CreateAnimation("Scale")
+        ResetFrame_Scale1:SetDuration(0)
+        ResetFrame_Scale1:SetOrder(1)
+        ResetFrame_Scale1:SetEndDelay(0.5)
+        ResetFrame_Scale1:SetScale(0.1,1)
+        ResetFrame_Animgroup:SetScript("OnPlay", function()
+            ResetFrame_Animgroup2:Play()
+            end)
 		
 		
 	-- training button
@@ -465,9 +538,9 @@ sideBar:SetFrameStrata("LOW")
         --SetBinding("I", togglesiderframe())
 
         --fast acces to frames--
-        local fastaccessframe = CreateFrame("frame", "fastaccessframe", UIParent)
+        local fastaccessframe = CreateFrame("frame", nil, UIParent)
         fastaccessframe:SetSize(210,210)
-        fastaccessframe:SetPoint("CENTER")
+        fastaccessframe:SetPoint("TOPLEFT", 0, -80)
         fastaccessframe:EnableMouse(true)
         fastaccessframe:SetMovable(true)
         fastaccessframe:EnableMouse(true)
@@ -480,7 +553,6 @@ sideBar:SetFrameStrata("LOW")
            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Misc\\fastbuttonHighlight",
                 }) -- edited
         fastaccessframe:Hide()
-        AIO.SavePosition(fastaccessframe)
         --fastaccessframe:SetScript
 
             local TrainingButton_fast = CreateFrame("Button", "TrainingButton_fast", fastaccessframe)
@@ -531,8 +603,6 @@ sideBar:SetFrameStrata("LOW")
                 }) -- edited
         ResetButton_fast:SetFrameLevel(3)
 
-        fastacc_var = {}
-
         local sideBar_CheckBox = CreateFrame("CheckButton", "sideBar_CheckBox", sideBar, "ChatConfigSmallCheckButtonTemplate")
     sideBar_CheckBox:ClearAllPoints()
     sideBar_CheckBox:SetPoint("LEFT", sideBar.Text_CheckBox, -20, 0)
@@ -542,20 +612,30 @@ sideBar:SetFrameStrata("LOW")
         fastaccessframe:Hide()
         table.remove(fastacc_var,1)
         table.insert(fastacc_var,1, 1)
+        --print(fastacc_var[1])
     else
         fastaccessframe:Show()
         table.remove(fastacc_var,1)
         table.insert(fastacc_var,1, 2)
+        --print(fastacc_var[1])
     end
         end)
 
-    if not(fastacc_var[1]) or (fastacc_var[1] == 2) then
+    if not(fastacc_var) or (fastacc_var[1] == 2) then
+        fastacc_var = {}
         sideBar_CheckBox:SetChecked(1)
-        fastacc_var[1] = 2
+        table.remove(fastacc_var,1)
+        table.insert(fastacc_var,1, 2)
         fastaccessframe:Show()
-    elseif (fastacc_var[1] == 1) then
+    else
         fastaccessframe:Hide()
     end
+            CharUpdatesMicroButton:SetScript("OnUpdate", function()
+            if (fastacc_var[1] == 1) and (fastaccessframe:IsVisible()) then
+                fastaccessframe:Hide()
+                sideBar_CheckBox:SetChecked(0)
+            end
+            end)
     AIO.AddSavedVar(fastacc_var)
 
 
@@ -651,8 +731,16 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         ResetButton_text:SetText("Reset abilities") -- edited
         ResetButton:SetFontString(ResetButton_text)
         local function ResetButton_button_pushed(self)
-            Reset_spells_button()
-         TrainingFrame:Hide() StatFrame:Hide()
+          PlaySound("igMainMenuOptionCheckBoxOn")
+            if not(ResetButton_yes:IsVisible()) then
+            ResetDialog_text:SetText("|cffE1AB18You are going to reset spells|r")
+            ResetFrame:Show()
+            ResetFrame_Animgroup:Play()
+            ResetButton_yesTalents:Hide()
+            ResetButton_yes:Show()
+        else
+            ResetFrame:Hide()
+        end
         end
         ResetButton:SetScript("OnMouseUp", ResetButton_button_pushed)
         local function ResetButton_Tooltip_OnEnter(self, motion)
@@ -680,8 +768,16 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         ResetButton_t_text:SetText("Reset talents") -- edited
         ResetButton_t:SetFontString(ResetButton_t_text)
         local function ResetButton_t_button_pushed(self)
-            Reset_talents_button()
-            TrainingFrame:Hide() StatFrame:Hide()
+             PlaySound("igMainMenuOptionCheckBoxOn")
+            if not(ResetButton_yesTalents:IsVisible()) then
+            ResetDialog_text:SetText("|cffE1AB18You are going to reset talents|r")
+            ResetFrame:Show()
+            ResetFrame_Animgroup:Play()
+            ResetButton_yesTalents:Show()
+            ResetButton_yes:Hide()
+        else
+            ResetFrame:Hide()
+        end
         end
         ResetButton_t:SetScript("OnMouseUp", ResetButton_t_button_pushed)
         local function ResetButton_t_Tooltip_OnEnter(self, motion)
