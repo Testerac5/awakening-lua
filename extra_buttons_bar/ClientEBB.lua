@@ -133,19 +133,19 @@ sideBar:SetFrameStrata("LOW")
         sideBar:SetScript("OnShow", function()
             MainFrame_ButtonModels_Ulduar1:SetModel("World\\Expansion02\\doodads\\ulduar\\ul_statue_03.m2")
             MainFrame_ButtonModels_Ulduar1:SetModelScale(0.23)
-            MainFrame_ButtonModels_Ulduar1:SetPosition(-0.27,0.0,1.77)
+            MainFrame_ButtonModels_Ulduar1:SetPosition(-0.27,0.0,1.77+768/ui_h)
             MainFrame_ButtonModels_Ulduar1:SetFacing(-0.3)
             MainFrame_ButtonModels_Ulduar1:SetAlpha(0.8)
 
             MainFrame_ButtonModels_Ulduar2:SetModel("World\\Expansion02\\doodads\\ulduar\\ul_smallstatue_druid.m2")
             MainFrame_ButtonModels_Ulduar2:SetModelScale(0.17)
-            MainFrame_ButtonModels_Ulduar2:SetPosition(0.1,0.0,1.89)
+            MainFrame_ButtonModels_Ulduar2:SetPosition(0.1,0.0,1.89+768/ui_h)
             MainFrame_ButtonModels_Ulduar2:SetFacing(3.9)
             MainFrame_ButtonModels_Ulduar2:SetAlpha(0.8)
 
             MainFrame_ButtonModels_Ulduar3:SetModel("World\\Expansion02\\doodads\\ulduar\\ul_statue_02.m2")
             MainFrame_ButtonModels_Ulduar3:SetModelScale(0.17)
-            MainFrame_ButtonModels_Ulduar3:SetPosition(0.05,0.0,1.8)
+            MainFrame_ButtonModels_Ulduar3:SetPosition(0.05,0.0,1.8+768/ui_h)
             MainFrame_ButtonModels_Ulduar3:SetFacing(3.6)
             MainFrame_ButtonModels_Ulduar3:SetAlpha(0.8)
             end)
@@ -404,7 +404,7 @@ sideBar:SetFrameStrata("LOW")
         ResetButton_yes:SetPoint("CENTER", -30, -15)
         ResetButton_yes:EnableMouse(true)
         --ResetButton_yes:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b")
-        ResetButton_yes:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h2")
+        ResetButton_yes:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\misc\\dialog_glow")
         ResetButton_yes:SetFrameLevel(3)
         ResetButton_yes:Hide()
 
@@ -420,7 +420,7 @@ sideBar:SetFrameStrata("LOW")
         ResetButton_yesTalents:SetPoint("CENTER", -30, -15)
         ResetButton_yesTalents:EnableMouse(true)
         --ResetButton_yesTalents:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b")
-        ResetButton_yesTalents:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h2")
+        ResetButton_yesTalents:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\misc\\dialog_glow")
         ResetButton_yesTalents:SetFrameLevel(3)
         ResetButton_yesTalents:Hide()
 
@@ -446,7 +446,7 @@ sideBar:SetFrameStrata("LOW")
         ResetButton_No:SetPoint("CENTER", 30, -15)
         ResetButton_No:EnableMouse(true)
         --ResetButton_No:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b")
-        ResetButton_No:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h2")
+        ResetButton_No:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\misc\\dialog_glow")
         ResetButton_No:SetFrameLevel(3)
         ResetButton_No:SetScript("OnMouseUp", function()
             ResetFrame:Hide()
@@ -637,7 +637,7 @@ sideBar:SetFrameStrata("LOW")
                 sideBar_CheckBox:SetChecked(0)
             end
             end)
-    AIO.AddSavedVar(fastacc_var)
+    AIO.AddSavedVar("fastacc_var")
 
 
         --end of fast acces--
@@ -1177,7 +1177,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
 	end
 	
 	
-	local ResetFrame_CloseButton = CreateFrame("Button", "ResetFrame_CloseButton", ResetFrame, "UIPanelCloseButton")
+	--[[local ResetFrame_CloseButton = CreateFrame("Button", "ResetFrame_CloseButton", ResetFrame, "UIPanelCloseButton")
 		ResetFrame_CloseButton:SetPoint("TOPRIGHT", -5, -5)
 		ResetFrame_CloseButton:EnableMouse(true)
 		ResetFrame_CloseButton:SetSize(27, 27)
@@ -1228,7 +1228,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
 		font_talent:SetShadowOffset(1, -1)
 		Reset_Talents:SetFontString(font_talent)
 		Reset_Talents:SetText("Talents Reset")
-        Reset_Talents:SetScript("OnMouseUp", Reset_talents_button)
+        Reset_Talents:SetScript("OnMouseUp", Reset_talents_button)]]--
 		
 		
 		
@@ -2804,7 +2804,7 @@ TrainingFrame:SetScript("OnUpdate" , function()
         v:SetSize(50, 20)
         v:SetPoint("CENTER", 0, -42)
         v:EnableMouse(true)
-        --v:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h3")
+        v:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\misc\\dialog_glow")
         v:SetScript("OnMouseUp",  learn_spell)
     end
     
@@ -2988,6 +2988,7 @@ TrainingFrame:SetScript("OnUpdate" , function()
         v:SetSize(50, 20)
         v:SetPoint("CENTER", 0, -42)
         v:EnableMouse(true)
+        v:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\misc\\dialog_glow")
         v:SetScript("OnMouseUp",  upgrade_talent)
     end
     
