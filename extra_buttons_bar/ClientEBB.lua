@@ -96,6 +96,7 @@ sideBar:SetFrameStrata("LOW")
 
     AIO.SavePosition(sideBar)
     local ui_w, ui_h = UIParent:GetSize()
+    local uiScale = GetCVar("uiScale")
 
         local MainFrame_ButtonModels_Ulduar1 = CreateFrame("Model", "MainFrame_ButtonModels_Ulduar1", sideBar)
         MainFrame_ButtonModels_Ulduar1:SetWidth(ui_w*30/100);               
@@ -131,21 +132,25 @@ sideBar:SetFrameStrata("LOW")
         --MainFrame_ButtonModels_Ulduar1:Hide()
         sideBar:Hide()
         sideBar:SetScript("OnShow", function()
+                local uiScale = 1
+                if (GetCVar("useUiScale") == "1") then
+                uiScale = GetCVar("UiScale")
+                end -- resolution and uiscale fix
             MainFrame_ButtonModels_Ulduar1:SetModel("World\\Expansion02\\doodads\\ulduar\\ul_statue_03.m2")
             MainFrame_ButtonModels_Ulduar1:SetModelScale(0.23)
-            MainFrame_ButtonModels_Ulduar1:SetPosition(-0.27,0.0,1.77)
+            MainFrame_ButtonModels_Ulduar1:SetPosition(-0.27,0.0,1.662/uiScale)
             MainFrame_ButtonModels_Ulduar1:SetFacing(-0.3)
             MainFrame_ButtonModels_Ulduar1:SetAlpha(0.8)
 
             MainFrame_ButtonModels_Ulduar2:SetModel("World\\Expansion02\\doodads\\ulduar\\ul_smallstatue_druid.m2")
             MainFrame_ButtonModels_Ulduar2:SetModelScale(0.17)
-            MainFrame_ButtonModels_Ulduar2:SetPosition(0.1,0.0,1.89)
+            MainFrame_ButtonModels_Ulduar2:SetPosition(0.1,0.0,1.785/uiScale)
             MainFrame_ButtonModels_Ulduar2:SetFacing(3.9)
             MainFrame_ButtonModels_Ulduar2:SetAlpha(0.8)
 
             MainFrame_ButtonModels_Ulduar3:SetModel("World\\Expansion02\\doodads\\ulduar\\ul_statue_02.m2")
             MainFrame_ButtonModels_Ulduar3:SetModelScale(0.17)
-            MainFrame_ButtonModels_Ulduar3:SetPosition(0.05,0.0,1.8)
+            MainFrame_ButtonModels_Ulduar3:SetPosition(0.05,0.0,1.685/uiScale)
             MainFrame_ButtonModels_Ulduar3:SetFacing(3.6)
             MainFrame_ButtonModels_Ulduar3:SetAlpha(0.8)
             end)
