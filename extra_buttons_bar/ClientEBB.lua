@@ -538,7 +538,7 @@ sideBar:SetFrameStrata("LOW")
         --SetBinding("I", togglesiderframe())
 
         --fast acces to frames--
-        local fastaccessframe = CreateFrame("frame", nil, UIParent)
+        local fastaccessframe = CreateFrame("frame", "fastaccessframe", UIParent)
         fastaccessframe:SetSize(210,210)
         fastaccessframe:SetPoint("TOPLEFT", 0, -80)
         fastaccessframe:EnableMouse(true)
@@ -553,6 +553,7 @@ sideBar:SetFrameStrata("LOW")
            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Misc\\fastbuttonHighlight",
                 }) -- edited
         fastaccessframe:Hide()
+        AIO.SavePosition(fastaccessframe)
         --fastaccessframe:SetScript
 
             local TrainingButton_fast = CreateFrame("Button", "TrainingButton_fast", fastaccessframe)
