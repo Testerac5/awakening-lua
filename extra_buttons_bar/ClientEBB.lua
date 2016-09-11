@@ -445,10 +445,12 @@ sideBar:SetFrameStrata("LOW")
         ResetButton_yesTalents:SetFontString(ResetButton_yesTalents_text)
 
         ResetButton_yes:SetScript("OnMouseUp", function()
+            PlaySound("igMainMenuOptionCheckBoxOn")
          Reset_spells_button()
          ResetFrame:Hide()
          end)
         ResetButton_yesTalents:SetScript("OnMouseUp", function()
+            PlaySound("igMainMenuOptionCheckBoxOn")
          Reset_talents_button()
          ResetFrame:Hide()
          end)
@@ -462,6 +464,7 @@ sideBar:SetFrameStrata("LOW")
         ResetButton_No:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\misc\\dialog_glow")
         ResetButton_No:SetFrameLevel(3)
         ResetButton_No:SetScript("OnMouseUp", function()
+            PlaySound("igMainMenuOptionCheckBoxOn")
             ResetFrame:Hide()
             end)
 
@@ -675,10 +678,10 @@ sideBar:SetFrameStrata("LOW")
         --TrainingButton:SetPushedTexture("Interface/Buttons/CheckButtonHilight")
         local function Training_button_pushed(self)
             if not(TrainingFrame:IsVisible()) then
-                PlaySound("uCharacterSheetOpen")
+                PlaySound("Glyph_MinorCreate")
             TrainingFrame:Show() StatFrame:Hide() --ResetFrame:Hide()
         else
-            PlaySound("uCharacterSheetClose")
+            PlaySound("Glyph_MinorDestroy")
             TrainingFrame:Hide()
         end
         end
@@ -750,6 +753,8 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         ResetButton:SetFontString(ResetButton_text)
         local function ResetButton_button_pushed(self)
           PlaySound("igMainMenuOptionCheckBoxOn")
+          local itemCount_sb_r = GetItemCount(383082) or 0
+          if (itemCount_sb_r > 0) then
             if not(ResetButton_yes:IsVisible()) then
             ResetDialog_text:SetText("|cffE1AB18You are going to reset spells|r")
             ResetFrame:Show()
@@ -759,6 +764,9 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         else
             ResetFrame:Hide()
         end
+    else
+        SendSystemMessage("I don't have enough tokens to do that")
+    end
         end
         ResetButton:SetScript("OnMouseUp", ResetButton_button_pushed)
         local function ResetButton_Tooltip_OnEnter(self, motion)
@@ -787,6 +795,8 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         ResetButton_t:SetFontString(ResetButton_t_text)
         local function ResetButton_t_button_pushed(self)
              PlaySound("igMainMenuOptionCheckBoxOn")
+             local itemCount_sb2_r = GetItemCount(383083) or 0
+             if (itemCount_sb2_r > 0) then
             if not(ResetButton_yesTalents:IsVisible()) then
             ResetDialog_text:SetText("|cffE1AB18You are going to reset talents|r")
             ResetFrame:Show()
@@ -796,6 +806,9 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         else
             ResetFrame:Hide()
         end
+    else
+        SendSystemMessage("I don't have enough tokens to do that")
+    end
         end
         ResetButton_t:SetScript("OnMouseUp", ResetButton_t_button_pushed)
         local function ResetButton_t_Tooltip_OnEnter(self, motion)
@@ -991,7 +1004,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
             end)
                 StatFrame_Panel_Int_Ico:SetScript("OnEnter", function(self)
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-            GameTooltip:SetText("|cffFFFFFFIntellect|r\nIntellect increases |cffFFFFFFspell power|r and is the most\nimportant stat for mana-using classes\nwearing any armor type in the\n|cffFFFFFFdamage-dealing|r (ranged spell caster) or |cffFFFFFFhealer|r role.")
+            GameTooltip:SetText("|cffFFFFFFIntellect|r\nIntellect increases |cffFFFFFFspell critical chance|r, |cffFFFFFFamount of mana|r and is the most\nimportant stat for mana-using classes\nwearing any armor type in the\n|cffFFFFFFdamage-dealing|r (ranged spell caster) or |cffFFFFFFhealer|r role.")
             GameTooltip:Show()StatFrame_Panel_Int_Ico_h:Show()
             end)
         StatFrame_Panel_Int_Ico:SetScript("OnLeave", function(self)
@@ -1352,7 +1365,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
 	spec_displaying = "ALL"
 	frame_displaying = "BASIC"
 	function display_stuff(self)
-        PlaySound("GnomeExploration")
+        PlaySound("TalentScreenOpen")
 	
 		local all_buttons = {BalanceDruid, FeralDruid, RestorationDruid, BeastMasteryHunter, MarksmanshipHunter, SurvivalHunter,
 		ArcaneMage, FireMage, FrostMage, HolyPaladin, ProtectionPaladin, RetributionPaladin,
@@ -1404,6 +1417,10 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         TrainingFrame_CloseButton:EnableMouse(true)
         TrainingFrame_CloseButton:SetSize(31, 31)
         TrainingFrame_CloseButton:SetFrameStrata("FULLSCREEN_DIALOG")
+        TrainingFrame_CloseButton:SetScript("OnMouseUp", function()
+            PlaySound("Glyph_MinorCreate")
+            TrainingFrame:Hide()
+            end)
 		
 		
 	--[[local TrainingFrame_TitleBar = CreateFrame("Frame", "TrainingFrame_TitleBar", TrainingFrame, nil)
@@ -1987,7 +2004,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 	end
 	
 	function display_next_frame_CA(self)
-        PlaySound("iAbilitiesTurnPageA")
+        PlaySound("TalentScreenClose")
 	
 		if self == DisplaySpellsButton then
 		
@@ -2029,7 +2046,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 	end
 	
 	function display_talents(self)
-        PlaySound("iAbilitiesTurnPageB")
+        PlaySound("TalentScreenClose")
 	
 		if spec_displaying ~= GeneralStuff then
 			frame_displaying = "TALENTS"
@@ -2233,6 +2250,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 	end
 	
 	function upgrade_talent(self)
+        PlaySound("igMainMenuOptionCheckBoxOn")
 		local talent_attached = false
 		local indexAt
 	
@@ -2396,7 +2414,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 	end
 	
 	function learn_spell(self)
-	
+	   PlaySound("igMainMenuOptionCheckBoxOn")
 		for i,v in ipairs(all_learn_spell_buttons) do
 			if self == v then
 				local got_spell = all_attached_spells[i]
