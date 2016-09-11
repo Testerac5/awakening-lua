@@ -191,6 +191,10 @@ sideBar:SetFrameStrata("LOW")
     sideBar_CloseButton:SetPoint("TOPRIGHT", -121, -57) --edited
     sideBar_CloseButton:EnableMouse(true)
     sideBar_CloseButton:SetSize(29, 29) --edited
+    sideBar_CloseButton:SetScript("OnMouseUp", function()
+        PlaySound("Glyph_MajorDestroy")
+        BaseFrameFadeOut(sideBar)
+        end)
 
     sideBar.Text_CheckBox = sideBar:CreateFontString()
     sideBar.Text_CheckBox:SetFontObject(GameFontNormal)
@@ -295,13 +299,17 @@ sideBar:SetFrameStrata("LOW")
         TrainingFrame_SelectedTitle_Stars2_glow:Hide()
 
         TrainingFrame_SelectedTitle:SetScript("OnShow", function()
+                                        local uiScale = 1
+                if (GetCVar("useUiScale") == "1") then
+                uiScale = GetCVar("UiScale")
+                end
             TrainingFrame_SelectedTitle_Stars1:SetModel("Particles\\Lootfx2.m2")
             TrainingFrame_SelectedTitle_Stars1:SetModelScale(0.1)
-            TrainingFrame_SelectedTitle_Stars1:SetPosition(0.2,0.0,1.95)
+            TrainingFrame_SelectedTitle_Stars1:SetPosition(0.2,0.0,1.85/uiScale)
             TrainingFrame_SelectedTitle_Stars1:SetAlpha(0.8)
             TrainingFrame_SelectedTitle_Stars2:SetModel("Particles\\Lootfx2.m2")
             TrainingFrame_SelectedTitle_Stars2:SetModelScale(0.1)
-            TrainingFrame_SelectedTitle_Stars2:SetPosition(0.2,0.0,1.95)
+            TrainingFrame_SelectedTitle_Stars2:SetPosition(0.2,0.0,1.85/uiScale)
             TrainingFrame_SelectedTitle_Stars2:SetAlpha(0.8)
             end)
 
@@ -517,8 +525,10 @@ sideBar:SetFrameStrata("LOW")
         function togglesiderframe()
             TrainingFrame:Hide() StatFrame:Hide()
             if not(sideBar:IsVisible()) then
+            PlaySound("Glyph_MajorCreate")
             BaseFrameFadeIn(sideBar)
         else
+            PlaySound("Glyph_MajorDestroy")
             BaseFrameFadeOut(sideBar)
         end
         end
@@ -614,6 +624,7 @@ sideBar:SetFrameStrata("LOW")
     sideBar_CheckBox:SetPoint("LEFT", sideBar.Text_CheckBox, -20, 0)
     sideBar_CheckBox:RegisterForClicks("AnyUp")
     sideBar_CheckBox:SetScript("OnClick", function(self)
+        PlaySound("igMainMenuOptionCheckBoxOn")
         if not(self:GetChecked()) then
         fastaccessframe:Hide()
         table.remove(fastacc_var,1)
@@ -663,10 +674,11 @@ sideBar:SetFrameStrata("LOW")
         TrainingButton:SetFontString(TrainingButton_text)
         --TrainingButton:SetPushedTexture("Interface/Buttons/CheckButtonHilight")
         local function Training_button_pushed(self)
-            PlaySound("igMainMenuOptionCheckBoxOn")
             if not(TrainingFrame:IsVisible()) then
+                PlaySound("uCharacterSheetOpen")
             TrainingFrame:Show() StatFrame:Hide() --ResetFrame:Hide()
         else
+            PlaySound("uCharacterSheetClose")
             TrainingFrame:Hide()
         end
         end
@@ -816,6 +828,10 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         StatFrame_CloseButton:SetPoint("TOPRIGHT", -57, -52) --edited
         StatFrame_CloseButton:EnableMouse(true)
         StatFrame_CloseButton:SetSize(29, 29) --edited
+        StatFrame_CloseButton:SetScript("OnMouseUp", function(self)
+            PlaySound("igQuestCancel")
+            BaseFrameFadeOut(StatFrame)
+            end)
        
     --[[local StatFrame_TitleBar = CreateFrame("Frame", "StatFrame_TitleBar", StatFrame, nil)
         StatFrame_TitleBar:SetSize(135, 25)
@@ -828,7 +844,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
             insets = { left = 5, right = 5, top = 5, bottom = 5 }
         })
         StatFrame_TitleBar:SetPoint("TOP", 0, 9)]]-- edited
-         local StatFrame_TitleText = StatFrame:CreateFontString("StatFrame_TitleText") -- edited
+                local StatFrame_TitleText = StatFrame:CreateFontString("StatFrame_TitleText") -- edited
         StatFrame_TitleText:SetFont("Fonts\\MORPHEUS.TTF", 15) -- edited
         StatFrame_TitleText:SetSize(190, 5)
         StatFrame_TitleText:SetPoint("TOP", 0, -45) -- edited
@@ -865,35 +881,130 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Allocation\\allocationbuttonframe"}) -- edited
 
         --textures
-        local StatFrame_Panel_Str_Ico = StatFrame_Panel_Str:CreateTexture(nil, "ARTWORK")
+        local StatFrame_Panel_Str_Ico = CreateFrame("FRAME", "StatFrame_Panel_Str_Ico", StatFrame_Panel_Str, nil)
         StatFrame_Panel_Str_Ico:SetWidth(58);               
         StatFrame_Panel_Str_Ico:SetHeight(58);
-        StatFrame_Panel_Str_Ico:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\Allocation\\strength")
+        StatFrame_Panel_Str_Ico:SetBackdrop({
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Allocation\\strength"})
         StatFrame_Panel_Str_Ico:SetPoint("CENTER", -105,4)
+        StatFrame_Panel_Str_Ico:EnableMouse(true)
 
-            local StatFrame_Panel_Sta_Ico = StatFrame_Panel_Sta:CreateTexture(nil, "ARTWORK")
+            local StatFrame_Panel_Sta_Ico = CreateFrame("FRAME", "StatFrame_Panel_Sta_Ico", StatFrame_Panel_Sta, nil)
         StatFrame_Panel_Sta_Ico:SetWidth(58);               
         StatFrame_Panel_Sta_Ico:SetHeight(58);
-        StatFrame_Panel_Sta_Ico:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\Allocation\\stamina")
+        StatFrame_Panel_Sta_Ico:SetBackdrop({
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Allocation\\stamina"})
         StatFrame_Panel_Sta_Ico:SetPoint("CENTER", -105,4)
+        StatFrame_Panel_Sta_Ico:EnableMouse(true)
 
-            local StatFrame_Panel_Agi_Ico = StatFrame_Panel_Agi:CreateTexture(nil, "ARTWORK")
+            local StatFrame_Panel_Agi_Ico = CreateFrame("FRAME", "StatFrame_Panel_Agi_Ico", StatFrame_Panel_Agi, nil)
         StatFrame_Panel_Agi_Ico:SetWidth(58);               
         StatFrame_Panel_Agi_Ico:SetHeight(58);
-        StatFrame_Panel_Agi_Ico:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\Allocation\\agility")
+        StatFrame_Panel_Agi_Ico:SetBackdrop({
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Allocation\\agility"})
         StatFrame_Panel_Agi_Ico:SetPoint("CENTER", -105,4)
+        StatFrame_Panel_Agi_Ico:EnableMouse(true)
 
-            local StatFrame_Panel_Int_Ico = StatFrame_Panel_Int:CreateTexture(nil, "ARTWORK")
+            local StatFrame_Panel_Int_Ico = CreateFrame("FRAME", "StatFrame_Panel_Int_Ico", StatFrame_Panel_Int, nil)
         StatFrame_Panel_Int_Ico:SetWidth(58);               
         StatFrame_Panel_Int_Ico:SetHeight(58);
-        StatFrame_Panel_Int_Ico:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\Allocation\\intellect")
+        StatFrame_Panel_Int_Ico:SetBackdrop({
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Allocation\\intellect"})
         StatFrame_Panel_Int_Ico:SetPoint("CENTER", -105,4)
+        StatFrame_Panel_Int_Ico:EnableMouse(true)
 
-            local StatFrame_Panel_Spi_Ico = StatFrame_Panel_Spi:CreateTexture(nil, "ARTWORK")
+            local StatFrame_Panel_Spi_Ico = CreateFrame("FRAME", "StatFrame_Panel_Spi_Ico", StatFrame_Panel_Spi, nil)
         StatFrame_Panel_Spi_Ico:SetWidth(58);               
         StatFrame_Panel_Spi_Ico:SetHeight(58);
-        StatFrame_Panel_Spi_Ico:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\Allocation\\spirit")
+        StatFrame_Panel_Spi_Ico:SetBackdrop({
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Allocation\\spirit"})
         StatFrame_Panel_Spi_Ico:SetPoint("CENTER", -105,4)
+        StatFrame_Panel_Spi_Ico:EnableMouse(true)
+
+
+        local StatFrame_Panel_Str_Ico_h = StatFrame_Panel_Str_Ico:CreateTexture(nil, "ARTWORK")
+        StatFrame_Panel_Str_Ico_h:SetWidth(58);               
+        StatFrame_Panel_Str_Ico_h:SetHeight(58);
+        StatFrame_Panel_Str_Ico_h:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\Allocation\\strength_h")
+        StatFrame_Panel_Str_Ico_h:SetPoint("CENTER")
+        StatFrame_Panel_Str_Ico_h:SetBlendMode("ALPHAKEY")
+
+            local StatFrame_Panel_Sta_Ico_h = StatFrame_Panel_Sta_Ico:CreateTexture(nil, "ARTWORK")
+        StatFrame_Panel_Sta_Ico_h:SetWidth(58);               
+        StatFrame_Panel_Sta_Ico_h:SetHeight(58);
+        StatFrame_Panel_Sta_Ico_h:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\Allocation\\stamina_h")
+        StatFrame_Panel_Sta_Ico_h:SetPoint("CENTER")
+        StatFrame_Panel_Sta_Ico_h:SetBlendMode("ALPHAKEY")
+
+            local StatFrame_Panel_Agi_Ico_h = StatFrame_Panel_Agi_Ico:CreateTexture(nil, "ARTWORK")
+        StatFrame_Panel_Agi_Ico_h:SetWidth(58);               
+        StatFrame_Panel_Agi_Ico_h:SetHeight(58);
+        StatFrame_Panel_Agi_Ico_h:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\Allocation\\agility_h")
+        StatFrame_Panel_Agi_Ico_h:SetPoint("CENTER")
+        StatFrame_Panel_Agi_Ico_h:SetBlendMode("ALPHAKEY")
+
+            local StatFrame_Panel_Int_Ico_h = StatFrame_Panel_Int_Ico:CreateTexture(nil, "ARTWORK")
+        StatFrame_Panel_Int_Ico_h:SetWidth(58);               
+        StatFrame_Panel_Int_Ico_h:SetHeight(58);
+        StatFrame_Panel_Int_Ico_h:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\Allocation\\intellect_h")
+        StatFrame_Panel_Int_Ico_h:SetPoint("CENTER")
+        StatFrame_Panel_Int_Ico_h:SetBlendMode("ALPHAKEY")
+
+            local StatFrame_Panel_Spi_Ico_h = StatFrame_Panel_Spi_Ico:CreateTexture(nil, "ARTWORK")
+        StatFrame_Panel_Spi_Ico_h:SetWidth(58);               
+        StatFrame_Panel_Spi_Ico_h:SetHeight(58);
+        StatFrame_Panel_Spi_Ico_h:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\Allocation\\spirit_h")
+        StatFrame_Panel_Spi_Ico_h:SetPoint("CENTER")
+        StatFrame_Panel_Spi_Ico_h:SetBlendMode("ALPHAKEY")
+
+        StatFrame_Panel_Str_Ico_h:Hide()
+        StatFrame_Panel_Sta_Ico_h:Hide()
+        StatFrame_Panel_Agi_Ico_h:Hide()
+        StatFrame_Panel_Int_Ico_h:Hide()
+        StatFrame_Panel_Spi_Ico_h:Hide()
+
+                StatFrame_Panel_Str_Ico:SetScript("OnEnter", function(self)
+            GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+            GameTooltip:SetText("|cffFFFFFFStrength|r\nStrength increases |cffFFFFFFattack power|r and is the most important\nstat for plate armor-wearing classes in the |cffFFFFFFdamage-dealing|r or |cffFFFFFFtank|r role.\nStrength also converts into |cffFFFFFFparry|r.")
+            GameTooltip:Show()
+            StatFrame_Panel_Str_Ico_h:Show()
+            end)
+        StatFrame_Panel_Str_Ico:SetScript("OnLeave", function(self)
+            GameTooltip:Hide()
+            StatFrame_Panel_Str_Ico_h:Hide()
+            end)
+                StatFrame_Panel_Sta_Ico:SetScript("OnEnter", function(self)
+            GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+            GameTooltip:SetText("|cffFFFFFFStamina|r\nStamina is the source of all |cffFFFFFFhealth|r.\nAll armor has stamina on it, and all classes\nand specializations wear armor with stamina on it,\nbut |cffFFFFFFtanks|r generally have the most.\nPlayers convert stamina into an increasing\namount of health based on character level")
+            GameTooltip:Show()StatFrame_Panel_Sta_Ico_h:Show()
+            end)
+        StatFrame_Panel_Sta_Ico:SetScript("OnLeave", function(self)
+            GameTooltip:Hide()StatFrame_Panel_Sta_Ico_h:Hide()
+            end)
+                StatFrame_Panel_Agi_Ico:SetScript("OnEnter", function(self)
+            GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+            GameTooltip:SetText("|cffFFFFFFAgility|r\nAgility increases |cffFFFFFFmelee|r and |cffFFFFFFranged attack power|r,\nand is the most important stat for leather armor\nand mail armor-wearing classes in the\n|cffFFFFFFdamage-dealing|r or |cffFFFFFFtank|r role.")
+            GameTooltip:Show()StatFrame_Panel_Agi_Ico_h:Show()
+            end)
+        StatFrame_Panel_Agi_Ico:SetScript("OnLeave", function(self)
+            GameTooltip:Hide()StatFrame_Panel_Agi_Ico_h:Hide()
+            end)
+                StatFrame_Panel_Int_Ico:SetScript("OnEnter", function(self)
+            GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+            GameTooltip:SetText("|cffFFFFFFIntellect|r\nIntellect increases |cffFFFFFFspell power|r and is the most\nimportant stat for mana-using classes\nwearing any armor type in the\n|cffFFFFFFdamage-dealing|r (ranged spell caster) or |cffFFFFFFhealer|r role.")
+            GameTooltip:Show()StatFrame_Panel_Int_Ico_h:Show()
+            end)
+        StatFrame_Panel_Int_Ico:SetScript("OnLeave", function(self)
+            GameTooltip:Hide()StatFrame_Panel_Int_Ico_h:Hide()
+            end)
+                StatFrame_Panel_Spi_Ico:SetScript("OnEnter", function(self)
+            GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+            GameTooltip:SetText("|cffFFFFFFSpirit|r\nSpirit is the |cffFFFFFFhealer-only|r stat,\nand increases their mana regeneration.")
+            GameTooltip:Show()StatFrame_Panel_Spi_Ico_h:Show()
+            end)
+        StatFrame_Panel_Spi_Ico:SetScript("OnLeave", function(self)
+            GameTooltip:Hide()StatFrame_Panel_Spi_Ico_h:Hide()
+            end)
         --edited--
         --[[local StatFrame_PointsPanel = CreateFrame("Frame", "StatFrame_PointsPanel", StatFrame, nil)
         StatFrame_PointsPanel:SetSize(170, 25)
@@ -1241,7 +1352,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
 	spec_displaying = "ALL"
 	frame_displaying = "BASIC"
 	function display_stuff(self)
-        PlaySound("igMainMenuOptionCheckBoxOn")
+        PlaySound("GnomeExploration")
 	
 		local all_buttons = {BalanceDruid, FeralDruid, RestorationDruid, BeastMasteryHunter, MarksmanshipHunter, SurvivalHunter,
 		ArcaneMage, FireMage, FrostMage, HolyPaladin, ProtectionPaladin, RetributionPaladin,
@@ -1876,7 +1987,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 	end
 	
 	function display_next_frame_CA(self)
-        PlaySound("igMainMenuOptionCheckBoxOn")
+        PlaySound("iAbilitiesTurnPageA")
 	
 		if self == DisplaySpellsButton then
 		
@@ -1918,7 +2029,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 	end
 	
 	function display_talents(self)
-        PlaySound("igMainMenuOptionCheckBoxOn")
+        PlaySound("iAbilitiesTurnPageB")
 	
 		if spec_displaying ~= GeneralStuff then
 			frame_displaying = "TALENTS"
