@@ -167,9 +167,17 @@ function MyHandlers.ReceiveItems(player,itemNumber, itemList, objectid)
 			local FullLoot_Text = FullLoot_TextTable[itemNumber]
 			
 			FullLoot_Button:SetSize(270, 40)
-			FullLoot_Button:SetPoint("TOP", 0, (20-(itemNumber*41)))
+			FullLoot_Button:SetPoint("TOP", 0, (20-(itemNumber*45)))
 			FullLoot_Button:EnableMouse(true)
 			FullLoot_Button:SetHighlightTexture("Interface/Buttons/UI-Listbox-Highlight")
+			FullLoot_Button:SetBackdrop({
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Misc\\lootbg",
+             insets = {
+            left = -102,
+            right = -102,
+            top = -22,
+            bottom = -22}
+                })
 			item_idd = itemList[itemNumber][2]
 			item_name = itemList[itemNumber][1]
 			item_stuff = itemList[itemNumber][3]
@@ -196,7 +204,7 @@ function MyHandlers.ReceiveItems(player,itemNumber, itemList, objectid)
 			end
 			FullLoot_Button:SetScript("OnLeave", FullLoot_Button_Tooltip_OnLeave)
 			FullLoot_Text:SetFont("Fonts\\FRIZQT__.TTF", 14)
-			FullLoot_Text:SetSize(200, 50)
+			FullLoot_Text:SetSize(200, 20)
 			FullLoot_Text:SetPoint("CENTER", -20, 0)
 			local texture_x = "Interface\\Icons\\INV_Chest_Samurai"
 			local name_x, link_x, quality_x, iLevel_x, reqLevel_x, class_x, subclass_x, maxStack_x, equipSlot_x, texture_x2, vendorPrice_x = GetItemInfo(itemList[itemNumber][2])
