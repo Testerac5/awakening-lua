@@ -198,8 +198,11 @@ function MyHandlers.ReceiveItems(player,itemNumber, itemList, objectid)
 			FullLoot_Text:SetFont("Fonts\\FRIZQT__.TTF", 14)
 			FullLoot_Text:SetSize(200, 50)
 			FullLoot_Text:SetPoint("CENTER", -20, 0)
-			texture_x = "Interface\\Icons\\INV_Chest_Samurai"
-			local name_x, link_x, quality_x, iLevel_x, reqLevel_x, class_x, subclass_x, maxStack_x, equipSlot_x, texture_x, vendorPrice_x = GetItemInfo(itemList[itemNumber][2])
+			local texture_x = "Interface\\Icons\\INV_Chest_Samurai"
+			local name_x, link_x, quality_x, iLevel_x, reqLevel_x, class_x, subclass_x, maxStack_x, equipSlot_x, texture_x2, vendorPrice_x = GetItemInfo(itemList[itemNumber][2])
+			if (texture_x2) then
+				texture_x = texture_x2
+			end
 			FullLoot_Text:SetText("|cffBB11AA|T"..texture_x..".blp:32:32|t|r  "..itemList[itemNumber][1].." x"..itemList[itemNumber][3])
 			FullLoot_Text:SetJustifyH("LEFT")
 			
