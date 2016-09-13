@@ -195,7 +195,7 @@ function MyHandlers.ReceiveItems(player,itemNumber, itemList, objectid)
 				GameTooltip:Hide()
 			end
 			FullLoot_Button:SetScript("OnLeave", FullLoot_Button_Tooltip_OnLeave)
-			FullLoot_Text:SetFont("Fonts\\FRIZQT__.TTF", 11)
+			FullLoot_Text:SetFont("Fonts\\FRIZQT__.TTF", 14)
 			FullLoot_Text:SetSize(200, 50)
 			FullLoot_Text:SetPoint("CENTER", -20, 0)
 			texture_x = "Interface\\Icons\\INV_Chest_Samurai"
