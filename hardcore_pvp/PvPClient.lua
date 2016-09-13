@@ -26,8 +26,8 @@ FullLootFrame:SetScript("OnHide", FullLootFrame.StopMovingOrSizing)
 FullLootFrame:SetScript("OnDragStop", FullLootFrame.StopMovingOrSizing)
 
 FullLootFrame_scroll = CreateFrame("ScrollFrame", nil, FullLootFrame)
-FullLootFrame_scroll:SetSize(500,350)
-FullLootFrame_scroll:SetPoint("CENTER")
+FullLootFrame_scroll:SetSize(500,400)
+FullLootFrame_scroll:SetPoint("CENTER", 0, -20)
 FullLootFrame_content = CreateFrame("Frame", nil, FullLootFrame)
 FullLootFrame_content:SetSize(FullLootFrame_scroll:GetSize())
 FullLootFrame_content:SetPoint("CENTER")
@@ -167,7 +167,7 @@ function MyHandlers.ReceiveItems(player,itemNumber, itemList, objectid)
 			local FullLoot_Text = FullLoot_TextTable[itemNumber]
 			
 			FullLoot_Button:SetSize(270, 40)
-			FullLoot_Button:SetPoint("TOP", 0, (20-(itemNumber*45)))
+			FullLoot_Button:SetPoint("TOP", 0, (0-((itemNumber-1)*45)))
 			FullLoot_Button:EnableMouse(true)
 			FullLoot_Button:SetHighlightTexture("Interface/Buttons/UI-Listbox-Highlight")
 			FullLoot_Button:SetBackdrop({
