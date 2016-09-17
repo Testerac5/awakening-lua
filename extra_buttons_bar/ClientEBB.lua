@@ -3156,6 +3156,52 @@ TrainingFrame:SetScript("OnUpdate" , function()
         all_talent_FrameNumber[i]:SetText(" ")
     end
 
+    --extra buttons for a spellbookframe--
+    local SpellBook_SkillTabOverFlowButton = CreateFrame("Button", "SpellBook_SkillTabOverFlowButton", SpellBookFrame, nil)
+SpellBook_SkillTabOverFlowButton:SetSize(25,50)
+SpellBook_SkillTabOverFlowButton:SetPoint("TOPLEFT", SpellBookSkillLineTab1, 0, 49)
+SpellBook_SkillTabOverFlowButton:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\spellbook_forward")
+SpellBook_SkillTabOverFlowButton:SetDisabledTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\spellbook_forward_d")
+SpellBook_SkillTabOverFlowButton:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\spellbook_forward_h")
+SpellBook_SkillTabOverFlowButton:SetScript("OnUpdate", function(self)
+    if (_G["SpellBookSkillLineTab"..GetNumSpellTabs()]) and (_G["SpellBookSkillLineTab"..GetNumSpellTabs()]:IsVisible()) then
+        self:Disable()
+    elseif (GetNumSpellTabs() > 7) then
+        self:Enable()
+    end
+    end)
+SpellBook_SkillTabOverFlowButton:SetScript("OnClick", function(self)
+    if (self:IsEnabled()) then
+    skilltab_pagenum = skilltab_pagenum +1
+    SpellBookFrame_PlayOpenSound()
+    SpellBookFrame_Update()
+end
+    end)
+
+local SpellBook_SkillTabOverFlowButton_b = CreateFrame("Button", "SpellBook_SkillTabOverFlowButton_b", SpellBookFrame, nil)
+SpellBook_SkillTabOverFlowButton_b:SetSize(25,50)
+SpellBook_SkillTabOverFlowButton_b:SetPoint("BOTTOMLEFT", SpellBookSkillLineTab7, 0, -49)
+SpellBook_SkillTabOverFlowButton_b:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\spellbook_back")
+SpellBook_SkillTabOverFlowButton_b:SetDisabledTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\spellbook_back_d")
+SpellBook_SkillTabOverFlowButton_b:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\spellbook_back_h")
+SpellBook_SkillTabOverFlowButton_b:SetScript("OnUpdate", function(self)
+    if (skilltab_pagenum == 1) then
+        self:Disable()
+            else
+        self:Enable()
+    end
+    end)
+SpellBook_SkillTabOverFlowButton_b:SetScript("OnClick", function(self)
+    if (self:IsEnabled()) then
+skilltab_pagenum = skilltab_pagenum -1
+SpellBookFrame_PlayOpenSound()
+SpellBookFrame_Update()
+end
+    end)
+
+SpellBook_SkillTabOverFlowButton:Disable()
+SpellBook_SkillTabOverFlowButton_b:Disable()
+
     
 
 	
