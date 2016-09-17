@@ -238,9 +238,9 @@ local function OnPlayerLogin(event, player) -- Caps out at 302 stats wont show b
 	local player_guid = player:GetGUIDLow()
 	local stats_query = CharDBQuery("SELECT str, sta, agi, inte, spi FROM character_stat_allocation WHERE guid = "..player_guid.."")
 	local points_query = CharDBQuery("SELECT points FROM character_stat_points WHERE guid = "..player_guid.."")
-	local statsq = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4)}
+	local statsq = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4), stats_query:GetInt32(5)}
 	--for _,v in pairs(statsq) do
-		if ((statsq[1] + statsq[2] + statsq[3] + statsq[4]) == 0) then
+		if ((statsq[1] + statsq[2] + statsq[3] + statsq[4] + stats[5]) == 0) then
 			if (player:GetLevel() <= 9) then
 				local init_points = player:GetLevel() + 4
 				CharDBExecute("REPLACE INTO character_stat_points(guid, points) VALUES("..player_guid..","..init_points..")")
