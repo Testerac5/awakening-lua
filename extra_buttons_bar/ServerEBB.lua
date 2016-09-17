@@ -109,6 +109,9 @@ function MyHandlers.AddStats(player, stat)
 		
 				sendStatsToPlayer(AIO.Msg(), player, stats):Send(player)
 				player_stat_auras(player, stats)
+				--hackfix for mar of the wind
+				player:RemoveAura(917050)
+				player:RemoveAura(917051)
 			
 			
 			else
