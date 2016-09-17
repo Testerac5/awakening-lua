@@ -20,12 +20,12 @@ function On_Select(event, player, unit, sender, intid, code)
 	if (intid == 1) then
 		player:AddAura(818052, player)
 		player:GossipComplete()
-		unit:SendUnitSay(""..player:GetName().." now has the Test aura and is now locked to this map.")
+		unit:SendUnitSay(""..player:GetName().." now has the Test aura and is now locked to this map.", 7)
 		--player:SendBroadcastMessage("You now have a Test Aura, you will not be allowed anywhere else until removed.")
 	else
 		player:RemoveAura(818052, player)
 		player:GossipComplete()
-		unit:SendUnitSay(""..player:GetName().." has removed the Test aura and is free to return to Azeroth.")
+		unit:SendUnitSay(""..player:GetName().." has removed the Test aura and is free to return to Azeroth.", 7)
 		--player:SendBroadcastMessage("Your Test aura has been removed, you're welcome to go back to Azeroth")
 end
         player:GossipComplete()

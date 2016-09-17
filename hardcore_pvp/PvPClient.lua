@@ -25,6 +25,31 @@ FullLootFrame:SetScript("OnDragStart", FullLootFrame.StartMoving)
 FullLootFrame:SetScript("OnHide", FullLootFrame.StopMovingOrSizing)
 FullLootFrame:SetScript("OnDragStop", FullLootFrame.StopMovingOrSizing)
 
+FullLootFrame_scroll = CreateFrame("ScrollFrame", nil, FullLootFrame)
+FullLootFrame_scroll:SetSize(500,400)
+FullLootFrame_scroll:SetPoint("CENTER", 0, -20)
+FullLootFrame_content = CreateFrame("Frame", nil, FullLootFrame)
+FullLootFrame_content:SetSize(FullLootFrame_scroll:GetSize())
+FullLootFrame_content:SetPoint("CENTER")
+
+FullLootscrollbar = CreateFrame("Slider", nil, FullLootFrame_scroll, "UIPanelScrollBarTemplate") 
+FullLootscrollbar:SetPoint("TOPLEFT", FullLootFrame, "TOPRIGHT", -100, -53) 
+FullLootscrollbar:SetPoint("BOTTOMLEFT", FullLootFrame, "BOTTOMRIGHT", -100, 30) 
+
+FullLootscrollbar:SetMinMaxValues(1, 1000) 
+FullLootscrollbar:SetValueStep(1) 
+FullLootscrollbar.scrollStep = 1
+FullLootscrollbar:SetValue(0) 
+FullLootscrollbar:SetWidth(16) 
+FullLootscrollbar:SetScript("OnValueChanged", 
+function (self, value) 
+FullLootFrame_scroll:SetVerticalScroll(value) 
+end) 
+local FLscrollbg = FullLootscrollbar:CreateTexture(nil, "BACKGROUND") 
+FLscrollbg:SetAllPoints(FullLootscrollbar) 
+FLscrollbg:SetTexture(0, 0, 0, 0.4) 
+
+FullLootFrame_scroll:SetScrollChild(FullLootFrame_content)
 FullLootFrame:Hide()
 
 local FullLootFrame_TitleText = FullLootFrame:CreateFontString("FullLootFrame_TitleText")
@@ -34,37 +59,37 @@ FullLootFrame_TitleText:SetPoint("TOP", 0, -18)
 FullLootFrame_TitleText:SetShadowOffset(0, -1)
 FullLootFrame_TitleText:SetText("|cff230d21Unclaimed Belongings|r")
 local FullLootFrame_CloseButton = CreateFrame("Button", "FullLootFrame_CloseButton", FullLootFrame, "UIPanelCloseButton")
-FullLootFrame_CloseButton:SetPoint("TOPRIGHT", -65.9, -12)
+FullLootFrame_CloseButton:SetPoint("TOPRIGHT", -75, -11)
 FullLootFrame_CloseButton:EnableMouse(true)
 FullLootFrame_CloseButton:SetSize(31, 30)
 
 
 
-local FullLoot_Button1 = CreateFrame("Button", "FullLoot_Button1", FullLootFrame, nil)
-local FullLoot_Button2 = CreateFrame("Button", "FullLoot_Button2", FullLootFrame, nil)
-local FullLoot_Button3 = CreateFrame("Button", "FullLoot_Button3", FullLootFrame, nil)
-local FullLoot_Button4 = CreateFrame("Button", "FullLoot_Button4", FullLootFrame, nil)
-local FullLoot_Button5 = CreateFrame("Button", "FullLoot_Button5", FullLootFrame, nil)
-local FullLoot_Button6 = CreateFrame("Button", "FullLoot_Button6", FullLootFrame, nil)
-local FullLoot_Button7 = CreateFrame("Button", "FullLoot_Button7", FullLootFrame, nil)
-local FullLoot_Button8 = CreateFrame("Button", "FullLoot_Button8", FullLootFrame, nil)
-local FullLoot_Button9 = CreateFrame("Button", "FullLoot_Button9", FullLootFrame, nil)
-local FullLoot_Button10 = CreateFrame("Button", "FullLoot_Button10", FullLootFrame, nil)
-local FullLoot_Button11 = CreateFrame("Button", "FullLoot_Button11", FullLootFrame, nil)
-local FullLoot_Button12 = CreateFrame("Button", "FullLoot_Button12", FullLootFrame, nil)
-local FullLoot_Button13 = CreateFrame("Button", "FullLoot_Button13", FullLootFrame, nil)
-local FullLoot_Button14 = CreateFrame("Button", "FullLoot_Button14", FullLootFrame, nil)
-local FullLoot_Button15 = CreateFrame("Button", "FullLoot_Button15", FullLootFrame, nil)
-local FullLoot_Button16 = CreateFrame("Button", "FullLoot_Button16", FullLootFrame, nil)
-local FullLoot_Button17 = CreateFrame("Button", "FullLoot_Button17", FullLootFrame, nil)
-local FullLoot_Button18 = CreateFrame("Button", "FullLoot_Button18", FullLootFrame, nil)
-local FullLoot_Button19 = CreateFrame("Button", "FullLoot_Button19", FullLootFrame, nil)
-local FullLoot_Button20 = CreateFrame("Button", "FullLoot_Button20", FullLootFrame, nil)
-local FullLoot_Button21 = CreateFrame("Button", "FullLoot_Button21", FullLootFrame, nil)
-local FullLoot_Button22 = CreateFrame("Button", "FullLoot_Button22", FullLootFrame, nil)
-local FullLoot_Button23 = CreateFrame("Button", "FullLoot_Button23", FullLootFrame, nil)
-local FullLoot_Button24 = CreateFrame("Button", "FullLoot_Button24", FullLootFrame, nil)
-local FullLoot_Button25 = CreateFrame("Button", "FullLoot_Button25", FullLootFrame, nil)
+local FullLoot_Button1 = CreateFrame("Button", "FullLoot_Button1", FullLootFrame_content, nil)
+local FullLoot_Button2 = CreateFrame("Button", "FullLoot_Button2", FullLootFrame_content, nil)
+local FullLoot_Button3 = CreateFrame("Button", "FullLoot_Button3", FullLootFrame_content, nil)
+local FullLoot_Button4 = CreateFrame("Button", "FullLoot_Button4", FullLootFrame_content, nil)
+local FullLoot_Button5 = CreateFrame("Button", "FullLoot_Button5", FullLootFrame_content, nil)
+local FullLoot_Button6 = CreateFrame("Button", "FullLoot_Button6", FullLootFrame_content, nil)
+local FullLoot_Button7 = CreateFrame("Button", "FullLoot_Button7", FullLootFrame_content, nil)
+local FullLoot_Button8 = CreateFrame("Button", "FullLoot_Button8", FullLootFrame_content, nil)
+local FullLoot_Button9 = CreateFrame("Button", "FullLoot_Button9", FullLootFrame_content, nil)
+local FullLoot_Button10 = CreateFrame("Button", "FullLoot_Button10", FullLootFrame_content, nil)
+local FullLoot_Button11 = CreateFrame("Button", "FullLoot_Button11", FullLootFrame_content, nil)
+local FullLoot_Button12 = CreateFrame("Button", "FullLoot_Button12", FullLootFrame_content, nil)
+local FullLoot_Button13 = CreateFrame("Button", "FullLoot_Button13", FullLootFrame_content, nil)
+local FullLoot_Button14 = CreateFrame("Button", "FullLoot_Button14", FullLootFrame_content, nil)
+local FullLoot_Button15 = CreateFrame("Button", "FullLoot_Button15", FullLootFrame_content, nil)
+local FullLoot_Button16 = CreateFrame("Button", "FullLoot_Button16", FullLootFrame_content, nil)
+local FullLoot_Button17 = CreateFrame("Button", "FullLoot_Button17", FullLootFrame_content, nil)
+local FullLoot_Button18 = CreateFrame("Button", "FullLoot_Button18", FullLootFrame_content, nil)
+local FullLoot_Button19 = CreateFrame("Button", "FullLoot_Button19", FullLootFrame_content, nil)
+local FullLoot_Button20 = CreateFrame("Button", "FullLoot_Button20", FullLootFrame_content, nil)
+local FullLoot_Button21 = CreateFrame("Button", "FullLoot_Button21", FullLootFrame_content, nil)
+local FullLoot_Button22 = CreateFrame("Button", "FullLoot_Button22", FullLootFrame_content, nil)
+local FullLoot_Button23 = CreateFrame("Button", "FullLoot_Button23", FullLootFrame_content, nil)
+local FullLoot_Button24 = CreateFrame("Button", "FullLoot_Button24", FullLootFrame_content, nil)
+local FullLoot_Button25 = CreateFrame("Button", "FullLoot_Button25", FullLootFrame_content, nil)
 
 local FullLoot_Text1 = FullLoot_Button1:CreateFontString("FullLoot_Text1")
 local FullLoot_Text2 = FullLoot_Button2:CreateFontString("FullLoot_Text2")
@@ -141,11 +166,18 @@ function MyHandlers.ReceiveItems(player,itemNumber, itemList, objectid)
 			local FullLoot_Button = FullLoot_ButtonTable[itemNumber]
 			local FullLoot_Text = FullLoot_TextTable[itemNumber]
 			
-			FullLoot_Button:SetSize(200, 13)
-			FullLoot_Button:SetPoint("TOP", 0, (-50-(itemNumber*15)))
+			FullLoot_Button:SetSize(270, 40)
+			FullLoot_Button:SetPoint("TOP", 0, (0-((itemNumber-1)*45)))
 			FullLoot_Button:EnableMouse(true)
 			FullLoot_Button:SetHighlightTexture("Interface/Buttons/UI-Listbox-Highlight")
-			FullLoot_Button:SetPushedTexture("Interface/Buttons/CheckButtonHilight") 
+			FullLoot_Button:SetBackdrop({
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Misc\\lootbg",
+             insets = {
+            left = -102,
+            right = -102,
+            top = -22,
+            bottom = -22}
+                })
 			item_idd = itemList[itemNumber][2]
 			item_name = itemList[itemNumber][1]
 			item_stuff = itemList[itemNumber][3]
@@ -171,10 +203,15 @@ function MyHandlers.ReceiveItems(player,itemNumber, itemList, objectid)
 				GameTooltip:Hide()
 			end
 			FullLoot_Button:SetScript("OnLeave", FullLoot_Button_Tooltip_OnLeave)
-			FullLoot_Text:SetFont("Fonts\\FRIZQT__.TTF", 11)
-			FullLoot_Text:SetSize(200, 5)
-			FullLoot_Text:SetPoint("CENTER", 0, 0)
-			FullLoot_Text:SetText(""..itemList[itemNumber][1].." x"..itemList[itemNumber][3])
+			FullLoot_Text:SetFont("Fonts\\FRIZQT__.TTF", 14)
+			FullLoot_Text:SetSize(200, 20)
+			FullLoot_Text:SetPoint("CENTER", -20, 0)
+			local texture_x = "Interface\\Icons\\INV_Chest_Samurai"
+			local name_x, link_x, quality_x, iLevel_x, reqLevel_x, class_x, subclass_x, maxStack_x, equipSlot_x, texture_x2, vendorPrice_x = GetItemInfo(itemList[itemNumber][2])
+			if (texture_x2) then
+				texture_x = texture_x2
+			end
+			FullLoot_Text:SetText("|cffBB11AA|T"..texture_x..".blp:32:32|t|r  "..itemList[itemNumber][1].." x"..itemList[itemNumber][3])
 			FullLoot_Text:SetJustifyH("LEFT")
 			
 

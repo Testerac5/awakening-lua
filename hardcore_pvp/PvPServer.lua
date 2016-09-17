@@ -43,82 +43,125 @@ local function EntropyPvP(event, pKiller, pKilled)
 		end
 	end
 	if not (pKilled == pKiller) then
-	if (playerdeath==true and check_safe == false and instanceID == 0) then
-		local killed_color = ClassColorCodes[pKilled:GetClass()]
-		local killer_color = ClassColorCodes[pKiller:GetClass()]
-		local killerguild_name = ", a Lone Wolf"
-		local killedguild_name = ", a Lone Wolf"
-		--Fetch Guild Names
-		--if (pKiller:GetGuildName()~=nil) then
-			--killerguild_name = " of "..pKiller:GetGuildName()..""
-		--end
-		--if (pKilled:GetGuildName()~=nil) then
-			--killedguild_name = " of"..pkilled:GetGuildName()..""
---end
-		
-		if ((pKiller:GetLevel()-pKilled:GetLevel())<=leveldiff) then
-		
-			local pKilledGUID = pKilled:GetGUIDLow()
-			local pKillerGUID = pKiller:GetGUIDLow()
-			local x,y,z,o = pKilled:GetX(),pKilled:GetY(),pKilled:GetZ(),pKilled:GetO()
-			local ContainerID = 818001
-			local FullLootContainer = PerformIngameSpawn(spawnType,ContainerID,pKiller_loc,instanceID, x, y, z, o)	--Spawn a Sack of Belongings
-			guid_linking_table[FullLootContainer:GetGUIDLow()] = pKilled:GetGUIDLow()
-			--Get Items
-			local bagslot = 255
-			local inven_ticker = 0
-			local item_ticker = 0
-			local maxitems = 25 --Equal to amount of buttons that I have declared.
-			item_table[FullLootContainer:GetGUIDLow()] = {}
-			remove_table[FullLootContainer:GetGUIDLow()] = {}
-			repeat
-				local SlotRange = 35
-				inven_ticker = inven_ticker+1
-				local bagToTake = math.random(3)
-				if bagToTake < 3 then
-					SlotRange = 38
-					bagToTake = 255
+		if (playerdeath==true and check_safe == false and instanceID == 0) then
+			local killed_color = ClassColorCodes[pKilled:GetClass()]
+			local killer_color = ClassColorCodes[pKiller:GetClass()]
+			local killerguild_name = ", a Lone Wolf"
+			local killedguild_name = ", a Lone Wolf"
+			--Fetch Guild Names
+			--if (pKiller:GetGuildName()~=nil) then
+				--killerguild_name = " of "..pKiller:GetGuildName()..""
+			--end
+			--if (pKilled:GetGuildName()~=nil) then
+				--killedguild_name = " of"..pkilled:GetGuildName()..""
+			--end
+			local zone = {46, 1377, 15}
+			for m, z in pairs(zone) do
+				if (pKiller:GetZoneId() ~= z) then
+					if ((pKiller:GetLevel()-pKilled:GetLevel())<=leveldiff) then		
+						local pKilledGUID = pKilled:GetGUIDLow()
+						local pKillerGUID = pKiller:GetGUIDLow()
+						local x,y,z,o = pKilled:GetX(),pKilled:GetY(),pKilled:GetZ(),pKilled:GetO()
+						local ContainerID = 818001
+						local FullLootContainer = PerformIngameSpawn(spawnType,ContainerID,pKiller_loc,instanceID, x, y, z, o)	--Spawn a Sack of Belongings
+						guid_linking_table[FullLootContainer:GetGUIDLow()] = pKilled:GetGUIDLow()
+						--Get Items
+						local bagslot = 255
+						local inven_ticker = 0
+						local item_ticker = 0
+						local maxitems = 25 --Equal to amount of buttons that I have declared.
+						item_table[FullLootContainer:GetGUIDLow()] = {}
+						remove_table[FullLootContainer:GetGUIDLow()] = {}
+						repeat
+							local SlotRange = 35
+							inven_ticker = inven_ticker+1
+							local bagToTake = math.random(3)
+							if bagToTake < 3 then
+								SlotRange = 38
+								bagToTake = 255
+							else
+								bagToTake = math.random(4)
+								bagToTake = bagToTake + 6 -- Original 18, changes the amount of items dropped on death
+							end								
+							local slotToTake = math.random(SlotRange)
+							
+							local checkitem = pKilled:GetItemByPos(bagToTake, slotToTake)
+							if (checkitem ~= 0) then -- Checks to make sure player has an item
+							if (checkitem~=nil) and (checkitem:IsBag()==false) and (checkitem:GetEntry()~=6948) then
+								item_ticker = item_ticker+1
+								table.insert (item_table[FullLootContainer:GetGUIDLow()], {checkitem:GetItemLink(), checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()), pKilled:GetName()})
+								table.insert (remove_table[FullLootContainer:GetGUIDLow()], {item_ticker, false})
+								pKilled:RemoveItem(checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()))
+							end
+							end
+						until (inven_ticker>=38) or (item_ticker>=maxitems)
+					end
 				else
-					bagToTake = math.random(4)
-					bagToTake = bagToTake + 6 --Modify this number to change # of items that drop, 1-4 is the base, 6 is the additional items
-				end								--Controls max items dropped in pvp. Is additive with creature drop amount
-				local slotToTake = math.random(SlotRange)
-				
-				local checkitem = pKilled:GetItemByPos(bagToTake, slotToTake)
-				if (checkitem ~= 0) then -- Checks to make sure player has an item
-				if (checkitem~=nil) and (checkitem:IsBag()==false) and (checkitem:GetEntry()~=6948) then
-					item_ticker = item_ticker+1
-					table.insert (item_table[FullLootContainer:GetGUIDLow()], {checkitem:GetItemLink(), checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()), pKilled:GetName()})
-					table.insert (remove_table[FullLootContainer:GetGUIDLow()], {item_ticker, false})
-					pKilled:RemoveItem(checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()))
+					if ((pKiller:GetLevel()-pKilled:GetLevel())<=leveldiff + 60) then
+					local pKilledGUID = pKilled:GetGUIDLow()
+					local pKillerGUID = pKiller:GetGUIDLow()
+					local x,y,z,o = pKilled:GetX(),pKilled:GetY(),pKilled:GetZ(),pKilled:GetO()
+					local ContainerID = 818001
+					local FullLootContainer = PerformIngameSpawn(spawnType,ContainerID,pKiller_loc,instanceID, x, y, z, o)	--Spawn a Sack of Belongings
+					guid_linking_table[FullLootContainer:GetGUIDLow()] = pKilled:GetGUIDLow()
+					--Get Items
+					local bagslot = 255
+					local inven_ticker = 0
+					local item_ticker = 0
+					local maxitems = 25 --Equal to amount of buttons that I have declared.
+					item_table[FullLootContainer:GetGUIDLow()] = {}
+					remove_table[FullLootContainer:GetGUIDLow()] = {}
+					repeat
+					local SlotRange = 35
+					inven_ticker = inven_ticker+1
+					local bagToTake = math.random(3)
+					if bagToTake < 3 then
+						SlotRange = 38
+						bagToTake = 255
+					else
+						bagToTake = math.random(4)
+						bagToTake = bagToTake + 6 -- Original 18, changes the amount of items dropped on death
+					end								
+					local slotToTake = math.random(SlotRange)
+							
+					local checkitem = pKilled:GetItemByPos(bagToTake, slotToTake)
+					if (checkitem ~= 0) then -- Checks to make sure player has an item
+						if (checkitem~=nil) and (checkitem:IsBag()==false) and (checkitem:GetEntry()~=6948) then
+							item_ticker = item_ticker+1
+							table.insert (item_table[FullLootContainer:GetGUIDLow()], {checkitem:GetItemLink(), checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()), pKilled:GetName()})
+							table.insert (remove_table[FullLootContainer:GetGUIDLow()], {item_ticker, false})
+							pKilled:RemoveItem(checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()))
+						end
+					end
+				until (inven_ticker>=38) or (item_ticker>=maxitems)
 				end
-				end
-			until (inven_ticker>=38) or (item_ticker>=maxitems)
-			--Kill Announcer
-			local DeathAnnouncements = {
+				--Kill Announcer
+				local DeathAnnouncements = {
 				"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", was slain by |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name.."!",
 				"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", met the maker to the hand of |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name.."!",
 				"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", was vanquished by |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name.."!",
 				"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", has fallen to |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name.."!",
 				"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", died a swift death, courtesy of |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name..".",
 				"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", wanted a piece of |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name..", but bit off a little more than they could chew!"
-			}
-			if (pKilled == pKiller) then
-				EnableDeathAnnouncer = false
-				
-			else
-			if (EnableDeathAnnouncer==true) then
-				local DeathAnnounce_Roll = math.random(1,6)
-				SendWorldMessage(DeathAnnouncements[DeathAnnounce_Roll])
-			end
+				}
+				if (pKilled == pKiller) then
+					EnableDeathAnnouncer = false
+							
+				else
+					if (EnableDeathAnnouncer==true) then
+						local DeathAnnounce_Roll = math.random(1,6)
+						SendWorldMessage(DeathAnnouncements[DeathAnnounce_Roll])
+					end
+				end
+				end
 			end
 		else
-			SendWorldMessage("[PvP]: |cffff0000Everyone give a big round of applause to|r |CFF"..killer_color..""..pKiller:GetName().."|r |cffff0000"..killerguild_name..", whom is level "..pKiller:GetLevel()..", killed|r |CFF"..killed_color..""..pKilled:GetName().."|r|cffff0000, a level "..pKilled:GetLevel()..".|r")
+			SendWorldMessage("[PvP]: |cffff0000Everyone give a big round of applause to|r |CFF"..killer_color..""..pKiller:GetName().."|r |cffff0000"..killerguild_name..", whom is level "..pKiller:GetLevel()..", killed|r |CFF"..killed_color..""..pKilled:GetName().."|r|cffff0000, a level "..pKilled:GetLevel()..".|r")		
 		end
-	end
+
 	else
-		pKilled:SendBroadcastMessage("You have committed suicide, none of your items were lost.")
-end
+		pKilled:SendBroadcastMessage("You have commit suicide, none of your items were lost.")
+	end
 end
 
 local function CreatureDeath (event, pKiller, pKilled)
@@ -132,7 +175,7 @@ local function CreatureDeath (event, pKiller, pKilled)
 			break
 		end
 	end
-if (pKilled ~= 0 or pKilled ~= nil) then
+	
 	if (creaturedeath==true and check_safe == false and instanceID == 0) then
 		local pKilledGUID = pKilled:GetGUIDLow()
 		local x,y,z,o = pKilled:GetX(),pKilled:GetY(),pKilled:GetZ(),pKilled:GetO()
@@ -183,8 +226,6 @@ if (pKilled ~= 0 or pKilled ~= nil) then
 		until (inven_ticker>=38) or (item_ticker>=maxitems)
 	end
 end
-end
-
 
 
 local function Init_FullLootFrame(event, player, object)
