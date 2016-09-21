@@ -978,7 +978,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
 
                 StatFrame_Panel_Str_Ico:SetScript("OnEnter", function(self)
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-            GameTooltip:SetText("|cffFFFFFFStrength|r\nStrength increases |cffFFFFFFattack power|r and is the most important\nstat for plate armor-wearing classes in the |cffFFFFFFdamage-dealing|r or |cffFFFFFFtank|r role.\nStrength also converts into |cffFFFFFFparry|r.")
+            GameTooltip:SetText("|cffFFFFFFStrength|r\nStrength increases |cffFFFFFFAttack Power|r and is an important\nstat for those wearing plate |cffFFFFFFDamage-Dealing|r or |cffFFFFFFTank|r roles.\nStrength also converts into |cffFFFFFFBlock|r and |cffFFFFFFParry|r.")
             GameTooltip:Show()
             StatFrame_Panel_Str_Ico_h:Show()
             end)
@@ -988,7 +988,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
             end)
                 StatFrame_Panel_Sta_Ico:SetScript("OnEnter", function(self)
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-            GameTooltip:SetText("|cffFFFFFFStamina|r\nStamina is the source of all |cffFFFFFFhealth|r.\nAll armor has stamina on it, and all classes\nand specializations wear armor with stamina on it,\nbut |cffFFFFFFtanks|r generally have the most.\nPlayers convert stamina into an increasing\namount of health based on character level")
+            GameTooltip:SetText("|cffFFFFFFStamina|r\nStamina is the source of all |cffFFFFFFHealth|r.\nAll armor has stamina on it, and all classes\nand specializations wear armor with stamina on it,\nbut |cffFFFFFFTanks|r generally have the most.\nPlayers convert stamina into an increasing\namount of health based on character level")
             GameTooltip:Show()StatFrame_Panel_Sta_Ico_h:Show()
             end)
         StatFrame_Panel_Sta_Ico:SetScript("OnLeave", function(self)
@@ -996,7 +996,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
             end)
                 StatFrame_Panel_Agi_Ico:SetScript("OnEnter", function(self)
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-            GameTooltip:SetText("|cffFFFFFFAgility|r\nAgility increases |cffFFFFFFmelee|r and |cffFFFFFFranged attack power|r,\nand is the most important stat for leather armor\nand mail armor-wearing classes in the\n|cffFFFFFFdamage-dealing|r or |cffFFFFFFtank|r role.")
+            GameTooltip:SetText("|cffFFFFFFAgility|r\nAgility increases |cffFFFFFFMelee|r and |cffFFFFFFRanged Attack Power|r,\nand is the most important stat for those wearing leather armor\nand mail in the\n|cffFFFFFFDamage-Dealing|r or |cffFFFFFFTank|r role.")
             GameTooltip:Show()StatFrame_Panel_Agi_Ico_h:Show()
             end)
         StatFrame_Panel_Agi_Ico:SetScript("OnLeave", function(self)
@@ -1004,7 +1004,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
             end)
                 StatFrame_Panel_Int_Ico:SetScript("OnEnter", function(self)
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-            GameTooltip:SetText("|cffFFFFFFIntellect|r\nIntellect increases |cffFFFFFFspell critical chance|r, |cffFFFFFFamount of mana|r and is the most\nimportant stat for mana-using classes\nwearing any armor type in the\n|cffFFFFFFdamage-dealing|r (ranged spell caster) or |cffFFFFFFhealer|r role.")
+            GameTooltip:SetText("|cffFFFFFFIntellect|r\nIntellect increases |cffFFFFFFspell critical chance|r, |cffFFFFFFamount of mana|r and is the most\nimportant stat for mana-using classes\nwearing any armor type in the\n|cffFFFFFFdamage-dealing|r (ranged spell caster) or |cffFFFFFFhealer|r roles.")
             GameTooltip:Show()StatFrame_Panel_Int_Ico_h:Show()
             end)
         StatFrame_Panel_Int_Ico:SetScript("OnLeave", function(self)
@@ -1012,7 +1012,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
             end)
                 StatFrame_Panel_Spi_Ico:SetScript("OnEnter", function(self)
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-            GameTooltip:SetText("|cffFFFFFFSpirit|r\nSpirit is the |cffFFFFFFhealer-only|r stat,\nand increases their mana regeneration.")
+            GameTooltip:SetText("|cffFFFFFFSpirit|r\nSpirit is a |cffFFFFFFRegeneration|r stat,\nand increases |cffFFFFFFHealth|r and |cffFFFFFFMana Regeneration|r")
             GameTooltip:Show()StatFrame_Panel_Spi_Ico_h:Show()
             end)
         StatFrame_Panel_Spi_Ico:SetScript("OnLeave", function(self)
@@ -1041,6 +1041,13 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         Strength_Text:SetSize(137, 5)
         Strength_Text:SetPoint("TOP", 0, -35)
         Strength_Text:SetText("|cffE1AB18Strength|r")
+
+        local Allocation_Fast_Text = StatFrame_Panel_Str:CreateFontString("Allocation_Fast_Text") -- edited
+        Allocation_Fast_Text:SetFont("Fonts\\FRIZQT__.TTF", 13) -- edited
+        Allocation_Fast_Text:SetSize(500, 5)
+        Allocation_Fast_Text:SetPoint("TOP", 0, -10)
+        Allocation_Fast_Text:SetText("|cffE1AB18Hold |cffFFFFFFShift|cffE1AB18 to allocate 10 points per stat|r")
+
         local Stamina_Text = StatFrame_Panel_Sta:CreateFontString("Stamina_Text") -- edited
         Stamina_Text:SetFont("Fonts\\MORPHEUS.TTF", 14, "OUTLINE") -- edited
         Stamina_Text:SetSize(137, 5)
@@ -1110,6 +1117,10 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         PlaySound("igMainMenuOptionCheckBoxOn")
 	
 		local stat = nil
+        local amount = nil
+        if (IsShiftKeyDown()) then
+            amount = 10
+        end
 	
 		if self == Inc_Str then
 		
@@ -1132,7 +1143,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
 			stat = 5
 		end
 			
-		AIO.Handle("sideBar", "AddStats", stat)
+		AIO.Handle("sideBar", "AddStats", stat, amount)
 
 	
 	end
@@ -1141,6 +1152,10 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         PlaySound("igMainMenuOptionCheckBoxOn")
 	
 		local stat = nil
+         local amount = nil
+        if (IsShiftKeyDown()) then
+            amount = 10
+        end
 	
 		if self == Dec_Str then
 		
@@ -1163,7 +1178,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
 			stat = 5
 			
 		end	
-		AIO.Handle("sideBar", "ReduceStats", stat)
+		AIO.Handle("sideBar", "ReduceStats", stat, amount)
 
 	
 	end
