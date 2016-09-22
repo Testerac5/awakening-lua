@@ -1041,6 +1041,13 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         Strength_Text:SetSize(137, 5)
         Strength_Text:SetPoint("TOP", 0, -35)
         Strength_Text:SetText("|cffE1AB18Strength|r")
+
+        local Allocation_Fast_Text = StatFrame_Panel_Str:CreateFontString("Allocation_Fast_Text") -- edited
+        Allocation_Fast_Text:SetFont("Fonts\\FRIZQT__.TTF", 13) -- edited
+        Allocation_Fast_Text:SetSize(500, 5)
+        Allocation_Fast_Text:SetPoint("TOP", 0, -10)
+        Allocation_Fast_Text:SetText("|cffE1AB18Hold |cffFFFFFFShift|cffE1AB18 to allocate 10 points per stat|r")
+
         local Stamina_Text = StatFrame_Panel_Sta:CreateFontString("Stamina_Text") -- edited
         Stamina_Text:SetFont("Fonts\\MORPHEUS.TTF", 14, "OUTLINE") -- edited
         Stamina_Text:SetSize(137, 5)
@@ -1110,6 +1117,10 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         PlaySound("igMainMenuOptionCheckBoxOn")
 	
 		local stat = nil
+        local amount = nil
+        if (IsShiftKeyDown()) then
+            amount = 10
+        end
 	
 		if self == Inc_Str then
 		
@@ -1132,7 +1143,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
 			stat = 5
 		end
 			
-		AIO.Handle("sideBar", "AddStats", stat)
+		AIO.Handle("sideBar", "AddStats", stat, amount)
 
 	
 	end
@@ -1141,6 +1152,10 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         PlaySound("igMainMenuOptionCheckBoxOn")
 	
 		local stat = nil
+         local amount = nil
+        if (IsShiftKeyDown()) then
+            amount = 10
+        end
 	
 		if self == Dec_Str then
 		
@@ -1163,7 +1178,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
 			stat = 5
 			
 		end	
-		AIO.Handle("sideBar", "ReduceStats", stat)
+		AIO.Handle("sideBar", "ReduceStats", stat, amount)
 
 	
 	end
