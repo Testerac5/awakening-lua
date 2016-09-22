@@ -21,15 +21,21 @@ local function maxLevel(event, delay, pCall, player)
 end
 
 local function LevelUpOnUse (event, player, item, target)
-	if (player:HasItem(itemid) == true and player:GetLevel() < 2) then
+	if (player:HasItem(itemid) == true) then
 		player:RemoveItem(itemid, 1)
-		player:AddItem(383080, 58)
-		player:AddItem(383081, 51)
+		local AP = 59 - player:GetLevel()
+		local TE = 59 - player:GetLevel()
+		player:AddItem(383080, AP)
+		if (player:GetLevel() >= 1 and player:GetLevel() <= 9) then
+			player:AddItem(383081, 51)
+		else
+			player:AddItem(383081, TE)
+		end
 		player:RegisterEvent(gainLevels, 500, 5, player)
 		player:RegisterEvent(maxLevel, 3000, 1, player)
 		
-	else
-		player:SendAreaTriggerMessage("|cffff0000You must be level 1!|r")
+	--else
+	--	player:SendAreaTriggerMessage("|cffff0000You must be level 1!|r")
 		--player:LogoutPlayer()
 	end
 end
