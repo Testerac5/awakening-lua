@@ -55,9 +55,13 @@ local function EntropyPvP(event, pKiller, pKilled)
 			--if (pKilled:GetGuildName()~=nil) then
 				--killedguild_name = " of"..pkilled:GetGuildName()..""
 			--end
-			local zone = {46, 1377, 15}
+			local zone = {46, 1377, 15} --Zones to enable pvp loot at all levels
 			for m, z in pairs(zone) do
-				if (pKiller:GetZoneId() ~= z) then
+				if pKiller:GetZoneId() == z then
+					local dZone = true
+				end
+			end
+				if (dZone == false) then
 					if ((pKiller:GetLevel()-pKilled:GetLevel())<=leveldiff) then		
 						local pKilledGUID = pKilled:GetGUIDLow()
 						local pKillerGUID = pKiller:GetGUIDLow()
@@ -152,7 +156,6 @@ local function EntropyPvP(event, pKiller, pKilled)
 						local DeathAnnounce_Roll = math.random(1,6)
 						SendWorldMessage(DeathAnnouncements[DeathAnnounce_Roll])
 					end
-				end
 				end
 			end
 		else
