@@ -31,6 +31,7 @@ talent_essence					= 383081
 spell_reset_token 				= 383082
 talent_reset_token 				= 383083
 safety_ids						= {489, 529, 30, 562, 617, 559, 572, 566, 607}
+nocapzones						= {46, 1377, 15, 718}
 free_spell_reset				= false
 free_talent_reset 				= false
 
