@@ -215,6 +215,13 @@ sideBar:SetFrameStrata("LOW")
         TrainingFrame:SetPoint("CENTER", 0, 45)
         TrainingFrame:SetFrameStrata("DIALOG")
         --TrainingFrame:SetClampedToScreen(true)
+        TrainingFrame:EnableMouseWheel(true)
+        TrainingFrame:SetScript("OnMouseWheel", function(self, delta)
+            if (scrollbar:IsVisible()) then
+        local value = scrollbar:GetValue()
+        scrollbar:SetValue(value-delta*30)
+    end
+        end)
         TrainingFrame:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\progress",}) --edited
         TrainingFrame:Hide()
@@ -2515,7 +2522,7 @@ TrainingFrame.Text_Talent:Hide()
     --ProgressionFrametexture:ClearAllPoints()
     
     DisplaySpellsButton = CreateFrame("Button", "TrainingFrame_DisplaySpellsButton", TrainingFrame, nil)
-        DisplaySpellsButton:SetSize(150, 75)
+        DisplaySpellsButton:SetSize(200, 250)
         DisplaySpellsButton:SetPoint("CENTER", -250, -20)
         DisplaySpellsButton:EnableMouse(true)
         texture_DisplaySpellsButton = DisplaySpellsButton:CreateTexture("DisplaySpellsButton")
@@ -2557,7 +2564,7 @@ TrainingFrame.Text_Talent:Hide()
         
         
     DisplayTalentsButton = CreateFrame("Button", "TrainingFrame_DisplayTalentsButton", TrainingFrame, nil)
-        DisplayTalentsButton:SetSize(150, 75)
+        DisplayTalentsButton:SetSize(200, 250)
         DisplayTalentsButton:SetPoint("CENTER", 22, -20)
         DisplayTalentsButton:EnableMouse(true)
         texture_DisplayTalentsButton = DisplayTalentsButton:CreateTexture("DisplayTalentsButton")
@@ -3115,7 +3122,7 @@ TrainingFrame:SetScript("OnUpdate" , function()
 	for i,v in ipairs(all_talent_slots) do
         v:SetSize(56, 56)
         v:SetBackdrop({
-            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\buttonbackgroundold",
+            bgFile = "Interface/CHARACTERFRAME/UI-Party-Background",
             edgeFile = "Interface/DialogFrame/UI-DialogBox-Border",
             edgeSize = 15
         })
@@ -3157,7 +3164,7 @@ TrainingFrame:SetScript("OnUpdate" , function()
     for i,v in ipairs(all_talent_FrameNumber) do
         v:SetSize(16, 16)
         v:SetBackdrop({
-            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\buttonbackgroundold",
+            bgFile = "Interface/CHARACTERFRAME/UI-Party-Background",
             edgeFile = "Interface/DialogFrame/UI-DialogBox-Border",
             edgeSize = 5
         })
