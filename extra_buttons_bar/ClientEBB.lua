@@ -2166,6 +2166,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			local requiredLevel = v[5]
 			local column = v[6]
 			local talent_ID = v[7]
+            local BG_New = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_bg"
 			
 			local get_spell_link = GetSpellLink(spellIds[1])
 			local name,_, icon, _,_,_,_ = GetSpellInfo(spellIds[1])
@@ -2181,16 +2182,18 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			
 				if player_knows_a_talent == true then
 			
-					get_spell_link = GetSpellLink(spellIds[player_talent_known])
+					get_spell_link = "|cffFFFFFF|Hspell:"..spellIds[player_talent_known].."|h[Talent]|h|r"
 					
 					if player_talent_known == number_of_ranks then
 						learn_tooltip = "Maxed Out"
 						learn_texture = {1, 1, 0}
 						learn_text = "|cff6b625bMax|r"
+                        BG_New = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_rank_max"
 					else
 						attach_it = {spellIds[player_talent_known + 1],AE_cost,TE_cost,spellIds,number_of_ranks}
 						learn_texture = {0, .5, 0}
 						learn_text = "|cffE1AB18Upgrade|r"
+                        BG_New = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_rank"
 					end
 				else
 				
@@ -2206,12 +2209,21 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			all_talent_slot_buttons[button_using]:SetBackdrop({
 				bgFile = icon
 			})
+            all_talent_slots[button_using]:SetBackdrop({
+                        bgFile = BG_New,
+                         insets = {
+                        left = -11,
+                        right = -11,
+                        top = -11,
+                        bottom = -11}
+                        })
+            all_talent_slot_buttons[button_using].HyperLink = get_spell_link
 
 			local talent_indexee = talent_index
 			local function talent_icon_tooltip_Enter(self, motion)
 				GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-				if get_spell_link ~= nil then
-					GameTooltip:SetHyperlink(get_spell_link)
+				if self.HyperLink ~= nil then
+					GameTooltip:SetHyperlink(self.HyperLink)
 				else
 					GameTooltip:SetTalent(tabIndexee, talent_indexee, false, false, nil)
 				end
@@ -2309,6 +2321,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 		local text_changed = "|cffE1AB18Upgrade|r"
 		local learn_tooltip = nil
 		local attached_talent = nil
+        local BG_File = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_bg"
 		local FN = 1
 
 
@@ -2319,8 +2332,12 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 					texture_changed = {1, 1, 0}
 					learn_tooltip = "Maxed Out" -- used for talent texts
 					text_changed = "|cff6b625bMax|r"
+                    all_talent_slot_buttons[indexAt].HyperLink = "|cffFFFFFF|Hspell:"..all_spellIds[i].."|h[Talent]|h|r"
+                    BG_File = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_rank_max"
 				else
+                    all_talent_slot_buttons[indexAt].HyperLink = "|cffFFFFFF|Hspell:"..all_spellIds[i].."|h[Talent]|h|r"
 					attached_talent = {all_spellIds[i + 1],AE_cost, TE_cost,all_spellIds,talents_ranks}
+                    BG_File = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_rank"
 				end
 				break
 			end
@@ -2334,14 +2351,22 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			end
 			all_learn_talent_buttons[indexAt]:SetScript("OnEnter", learn_button_tooltip_Enter)
 		end
-		
-		
+
 		all_attached_talent[indexAt] = attached_talent
 		
 		
 		all_learn_talent_buttons[indexAt]:SetText(text_changed)
 			
 		all_talent_FrameNumber[indexAt]:SetText(FN)
+
+        all_talent_slots[indexAt]:SetBackdrop({
+                        bgFile = BG_File,
+                         insets = {
+                        left = -11,
+                        right = -11,
+                        top = -11,
+                        bottom = -11}
+                        })
 		
 		--all_learn_talent_buttons_t[indexAt]:SetTexture(texture_changed[1], texture_changed[2], texture_changed[3], 1)
 		
@@ -3122,9 +3147,12 @@ TrainingFrame:SetScript("OnUpdate" , function()
 	for i,v in ipairs(all_talent_slots) do
         v:SetSize(56, 56)
         v:SetBackdrop({
-            bgFile = "Interface/CHARACTERFRAME/UI-Party-Background",
-            edgeFile = "Interface/DialogFrame/UI-DialogBox-Border",
-            edgeSize = 15
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_bg",
+            insets = {
+            left = -11,
+            right = -11,
+            top = -11,
+            bottom = -11}
         })
         v:SetPoint("TOP", all_talent_coords[i][1], all_talent_coords[i][2])
         v:Show()
@@ -3164,16 +3192,19 @@ TrainingFrame:SetScript("OnUpdate" , function()
     for i,v in ipairs(all_talent_FrameNumber) do
         v:SetSize(16, 16)
         v:SetBackdrop({
-            bgFile = "Interface/CHARACTERFRAME/UI-Party-Background",
-            edgeFile = "Interface/DialogFrame/UI-DialogBox-Border",
-            edgeSize = 5
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_fn",
+             insets = {
+            left = -7,
+            right = -7,
+            top = -7,
+            bottom = -7}
         })
-        v:SetPoint("BOTTOMRIGHT", 8, -8)
+        v:SetPoint("BOTTOMRIGHT", 2, -2)
     end
     
     for i,v in ipairs(all_talent_FNF) do
-        v:SetFont("Fonts\\MORPHEUS.TTF", 15, "OUTLINE")
-        v:SetShadowOffset(1, -1)
+        v:SetFont("Fonts\\FRIZQT__.ttf", 13)
+        v:SetShadowOffset(1, 1)
         all_talent_FrameNumber[i]:SetFontString(v)
         all_talent_FrameNumber[i]:SetText(" ")
     end
