@@ -1974,8 +1974,6 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			-- shows
 			DisplaySpellsButton:Show()
 			DisplayTalentsButton:Show()
-
-            TrainingFrame.Text_Talent:Hide()
             TrainingFrame.Text_Ability:Hide()
 
             ProgressionBlueBookBorder:Hide()
@@ -2034,7 +2032,6 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
             TrainingFrame:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\progress_inside_blue",})
             ProgressionBlueBookBorder:Show()
-            TrainingFrame.Text_Talent:Hide()
             TrainingFrame.Text_Ability:Show()
             --TrainingFrameBorder:SetFrameStrata("FULLSCREEN")
 			
@@ -2075,8 +2072,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
             TrainingFrame:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\progress_inside_purple",})
             ProgressionPurpleBookBorder:Show()
-            TrainingFrame.Text_Talent:Show()
-            TrainingFrame.Text_Ability:Hide()
+            TrainingFrame.Text_Ability:Show()
             --TrainingFrameBorder:SetFrameStrata("FULLSCREEN")
 			
 			local all_buttons = {BalanceDruid, FeralDruid, RestorationDruid, BeastMasteryHunter, MarksmanshipHunter, SurvivalHunter,
@@ -2167,6 +2163,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			local column = v[6]
 			local talent_ID = v[7]
             local BG_New = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_bg"
+            local BG_Color = {0.46,0.36,0.34,1}
 			
 			local get_spell_link = GetSpellLink(spellIds[1])
 			local name,_, icon, _,_,_,_ = GetSpellInfo(spellIds[1])
@@ -2183,7 +2180,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 				if player_knows_a_talent == true then
 			
 					get_spell_link = "|cffFFFFFF|Hspell:"..spellIds[player_talent_known].."|h[Talent]|h|r"
-					
+					BG_Color = {1,1,1,1}
 					if player_talent_known == number_of_ranks then
 						learn_tooltip = "Maxed Out"
 						learn_texture = {1, 1, 0}
@@ -2209,6 +2206,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			all_talent_slot_buttons[button_using]:SetBackdrop({
 				bgFile = icon
 			})
+            all_talent_slot_buttons[button_using]:SetBackdropColor(unpack(BG_Color))
             all_talent_slots[button_using]:SetBackdrop({
                         bgFile = BG_New,
                          insets = {
@@ -2323,6 +2321,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 		local attached_talent = nil
         local BG_File = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_bg"
 		local FN = 1
+        local BG_Color_U = {0.46,0.36,0.34,1}
 
 
 		for i,v in ipairs(all_spellIds) do
@@ -2334,10 +2333,12 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 					text_changed = "|cff6b625bMax|r"
                     all_talent_slot_buttons[indexAt].HyperLink = "|cffFFFFFF|Hspell:"..all_spellIds[i].."|h[Talent]|h|r"
                     BG_File = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_rank_max"
+                    BG_Color_U = {1,1,1,1}
 				else
                     all_talent_slot_buttons[indexAt].HyperLink = "|cffFFFFFF|Hspell:"..all_spellIds[i].."|h[Talent]|h|r"
 					attached_talent = {all_spellIds[i + 1],AE_cost, TE_cost,all_spellIds,talents_ranks}
                     BG_File = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_rank"
+                    BG_Color_U = {1,1,1,1}
 				end
 				break
 			end
@@ -2367,6 +2368,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
                         top = -11,
                         bottom = -11}
                         })
+        all_talent_slot_buttons[indexAt]:SetBackdropColor(unpack(BG_Color_U))
 		
 		--all_learn_talent_buttons_t[indexAt]:SetTexture(texture_changed[1], texture_changed[2], texture_changed[3], 1)
 		
@@ -2510,18 +2512,12 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 
         TrainingFrame.Text_Ability = TrainingFrameBorder:CreateFontString()
 TrainingFrame.Text_Ability:SetFontObject(GameFontNormal)
-TrainingFrame.Text_Ability:SetPoint("BOTTOM", TrainingFrame,  30, 75);
-TrainingFrame.Text_Ability:SetFont("Fonts\\MORPHEUS.TTF", 18, "OUTLINE")
+TrainingFrame.Text_Ability:SetPoint("BOTTOM", TrainingFrame,  75, 67);
+TrainingFrame.Text_Ability:SetFont("Fonts\\FRIZQT__.TTF", 14, "OUTLINE")
 local itemCount = GetItemCount(383080) or 0
-TrainingFrame.Text_Ability:SetText("|cffE1AB18Ability Essence: |cffFFFFFF"..itemCount)
-TrainingFrame.Text_Ability:Hide()
-    TrainingFrame.Text_Talent = TrainingFrameBorder:CreateFontString()
-TrainingFrame.Text_Talent:SetFontObject(GameFontNormal)
-TrainingFrame.Text_Talent:SetPoint("BOTTOM", TrainingFrame,  30, 75);
-TrainingFrame.Text_Talent:SetFont("Fonts\\MORPHEUS.TTF", 18, "OUTLINE")
 local itemCount2 = GetItemCount(383080) or 0
-TrainingFrame.Text_Talent:SetText("|cffE1AB18Talent Essence: |cffFFFFFF"..itemCount2)
-TrainingFrame.Text_Talent:Hide()
+TrainingFrame.Text_Ability:SetText("|cffE1AB18AE: |cffFFFFFF"..itemCount.." |cffE1AB18TE: |cffFFFFFF"..itemCount2)
+TrainingFrame.Text_Ability:Hide()
 
 
     local ProgressionBlueBookBorder = TrainingFrameBorder:CreateTexture("ProgressionBlueBookBorder", "BACKGROUND") 
@@ -2634,8 +2630,7 @@ DisplayTalentsButton:Disable()
 TrainingFrame:SetScript("OnUpdate" , function() 
                     local itemCount_t = GetItemCount(383080) or 0
     local itemCount2_t = GetItemCount(383081) or 0
-    TrainingFrame.Text_Ability:SetText("|cffE1AB18Ability Essence: |cffFFFFFF"..itemCount_t)
-    TrainingFrame.Text_Talent:SetText("|cffE1AB18Talent Essence: |cffFFFFFF"..itemCount2_t)
+    TrainingFrame.Text_Ability:SetText("|cffE1AB18AE: |cffFFFFFF"..itemCount_t.." |cffE1AB18TE: |cffFFFFFF"..itemCount2_t)
 
                 if not(DisplaySpellsButton:IsVisible()) then
             TrainingFrame_SelectedTitle_Stars1:Hide()
@@ -3014,8 +3009,8 @@ TrainingFrame:SetScript("OnUpdate" , function()
      
     --scrollbar 
     scrollbar = CreateFrame("Slider", nil, scrollframe, "UIPanelScrollBarTemplate") 
-    scrollbar:SetPoint("TOPLEFT", scrollframe, "TOPRIGHT", 4, -16) 
-    scrollbar:SetPoint("BOTTOMLEFT", scrollframe, "BOTTOMRIGHT", 4, 16) 
+    scrollbar:SetPoint("TOPLEFT", scrollframe, "TOPRIGHT", 33, 0) 
+    scrollbar:SetPoint("BOTTOMLEFT", scrollframe, "BOTTOMRIGHT", 33, 0) 
     scrollbar:SetMinMaxValues(0, 670) 
     scrollbar:SetValueStep(1) 
     scrollbar.scrollStep = 1
@@ -3199,7 +3194,7 @@ TrainingFrame:SetScript("OnUpdate" , function()
             top = -7,
             bottom = -7}
         })
-        v:SetPoint("BOTTOMRIGHT", 2, -2)
+        v:SetPoint("BOTTOMRIGHT", 2, -1)
     end
     
     for i,v in ipairs(all_talent_FNF) do
