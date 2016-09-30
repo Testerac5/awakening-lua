@@ -30,10 +30,10 @@ warlock_affliction_talents_tab = 20
 warlock_demonology_spells = {{687, 2, 0, 1}, {688, 2, 0, 1}, {697, 2, 0, 10}, {6201, 2, 0, 10}, {755, 2, 0, 12},
 {5697, 2, 0, 16}, {693, 2, 0, 18}, {698, 2, 0, 20}, {712, 2, 0, 20}, {126, 2, 0, 22},
 {5500, 2, 0, 24}, {132, 2, 0, 26}, {710, 2, 0, 28}, {6366, 2, 0, 28}, {1098, 2, 0, 30}, {691, 2, 0, 30},
-{6229, 2, 0, 32}, {2362, 2, 0, 36}, {1122, 2, 0, 50}, {59671, 2, 0, 60}, {50589, 2, 0, 60},
+{6229, 2, 0, 32}, {2362, 2, 0, 36}, {1122, 2, 0, 50},
 {18540, 2, 0, 60}, {28176, 2, 0, 62}, {29858, 2, 0, 66}, {29893, 2, 0, 68}, {48018, 2, 0, 80}, {48020, 2, 0, 80}}
 
-warlock_demonology_spells_count = 27
+warlock_demonology_spells_count = 25
 warlock_demonology_bgs = {"Interface\\TalentFrame\\Warlocksummoning-TopLeft", "Interface\\TalentFrame\\Warlocksummoning-TopRight",
 "Interface\\TalentFrame\\Warlocksummoning-BottomLeft", "Interface\\TalentFrame\\Warlocksummoning-BottomRight"}
 

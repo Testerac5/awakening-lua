@@ -369,6 +369,12 @@ function MyHandlers.ResetSpells(player)
 	else
 		if player:HasItem(spell_reset_token) == true or free_spell_reset == true then		
 			player:RemoveItem(spell_reset_token, 1)
+			local noTEspells = {54785, 50589, 50581, 59671, 11417, 11420, 11418, 3567, 3566, 3563, 11419, 11416, 10059, 3565, 3562, 3561}
+			for s, sid in pairs(noTEspells) do
+				if player:HasSpell(sid) then
+					player:RemoveSpell(sid)
+				end
+			end
 			for listloc,spec in ipairs(all_spell_lists) do
 				for loc,spell in ipairs(spec) do
 					local AE_cost = spell[2]
