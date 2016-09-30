@@ -31,10 +31,10 @@ druid_feral_spells = {{99, 2, 0, 10}, {6807, 2, 0, 10}, {6795, 2, 0, 10}, {5487,
 {5211, 2, 0, 14}, {1066, 2, 0, 16}, {779, 2, 0, 16}, {783, 2, 0, 16}, {16857, 2, 0, 18}, {1082, 2, 0, 20},
 {1079, 2, 0, 20}, {768, 2, 0, 20}, {5215, 2, 0, 20}, {5221, 2, 0, 22}, {1822, 2, 0, 24}, {5217, 2, 0, 24},
 {1850, 2, 0, 26}, {8998, 2, 0, 28}, {5209, 2, 0, 28}, {22568, 2, 0, 32},
-{6785, 2, 0, 32}, {9005, 2, 0, 36}, {22842, 2, 0, 36}, {9634, 2, 0, 40}, {20719, 2, 0, 40}, {62600, 2, 0, 40},
+{6785, 2, 0, 32}, {9005, 2, 0, 36}, {22842, 2, 0, 36}, {20719, 2, 0, 40}, {62600, 2, 0, 40},
 {62078, 2, 0, 80}}
 
-druid_feral_spells_count = 28
+druid_feral_spells_count = 27
 druid_feral_bgs = {"Interface\\TalentFrame\\DruidFeralCombat-TopLeft", "Interface\\TalentFrame\\DruidFeralCombat-TopRight",
 "Interface\\TalentFrame\\DruidFeralCombat-BottomLeft", "Interface\\TalentFrame\\DruidFeralCombat-BottomRight"}
 
