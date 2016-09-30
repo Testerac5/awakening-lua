@@ -16,7 +16,7 @@ end
 
 
 
-function MyHandlers.AddStats(player, stat)
+function MyHandlers.AddStats(player, stat, s_amount)
 	-- stat values equal >>>>> 1 = strength | 2 = stamina | 3 = agility | 4 = intellect | 5 = spirit 
 
 	local stat_names = {"str", "sta", "agi", "inte", "spi"}
@@ -27,6 +27,14 @@ function MyHandlers.AddStats(player, stat)
 	local stats = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4)}
 	local range = {[9]=(player:GetLevel() + 4), [19]=((player:GetLevel() * 2) - 5), [29]=((player:GetLevel() * 3) - 24), [39]=((player:GetLevel() * 4) - 53), [59]=((player:GetLevel() * 5) - 92), [69]=((player:GetLevel() * 10) - 387)}
 	local levels = {9, 19, 29, 39, 59, 69}
+	local amount = 1
+	if (s_amount) then
+		if (s_amount <= point_val) then
+		amount = s_amount
+		elseif (point_val > 0) and (point_val<s_amount) then
+			amount = point_val
+		end
+	end
 	
 	--for _, v in ipairs(ghost) do
 		--if (player:HasAura(v) == false and player:IsDead() == false) then
@@ -44,7 +52,7 @@ function MyHandlers.AddStats(player, stat)
 							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
 							point_val = point_max
 						end
-						point_val = point_val - 1
+						point_val = point_val - amount
 						CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
 					elseif (player:GetLevel() <= 19) then
 						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[19] then
@@ -52,7 +60,7 @@ function MyHandlers.AddStats(player, stat)
 							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
 							point_val = point_max
 						end
-						point_val = point_val - 1
+						point_val = point_val - amount
 						CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
 					elseif (player:GetLevel() <= 29) then
 						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[29] then
@@ -60,7 +68,7 @@ function MyHandlers.AddStats(player, stat)
 							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
 							point_val = point_max
 						end
-						point_val = point_val - 1
+						point_val = point_val - amount
 						CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
 					elseif (player:GetLevel() <= 39) then
 						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[39] then
@@ -68,7 +76,7 @@ function MyHandlers.AddStats(player, stat)
 							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
 							point_val = point_max
 						end
-							point_val = point_val - 1
+							point_val = point_val - amount
 							CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
 					elseif (player:GetLevel() <= 59) then
 						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[59] then
@@ -76,7 +84,7 @@ function MyHandlers.AddStats(player, stat)
 							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
 							point_val = point_max
 						end
-							point_val = point_val - 1
+							point_val = point_val - amount
 							CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
 					else--if (player:GetLevel() <= 69) then
 						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[69] then
@@ -84,7 +92,7 @@ function MyHandlers.AddStats(player, stat)
 							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
 							point_val = point_max
 						end
-							point_val = point_val - 1
+							point_val = point_val - amount
 							CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
 					end
 	
@@ -95,7 +103,7 @@ function MyHandlers.AddStats(player, stat)
 				local stat_value = stats_query:GetInt32(0)
 		
 		
-				stat_value = stat_value + 1
+				stat_value = stat_value + amount
 		
 				CharDBExecute("UPDATE character_stat_allocation set "..stat_use.." = "..stat_value.." WHERE guid = "..player_guid)
 		
@@ -109,9 +117,6 @@ function MyHandlers.AddStats(player, stat)
 		
 				sendStatsToPlayer(AIO.Msg(), player, stats):Send(player)
 				player_stat_auras(player, stats)
-				--hackfix for mar of the wind
-				player:RemoveAura(917050)
-				player:RemoveAura(917051)
 			
 			
 			else
@@ -128,7 +133,7 @@ end
 
 
 
-function MyHandlers.ReduceStats(player, stat)
+function MyHandlers.ReduceStats(player, stat, s_amount)
 	-- stat values equal >>>>> 1 = strength | 2 = stamina | 3 = agility | 4 = intellect | 5 = spirit 
 	local stat_names = {"str", "sta", "agi", "inte", "spi"}
 	local player_guid = player:GetGUIDLow()
@@ -138,6 +143,14 @@ function MyHandlers.ReduceStats(player, stat)
 	local stats = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4)}
 	local range = {[9]=(player:GetLevel() + 4), [19]=((player:GetLevel() * 2) - 5), [29]=((player:GetLevel() * 3) - 24), [39]=((player:GetLevel() * 4) - 53), [59]=((player:GetLevel() * 5) - 92), [69]=((player:GetLevel() * 10) - 387)}
 	local levels = {9, 19, 29, 39, 59, 69}
+	local amount = 1
+	if (s_amount) then
+		if (s_amount <= stats[stat]) then
+		amount = s_amount
+		elseif (stats[stat] > 0) and (stats[stat]<s_amount) then
+			amount = stats[stat]
+		end
+	end
 	--for _, v in ipairs(ghost) do
 		--if (player:HasAura(v) == false and player:IsDead() == false) then
 	if (player:InArena() ==	true or player:InBattleground() == 	true) then
@@ -154,7 +167,7 @@ function MyHandlers.ReduceStats(player, stat)
 							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
 							point_val = point_max
 						end
-						point_val = point_val + 1
+						point_val = point_val + amount
 						CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
 					elseif (player:GetLevel() <= 19) then
 						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[19] then
@@ -162,7 +175,7 @@ function MyHandlers.ReduceStats(player, stat)
 							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
 							point_val = point_max
 						end
-						point_val = point_val + 1
+						point_val = point_val + amount
 						CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
 					elseif (player:GetLevel() <= 29) then
 						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[29] then
@@ -170,7 +183,7 @@ function MyHandlers.ReduceStats(player, stat)
 							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
 							point_val = point_max
 						end
-						point_val = point_val + 1
+						point_val = point_val + amount
 						CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
 					elseif (player:GetLevel() <= 39) then
 						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[39] then
@@ -186,7 +199,7 @@ function MyHandlers.ReduceStats(player, stat)
 							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
 							point_val = point_max
 						end
-							point_val = point_val + 1
+							point_val = point_val + amount
 							CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
 					else--if (player:GetLevel() <= 69) then
 						if point_val + (stats[1] + stats[2] + stats[3] + stats[4] + stats[5]) ~= range[69] then
@@ -194,12 +207,12 @@ function MyHandlers.ReduceStats(player, stat)
 							point_max = point_max - (stats[1] + stats[2] + stats[3] + stats[4] + stats[5])
 							point_val = point_max
 						end
-							point_val = point_val + 1
+							point_val = point_val + amount
 							CharDBExecute("UPDATE character_stat_points SET points = "..point_val.." WHERE guid = "..player_guid)
 					end
 	
 	
-				local stat_value = stats[stat] - 1
+				local stat_value = stats[stat] - amount
 				CharDBExecute("UPDATE character_stat_allocation set "..stat_names[stat].." = "..stat_value.." WHERE guid = "..player_guid)
 		
 				stats_query = CharDBQuery("SELECT str, sta, agi, inte, spi FROM character_stat_allocation WHERE guid = "..player_guid)
@@ -241,9 +254,9 @@ local function OnPlayerLogin(event, player) -- Caps out at 302 stats wont show b
 	local player_guid = player:GetGUIDLow()
 	local stats_query = CharDBQuery("SELECT str, sta, agi, inte, spi FROM character_stat_allocation WHERE guid = "..player_guid.."")
 	local points_query = CharDBQuery("SELECT points FROM character_stat_points WHERE guid = "..player_guid.."")
-	local statsq = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4), stats_query:GetInt32(5)}
+	local statsq = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4)}
 	--for _,v in pairs(statsq) do
-		if ((statsq[1] + statsq[2] + statsq[3] + statsq[4] + stats[5]) == 0) then
+		if ((statsq[1] + statsq[2] + statsq[3] + statsq[4] + statsq[5]) == 0) then
 			if (player:GetLevel() <= 9) then
 				local init_points = player:GetLevel() + 4
 				CharDBExecute("REPLACE INTO character_stat_points(guid, points) VALUES("..player_guid..","..init_points..")")
@@ -268,9 +281,7 @@ local function OnPlayerLogin(event, player) -- Caps out at 302 stats wont show b
 			player_stat_auras(player, stats)
 			player:DealHeal(player, 818037, 500000)
 		end
-
 		end
-
 
 
 function player_stat_auras(player, stats)
@@ -293,6 +304,12 @@ function player_stat_auras(player, stats)
 		
 		end
 	end
+end
+
+local function OnRevive(event, player)
+	local stats_query = CharDBQuery("SELECT str, sta, agi, inte, spi FROM character_stat_allocation WHERE guid = "..player_guid.."")
+	local stats = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4)}
+	player_stat_auras(player, stats)
 end
 
 local function OnLevelChange(event, player, oldLevel)
@@ -331,7 +348,7 @@ local function OnLevelChange(event, player, oldLevel)
 
 end
 
-
+RegisterPlayerEvent(36, OnRevive)
 RegisterPlayerEvent(13, OnLevelChange)
 RegisterPlayerEvent(3, OnPlayerLogin)
 
@@ -352,6 +369,12 @@ function MyHandlers.ResetSpells(player)
 	else
 		if player:HasItem(spell_reset_token) == true or free_spell_reset == true then		
 			player:RemoveItem(spell_reset_token, 1)
+			local noTEspells = {54785, 50589, 50581, 59671, 11417, 11420, 11418, 3567, 3566, 3563, 11419, 11416, 10059, 3565, 3562, 3561}
+			for s, sid in pairs(noTEspells) do
+				if player:HasSpell(sid) then
+					player:RemoveSpell(sid)
+				end
+			end
 			for listloc,spec in ipairs(all_spell_lists) do
 				for loc,spell in ipairs(spec) do
 					local AE_cost = spell[2]

@@ -215,6 +215,13 @@ sideBar:SetFrameStrata("LOW")
         TrainingFrame:SetPoint("CENTER", 0, 45)
         TrainingFrame:SetFrameStrata("DIALOG")
         --TrainingFrame:SetClampedToScreen(true)
+        TrainingFrame:EnableMouseWheel(true)
+        TrainingFrame:SetScript("OnMouseWheel", function(self, delta)
+            if (scrollbar:IsVisible()) then
+        local value = scrollbar:GetValue()
+        scrollbar:SetValue(value-delta*30)
+    end
+        end)
         TrainingFrame:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\progress",}) --edited
         TrainingFrame:Hide()
@@ -978,7 +985,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
 
                 StatFrame_Panel_Str_Ico:SetScript("OnEnter", function(self)
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-            GameTooltip:SetText("|cffFFFFFFStrength|r\nStrength increases |cffFFFFFFAttack Power|r and is an important\nstat for those wearing plate |cffFFFFFFDamage-Dealing|r or |cffFFFFFFTank|r roles.\nStrength also converts into |cffFFFFFFBlock|r and |cffFFFFFFParry|r.")
+            GameTooltip:SetText("|cffFFFFFFStrength|r\nStrength increases |cffFFFFFFattack power|r and is the most important\nstat for plate armor-wearing classes in the |cffFFFFFFdamage-dealing|r or |cffFFFFFFtank|r role.\nStrength also converts into |cffFFFFFFparry|r.")
             GameTooltip:Show()
             StatFrame_Panel_Str_Ico_h:Show()
             end)
@@ -988,7 +995,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
             end)
                 StatFrame_Panel_Sta_Ico:SetScript("OnEnter", function(self)
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-            GameTooltip:SetText("|cffFFFFFFStamina|r\nStamina is the source of all |cffFFFFFFHealth|r.\nAll armor has stamina on it, and all classes\nand specializations wear armor with stamina on it,\nbut |cffFFFFFFTanks|r generally have the most.\nPlayers convert stamina into an increasing\namount of health based on character level")
+            GameTooltip:SetText("|cffFFFFFFStamina|r\nStamina is the source of all |cffFFFFFFhealth|r.\nAll armor has stamina on it, and all classes\nand specializations wear armor with stamina on it,\nbut |cffFFFFFFtanks|r generally have the most.\nPlayers convert stamina into an increasing\namount of health based on character level")
             GameTooltip:Show()StatFrame_Panel_Sta_Ico_h:Show()
             end)
         StatFrame_Panel_Sta_Ico:SetScript("OnLeave", function(self)
@@ -996,7 +1003,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
             end)
                 StatFrame_Panel_Agi_Ico:SetScript("OnEnter", function(self)
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-            GameTooltip:SetText("|cffFFFFFFAgility|r\nAgility increases |cffFFFFFFMelee|r and |cffFFFFFFRanged Attack Power|r,\nand is the most important stat for those wearing leather armor\nand mail in the\n|cffFFFFFFDamage-Dealing|r or |cffFFFFFFTank|r role.")
+            GameTooltip:SetText("|cffFFFFFFAgility|r\nAgility increases |cffFFFFFFmelee|r and |cffFFFFFFranged attack power|r,\nand is the most important stat for leather armor\nand mail armor-wearing classes in the\n|cffFFFFFFdamage-dealing|r or |cffFFFFFFtank|r role.")
             GameTooltip:Show()StatFrame_Panel_Agi_Ico_h:Show()
             end)
         StatFrame_Panel_Agi_Ico:SetScript("OnLeave", function(self)
@@ -1004,7 +1011,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
             end)
                 StatFrame_Panel_Int_Ico:SetScript("OnEnter", function(self)
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-            GameTooltip:SetText("|cffFFFFFFIntellect|r\nIntellect increases |cffFFFFFFspell critical chance|r, |cffFFFFFFamount of mana|r and is the most\nimportant stat for mana-using classes\nwearing any armor type in the\n|cffFFFFFFdamage-dealing|r (ranged spell caster) or |cffFFFFFFhealer|r roles.")
+            GameTooltip:SetText("|cffFFFFFFIntellect|r\nIntellect increases |cffFFFFFFspell critical chance|r, |cffFFFFFFamount of mana|r and is the most\nimportant stat for mana-using classes\nwearing any armor type in the\n|cffFFFFFFdamage-dealing|r (ranged spell caster) or |cffFFFFFFhealer|r role.")
             GameTooltip:Show()StatFrame_Panel_Int_Ico_h:Show()
             end)
         StatFrame_Panel_Int_Ico:SetScript("OnLeave", function(self)
@@ -1012,7 +1019,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
             end)
                 StatFrame_Panel_Spi_Ico:SetScript("OnEnter", function(self)
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-            GameTooltip:SetText("|cffFFFFFFSpirit|r\nSpirit is a |cffFFFFFFRegeneration|r stat,\nand increases |cffFFFFFFHealth|r and |cffFFFFFFMana Regeneration|r")
+            GameTooltip:SetText("|cffFFFFFFSpirit|r\nSpirit is the |cffFFFFFFhealer-only|r stat,\nand increases their mana regeneration.")
             GameTooltip:Show()StatFrame_Panel_Spi_Ico_h:Show()
             end)
         StatFrame_Panel_Spi_Ico:SetScript("OnLeave", function(self)
@@ -2159,6 +2166,8 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			local requiredLevel = v[5]
 			local column = v[6]
 			local talent_ID = v[7]
+            local BG_New = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_bg"
+            local BG_Color = {0.46,0.36,0.34,1}
 			
 			local get_spell_link = GetSpellLink(spellIds[1])
 			local name,_, icon, _,_,_,_ = GetSpellInfo(spellIds[1])
@@ -2174,16 +2183,18 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			
 				if player_knows_a_talent == true then
 			
-					get_spell_link = GetSpellLink(spellIds[player_talent_known])
-					
+					get_spell_link = "|cffFFFFFF|Hspell:"..spellIds[player_talent_known].."|h[Talent]|h|r"
+					BG_Color = {1,1,1,1}
 					if player_talent_known == number_of_ranks then
 						learn_tooltip = "Maxed Out"
 						learn_texture = {1, 1, 0}
 						learn_text = "|cff6b625bMax|r"
+                        BG_New = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_rank_max"
 					else
 						attach_it = {spellIds[player_talent_known + 1],AE_cost,TE_cost,spellIds,number_of_ranks}
 						learn_texture = {0, .5, 0}
 						learn_text = "|cffE1AB18Upgrade|r"
+                        BG_New = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_rank"
 					end
 				else
 				
@@ -2199,12 +2210,22 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			all_talent_slot_buttons[button_using]:SetBackdrop({
 				bgFile = icon
 			})
+            all_talent_slot_buttons[button_using]:SetBackdropColor(unpack(BG_Color))
+            all_talent_slots[button_using]:SetBackdrop({
+                        bgFile = BG_New,
+                         insets = {
+                        left = -11,
+                        right = -11,
+                        top = -11,
+                        bottom = -11}
+                        })
+            all_talent_slot_buttons[button_using].HyperLink = get_spell_link
 
 			local talent_indexee = talent_index
 			local function talent_icon_tooltip_Enter(self, motion)
 				GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-				if get_spell_link ~= nil then
-					GameTooltip:SetHyperlink(get_spell_link)
+				if self.HyperLink ~= nil then
+					GameTooltip:SetHyperlink(self.HyperLink)
 				else
 					GameTooltip:SetTalent(tabIndexee, talent_indexee, false, false, nil)
 				end
@@ -2302,7 +2323,9 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 		local text_changed = "|cffE1AB18Upgrade|r"
 		local learn_tooltip = nil
 		local attached_talent = nil
+        local BG_File = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_bg"
 		local FN = 1
+        local BG_Color_U = {0.46,0.36,0.34,1}
 
 
 		for i,v in ipairs(all_spellIds) do
@@ -2312,8 +2335,14 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 					texture_changed = {1, 1, 0}
 					learn_tooltip = "Maxed Out" -- used for talent texts
 					text_changed = "|cff6b625bMax|r"
+                    all_talent_slot_buttons[indexAt].HyperLink = "|cffFFFFFF|Hspell:"..all_spellIds[i].."|h[Talent]|h|r"
+                    BG_File = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_rank_max"
+                    BG_Color_U = {1,1,1,1}
 				else
+                    all_talent_slot_buttons[indexAt].HyperLink = "|cffFFFFFF|Hspell:"..all_spellIds[i].."|h[Talent]|h|r"
 					attached_talent = {all_spellIds[i + 1],AE_cost, TE_cost,all_spellIds,talents_ranks}
+                    BG_File = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_rank"
+                    BG_Color_U = {1,1,1,1}
 				end
 				break
 			end
@@ -2327,14 +2356,23 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			end
 			all_learn_talent_buttons[indexAt]:SetScript("OnEnter", learn_button_tooltip_Enter)
 		end
-		
-		
+
 		all_attached_talent[indexAt] = attached_talent
 		
 		
 		all_learn_talent_buttons[indexAt]:SetText(text_changed)
 			
 		all_talent_FrameNumber[indexAt]:SetText(FN)
+
+        all_talent_slots[indexAt]:SetBackdrop({
+                        bgFile = BG_File,
+                         insets = {
+                        left = -11,
+                        right = -11,
+                        top = -11,
+                        bottom = -11}
+                        })
+        all_talent_slot_buttons[indexAt]:SetBackdropColor(unpack(BG_Color_U))
 		
 		--all_learn_talent_buttons_t[indexAt]:SetTexture(texture_changed[1], texture_changed[2], texture_changed[3], 1)
 		
@@ -2515,7 +2553,7 @@ TrainingFrame.Text_Talent:Hide()
     --ProgressionFrametexture:ClearAllPoints()
     
     DisplaySpellsButton = CreateFrame("Button", "TrainingFrame_DisplaySpellsButton", TrainingFrame, nil)
-        DisplaySpellsButton:SetSize(150, 75)
+        DisplaySpellsButton:SetSize(200, 250)
         DisplaySpellsButton:SetPoint("CENTER", -250, -20)
         DisplaySpellsButton:EnableMouse(true)
         texture_DisplaySpellsButton = DisplaySpellsButton:CreateTexture("DisplaySpellsButton")
@@ -2557,7 +2595,7 @@ TrainingFrame.Text_Talent:Hide()
         
         
     DisplayTalentsButton = CreateFrame("Button", "TrainingFrame_DisplayTalentsButton", TrainingFrame, nil)
-        DisplayTalentsButton:SetSize(150, 75)
+        DisplayTalentsButton:SetSize(200, 250)
         DisplayTalentsButton:SetPoint("CENTER", 22, -20)
         DisplayTalentsButton:EnableMouse(true)
         texture_DisplayTalentsButton = DisplayTalentsButton:CreateTexture("DisplayTalentsButton")
@@ -2982,8 +3020,8 @@ TrainingFrame:SetScript("OnUpdate" , function()
      
     --scrollbar 
     scrollbar = CreateFrame("Slider", nil, scrollframe, "UIPanelScrollBarTemplate") 
-    scrollbar:SetPoint("TOPLEFT", scrollframe, "TOPRIGHT", 4, -16) 
-    scrollbar:SetPoint("BOTTOMLEFT", scrollframe, "BOTTOMRIGHT", 4, 16) 
+    scrollbar:SetPoint("TOPLEFT", scrollframe, "TOPRIGHT", 33, 0) 
+    scrollbar:SetPoint("BOTTOMLEFT", scrollframe, "BOTTOMRIGHT", 33, 0) 
     scrollbar:SetMinMaxValues(0, 670) 
     scrollbar:SetValueStep(1) 
     scrollbar.scrollStep = 1
@@ -3115,9 +3153,12 @@ TrainingFrame:SetScript("OnUpdate" , function()
 	for i,v in ipairs(all_talent_slots) do
         v:SetSize(56, 56)
         v:SetBackdrop({
-            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\buttonbackgroundold",
-            edgeFile = "Interface/DialogFrame/UI-DialogBox-Border",
-            edgeSize = 15
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_bg",
+            insets = {
+            left = -11,
+            right = -11,
+            top = -11,
+            bottom = -11}
         })
         v:SetPoint("TOP", all_talent_coords[i][1], all_talent_coords[i][2])
         v:Show()
@@ -3157,16 +3198,19 @@ TrainingFrame:SetScript("OnUpdate" , function()
     for i,v in ipairs(all_talent_FrameNumber) do
         v:SetSize(16, 16)
         v:SetBackdrop({
-            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\buttonbackgroundold",
-            edgeFile = "Interface/DialogFrame/UI-DialogBox-Border",
-            edgeSize = 5
+            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_fn",
+             insets = {
+            left = -7,
+            right = -7,
+            top = -7,
+            bottom = -7}
         })
-        v:SetPoint("BOTTOMRIGHT", 8, -8)
+        v:SetPoint("BOTTOMRIGHT", 2, -1)
     end
     
     for i,v in ipairs(all_talent_FNF) do
-        v:SetFont("Fonts\\MORPHEUS.TTF", 15, "OUTLINE")
-        v:SetShadowOffset(1, -1)
+        v:SetFont("Fonts\\FRIZQT__.ttf", 13)
+        v:SetShadowOffset(1, 1)
         all_talent_FrameNumber[i]:SetFontString(v)
         all_talent_FrameNumber[i]:SetText(" ")
     end
