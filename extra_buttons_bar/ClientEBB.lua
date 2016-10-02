@@ -582,7 +582,7 @@ sideBar:SetFrameStrata("LOW")
         --fastaccessframe:SetScript
 
             local TrainingButton_fast = CreateFrame("Button", "TrainingButton_fast", fastaccessframe)
-        TrainingButton_fast:SetSize(70, 70)
+         TrainingButton_fast:SetSize(80, 80)
         TrainingButton_fast:SetPoint("CENTER", -40, 0)
         TrainingButton_fast:EnableMouse(true)
         TrainingButton_fast:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbutton")
@@ -590,10 +590,10 @@ sideBar:SetFrameStrata("LOW")
         TrainingButton_fast:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Misc\\spell_Paladin_divinecircle",
              insets = {
-            left = 16,
-            right = 16,
-            top = 16,
-            bottom = 16}
+            left = 18,
+            right = 18,
+            top = 18,
+            bottom = 18}
                 }) -- edited
 
 
@@ -613,21 +613,37 @@ sideBar:SetFrameStrata("LOW")
                 }) -- edited
 
 
-            local ResetButton_fast = CreateFrame("Button", "ResetButton_fast", fastaccessframe)
-        ResetButton_fast:SetSize(54.4, 54.4)
-        ResetButton_fast:SetPoint("CENTER", -18, -23)
+             local ResetButton_fast = CreateFrame("Button", "ResetButton_fast", fastaccessframe)
+        ResetButton_fast:SetSize(46, 46)
+        ResetButton_fast:SetPoint("CENTER", -11, -5)
         ResetButton_fast:EnableMouse(true)
         ResetButton_fast:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbutton")
         ResetButton_fast:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbuttonhighlight")
         ResetButton_fast:SetBackdrop({
-            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Misc\\TimelessCoin-Bloody",
+            bgFile = "Interface\\Icons\\INV_Misc_Orb_03",
              insets = {
-            left = 12,
-            right = 12,
-            top = 12,
-            bottom = 12}
+            left = 11,
+            right = 11,
+            top = 11,
+            bottom = 11}
                 }) -- edited
         ResetButton_fast:SetFrameLevel(3)
+
+        local ResetButton_fast_T = CreateFrame("Button", "ResetButton_fast_T", fastaccessframe)
+        ResetButton_fast_T:SetSize(46, 46)
+        ResetButton_fast_T:SetPoint("CENTER", -30, -30)
+        ResetButton_fast_T:EnableMouse(true)
+        ResetButton_fast_T:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbutton")
+        ResetButton_fast_T:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbuttonhighlight")
+        ResetButton_fast_T:SetBackdrop({
+            bgFile = "Interface\\Icons\\Ability_Marksmanship",
+             insets = {
+            left = 11,
+            right = 11,
+            top = 11,
+            bottom = 11}
+                }) -- edited
+        ResetButton_fast_T:SetFrameLevel(3)
 
         local sideBar_CheckBox = CreateFrame("CheckButton", "sideBar_CheckBox", sideBar, "ChatConfigSmallCheckButtonTemplate")
     sideBar_CheckBox:ClearAllPoints()
@@ -836,9 +852,22 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         AllocateButton_fast:SetScript("OnMouseUp",StatAllocation_button_pushed)
         AllocateButton_fast:SetScript("OnEnter", StatAllocationButton_Tooltip_OnEnter)
         AllocateButton_fast:SetScript("OnLeave", StatAllocationButton_Tooltip_OnLeave)
-        ResetButton_fast:SetScript("OnMouseUp", togglesiderframe)
+        ResetButton_fast:SetScript("OnMouseUp", function()
+            if not(sideBar:IsVisible()) then
+            togglesiderframe()
+        end
+            ResetButton_button_pushed()
+            end)
         ResetButton_fast:SetScript("OnEnter", ResetButton_Tooltip_OnEnter)
         ResetButton_fast:SetScript("OnLeave", ResetButton_Tooltip_OnLeave)
+        ResetButton_fast_T:SetScript("OnMouseUp", function()
+         if not(sideBar:IsVisible()) then
+            togglesiderframe()
+        end
+            ResetButton_t_button_pushed()
+            end)
+        ResetButton_fast_T:SetScript("OnEnter", ResetButton_t_Tooltip_OnEnter)
+        ResetButton_fast_T:SetScript("OnLeave", ResetButton_t_Tooltip_OnLeave)
 		
 	-- ================================ SPECIFIC UI SECTIONS ==============================================
 	
