@@ -32,7 +32,8 @@ function hunger_ticker(event, timer, delay, player)
 
 function update_display_hunger(msg, player)
 	local hunger = player_hunger_table[player:GetGUIDLow()]
-	return msg:Add("HungerBar", "GetHungerPct", hunger)
+	local level = player:GetLevel()
+	max_hunger = (level * 5) + 100
 	local percent = (player_hunger_table[player:GetGUIDLow()] / max_hunger) * 100
 	if percent >= 80 then
 		player:AddAura(818053, player)
@@ -41,7 +42,7 @@ function update_display_hunger(msg, player)
 	elseif percent <= 20 then
 		player:AddAura(818054, player)
 		player:RemoveAura(818053)
-	elseif percent >= 21 and percent <= 79 then
+	elseif (percent >= 21 and percent <= 79) then
 		if player:HasAura(818053) then
 			player:RemoveAura(818053)
 		elseif (player:HasAura(818054) or player:HasAura(818055)) then
@@ -49,6 +50,7 @@ function update_display_hunger(msg, player)
 			player:RemoveAura(818055)
 		end
 	end
+	return msg:Add("HungerBar", "GetHungerPct", hunger)
 end
 
 local function OnLoginPlayer(event, player)
