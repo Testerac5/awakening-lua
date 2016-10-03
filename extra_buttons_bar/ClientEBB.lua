@@ -645,6 +645,22 @@ sideBar:SetFrameStrata("LOW")
                 }) -- edited
         ResetButton_fast_T:SetFrameLevel(3)
 
+        local fastaccessframe_h = ResetButton_fast_T:CreateTexture(nil, "ARTWORK")
+        fastaccessframe_h:SetSize(fastaccessframe:GetSize())
+        fastaccessframe_h:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\fastbuttonHighlight_h")
+        fastaccessframe_h:SetPoint("CENTER", fastaccessframe, 0)
+        fastaccessframe_h:Hide()
+                fastaccessframe:SetScript("OnEnter", function()
+            if not(fastaccessframe_h:IsVisible()) then
+                BaseFrameFadeIn(fastaccessframe_h)
+            end
+            end)
+                fastaccessframe:SetScript("OnLEave", function()
+            if (fastaccessframe_h:IsVisible()) then
+                BaseFrameFadeOut(fastaccessframe_h)
+            end
+            end)
+
         local sideBar_CheckBox = CreateFrame("CheckButton", "sideBar_CheckBox", sideBar, "ChatConfigSmallCheckButtonTemplate")
     sideBar_CheckBox:ClearAllPoints()
     sideBar_CheckBox:SetPoint("LEFT", sideBar.Text_CheckBox, -20, 0)
