@@ -134,7 +134,7 @@ sideBar:SetFrameStrata("LOW")
         sideBar:SetScript("OnShow", function()
                 local uiScale = 1
                 if (GetCVar("useUiScale") == "1") then
-                uiScale = GetCVar("UiScale")
+                uiScale = GetCVar("uiScale")
                 end -- resolution and uiscale fix
             MainFrame_ButtonModels_Ulduar1:SetModel("World\\Expansion02\\doodads\\ulduar\\ul_statue_03.m2")
             MainFrame_ButtonModels_Ulduar1:SetModelScale(0.23)
@@ -453,11 +453,17 @@ sideBar:SetFrameStrata("LOW")
 
         ResetButton_yes:SetScript("OnMouseUp", function()
             PlaySound("igMainMenuOptionCheckBoxOn")
+            if (TrainingFrame:IsVisible()) then
+                TrainingFrame:Hide()
+            end
          Reset_spells_button()
          ResetFrame:Hide()
          end)
         ResetButton_yesTalents:SetScript("OnMouseUp", function()
             PlaySound("igMainMenuOptionCheckBoxOn")
+            if (TrainingFrame:IsVisible()) then
+                TrainingFrame:Hide()
+            end
          Reset_talents_button()
          ResetFrame:Hide()
          end)
@@ -804,7 +810,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
             ResetFrame:Hide()
         end
     else
-        SendSystemMessage("I don't have enough tokens to do that")
+        SendSystemMessage("You are missing the required token to do this!")
     end
         end
         ResetButton:SetScript("OnMouseUp", ResetButton_button_pushed)
@@ -846,7 +852,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
             ResetFrame:Hide()
         end
     else
-        SendSystemMessage("I don't have enough tokens to do that")
+        SendSystemMessage("You are missing the required token to do this!")
     end
         end
         ResetButton_t:SetScript("OnMouseUp", ResetButton_t_button_pushed)
@@ -1361,15 +1367,15 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
 	
 	
 	function Reset_spells_button(self)
-	
+	if not(TrainingFrame:IsVisible()) then
 		AIO.Handle("sideBar", "ResetSpells")
-	
+	end
 	end
 	
 	function Reset_talents_button(self)
-	
+	if not(TrainingFrame:IsVisible()) then
 		AIO.Handle("sideBar", "ResetTalents")
-	
+	end
 	end
 	
 	
@@ -2509,15 +2515,20 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 	
 	function learn_spell(self)
 	   PlaySound("igMainMenuOptionCheckBoxOn")
+       local got_spell = nil
+       local got_index
+
 		for i,v in ipairs(all_learn_spell_buttons) do
 			if self == v then
-				local got_spell = all_attached_spells[i]
-				if got_spell ~= nil then
-					AIO.Handle("sideBar", "LearnThisSpell", got_spell, i)
-				end
+				got_spell = all_attached_spells[i]
+				all_attached_spells[i] = nil
+                got_index = i
 			end
 		end
 	
+      if got_spell ~= nil then
+       AIO.Handle("sideBar", "LearnThisSpell", got_spell, got_index)
+       end
 	end
 	
 	function MyHandlers.ChangeLearnButton(player, i)
