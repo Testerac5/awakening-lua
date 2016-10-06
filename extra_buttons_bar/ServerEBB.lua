@@ -589,23 +589,18 @@ function MyHandlers.LearnThisSpell(player, got_spell, i)
 		end
 	end
 	
-	if player_has_currency == true and currency_one ~= 0 then
-		player:RemoveItem(spell_essence, currency_one)
-	end
-	
-	if player_has_currency == true and currency_two ~= 0 then
-		player:RemoveItem(talent_essence, currency_two)
-	end
-	
-	if player_has_currency == true then
-		player:LearnSpell(spellID)
-	end
-	
 	if successful == false then
 		player:SendBroadcastMessage("You do not have the required currency!")
 		
 	else
+		if (currency_one ~= 0) then
+		player:RemoveItem(spell_essence, currency_one)
+	end
+		if (currency_two ~= 0) then
+		player:RemoveItem(talent_essence, currency_two)
+	end
 		sendButtonToChangeSpells(AIO.Msg(), player, i):Send(player)
+		player:LearnSpell(spellID)
 	end
 	
 end

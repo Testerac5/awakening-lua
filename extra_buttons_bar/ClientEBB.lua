@@ -645,10 +645,10 @@ sideBar:SetFrameStrata("LOW")
                 }) -- edited
         ResetButton_fast_T:SetFrameLevel(3)
 
-        local fastaccessframe_h = ResetButton_fast_T:CreateTexture(nil, "ARTWORK")
+        local fastaccessframe_h = fastaccessframe:CreateTexture(nil, "ARTWORK")
         fastaccessframe_h:SetSize(fastaccessframe:GetSize())
         fastaccessframe_h:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\fastbuttonHighlight_h")
-        fastaccessframe_h:SetPoint("CENTER", fastaccessframe, 0)
+        fastaccessframe_h:SetPoint("CENTER")
         fastaccessframe_h:Hide()
                 fastaccessframe:SetScript("OnEnter", function()
             if not(fastaccessframe_h:IsVisible()) then
