@@ -806,6 +806,9 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
           PlaySound("igMainMenuOptionCheckBoxOn")
           local itemCount_sb_r = GetItemCount(383082) or 0
           if (itemCount_sb_r > 0) then
+            if (TrainingFrame:IsVisible()) then
+                TrainingFrame:Hide()
+            end
             if not(ResetButton_yes:IsVisible()) then
             ResetDialog_text:SetText("|cffE1AB18You are going to reset spells|r")
             ResetFrame:Show()
@@ -848,6 +851,9 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
              PlaySound("igMainMenuOptionCheckBoxOn")
              local itemCount_sb2_r = GetItemCount(383083) or 0
              if (itemCount_sb2_r > 0) then
+                if (TrainingFrame:IsVisible()) then
+                TrainingFrame:Hide()
+            end
             if not(ResetButton_yesTalents:IsVisible()) then
             ResetDialog_text:SetText("|cffE1AB18You are going to reset talents|r")
             ResetFrame:Show()
