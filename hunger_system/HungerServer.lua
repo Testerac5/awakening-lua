@@ -36,6 +36,7 @@ function update_display_hunger(msg, player)
 	max_hunger = (level * 5) + 100
 	local percent = (player_hunger_table[player:GetGUIDLow()] / max_hunger) * 100
 	if percent >= 80 then
+		player:RemoveAura(818053)
 		player:AddAura(818053, player)
 		player:RemoveAura(818054)
 		player:RemoveAura(818055)
