@@ -96,7 +96,7 @@ sideBar:SetFrameStrata("LOW")
 
     AIO.SavePosition(sideBar)
     local ui_w, ui_h = UIParent:GetSize()
-    local uiScale = GetCVar("uiScale")
+    local uiScale = 1
 
         local MainFrame_ButtonModels_Ulduar1 = CreateFrame("Model", "MainFrame_ButtonModels_Ulduar1", sideBar)
         MainFrame_ButtonModels_Ulduar1:SetWidth(ui_w*30/100);               
@@ -132,9 +132,12 @@ sideBar:SetFrameStrata("LOW")
         --MainFrame_ButtonModels_Ulduar1:Hide()
         sideBar:Hide()
         sideBar:SetScript("OnShow", function()
-                local uiScale = 1
                 if (GetCVar("useUiScale") == "1") then
                 uiScale = GetCVar("uiScale")
+            else
+                SetCVar("useUiScale","1")
+                SetCVar("uiScale","1")
+                uiScale = 1
                 end -- resolution and uiscale fix
             MainFrame_ButtonModels_Ulduar1:SetModel("World\\Expansion02\\doodads\\ulduar\\ul_statue_03.m2")
             MainFrame_ButtonModels_Ulduar1:SetModelScale(0.23)
@@ -306,10 +309,13 @@ sideBar:SetFrameStrata("LOW")
         TrainingFrame_SelectedTitle_Stars2_glow:Hide()
 
         TrainingFrame_SelectedTitle:SetScript("OnShow", function()
-                                        local uiScale = 1
-                if (GetCVar("useUiScale") == "1") then
-                uiScale = GetCVar("UiScale")
-                end
+               if (GetCVar("useUiScale") == "1") then
+                uiScale = GetCVar("uiScale")
+            else
+                SetCVar("useUiScale","1")
+                SetCVar("uiScale","1")
+                uiScale = 1
+            end
             TrainingFrame_SelectedTitle_Stars1:SetModel("Particles\\Lootfx2.m2")
             TrainingFrame_SelectedTitle_Stars1:SetModelScale(0.1)
             TrainingFrame_SelectedTitle_Stars1:SetPosition(0.2,0.0,1.85/uiScale)
