@@ -6,10 +6,10 @@
 
 mage_arcane_spells = {{1459, 2, 0, 1}, {5504, 2, 0, 4}, {587, 2, 0, 6}, {5143, 2, 0, 8}, {118, 2, 0, 8},
 {475, 2, 0, 10}, {604, 2, 0, 12}, {130, 2, 0, 12}, {1449, 2, 0, 14}, {1008, 2, 0, 18}, {1463, 2, 0, 20},
-{1953, 2, 0, 20}, {818045, 2, 0, 20}, {12051, 2, 0, 20}, {2139, 2, 0, 24}, {759, 2, 0, 28}, {6117, 2, 0, 34}, {23028, 2, 0, 56},
+{1953, 2, 0, 20}, {818045, 2, 0, 20}, {12051, 2, 0, 20}, {2139, 2, 0, 24}, {759, 2, 0, 28}, {6117, 2, 0, 34},
 {30451, 2, 0, 64}, {66, 2, 0, 68}, {43987, 2, 0, 70}, {30449, 2, 0, 70}, {55342, 2, 0, 80}}
 
-mage_arcane_spells_count = 23
+mage_arcane_spells_count = 22
 mage_arcane_bgs = {"Interface\\TalentFrame\\MageArcane-TopLeft", "Interface\\TalentFrame\\MageArcane-TopRight",
 "Interface\\TalentFrame\\MageArcane-BottomLeft", "Interface\\TalentFrame\\MageArcane-BottomRight"}
 
