@@ -36,7 +36,7 @@ FullLootscrollbar = CreateFrame("Slider", nil, FullLootFrame_scroll, "UIPanelScr
 FullLootscrollbar:SetPoint("TOPLEFT", FullLootFrame, "TOPRIGHT", -100, -53) 
 FullLootscrollbar:SetPoint("BOTTOMLEFT", FullLootFrame, "BOTTOMRIGHT", -100, 30) 
 
-FullLootscrollbar:SetMinMaxValues(1, 1000) 
+FullLootscrollbar:SetMinMaxValues(1, 1250) 
 FullLootscrollbar:SetValueStep(1) 
 FullLootscrollbar.scrollStep = 1
 FullLootscrollbar:SetValue(0) 
@@ -117,6 +117,36 @@ local FullLoot_Text23 = FullLoot_Button23:CreateFontString("FullLoot_Text23")
 local FullLoot_Text24 = FullLoot_Button24:CreateFontString("FullLoot_Text24")
 local FullLoot_Text25 = FullLoot_Button25:CreateFontString("FullLoot_Text25")
 
+local FullLootIconTable = {}
+local FullLoot_Icon1 = FullLoot_Button1:CreateTexture("FullLoot_Icon1")
+local FullLoot_Icon2 = FullLoot_Button2:CreateTexture("FullLoot_Icon2")
+local FullLoot_Icon3 = FullLoot_Button3:CreateTexture("FullLoot_Icon3")
+local FullLoot_Icon4 = FullLoot_Button4:CreateTexture("FullLoot_Icon4")
+local FullLoot_Icon5 = FullLoot_Button5:CreateTexture("FullLoot_Icon5")
+local FullLoot_Icon6 = FullLoot_Button6:CreateTexture("FullLoot_Icon6")
+local FullLoot_Icon7 = FullLoot_Button7:CreateTexture("FullLoot_Icon7")
+local FullLoot_Icon8 = FullLoot_Button8:CreateTexture("FullLoot_Icon8")
+local FullLoot_Icon9 = FullLoot_Button9:CreateTexture("FullLoot_Icon9")
+local FullLoot_Icon10 = FullLoot_Button10:CreateTexture("FullLoot_Icon10")
+local FullLoot_Icon11 = FullLoot_Button11:CreateTexture("FullLoot_Icon11")
+local FullLoot_Icon12 = FullLoot_Button12:CreateTexture("FullLoot_Icon12")
+local FullLoot_Icon13 = FullLoot_Button13:CreateTexture("FullLoot_Icon13")
+local FullLoot_Icon14 = FullLoot_Button14:CreateTexture("FullLoot_Icon14")
+local FullLoot_Icon15 = FullLoot_Button15:CreateTexture("FullLoot_Icon15")
+local FullLoot_Icon16 = FullLoot_Button16:CreateTexture("FullLoot_Icon16")
+local FullLoot_Icon17 = FullLoot_Button17:CreateTexture("FullLoot_Icon17")
+local FullLoot_Icon18 = FullLoot_Button18:CreateTexture("FullLoot_Icon18")
+local FullLoot_Icon19 = FullLoot_Button19:CreateTexture("FullLoot_Icon19")
+local FullLoot_Icon20 = FullLoot_Button20:CreateTexture("FullLoot_Icon20")
+local FullLoot_Icon21 = FullLoot_Button21:CreateTexture("FullLoot_Icon21")
+local FullLoot_Icon22 = FullLoot_Button22:CreateTexture("FullLoot_Icon22")
+local FullLoot_Icon23 = FullLoot_Button23:CreateTexture("FullLoot_Icon23")
+local FullLoot_Icon24 = FullLoot_Button24:CreateTexture("FullLoot_Icon24")
+local FullLoot_Icon25 = FullLoot_Button25:CreateTexture("FullLoot_Icon25")
+for i = 1, 25 do
+	table.insert(FullLootIconTable, _G["FullLoot_Icon"..i])
+end
+
 local FullLoot_ButtonTable = {FullLoot_Button1, FullLoot_Button2, FullLoot_Button3, FullLoot_Button4, FullLoot_Button5, 
 FullLoot_Button6, FullLoot_Button7, FullLoot_Button8, FullLoot_Button9, FullLoot_Button10, FullLoot_Button11, FullLoot_Button12, 
 FullLoot_Button13, FullLoot_Button14, FullLoot_Button15, FullLoot_Button16, FullLoot_Button17, FullLoot_Button18, FullLoot_Button19, 
@@ -150,9 +180,11 @@ function MyHandlers.ReceiveItems(player,itemNumber, itemList, objectid)
 	
 		local FullLoot_Button_null = FullLoot_ButtonTable[itemNumber + nullItems]
 		local FullLoot_Text_null = FullLoot_TextTable[itemNumber + nullItems]
+		local FullLootIconTable_null = FullLootIconTable[itemNumber + nullItems]
 		
 		FullLoot_Button_null:Hide()
 		FullLoot_Text_null:Hide()
+		FullLootIconTable_null:Hide()
 		
 		nullItems = nullItems - 1
 	
@@ -165,9 +197,10 @@ function MyHandlers.ReceiveItems(player,itemNumber, itemList, objectid)
 			repeat
 			local FullLoot_Button = FullLoot_ButtonTable[itemNumber]
 			local FullLoot_Text = FullLoot_TextTable[itemNumber]
+			local FullLoot_Icon = FullLootIconTable[itemNumber]
 			
-			FullLoot_Button:SetSize(270, 40)
-			FullLoot_Button:SetPoint("TOP", 0, (0-((itemNumber-1)*45)))
+			FullLoot_Button:SetSize(256, 52)
+			FullLoot_Button:SetPoint("TOP", 0, (0-((itemNumber-1)*64)))
 			FullLoot_Button:EnableMouse(true)
 			FullLoot_Button:SetHighlightTexture("Interface/Buttons/UI-Listbox-Highlight")
 			FullLoot_Button:SetBackdrop({
@@ -175,8 +208,8 @@ function MyHandlers.ReceiveItems(player,itemNumber, itemList, objectid)
              insets = {
             left = -102,
             right = -102,
-            top = -22,
-            bottom = -22}
+            top = -34,
+            bottom = -34}
                 })
 			item_idd = itemList[itemNumber][2]
 			item_name = itemList[itemNumber][1]
@@ -205,13 +238,18 @@ function MyHandlers.ReceiveItems(player,itemNumber, itemList, objectid)
 			FullLoot_Button:SetScript("OnLeave", FullLoot_Button_Tooltip_OnLeave)
 			FullLoot_Text:SetFont("Fonts\\FRIZQT__.TTF", 14)
 			FullLoot_Text:SetSize(200, 20)
-			FullLoot_Text:SetPoint("CENTER", -20, 0)
+			FullLoot_Text:SetPoint("CENTER", 20, 0)
+			FullLoot_Text:SetShadowOffset(1, -1)
 			local texture_x = "Interface\\Icons\\INV_Chest_Samurai"
 			local name_x, link_x, quality_x, iLevel_x, reqLevel_x, class_x, subclass_x, maxStack_x, equipSlot_x, texture_x2, vendorPrice_x = GetItemInfo(itemList[itemNumber][2])
 			if (texture_x2) then
 				texture_x = texture_x2
 			end
-			FullLoot_Text:SetText("|cffBB11AA|T"..texture_x..".blp:32:32|t|r  "..itemList[itemNumber][1].." x"..itemList[itemNumber][3])
+			FullLoot_Icon:SetWidth(32);               
+        	FullLoot_Icon:SetHeight(34);
+        	FullLoot_Icon:SetTexture(texture_x)
+        	FullLoot_Icon:SetPoint("LEFT", 8, 0)
+			FullLoot_Text:SetText(itemList[itemNumber][1].." x"..itemList[itemNumber][3]) -- edited
 			FullLoot_Text:SetJustifyH("LEFT")
 			
 
@@ -256,7 +294,7 @@ function MyHandlers.ReceiveItems(player,itemNumber, itemList, objectid)
 			
 			FullLoot_Button:Show()
 			FullLoot_Text:Show()
-			
+			FullLoot_Icon:Show()
 			
 			itemNumber = itemNumber - 1
 			until(itemNumber <= 0)
@@ -265,9 +303,11 @@ function MyHandlers.ReceiveItems(player,itemNumber, itemList, objectid)
 		
 			local FullLoot_Button_null = FullLoot_ButtonTable[itemNumber]
 			local FullLoot_Text_null = FullLoot_TextTable[itemNumber]
+			local FullLootIconTable_null = FullLootIconTable[itemNumber]
 			
 			FullLoot_Button_null:Hide()
 			FullLoot_Text_null:Hide()
+			FullLootIconTable_null:Hide()
 			
 			itemNumber = itemNumber - 1
 		
