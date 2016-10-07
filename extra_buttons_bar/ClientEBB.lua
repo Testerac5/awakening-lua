@@ -96,7 +96,7 @@ sideBar:SetFrameStrata("LOW")
 
     AIO.SavePosition(sideBar)
     local ui_w, ui_h = UIParent:GetSize()
-    local uiScale = GetCVar("uiScale")
+    local uiScale = 1
 
         local MainFrame_ButtonModels_Ulduar1 = CreateFrame("Model", "MainFrame_ButtonModels_Ulduar1", sideBar)
         MainFrame_ButtonModels_Ulduar1:SetWidth(ui_w*30/100);               
@@ -132,9 +132,12 @@ sideBar:SetFrameStrata("LOW")
         --MainFrame_ButtonModels_Ulduar1:Hide()
         sideBar:Hide()
         sideBar:SetScript("OnShow", function()
-                local uiScale = 1
                 if (GetCVar("useUiScale") == "1") then
-                uiScale = GetCVar("UiScale")
+                uiScale = GetCVar("uiScale")
+            else
+                SetCVar("useUiScale","1")
+                SetCVar("uiScale","1")
+                uiScale = 1
                 end -- resolution and uiscale fix
             MainFrame_ButtonModels_Ulduar1:SetModel("World\\Expansion02\\doodads\\ulduar\\ul_statue_03.m2")
             MainFrame_ButtonModels_Ulduar1:SetModelScale(0.23)
@@ -306,10 +309,13 @@ sideBar:SetFrameStrata("LOW")
         TrainingFrame_SelectedTitle_Stars2_glow:Hide()
 
         TrainingFrame_SelectedTitle:SetScript("OnShow", function()
-                                        local uiScale = 1
-                if (GetCVar("useUiScale") == "1") then
-                uiScale = GetCVar("UiScale")
-                end
+               if (GetCVar("useUiScale") == "1") then
+                uiScale = GetCVar("uiScale")
+            else
+                SetCVar("useUiScale","1")
+                SetCVar("uiScale","1")
+                uiScale = 1
+            end
             TrainingFrame_SelectedTitle_Stars1:SetModel("Particles\\Lootfx2.m2")
             TrainingFrame_SelectedTitle_Stars1:SetModelScale(0.1)
             TrainingFrame_SelectedTitle_Stars1:SetPosition(0.2,0.0,1.85/uiScale)
@@ -453,11 +459,17 @@ sideBar:SetFrameStrata("LOW")
 
         ResetButton_yes:SetScript("OnMouseUp", function()
             PlaySound("igMainMenuOptionCheckBoxOn")
+            if (TrainingFrame:IsVisible()) then
+                TrainingFrame:Hide()
+            end
          Reset_spells_button()
          ResetFrame:Hide()
          end)
         ResetButton_yesTalents:SetScript("OnMouseUp", function()
             PlaySound("igMainMenuOptionCheckBoxOn")
+            if (TrainingFrame:IsVisible()) then
+                TrainingFrame:Hide()
+            end
          Reset_talents_button()
          ResetFrame:Hide()
          end)
@@ -582,7 +594,7 @@ sideBar:SetFrameStrata("LOW")
         --fastaccessframe:SetScript
 
             local TrainingButton_fast = CreateFrame("Button", "TrainingButton_fast", fastaccessframe)
-        TrainingButton_fast:SetSize(70, 70)
+         TrainingButton_fast:SetSize(80, 80)
         TrainingButton_fast:SetPoint("CENTER", -40, 0)
         TrainingButton_fast:EnableMouse(true)
         TrainingButton_fast:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbutton")
@@ -590,10 +602,10 @@ sideBar:SetFrameStrata("LOW")
         TrainingButton_fast:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Misc\\spell_Paladin_divinecircle",
              insets = {
-            left = 16,
-            right = 16,
-            top = 16,
-            bottom = 16}
+            left = 18,
+            right = 18,
+            top = 18,
+            bottom = 18}
                 }) -- edited
 
 
@@ -613,21 +625,53 @@ sideBar:SetFrameStrata("LOW")
                 }) -- edited
 
 
-            local ResetButton_fast = CreateFrame("Button", "ResetButton_fast", fastaccessframe)
-        ResetButton_fast:SetSize(54.4, 54.4)
-        ResetButton_fast:SetPoint("CENTER", -18, -23)
+             local ResetButton_fast = CreateFrame("Button", "ResetButton_fast", fastaccessframe)
+        ResetButton_fast:SetSize(46, 46)
+        ResetButton_fast:SetPoint("CENTER", -11, -5)
         ResetButton_fast:EnableMouse(true)
         ResetButton_fast:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbutton")
         ResetButton_fast:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbuttonhighlight")
         ResetButton_fast:SetBackdrop({
-            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Misc\\TimelessCoin-Bloody",
+            bgFile = "Interface\\Icons\\INV_Misc_Orb_03",
              insets = {
-            left = 12,
-            right = 12,
-            top = 12,
-            bottom = 12}
+            left = 11,
+            right = 11,
+            top = 11,
+            bottom = 11}
                 }) -- edited
         ResetButton_fast:SetFrameLevel(3)
+
+        local ResetButton_fast_T = CreateFrame("Button", "ResetButton_fast_T", fastaccessframe)
+        ResetButton_fast_T:SetSize(46, 46)
+        ResetButton_fast_T:SetPoint("CENTER", -30, -30)
+        ResetButton_fast_T:EnableMouse(true)
+        ResetButton_fast_T:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbutton")
+        ResetButton_fast_T:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbuttonhighlight")
+        ResetButton_fast_T:SetBackdrop({
+            bgFile = "Interface\\Icons\\Ability_Marksmanship",
+             insets = {
+            left = 11,
+            right = 11,
+            top = 11,
+            bottom = 11}
+                }) -- edited
+        ResetButton_fast_T:SetFrameLevel(3)
+
+        local fastaccessframe_h = fastaccessframe:CreateTexture(nil, "ARTWORK")
+        fastaccessframe_h:SetSize(fastaccessframe:GetSize())
+        fastaccessframe_h:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\fastbuttonHighlight_h")
+        fastaccessframe_h:SetPoint("CENTER")
+        fastaccessframe_h:Hide()
+                fastaccessframe:SetScript("OnEnter", function()
+            if not(fastaccessframe_h:IsVisible()) then
+                BaseFrameFadeIn(fastaccessframe_h)
+            end
+            end)
+                fastaccessframe:SetScript("OnLEave", function()
+            if (fastaccessframe_h:IsVisible()) then
+                BaseFrameFadeOut(fastaccessframe_h)
+            end
+            end)
 
         local sideBar_CheckBox = CreateFrame("CheckButton", "sideBar_CheckBox", sideBar, "ChatConfigSmallCheckButtonTemplate")
     sideBar_CheckBox:ClearAllPoints()
@@ -762,6 +806,9 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
           PlaySound("igMainMenuOptionCheckBoxOn")
           local itemCount_sb_r = GetItemCount(383082) or 0
           if (itemCount_sb_r > 0) then
+            if (TrainingFrame:IsVisible()) then
+                TrainingFrame:Hide()
+            end
             if not(ResetButton_yes:IsVisible()) then
             ResetDialog_text:SetText("|cffE1AB18You are going to reset spells|r")
             ResetFrame:Show()
@@ -772,7 +819,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
             ResetFrame:Hide()
         end
     else
-        SendSystemMessage("I don't have enough tokens to do that")
+        SendSystemMessage("You are missing the required token to do this!")
     end
         end
         ResetButton:SetScript("OnMouseUp", ResetButton_button_pushed)
@@ -804,6 +851,9 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
              PlaySound("igMainMenuOptionCheckBoxOn")
              local itemCount_sb2_r = GetItemCount(383083) or 0
              if (itemCount_sb2_r > 0) then
+                if (TrainingFrame:IsVisible()) then
+                TrainingFrame:Hide()
+            end
             if not(ResetButton_yesTalents:IsVisible()) then
             ResetDialog_text:SetText("|cffE1AB18You are going to reset talents|r")
             ResetFrame:Show()
@@ -814,7 +864,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
             ResetFrame:Hide()
         end
     else
-        SendSystemMessage("I don't have enough tokens to do that")
+        SendSystemMessage("You are missing the required token to do this!")
     end
         end
         ResetButton_t:SetScript("OnMouseUp", ResetButton_t_button_pushed)
@@ -836,9 +886,22 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         AllocateButton_fast:SetScript("OnMouseUp",StatAllocation_button_pushed)
         AllocateButton_fast:SetScript("OnEnter", StatAllocationButton_Tooltip_OnEnter)
         AllocateButton_fast:SetScript("OnLeave", StatAllocationButton_Tooltip_OnLeave)
-        ResetButton_fast:SetScript("OnMouseUp", togglesiderframe)
+        ResetButton_fast:SetScript("OnMouseUp", function()
+            if not(sideBar:IsVisible()) then
+            togglesiderframe()
+        end
+            ResetButton_button_pushed()
+            end)
         ResetButton_fast:SetScript("OnEnter", ResetButton_Tooltip_OnEnter)
         ResetButton_fast:SetScript("OnLeave", ResetButton_Tooltip_OnLeave)
+        ResetButton_fast_T:SetScript("OnMouseUp", function()
+         if not(sideBar:IsVisible()) then
+            togglesiderframe()
+        end
+            ResetButton_t_button_pushed()
+            end)
+        ResetButton_fast_T:SetScript("OnEnter", ResetButton_t_Tooltip_OnEnter)
+        ResetButton_fast_T:SetScript("OnLeave", ResetButton_t_Tooltip_OnLeave)
 		
 	-- ================================ SPECIFIC UI SECTIONS ==============================================
 	
@@ -1316,15 +1379,15 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
 	
 	
 	function Reset_spells_button(self)
-	
+	if not(TrainingFrame:IsVisible()) then
 		AIO.Handle("sideBar", "ResetSpells")
-	
+	end
 	end
 	
 	function Reset_talents_button(self)
-	
+	if not(TrainingFrame:IsVisible()) then
 		AIO.Handle("sideBar", "ResetTalents")
-	
+	end
 	end
 	
 	
@@ -1974,8 +2037,6 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			-- shows
 			DisplaySpellsButton:Show()
 			DisplayTalentsButton:Show()
-
-            TrainingFrame.Text_Talent:Hide()
             TrainingFrame.Text_Ability:Hide()
 
             ProgressionBlueBookBorder:Hide()
@@ -2034,7 +2095,6 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
             TrainingFrame:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\progress_inside_blue",})
             ProgressionBlueBookBorder:Show()
-            TrainingFrame.Text_Talent:Hide()
             TrainingFrame.Text_Ability:Show()
             --TrainingFrameBorder:SetFrameStrata("FULLSCREEN")
 			
@@ -2075,8 +2135,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
             TrainingFrame:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\progress_inside_purple",})
             ProgressionPurpleBookBorder:Show()
-            TrainingFrame.Text_Talent:Show()
-            TrainingFrame.Text_Ability:Hide()
+            TrainingFrame.Text_Ability:Show()
             --TrainingFrameBorder:SetFrameStrata("FULLSCREEN")
 			
 			local all_buttons = {BalanceDruid, FeralDruid, RestorationDruid, BeastMasteryHunter, MarksmanshipHunter, SurvivalHunter,
@@ -2468,15 +2527,20 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 	
 	function learn_spell(self)
 	   PlaySound("igMainMenuOptionCheckBoxOn")
+       local got_spell = nil
+       local got_index
+
 		for i,v in ipairs(all_learn_spell_buttons) do
 			if self == v then
-				local got_spell = all_attached_spells[i]
-				if got_spell ~= nil then
-					AIO.Handle("sideBar", "LearnThisSpell", got_spell, i)
-				end
+				got_spell = all_attached_spells[i]
+				all_attached_spells[i] = nil
+                got_index = i
 			end
 		end
 	
+      if got_spell ~= nil then
+       AIO.Handle("sideBar", "LearnThisSpell", got_spell, got_index)
+       end
 	end
 	
 	function MyHandlers.ChangeLearnButton(player, i)
@@ -2516,18 +2580,12 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 
         TrainingFrame.Text_Ability = TrainingFrameBorder:CreateFontString()
 TrainingFrame.Text_Ability:SetFontObject(GameFontNormal)
-TrainingFrame.Text_Ability:SetPoint("BOTTOM", TrainingFrame,  30, 75);
-TrainingFrame.Text_Ability:SetFont("Fonts\\MORPHEUS.TTF", 18, "OUTLINE")
+TrainingFrame.Text_Ability:SetPoint("BOTTOM", TrainingFrame,  75, 67);
+TrainingFrame.Text_Ability:SetFont("Fonts\\FRIZQT__.TTF", 14, "OUTLINE")
 local itemCount = GetItemCount(383080) or 0
-TrainingFrame.Text_Ability:SetText("|cffE1AB18Ability Essence: |cffFFFFFF"..itemCount)
-TrainingFrame.Text_Ability:Hide()
-    TrainingFrame.Text_Talent = TrainingFrameBorder:CreateFontString()
-TrainingFrame.Text_Talent:SetFontObject(GameFontNormal)
-TrainingFrame.Text_Talent:SetPoint("BOTTOM", TrainingFrame,  30, 75);
-TrainingFrame.Text_Talent:SetFont("Fonts\\MORPHEUS.TTF", 18, "OUTLINE")
 local itemCount2 = GetItemCount(383080) or 0
-TrainingFrame.Text_Talent:SetText("|cffE1AB18Talent Essence: |cffFFFFFF"..itemCount2)
-TrainingFrame.Text_Talent:Hide()
+TrainingFrame.Text_Ability:SetText("|cffE1AB18AE: |cffFFFFFF"..itemCount.." |cffE1AB18TE: |cffFFFFFF"..itemCount2)
+TrainingFrame.Text_Ability:Hide()
 
 
     local ProgressionBlueBookBorder = TrainingFrameBorder:CreateTexture("ProgressionBlueBookBorder", "BACKGROUND") 
@@ -2640,8 +2698,7 @@ DisplayTalentsButton:Disable()
 TrainingFrame:SetScript("OnUpdate" , function() 
                     local itemCount_t = GetItemCount(383080) or 0
     local itemCount2_t = GetItemCount(383081) or 0
-    TrainingFrame.Text_Ability:SetText("|cffE1AB18Ability Essence: |cffFFFFFF"..itemCount_t)
-    TrainingFrame.Text_Talent:SetText("|cffE1AB18Talent Essence: |cffFFFFFF"..itemCount2_t)
+    TrainingFrame.Text_Ability:SetText("|cffE1AB18AE: |cffFFFFFF"..itemCount_t.." |cffE1AB18TE: |cffFFFFFF"..itemCount2_t)
 
                 if not(DisplaySpellsButton:IsVisible()) then
             TrainingFrame_SelectedTitle_Stars1:Hide()
