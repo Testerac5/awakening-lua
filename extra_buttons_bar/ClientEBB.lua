@@ -1058,7 +1058,7 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
             end)
                 StatFrame_Panel_Sta_Ico:SetScript("OnEnter", function(self)
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-            GameTooltip:SetText("|cffFFFFFFStamina|r\nStamina is the source of all |cffFFFFFFhealth|r.\nAll armor has stamina on it, and all classes\nand specializations wear armor with stamina on it,\nbut |cffFFFFFFtanks|r generally have the most.\nPlayers convert stamina into an increasing\namount of health based on character level")
+            GameTooltip:SetText("|cffFFFFFFStamina|r\nStamina is the source of all |cffFFFFFFhealth|r.\nMost armor has stamina on it, and all classes\nand specializations wear armor with stamina on it,\nbut |cffFFFFFFtanks|r generally have the most.")
             GameTooltip:Show()StatFrame_Panel_Sta_Ico_h:Show()
             end)
         StatFrame_Panel_Sta_Ico:SetScript("OnLeave", function(self)
@@ -1379,12 +1379,14 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
 	
 	
 	function Reset_spells_button(self)
+        display_stuff(GeneralStuff)
 	if not(TrainingFrame:IsVisible()) then
 		AIO.Handle("sideBar", "ResetSpells")
 	end
 	end
 	
 	function Reset_talents_button(self)
+        display_stuff(GeneralStuff)
 	if not(TrainingFrame:IsVisible()) then
 		AIO.Handle("sideBar", "ResetTalents")
 	end
