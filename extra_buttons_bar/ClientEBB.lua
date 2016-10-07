@@ -1379,12 +1379,14 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
 	
 	
 	function Reset_spells_button(self)
+        display_stuff(GeneralStuff)
 	if not(TrainingFrame:IsVisible()) then
 		AIO.Handle("sideBar", "ResetSpells")
 	end
 	end
 	
 	function Reset_talents_button(self)
+        display_stuff(GeneralStuff)
 	if not(TrainingFrame:IsVisible()) then
 		AIO.Handle("sideBar", "ResetTalents")
 	end
