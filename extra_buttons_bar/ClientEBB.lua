@@ -135,7 +135,7 @@ sideBar:SetFrameStrata("LOW")
                 if (GetCVar("useUiScale") == "1") then
                 uiScale = GetCVar("uiScale")
             else
-                SetCVar("useUiScale","1")
+                --SetCVar("useUiScale","1")
                 SetCVar("uiScale","1")
                 uiScale = 1
                 end -- resolution and uiscale fix
@@ -312,7 +312,7 @@ sideBar:SetFrameStrata("LOW")
                if (GetCVar("useUiScale") == "1") then
                 uiScale = GetCVar("uiScale")
             else
-                SetCVar("useUiScale","1")
+                --SetCVar("useUiScale","1")
                 SetCVar("uiScale","1")
                 uiScale = 1
             end
