@@ -1,5 +1,10 @@
 --[[
 			ToDO:
+1. Reduce decimal places on timer
+
+
+
+
 
 ]]--
 
@@ -17,9 +22,10 @@ local function PvPExp(event, pKiller, pKilled)
 	local killerguid = pKiller:GetGUIDLow()
 	local victimguid = pKilled:GetGUIDLow()
 	local check = CharDBQuery("SELECT victimguid FROM character_kill_count WHERE killerguid = "..killerguid)
-	local cap = 5 -- Set max kills here
+	local cap = 5 -- set cap
 	if(pKiller ~= pKilled) then
 		if(check == nil) then -- if player has not killed anyone yet:
+			print("Player has no kill data")
 			CharDBExecute("INSERT INTO character_kill_count(killerguid, victimguid, count) VALUES("..killerguid..","..victimguid..",1)")
 			if (exp2 >= exp1 - 10 and exp2 <= exp1 + 10) then
 				pKiller:GiveXP(ExpBase)

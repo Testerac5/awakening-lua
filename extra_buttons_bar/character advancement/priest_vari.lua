@@ -5,9 +5,9 @@
 -- talents tab variables refers to talenttab dbc
 
 priest_discipline_spells = {{1243, 2, 0, 1}, {17, 2, 0, 6}, {588, 2, 0, 12}, {527, 2, 0, 18}, {9484, 2, 0, 20},
-{6346, 2, 0, 20}, {8129, 2, 0, 24}, {14752, 2, 0, 30}, {1706, 2, 0, 34}, {21562, 2, 0, 48}, {32375, 2, 0, 70}}
+{6346, 2, 0, 20}, {8129, 2, 0, 24}, {14752, 2, 0, 30}, {1706, 2, 0, 34}, {32375, 2, 0, 70}}
 
-priest_discipline_spells_count = 11
+priest_discipline_spells_count = 10
 priest_discipline_bgs = {"Interface\\TalentFrame\\PriestDiscipline-TopLeft", "Interface\\TalentFrame\\PriestDiscipline-TopRight",
 "Interface\\TalentFrame\\PriestDiscipline-BottomLeft", "Interface\\TalentFrame\\PriestDiscipline-BottomRight"}
 
@@ -52,10 +52,10 @@ priest_holy_talents_tab = 11
 
 
 priest_shadow_spells = {{589, 2, 0, 4}, {586, 2, 0, 8}, {8092, 2, 0, 10}, {8122, 2, 0, 10}, {2944, 2, 0, 20},
-{453, 2, 0, 20}, {2096, 2, 0, 22}, {976, 2, 0, 30}, {605, 2, 0, 30}, {27683, 2, 0, 56}, {32379, 2, 0, 62},
+{453, 2, 0, 20}, {2096, 2, 0, 22}, {976, 2, 0, 30}, {605, 2, 0, 30}, {32379, 2, 0, 62},
 {34433, 2, 0, 66}, {48045, 2, 0, 75}}
 
-priest_shadow_spells_count = 13
+priest_shadow_spells_count = 12
 priest_shadow_bgs = {"Interface\\TalentFrame\\PriestShadow-TopLeft", "Interface\\TalentFrame\\PriestShadow-TopRight",
 "Interface\\TalentFrame\\PriestShadow-BottomLeft", "Interface\\TalentFrame\\PriestShadow-BottomRight"}
 
