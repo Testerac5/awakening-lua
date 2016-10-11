@@ -69,7 +69,7 @@ local function EntropyPvP(event, pKiller, pKilled)
 			--if (pKilled:GetGuildName()~=nil) then
 				--killedguild_name = " of"..pkilled:GetGuildName()..""
 			--end
-			if ((pKiller:GetLevel()-pKilled:GetLevel())<=leveldiff) then		
+			if (((pKiller:GetLevel()-pKilled:GetLevel())<=leveldiff) and ((pKiller:GetLevel()-pKilled:GetLevel())>=(leveldiff * -1))) then		
 				local pKilledGUID = pKilled:GetGUIDLow()
 				local pKillerGUID = pKiller:GetGUIDLow()
 				local x,y,z,o = pKilled:GetX(),pKilled:GetY(),pKilled:GetZ(),pKilled:GetO()
@@ -100,7 +100,13 @@ local function EntropyPvP(event, pKiller, pKilled)
 					if (checkitem ~= 0) then -- Checks to make sure player has an item
 						if (checkitem~=nil) and (checkitem:IsBag()==false) and (checkitem:GetEntry()~=6948) then
 							item_ticker = item_ticker+1
-							table.insert (item_table[FullLootContainer:GetGUIDLow()], {checkitem:GetItemLink(), checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()), pKilled:GetName()})
+							if (checkitem:GetClass() == 2 or checkitem:GetClass() == 4) then
+								if (checkitem:GetEnchantmentId(5) == 0 or checkitem:GetEnchantmentId(5) == nil) then
+									table.insert (item_table[FullLootContainer:GetGUIDLow()], {checkitem:GetItemLink(), checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()), pKilled:GetName()})
+								else
+									table.insert (item_table[FullLootContainer:GetGUIDLow()], {checkitem:GetItemLink(), checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()), pKilled:GetName(), checkitem:GetEnchantmentId(5)})
+								end
+							end
 							table.insert (remove_table[FullLootContainer:GetGUIDLow()], {item_ticker, false})
 							pKilled:RemoveItem(checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()))
 						end
@@ -146,7 +152,7 @@ local function CreatureDeath (event, pKiller, pKilled)
 	end
 	if (pKiller:GetOwner() == nil or pKiller:GetOwner() == 0) then
 		 petkill = false
-		 print("No Owner")
+		 --print("No Owner")
 	else
 		local plrs = pKiller:GetPlayersInRange(20)
 		for h,p in pairs(plrs) do
@@ -187,7 +193,7 @@ local function CreatureDeath (event, pKiller, pKilled)
 			if petkill == true then
 				bagToTake = bagToTake + 6
 			else
-				bagToTake = bagToTake + 4
+				bagToTake = bagToTake + 6
 			end
 		end
 			local slotToTake = math.random(SlotRange)
@@ -212,7 +218,13 @@ local function CreatureDeath (event, pKiller, pKilled)
 			if petkill == false then
 				if (checkitem~=nil) and (checkitem:IsBag()==false) and (checkitem:GetEntry()~=6948) and safe_to_take == true then
 					item_ticker = item_ticker+1
-					table.insert (item_table[FullLootContainer:GetGUIDLow()], {checkitem:GetItemLink(), checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()), pKilled:GetName()})
+					if (checkitem:GetClass() == 2 or checkitem:GetClass() == 4) then
+						if (checkitem:GetEnchantmentId(5) == 0 or checkitem:GetEnchantmentId(5) == nil) then
+							table.insert (item_table[FullLootContainer:GetGUIDLow()], {checkitem:GetItemLink(), checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()), pKilled:GetName()})
+						else
+							table.insert (item_table[FullLootContainer:GetGUIDLow()], {checkitem:GetItemLink(), checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()), pKilled:GetName(), checkitem:GetEnchantmentId(5)})
+						end
+					end
 					table.insert (remove_table[FullLootContainer:GetGUIDLow()], {item_ticker, false})
 					pKilled:RemoveItem(checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()))
 				end
@@ -220,7 +232,13 @@ local function CreatureDeath (event, pKiller, pKilled)
 				if (checkitem ~= 0) then -- Checks to make sure player has an item
 					if (checkitem~=nil) and (checkitem:IsBag()==false) and (checkitem:GetEntry()~=6948) then
 						item_ticker = item_ticker+1
-						table.insert (item_table[FullLootContainer:GetGUIDLow()], {checkitem:GetItemLink(), checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()), pKilled:GetName()})
+						if (checkitem:GetClass() == 2 or checkitem:GetClass() == 4) then
+							if (checkitem:GetEnchantmentId(5) == 0 or checkitem:GetEnchantmentId(5) == nil) then
+								table.insert (item_table[FullLootContainer:GetGUIDLow()], {checkitem:GetItemLink(), checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()), pKilled:GetName()})
+							else
+								table.insert (item_table[FullLootContainer:GetGUIDLow()], {checkitem:GetItemLink(), checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()), pKilled:GetName(), checkitem:GetEnchantmentId(5)})
+							end
+						end
 						table.insert (remove_table[FullLootContainer:GetGUIDLow()], {item_ticker, false})
 						pKilled:RemoveItem(checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()))
 					end
@@ -289,9 +307,14 @@ function MyHandlers.AddPlayerItem(player, itemEntry, itemCount, object)
 	for i,v in pairs(item_table[object]) do
 		if v[2] == itemEntry then
 			player:AddItem(itemEntry, itemCount)
+			if (item_table[object][i][5] ~= nil or item_table[object][i][5] ~= 0) then
+				player:GetItemByEntry(itemEntry):SetEnchantment(item_table[object][i][5], 5)
+				item_table[object][i][5] = nil
+			end
 			item_table[object][i][2] = nil
 			item_table[object][i][1] = nil
 			item_table[object][i][3] = nil
+			
 		end
 	
 	end
