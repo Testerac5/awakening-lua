@@ -11,9 +11,9 @@ local MyHandlers = AIO.AddHandlers("sideBar", {})
 
 --fading function
 
-local FramesToFade = {}
+FramesToFade = {}
 
-local function BaseFrameFade(frame, mode)
+function BaseFrameFade(frame, mode)
     if (frame) then
         frame.FadeTimer = 0
         if (frame.time) then
@@ -26,17 +26,17 @@ local function BaseFrameFade(frame, mode)
     end
 end
 
-local function BaseFrameFadeIn(frame, mode)
+function BaseFrameFadeIn(frame, mode)
     BaseFrameFade(frame, "IN")
     frame:Show()
 end
 
-local function BaseFrameFadeOut(frame, mode)
+function BaseFrameFadeOut(frame, mode)
     BaseFrameFade(frame, "OUT")
     --frame:Show()
 end
 
-local function BaseFading(elapsed)
+function BaseFading(elapsed)
     for k,frame in pairs(FramesToFade) do
         frame.FadeTimer = frame.FadeTimer + 0.1
         if (frame.FadeTimer < frame.TimeToFade) then
@@ -57,7 +57,7 @@ local function BaseFading(elapsed)
     end
     end
 
-local fadingFunc = CreateFrame("FRAME", "fadingFunc")
+fadingFunc = CreateFrame("FRAME", "fadingFunc")
 fadingFunc:SetScript("OnUpdate", BaseFading)
 --end of fading function
 
