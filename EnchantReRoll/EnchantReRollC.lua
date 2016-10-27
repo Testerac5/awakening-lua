@@ -8,6 +8,7 @@ end
 
 local MyHandlers = AIO.AddHandlers("EnchantReRoll", {})
 
+local Reforge_Spell = 964998
 --[[MAIN FRAME SCRIPTS]]--
 local function EnchantReRollMain_RollButton_Check(self,elapsed)
     if (EnchantReRollMain.item) then
@@ -32,9 +33,18 @@ EnchantReRollMain.Slot = bag-1
 end
     end
 
+local function EnchantReRollMain_Reforge_CastSuccess(self,event,unit,spellname)
+    local name = GetSpellInfo(964998)
+    if (spellname == name) and (unit == "player") then
+        if (EnchantReRollMain.item and EnchantReRollMain_RollButton.Bag and EnchantReRollMain_RollButton.Slot) then
+            AIO.Handle("EnchantReRoll", "ReforgeItem", EnchantReRollMain_RollButton.Bag, EnchantReRollMain_RollButton.Slot)
+        end
+    end
+end
+
  function MyHandlers.EnchantReRollMain_Reforge(player,neweffect) -- AIO
 --Set up strings from server
-EnchantReRollMain.itemEffect2 = neweffect
+EnchantReRollMain.itemEffect2 = GetSpellDescription(nameeffect)
 EnchantReRollMain_Item_EffectAFrame_BaseEffectAText:SetText("|cff00FF00"..EnchantReRollMain.itemEffect2.."|r")
 --Play Reforge Animations
 EnchantReRollMain_Item_EffectAFrame_Animgroup:Stop()
@@ -78,10 +88,12 @@ EnchantReRollMain_RollButton:SetPoint("BOTTOM", 0,90)
 EnchantReRollMain_RollButton:RegisterForClicks("AnyUp") 
 EnchantReRollMain_RollButton:SetText("Reforge item")
 EnchantReRollMain_RollButton:Disable()
+EnchantReRollMain_RollButton:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
+EnchantReRollMain_RollButton:SetScript("OnEvent", EnchantReRollMain_Reforge_CastSuccess)
 EnchantReRollMain_RollButton:SetScript("OnUpdate", EnchantReRollMain_RollButton_Check)
 EnchantReRollMain_RollButton:SetScript("OnMouseDown",function()
     if (EnchantReRollMain.item and EnchantReRollMain_RollButton.Bag and EnchantReRollMain_RollButton.Slot) then
-    AIO.Handle("EnchantReRoll", "ReforgeItem", EnchantReRollMain_RollButton.Bag, EnchantReRollMain_RollButton.Slot)
+    AIO.Handle("EnchantReRoll", "ReforgeItem_Prep", EnchantReRollMain_RollButton.Bag, EnchantReRollMain_RollButton.Slot)
 end
     end)
 
@@ -112,7 +124,7 @@ local name, itemlink, _, _, _, _, _, _, _, texture, _ = GetItemInfo(item)
 ClearCursor()
 EnchantReRollMain_Item.Button:SetNormalTexture(texture)
 EnchantReRollMain.item = item
-EnchantReRollMain.itemEffect = nameeffect
+EnchantReRollMain.itemEffect = GetSpellDescription(nameeffect)
 EnchantReRollMain.itemCost = cost
 --For Reforge
 EnchantReRollMain_RollButton.Slot = slot

@@ -4,7 +4,53 @@ local AIO = AIO or require("AIO")
 local MyHandlers = AIO.AddHandlers("sideBar", {})
 local ghost = {8326}
 
+local Reset_Level = {
+    [0] = {2500, 2700, 105},
+    [10] = {5000, 7500, 150},
+    [20] = {7500, 10000, 2150},
+    [30] = {50000,150000,3250},
+    [40] = {150000,300000,9250},
+    [50] = {300000,1000000,10550},
+    [60] = {500000,2500000,20000},
+}
 
+local function GetMoneyForReset(player,purgemissing)
+	local TalentMult = 0
+	local SpellMult = 0
+	local mult = 0
+	local SQLMultQuery = CharDBQuery("SELECT ability_resets, talent_resets FROM custom_resets WHERE char_guid = "..player:GetGUIDLow()..";")
+	if not(SQLMultQuery) then
+		CharDBExecute("INSERT INTO custom_resets VALUES ("..player:GetGUIDLow()..",0,0);")
+	else
+		SpellMult = SQLMultQuery:GetInt32(0)
+		TalentMult = SQLMultQuery:GetInt32(1)
+	end
+for k,v in pairs(Reset_Level) do
+    if (player:GetLevel() >= k) and (player:GetLevel() < k+10) then
+
+    	if (purgetype == 2) then
+        mult = TalentMult
+        elseif (purgetype == 1) then
+        mult = SpellMult
+    	end
+
+        local talent_cost = Reset_Level[k][purgemissing] + Reset_Level[k][3]*(player:GetLevel()-k+mult*2)
+        return talent_cost,TalentMult,SpellMult
+    end
+end
+end
+
+ function MyHandlers.GetMults(player)
+ 	local cost = 0
+ 	local t_mult = 0
+ 	local a_mult = 0
+ 	cost, t_mult, a_mult = GetMoneyForReset(player, 1)
+	resetFrame_Refresh(AIO.Msg(), player,t_mult, a_mult):Send(player)
+end
+
+ function resetFrame_Refresh(msg,player,t_mult, a_mult)
+	return msg:Add("sideBar", "ResetFrame_Init", t_mult, a_mult)
+end
 
 function MyHandlers.ReceivePlayerStats(player)
 	local player_guid = player:GetGUIDLow()
@@ -315,6 +361,11 @@ end
 local function OnLevelChange(event, player, oldLevel)
 
 	local player_guid = player:GetGUIDLow()
+		--resets part--
+		if (oldLevel == 9) or (oldLevel == 19) or (oldLevel == 29) or (oldLevel == 39) or (oldLevel == 49) or (oldLevel == 59) then
+		CharDBExecute("DELETE FROM custom_resets WHERE char_guid = "..player_guid..";")
+		resetFrame_Refresh(AIO.Msg(), player,0, 0):Send(player)
+		end
 
 	local points_query = CharDBQuery("SELECT points FROM character_stat_points WHERE guid = "..player_guid)
 	local point_val = points_query:GetInt32(0)
@@ -354,7 +405,7 @@ RegisterPlayerEvent(3, OnPlayerLogin)
 
 
 function MyHandlers.ResetSpells(player)
-
+	local cost = GetMoneyForReset(player,2)
 	local all_spell_lists = {druid_balance_spells, druid_feral_spells, druid_restoration_spells,
 							   hunter_beastmastery_spells, hunter_marksmanship_spells, hunter_survival_spells,
 							   mage_arcane_spells, mage_fire_spells, mage_frost_spells,
@@ -367,8 +418,12 @@ function MyHandlers.ResetSpells(player)
 	if (player:InArena() ==	true or player:InBattleground() == 	true) then
 		player:SendBroadcastMessage("You can't do that in Battlegrounds and Arenas.")
 	else
-		if player:HasItem(spell_reset_token) == true or free_spell_reset == true then		
+		if player:HasItem(spell_reset_token) == true or free_spell_reset == true or (player:GetCoinage() >= cost) then
+		if (player:HasItem(spell_reset_token) == true or free_spell_reset == true) then		 
 			player:RemoveItem(spell_reset_token, 1)
+		else
+			player:ModifyMoney(-cost)
+		end
 			local noTEspells = {54785, 50589, 50581, 59671, 11417, 11420, 11418, 3567, 3566, 3563, 11419, 11416, 10059, 3565, 3562, 3561}
 			for s, sid in pairs(noTEspells) do
 				if player:HasSpell(sid) then
@@ -393,6 +448,11 @@ function MyHandlers.ResetSpells(player)
 					end
 				end
 			end
+			--custom mult part
+			CharDBExecute("UPDATE custom_resets SET ability_resets = ability_resets+1 WHERE char_guid = "..player:GetGUIDLow()..";")
+			local temp_cost, temp_t_mult, temp_a_mult = GetMoneyForReset(player, 1)
+			resetFrame_Refresh(AIO.Msg(), player,temp_t_mult, temp_a_mult+1):Send(player)
+			--
 			player:SendBroadcastMessage("Refund Complete for Spells")
 		else
 			player:SendBroadcastMessage("You are missing the required token to do this!")
@@ -404,7 +464,7 @@ end
 
 
 function MyHandlers.ResetTalents(player)
-
+	local cost = GetMoneyForReset(player,1)
 	local all_talent_lists = {druid_balance_talents, druid_feral_talents, druid_restoration_talents,
 							   hunter_beastmastery_talents, hunter_marksmanship_talents, hunter_survival_talents,
 							   mage_arcane_talents, mage_fire_talents, mage_frost_talents,
@@ -417,8 +477,12 @@ function MyHandlers.ResetTalents(player)
 	if (player:InArena() ==	true or player:InBattleground() == 	true) then
 		player:SendBroadcastMessage("You can't do that in Battlegrounds and Arenas.")
 	else						   
-		if player:HasItem(talent_reset_token) == true or free_talent_reset == true then
+		if player:HasItem(talent_reset_token) == true or free_talent_reset == true or (player:GetCoinage() >= cost) then
+		if (player:HasItem(talent_reset_token) == true or free_talent_reset == true) then		 
 			player:RemoveItem(talent_reset_token, 1)
+		else
+			player:ModifyMoney(-cost)
+		end
 			for i,v in ipairs(all_talent_lists) do
 			
 				for listloc,talent in ipairs(v) do
@@ -447,9 +511,12 @@ function MyHandlers.ResetTalents(player)
 						end
 					end
 				end
-			
-			
 			end
+			--custom mult part
+			CharDBExecute("UPDATE custom_resets SET talent_resets = talent_resets+1 WHERE char_guid = "..player:GetGUIDLow()..";")
+			local temp_cost, temp_t_mult, temp_a_mult = GetMoneyForReset(player, 1)
+			resetFrame_Refresh(AIO.Msg(), player,temp_t_mult+1, temp_a_mult):Send(player)
+			--
 			player:SendBroadcastMessage("Refund Complete for talents")
 		else
 			player:SendBroadcastMessage("You are missing the required token to do this!")

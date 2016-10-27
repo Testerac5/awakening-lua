@@ -15,7 +15,7 @@ end
 
 function EnchantItemCost(item)
 	local cost = nil
-	cost = item:GetItemLevel()*1000
+	cost = item:GetItemLevel()*10000
 	return cost
 end
 --MAIN SET ITEM FUNCTION
@@ -24,8 +24,8 @@ end
 	if (EnchantItemCheck(player,item)) then
 
 	local itemlink = GetItemLink(item:GetEntry())
-	local effect = item:GetEnchantmentId(5)
-	local cost = EnchantItemCost(item)/1000
+	local effect = item:GetEnchantmentSpellId(5)
+	local cost = EnchantItemCost(item)/10000
 
 	enchantReRoll_PlaceItem(AIO.Msg(), player,itemlink, effect, cost,bag,slot):Send(player)
 	end
@@ -37,10 +37,24 @@ end
 --end
 
 --MAIN REFORGE ITEM FUNCTION
+function MyHandlers.ReforgeItem_Prep(player,bag,slot)
+local item = player:GetItemByPos(bag,slot)
+	if (EnchantItemCheck(player,item)) then
+		local cost = EnchantItemCost(item)
+
+			if (cost > player:GetCoinage()) then
+			player:SendBroadcastMessage("You don't have enough money to do that")
+			return false
+		end
+
+			player:CastSpell(player, 964998)
+	end
+end
+
 function MyHandlers.ReforgeItem(player,bag,slot)
 	local item = player:GetItemByPos(bag,slot)
 	if (EnchantItemCheck(player,item)) then
-		local effect = item:GetEnchantmentId(5)
+		local effect = item:GetEnchantmentSpellId(5)
 		local cost = EnchantItemCost(item)
 		local class = item:GetClass()
 		local enchantTier = 1
