@@ -203,15 +203,16 @@ RegisterPlayerEvent(5, RestCheck)
 
 
 function On_LogIn (event, player)
- player:AddAura(7711, player)			--Modded in the DBC files, this is the aura that makes auto attacks cost energy.
-	player:RemoveSpell(668, player)
-	player:LearnSpell(668, player)			--Language glitch band-aid. Teaches Player common
-	if (player:GetAura(818012)) then
-		player:RegisterEvent(EnergyDrain, 1000, 0)
-	end
+ player:AddAura(7711, player)   --Modded in the DBC files, this is the aura that makes auto attacks cost energy.
+ player:RemoveSpell(668, player)
+ player:LearnSpell(668, player)   --Language glitch band-aid. Teaches Player common
+ player:LearnSpell(669, player)   --Language glitch band-aid. Teaches Player common
+ player:SetSkill(98, 1, 300, 300)
+ player:SetSkill(109, 1, 300, 300)
+ if (player:GetAura(818012)) then
+  player:RegisterEvent(EnergyDrain, 1000, 0)
+ end
 end
-
-RegisterPlayerEvent(3, On_LogIn)
 
 
 function first_login (event, player)
