@@ -123,6 +123,7 @@ EnchantReRollMain_Item_EffectAFrame_ReforgeCompleteTexture:Hide()
 --Setting up item to the button
 local name, itemlink, _, _, _, _, _, _, _, texture, _ = GetItemInfo(item)
 ClearCursor()
+print(nameeffect) --debug
 EnchantReRollMain_Item.Button:SetNormalTexture(texture)
 EnchantReRollMain.item = item
 EnchantReRollMain.itemEffect = GetSpellDescription(nameeffect)
