@@ -44,7 +44,6 @@ end
 
  function MyHandlers.EnchantReRollMain_Reforge(player,neweffect) -- AIO
 --Set up strings from server
-print(nameeffect) --debug
 EnchantReRollMain.itemEffect2 = GetSpellDescription(nameeffect)
 EnchantReRollMain_Item_EffectAFrame_BaseEffectAText:SetText("|cff00FF00"..EnchantReRollMain.itemEffect2.."|r")
 --Play Reforge Animations
@@ -123,7 +122,6 @@ EnchantReRollMain_Item_EffectAFrame_ReforgeCompleteTexture:Hide()
 --Setting up item to the button
 local name, itemlink, _, _, _, _, _, _, _, texture, _ = GetItemInfo(item)
 ClearCursor()
-print(nameeffect) --debug
 EnchantReRollMain_Item.Button:SetNormalTexture(texture)
 EnchantReRollMain.item = item
 EnchantReRollMain.itemEffect = GetSpellDescription(nameeffect)

@@ -22,10 +22,10 @@ end
  function MyHandlers.SetItem(player,bag,slot)
  local item = player:GetItemByPos(bag,slot)
 	if (EnchantItemCheck(player,item)) then
-
 	local itemlink = GetItemLink(item:GetEntry())
 	local effect = item:GetEnchantmentSpellId(5)
 	local cost = EnchantItemCost(item)/10000
+	player:SendBroadcastMessage(effect) -- debug
 
 	enchantReRoll_PlaceItem(AIO.Msg(), player,itemlink, effect, cost,bag,slot):Send(player)
 	end
@@ -55,6 +55,7 @@ function MyHandlers.ReforgeItem(player,bag,slot)
 	local item = player:GetItemByPos(bag,slot)
 	if (EnchantItemCheck(player,item)) then
 		local effect = item:GetEnchantmentSpellId(5)
+
 		local cost = EnchantItemCost(item)
 		local class = item:GetClass()
 		local enchantTier = 1
