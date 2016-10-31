@@ -44,7 +44,7 @@ end
 
  function MyHandlers.EnchantReRollMain_Reforge(player,neweffect) -- AIO
 --Set up strings from server
-EnchantReRollMain.itemEffect2 = GetSpellDescription(nameeffect)
+EnchantReRollMain.itemEffect2 = GetSpellLink(nameeffect)
 EnchantReRollMain_Item_EffectAFrame_BaseEffectAText:SetText("|cff00FF00"..EnchantReRollMain.itemEffect2.."|r")
 --Play Reforge Animations
 EnchantReRollMain_Item_EffectAFrame_Animgroup:Stop()
@@ -124,7 +124,7 @@ local name, itemlink, _, _, _, _, _, _, _, texture, _ = GetItemInfo(item)
 ClearCursor()
 EnchantReRollMain_Item.Button:SetNormalTexture(texture)
 EnchantReRollMain.item = item
-EnchantReRollMain.itemEffect = GetSpellDescription(nameeffect)
+EnchantReRollMain.itemEffect = GetSpellLink(nameeffect)
 EnchantReRollMain.itemCost = cost
 --For Reforge
 EnchantReRollMain_RollButton.Slot = slot
@@ -214,13 +214,13 @@ EnchantReRollMain_Item_BackgroundTexture_Effect:Hide()
 --[ITEM FRAME EFFECT SCRIPTS]--
 local function EnchantReRollMain_Item_EffectFrame_ShowLink(self)
 GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-GameTooltip:SetText(EnchantReRollMain_Item_EffectFrame_BaseEffectText:GetText())
+GameTooltip:SetHyperlink(EnchantReRollMain.itemEffect)
 GameTooltip:Show()
     end
 
 local function EnchantReRollMain_Item_EffectAFrame_ShowLink(self)
 GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-GameTooltip:SetText(EnchantReRollMain_Item_EffectAFrame_BaseEffectAText:GetText())
+GameTooltip:SetHyperlink(EnchantReRollMain.itemEffect2)
 GameTooltip:Show()
 end
 

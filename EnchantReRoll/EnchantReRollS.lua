@@ -25,7 +25,6 @@ end
 	local itemlink = GetItemLink(item:GetEntry())
 	local effect = item:GetEnchantmentSpellId(5)
 	local cost = EnchantItemCost(item)/10000
-	player:SendBroadcastMessage(effect) -- debug
 
 	enchantReRoll_PlaceItem(AIO.Msg(), player,itemlink, effect, cost,bag,slot):Send(player)
 	end
