@@ -255,9 +255,12 @@ function first_login (event, player)
 	player:LearnSpell(818011)
 	player:LearnSpell(818040)
 	player:LearnSpell(818039)
+	player:LearnSpell(668, player)   --Language glitch band-aid. Teaches Player common
+    player:LearnSpell(669, player)   --Language glitch band-aid. Teaches Player common
+    player:SetSkill(98, 1, 300, 300)
+    player:SetSkill(109, 1, 300, 300)
 
 end
 
 RegisterPlayerEvent(30, first_login)
-
 
