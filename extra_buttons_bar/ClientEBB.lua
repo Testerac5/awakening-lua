@@ -638,7 +638,7 @@ sideBar:SetFrameStrata("LOW")
         
     local TrainingButton = CreateFrame("Button", "TrainingButton", sideBar)
         TrainingButton:SetSize(128, 64)
-        TrainingButton:SetPoint("CENTER", -60, 50)
+        TrainingButton:SetPoint("CENTER", 230, -43)
         TrainingButton:EnableMouse(true)
         TrainingButton:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b")
         TrainingButton:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b_h")
@@ -678,7 +678,7 @@ sideBar:SetFrameStrata("LOW")
     -- stat allocation button
     local StatAllocationButton = CreateFrame("Button", StatAllocationButton, sideBar)
         StatAllocationButton:SetSize(128, 64)
-        StatAllocationButton:SetPoint("CENTER", 90, 20)
+        StatAllocationButton:SetPoint("CENTER", -200, -43)
         StatAllocationButton:EnableMouse(true)
         StatAllocationButton:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b")
         StatAllocationButton:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b_h")
@@ -719,6 +719,33 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
 local function ResetButtonFast_Tooltip_OnLeave(self)
             GameTooltip:Hide()
         end
+
+            local ResetUpgradesButton = CreateFrame("Button", "ResetUpgradesButton", sideBar)
+        ResetUpgradesButton:SetSize(128, 64)
+        ResetUpgradesButton:SetPoint("CENTER", 0, 20)
+        ResetUpgradesButton:EnableMouse(true)
+        ResetUpgradesButton:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b")
+        ResetUpgradesButton:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b_h")
+        ResetUpgradesButton:SetFrameLevel(3)
+
+        local ResetUpgradesButton_text = ResetUpgradesButton:CreateFontString("ResetUpgradesButton_text") -- edited
+        ResetUpgradesButton_text:SetFont("Fonts\\MORPHEUS.TTF", 16, "OUTLINE") -- edited
+        ResetUpgradesButton_text:SetSize(250, 5)
+        ResetUpgradesButton_text:SetPoint("CENTER", 0, 0) -- edited
+        ResetUpgradesButton_text:SetText("Resets Spells/Talents") -- edited
+        ResetUpgradesButton:SetFontString(ResetUpgradesButton_text)
+        --ResetUpgradesButton:SetPushedTexture("Interface/Buttons/CheckButtonHilight")
+        ResetUpgradesButton:SetScript("OnMouseUp", function()
+            PlaySound("TalentScreenOpen")
+                if not(ResetFrame_main:IsVisible()) then
+                ResetFrame_main:Show() BaseFrameFadeOut(StatFrame) TrainingFrame:Hide()
+                AIO.Handle("sideBar", "GetMults")
+                else
+                ResetFrame_main:Hide()
+                end
+            end)
+        ResetUpgradesButton:SetScript("OnEnter", ResetButtonFast_Tooltip_OnEnter)
+        ResetUpgradesButton:SetScript("OnLeave", ResetButtonFast_Tooltip_OnLeave)
         
         
     -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ResetGui Frame -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
