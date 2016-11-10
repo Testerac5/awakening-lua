@@ -124,8 +124,8 @@ local name, itemlink, _, _, _, _, _, _, _, texture, _ = GetItemInfo(item)
 ClearCursor()
 EnchantReRollMain_Item.Button:SetNormalTexture(texture)
 EnchantReRollMain.item = item
-EnchantReRollMain.itemEffectName = GetSpellInfo(nameeffect)
-EnchantReRollMain.itemEffect = "|Hspell:"..nameeffect.."|h["..EnchantReRollMain.itemEffectName.."]|h"
+--EnchantReRollMain.itemEffectName = GetSpellInfo(nameeffect)
+EnchantReRollMain.itemEffect = "|Hspell:"..nameeffect.."|h[Test]|h"
 EnchantReRollMain.itemCost = cost
 --For Reforge
 EnchantReRollMain_RollButton.Slot = slot
