@@ -6,17 +6,17 @@ function update(event, player, msg, Type, lang)
 	
 		if msg == "%push lua" then
 		
-			os.execute ('bash ./update_lua.sh &')
+			os.execute ('bash update_lua.sh')
 			player:SendBroadcastMessage("Successfully pushed Lua Scripts. Some Modules require restarts or .reload eluna")
 		
 		elseif msg == "%push log" then
 		
-			os.execute ('bash ./push_log.sh &')
+			os.execute ('bash push_log.sh')
 			player:SendBroadcastMessage("Successfully pushed Lua Log")
 		
 		elseif msg == "%push dbc" then
 		
-			os.execute ('bash ./update_dbc.sh &')
+			os.execute ('bash update_dbc.sh')
 			player:SendBroadcastMessage("Successfully pushed DBC Files. This requires a restart")
 		
 		elseif msg == "%push live" then
