@@ -124,7 +124,8 @@ local name, itemlink, _, _, _, _, _, _, _, texture, _ = GetItemInfo(item)
 ClearCursor()
 EnchantReRollMain_Item.Button:SetNormalTexture(texture)
 EnchantReRollMain.item = item
-EnchantReRollMain.itemEffect = GetSpellLink(nameeffect)
+EnchantReRollMain.itemEffectEntry = nameeffect
+EnchantReRollMain.itemEffect = GetSpellLink(EnchantReRollMain.itemEffectEntry)
 EnchantReRollMain.itemCost = cost
 --For Reforge
 EnchantReRollMain_RollButton.Slot = slot
