@@ -801,7 +801,7 @@ end
 end -- end of the main "if"
 end
 
-local function GetGoldForMoney(cost)
+ function GetGoldForMoney(cost)
     local c_gold,c_silver,c_copper = 0
             c_gold = floor(abs(cost / 10000))
             c_silver = floor(abs(mod(cost / 100, 100)))

@@ -38,13 +38,15 @@ local function EnchantReRollMain_Reforge_CastSuccess(self,event,unit,spellname)
     if (spellname == name) and (unit == "player") then
         if (EnchantReRollMain.item and EnchantReRollMain_RollButton.Bag and EnchantReRollMain_RollButton.Slot) then
             AIO.Handle("EnchantReRoll", "ReforgeItem", EnchantReRollMain_RollButton.Bag, EnchantReRollMain_RollButton.Slot)
+            print("reforge started")
         end
     end
 end
 
  function MyHandlers.EnchantReRollMain_Reforge(player,neweffect) -- AIO
 --Set up strings from server
-EnchantReRollMain.itemEffect2 = GetSpellLink(nameeffect)
+EnchantReRollMain.itemEffectName2 = GetSpellInfo(nameeffect)
+EnchantReRollMain.itemEffect2 = "|Hspell:"..nameeffect.."|h["..EnchantReRollMain.itemEffectName2.."]|h"
 EnchantReRollMain_Item_EffectAFrame_BaseEffectAText:SetText("|cff00FF00"..EnchantReRollMain.itemEffect2.."|r")
 --Play Reforge Animations
 EnchantReRollMain_Item_EffectAFrame_Animgroup:Stop()
@@ -130,9 +132,11 @@ EnchantReRollMain.itemCost = cost
 --For Reforge
 EnchantReRollMain_RollButton.Slot = slot
 EnchantReRollMain_RollButton.Bag = bag
+--cost
+ local gold,silver,copper = GetGoldForMoney(EnchantReRollMain.itemCost)
 --Play animations
 EnchantReRollMain_Item_EffectFrame_BaseEffectText:SetText("|cff00FF00"..EnchantReRollMain.itemEffect.."|r")
-EnchantReRollMain_CostText:SetText("|cffE1AB18Reforge cost:|r|cffFFFFFF "..EnchantReRollMain.itemCost.."|r|TInterface\\MONEYFRAME\\UI-GoldIcon.blp:16:16:0:-1|t|r")
+EnchantReRollMain_CostText:SetText("|cffE1AB18Reforge cost: |cffFFFFFF"..gold.."|TInterface\\MONEYFRAME\\UI-GoldIcon.blp:11:11:0:-1|t "..silver.."|TInterface\\MONEYFRAME\\UI-SilverIcon.blp:11:11:0:-1|t "..copper.."|TInterface\\MONEYFRAME\\UI-CopperIcon.blp:11:11:0:-1|t|r")
 EnchantReRollMain_Item_BackgroundTexture:SetAlpha(1.0)
 BaseFrameFadeIn(EnchantReRollMain_Item_BackgroundTexture_Effect)
 BaseFrameFadeIn(EnchantReRollMain_Item_EffectFrame)

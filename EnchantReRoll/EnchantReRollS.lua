@@ -15,7 +15,7 @@ end
 
 function EnchantItemCost(item)
 	local cost = nil
-	cost = item:GetItemLevel()*10000
+	cost = item:GetItemLevel()*1523
 	return cost
 end
 --MAIN SET ITEM FUNCTION
@@ -24,7 +24,7 @@ end
 	if (EnchantItemCheck(player,item)) then
 	local itemlink = GetItemLink(item:GetEntry())
 	local effect = item:GetEnchantmentSpellId(5)
-	local cost = EnchantItemCost(item)/10000
+	local cost = EnchantItemCost(item)
 
 	enchantReRoll_PlaceItem(AIO.Msg(), player,itemlink, effect, cost,bag,slot):Send(player)
 	end
