@@ -38,7 +38,7 @@ local function EnchantReRollMain_Reforge_CastSuccess(self,event,unit,spellname)
     if (spellname == name) and (unit == "player") then
         if (EnchantReRollMain.item and EnchantReRollMain_RollButton.Bag and EnchantReRollMain_RollButton.Slot) then
             AIO.Handle("EnchantReRoll", "ReforgeItem", EnchantReRollMain_RollButton.Bag, EnchantReRollMain_RollButton.Slot)
-            print("reforge started")
+            PlaySound("Glyph_MajorDestroy")
         end
     end
 end
@@ -82,6 +82,10 @@ local EnchantReRollMain_CloseButton = CreateFrame("Button", "EnchantReRollMain_C
 EnchantReRollMain_CloseButton:SetPoint("TOPRIGHT", -19, -15) 
 EnchantReRollMain_CloseButton:EnableMouse(true)
 EnchantReRollMain_CloseButton:SetSize(25, 25) 
+EnchantReRollMain_CloseButton:SetScript("OnClick", function()
+    PlaySound("igMainMenuOptionCheckBoxOn")
+    EnchantReRollMain:Hide()
+    end)
 
 local EnchantReRollMain_RollButton = CreateFrame("Button", "EnchantReRollMain_RollButton", EnchantReRollMain, "UIPanelButtonTemplate")
 EnchantReRollMain_RollButton:SetWidth(120) 
@@ -95,6 +99,7 @@ EnchantReRollMain_RollButton:SetScript("OnEvent", EnchantReRollMain_Reforge_Cast
 EnchantReRollMain_RollButton:SetScript("OnUpdate", EnchantReRollMain_RollButton_Check)
 EnchantReRollMain_RollButton:SetScript("OnMouseDown",function()
     if (EnchantReRollMain.item and EnchantReRollMain_RollButton.Bag and EnchantReRollMain_RollButton.Slot) then
+    PlaySound("igMainMenuOptionCheckBoxOn")
     AIO.Handle("EnchantReRoll", "ReforgeItem_Prep", EnchantReRollMain_RollButton.Bag, EnchantReRollMain_RollButton.Slot)
 end
     end)
@@ -122,6 +127,7 @@ EnchantReRollMain_Item_EffectAFrame_ReforgeCompleteTexture:Hide()
 --[[ITEM FRAME SCRIPTS]]--
  function MyHandlers.EnchantReRoll_PlaceItem(player,item,nameeffect,cost,bag,slot) -- AIO
 --Setting up item to the button
+PlaySound("Glyph_MajorCreate")
 local name, itemlink, _, _, _, _, _, _, _, texture, _ = GetItemInfo(item)
 ClearCursor()
 EnchantReRollMain_Item.Button:SetNormalTexture(texture)
