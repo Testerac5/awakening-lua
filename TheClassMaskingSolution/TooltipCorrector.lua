@@ -21,10 +21,7 @@ local correctionMatches = {}
 --format: {spellToCorrect, tooltipLine, tooltipContent, HasSpell}
 --The below examples are testing filler, you can delete.
 local correctionsTable = {
-	{ 116, 5, "1.4 sec", 11070 },
-	{ 116, 5, "1.3 sec", 12473 },
-	{ 116, 5, "Lolwut", 116    },
-	{ 116, 4, "YOOO", 116      }
+	
 }
 
 local function GetTipNum()

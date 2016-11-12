@@ -19,13 +19,17 @@ local spellCost = 0
 local tempSpell = 0
 local castCheck
 local tempPlayer
+local isPct = false
 
-
---format: {spellid, powerType, powerCost, hasSpell}
+--format: {spellid, powerType, powerCost, hasSpell, isPercentCost}
 local correctionsTable = 
 {
-	{5185, 0, 100, 133}
+	
 }
+
+--Special Note: powerCost is additive of the base spellcost. e.g. if the spell costs 5% in the DBC,
+--              a 50% in powerCost will total to 55% of baseMana cost.
+
 local function StopCastingNow(event, delay, pCall, pPlayer)
 	pPlayer:InterruptSpell(1)
 end
@@ -38,26 +42,49 @@ local function CostHandler(event, pPlayer, spell)
 			tempCache[1] = value
 		end
 	end
-	if (not tempCache) then
+	if (not tempCache[1]) then
 	return
 	end
 	spellCost = tempCache[1][3]
 	powType = tempCache[1][2]
-	if(pPlayer:GetPower(powType) - (spellCost + spell:GetPowerCost()) <= 0) then
-		tempSpell = spell
-		tempPlayer = pPlayer
-		pPlayer:RegisterEvent(StopCastingNow, 0, 1, tempPlayer)
-		castCheck = false
+	isPct = tempCache[1][5]
+
+	--Check to see if the value is a %cost.
+	if(isPct) then 
+		--if so, check if the player has enough mana; convert %s into real nums
+		if(pPlayer:GetPower(powType) - (((pPlayer:GetBaseMana() * spellCost) / 100) + spell:GetPowerCost()) <= 0) then
+			tempSpell = spell
+			tempPlayer = pPlayer
+			pPlayer:RegisterEvent(StopCastingNow, 0, 1, tempPlayer)
+			castCheck = false
+		else
+			castCheck = true
+		end
 	else
-		castCheck = true
+		if(pPlayer:GetPower(powType) - (spellCost + spell:GetPowerCost()) <= 0) then
+			tempSpell = spell
+			tempPlayer = pPlayer
+			pPlayer:RegisterEvent(StopCastingNow, 0, 1, tempPlayer)
+			castCheck = false
+		else
+			castCheck = true
+		end
 	end
-	tempCache = nil
+	
+	tempCache[1] = nil
 end
 
 local function TakePowerPls(event, player, spell, skipCheck)
 	if(castCheck) then 
-		player:ModifyPower(powType, -spellCost)
-		castCheck = false
+		if(isPct) then 
+			--modifies power based on % of baseMana cost
+			player:ModifyPowerPct(powType, -spellCost)
+			castCheck = false
+		else 
+			--modifies power directly
+			player:ModifyPower(powType, -spellCost)
+			castCheck = false
+		end
 	end
 end
 
