@@ -82,7 +82,7 @@ function MyHandlers.ReforgeItem(player,bag,slot)
 		end
 		neweffect = neweffectSQL:GetInt32(0)
 		item:SetEnchantment(neweffect, 5)
-
+		neweffect = item:GetEnchantmentSpellId(5)
 		enchantReRoll_Reforge(AIO.Msg(),player,neweffect):Send(player)
 	else
 		player:SendBroadcastMessage("Your item can't be reforged")
