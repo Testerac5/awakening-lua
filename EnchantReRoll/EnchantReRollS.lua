@@ -53,7 +53,7 @@ end
 function MyHandlers.ReforgeItem(player,bag,slot)
 	local item = player:GetItemByPos(bag,slot)
 	if (EnchantItemCheck(player,item)) then
-		local effect = item:GetEnchantmentSpellId(5)
+		local effect = item:GetEnchantmentId(5)
 
 		local cost = EnchantItemCost(item)
 		local class = item:GetClass()
