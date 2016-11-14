@@ -525,98 +525,102 @@ function MyHandlers.ResetTalents(player)
 	end
 end
 
+ function GetRightSpellTables(class,Spec)
+local spell_count = nil
+local spell_list = nil
+
+	if class == "DRUID" and Spec == "BALANCE" then
+		spell_count = druid_balance_spells_count
+		spell_list = druid_balance_spells
+	elseif class == "DRUID" and Spec == "FERAL" then
+		spell_count = druid_feral_spells_count
+		spell_list = druid_feral_spells
+	elseif class == "DRUID" and Spec == "RESTORATION" then
+		spell_count = druid_restoration_spells_count
+		spell_list = druid_restoration_spells
+	elseif class == "HUNTER" and Spec == "BEASTMASTERY" then
+		spell_count = hunter_beastmastery_spells_count
+		spell_list = hunter_beastmastery_spells
+	elseif class == "HUNTER" and Spec == "MARKSMANSHIP" then
+		spell_count = hunter_marksmanship_spells_count
+		spell_list = hunter_marksmanship_spells
+	elseif class == "HUNTER" and Spec == "SURVIVAL" then
+		spell_count = hunter_survival_spells_count
+		spell_list = hunter_survival_spells
+	elseif class == "MAGE" and Spec == "ARCANE" then
+		spell_count = mage_arcane_spells_count
+		spell_list = mage_arcane_spells
+	elseif class == "MAGE" and Spec == "FIRE" then
+		spell_count = mage_fire_spells_count
+		spell_list = mage_fire_spells
+	elseif class == "MAGE" and Spec == "FROST" then
+		spell_count = mage_frost_spells_count
+		spell_list = mage_frost_spells
+	elseif class == "PALADIN" and Spec == "HOLY" then
+		spell_count = paladin_holy_spells_count
+		spell_list = paladin_holy_spells
+	elseif class == "PALADIN" and Spec == "RETRIBUTION" then
+		spell_count = paladin_retribution_spells_count
+		spell_list = paladin_retribution_spells
+	elseif class == "PALADIN" and Spec == "PROTECTION" then
+		spell_count = paladin_protection_spells_count
+		spell_list = paladin_protection_spells
+	elseif class == "PRIEST" and Spec == "DISCIPLINE" then
+		spell_count = priest_discipline_spells_count
+		spell_list = priest_discipline_spells
+	elseif class == "PRIEST" and Spec == "HOLY" then
+		spell_count = priest_holy_spells_count
+		spell_list = priest_holy_spells
+	elseif class == "PRIEST" and Spec == "SHADOW" then
+		spell_count = priest_shadow_spells_count
+		spell_list = priest_shadow_spells
+	elseif class == "ROGUE" and Spec == "ASSASSINATION" then
+		spell_count = rogue_assassination_spells_count
+		spell_list = rogue_assassination_spells
+	elseif class == "ROGUE" and Spec == "COMBAT" then
+		spell_count = rogue_combat_spells_count
+		spell_list = rogue_combat_spells
+	elseif class == "ROGUE" and Spec == "SUBTLETY" then
+		spell_count = rogue_subtlety_spells_count
+		spell_list = rogue_subtlety_spells
+	elseif class == "SHAMAN" and Spec == "ELEMENTAL" then
+		spell_count = shaman_elemental_spells_count
+		spell_list = shaman_elemental_spells
+	elseif class == "SHAMAN" and Spec == "ENHANCEMENT" then
+		spell_count = shaman_enhancement_spells_count
+		spell_list = shaman_enhancement_spells
+	elseif class == "SHAMAN" and Spec == "RESTORATION" then
+		spell_count = shaman_restoration_spells_count
+		spell_list = shaman_restoration_spells
+	elseif class == "WARLOCK" and Spec == "AFFLICTION" then
+		spell_count = warlock_affliction_spells_count
+		spell_list = warlock_affliction_spells
+	elseif class == "WARLOCK" and Spec == "DEMONOLOGY" then
+		spell_count = warlock_demonology_spells_count
+		spell_list = warlock_demonology_spells
+	elseif class == "WARLOCK" and Spec == "DESTRUCTION" then
+		spell_count = warlock_destruction_spells_count
+		spell_list = warlock_destruction_spells
+	elseif class == "WARRIOR" and Spec == "ARMS" then
+		spell_count = warrior_arms_spells_count
+		spell_list = warrior_arms_spells
+	elseif class == "WARRIOR" and Spec == "FURY" then
+		spell_count = warrior_fury_spells_count
+		spell_list = warrior_fury_spells
+	elseif class == "WARRIOR" and Spec == "PROTECTION" then
+		spell_count = warrior_protection_spells_count
+		spell_list = warrior_protection_spells
+	elseif class == "GENERAL" and Spec == "GENERAL" then
+		spell_count = general_spells_count
+		spell_list = general_spells
+	end
+return spell_count, spell_list
+
+end
 
 function MyHandlers.SendAmountOfSpells(player, class, Spec)
 
-	local pass_1 = nil
-	local pass_2 = nil
-
-	if class == "DRUID" and Spec == "BALANCE" then
-		pass_1 = druid_balance_spells_count
-		pass_2 = druid_balance_spells
-	elseif class == "DRUID" and Spec == "FERAL" then
-		pass_1 = druid_feral_spells_count
-		pass_2 = druid_feral_spells
-	elseif class == "DRUID" and Spec == "RESTORATION" then
-		pass_1 = druid_restoration_spells_count
-		pass_2 = druid_restoration_spells
-	elseif class == "HUNTER" and Spec == "BEASTMASTERY" then
-		pass_1 = hunter_beastmastery_spells_count
-		pass_2 = hunter_beastmastery_spells
-	elseif class == "HUNTER" and Spec == "MARKSMANSHIP" then
-		pass_1 = hunter_marksmanship_spells_count
-		pass_2 = hunter_marksmanship_spells
-	elseif class == "HUNTER" and Spec == "SURVIVAL" then
-		pass_1 = hunter_survival_spells_count
-		pass_2 = hunter_survival_spells
-	elseif class == "MAGE" and Spec == "ARCANE" then
-		pass_1 = mage_arcane_spells_count
-		pass_2 = mage_arcane_spells
-	elseif class == "MAGE" and Spec == "FIRE" then
-		pass_1 = mage_fire_spells_count
-		pass_2 = mage_fire_spells
-	elseif class == "MAGE" and Spec == "FROST" then
-		pass_1 = mage_frost_spells_count
-		pass_2 = mage_frost_spells
-	elseif class == "PALADIN" and Spec == "HOLY" then
-		pass_1 = paladin_holy_spells_count
-		pass_2 = paladin_holy_spells
-	elseif class == "PALADIN" and Spec == "RETRIBUTION" then
-		pass_1 = paladin_retribution_spells_count
-		pass_2 = paladin_retribution_spells
-	elseif class == "PALADIN" and Spec == "PROTECTION" then
-		pass_1 = paladin_protection_spells_count
-		pass_2 = paladin_protection_spells
-	elseif class == "PRIEST" and Spec == "DISCIPLINE" then
-		pass_1 = priest_discipline_spells_count
-		pass_2 = priest_discipline_spells
-	elseif class == "PRIEST" and Spec == "HOLY" then
-		pass_1 = priest_holy_spells_count
-		pass_2 = priest_holy_spells
-	elseif class == "PRIEST" and Spec == "SHADOW" then
-		pass_1 = priest_shadow_spells_count
-		pass_2 = priest_shadow_spells
-	elseif class == "ROGUE" and Spec == "ASSASSINATION" then
-		pass_1 = rogue_assassination_spells_count
-		pass_2 = rogue_assassination_spells
-	elseif class == "ROGUE" and Spec == "COMBAT" then
-		pass_1 = rogue_combat_spells_count
-		pass_2 = rogue_combat_spells
-	elseif class == "ROGUE" and Spec == "SUBTLETY" then
-		pass_1 = rogue_subtlety_spells_count
-		pass_2 = rogue_subtlety_spells
-	elseif class == "SHAMAN" and Spec == "ELEMENTAL" then
-		pass_1 = shaman_elemental_spells_count
-		pass_2 = shaman_elemental_spells
-	elseif class == "SHAMAN" and Spec == "ENHANCEMENT" then
-		pass_1 = shaman_enhancement_spells_count
-		pass_2 = shaman_enhancement_spells
-	elseif class == "SHAMAN" and Spec == "RESTORATION" then
-		pass_1 = shaman_restoration_spells_count
-		pass_2 = shaman_restoration_spells
-	elseif class == "WARLOCK" and Spec == "AFFLICTION" then
-		pass_1 = warlock_affliction_spells_count
-		pass_2 = warlock_affliction_spells
-	elseif class == "WARLOCK" and Spec == "DEMONOLOGY" then
-		pass_1 = warlock_demonology_spells_count
-		pass_2 = warlock_demonology_spells
-	elseif class == "WARLOCK" and Spec == "DESTRUCTION" then
-		pass_1 = warlock_destruction_spells_count
-		pass_2 = warlock_destruction_spells
-	elseif class == "WARRIOR" and Spec == "ARMS" then
-		pass_1 = warrior_arms_spells_count
-		pass_2 = warrior_arms_spells
-	elseif class == "WARRIOR" and Spec == "FURY" then
-		pass_1 = warrior_fury_spells_count
-		pass_2 = warrior_fury_spells
-	elseif class == "WARRIOR" and Spec == "PROTECTION" then
-		pass_1 = warrior_protection_spells_count
-		pass_2 = warrior_protection_spells
-	elseif class == "GENERAL" and Spec == "GENERAL" then
-		pass_1 = general_spells_count
-		pass_2 = general_spells
-	end
-	
+	local pass_1, pass_2 = GetRightSpellTables(class,Spec)
 	sendAmountOfSpells(AIO.Msg(), player, pass_1, pass_2):Send(player)
 
 end
@@ -634,22 +638,41 @@ function sendButtonToChangeSpells(msg, player, i)
 end
 
 
-function MyHandlers.LearnThisSpell(player, got_spell, i)
+function MyHandlers.LearnThisSpell(player, got_spell, i,class,spec)
 	local successful = true
 	local player_has_currency = true
-	local currency_one = got_spell[2]
-	local currency_two = got_spell[3]
-	local spellID = got_spell[1]
+
+	local currency_one = nil
+	local currency_two = nil
+	local spellID = nil
+	local LevelReq = nil
+
+	local countofspells, spells = GetRightSpellTables(class,spec)
+	for k,v in pairs(spells) do
+		if (v[1] == got_spell[1]) then
+		currency_one = v[2]
+		currency_two = v[3]
+		spellID = v[1]
+		LevelReq = v[4]
+	end
+	end
+
+	if not(spellID) then
+		successful = false
+	end
+
+	if (LevelReq > player:GetLevel()) then
+		successful = false
+	end
 	
-	
-	if got_spell[2] ~= 0 then
+	if currency_one ~= 0 then
 		if player:HasItem(spell_essence, currency_one) == false then
 			player_has_currency = false
 			successful = false
 		end
 	end
 	
-	if got_spell[3] ~= 0 then
+	if currency_two ~= 0 then
 		if player:HasItem(talent_essence, currency_two) == false then
 			player_has_currency = false
 			successful = false
@@ -755,14 +778,61 @@ function sendBGListToPlayer(msg, player, ClassSpec, bgList, talentList, known_ta
 end
 
 
-function MyHandlers.LearnThisTalent(player, attached_talent, indexAt)
-	
+function MyHandlers.LearnThisTalent(player, attached_talent, indexAt,ClassSpec)
+	local talentList = nil
 	local successful = true
 	local player_has_currency = true
-	local currency_one = attached_talent[2]
-	local currency_two = attached_talent[3]
-	local spellID = attached_talent[1]
+	local currency_one = nil
+	local currency_two = nil
+	local spellID = nil
+	local LevelReq = nil
+	--preventing any spell learn hack--
+	--HACKFIX, VERY FUCKING HACK FIX OF HACK--
+		local ClassSpecList = {"DRUIDBALANCE", "DRUIDFERAL", "DRUIDRESTORATION",
+						   "HUNTERBEASTMASTERY", "HUNTERMARKSMANSHIP", "HUNTERSURVIVAL",
+						   "MAGEARCANE", "MAGEFIRE", "MAGEFROST",
+						   "PALADINHOLY", "PALADINPROTECTION", "PALADINRETRIBUTION",
+						   "PRIESTDISCIPLINE", "PRIESTHOLY", "PRIESTSHADOW",
+						   "ROGUEASSASSINATION", "ROGUECOMBAT", "ROGUESUBTLETY",
+						   "SHAMANELEMENTAL", "SHAMANENHANCEMENT", "SHAMANRESTORATION",
+						   "WARLOCKAFFLICTION", "WARLOCK", "DEMONOLOGY", "WARLOCKDESTRUCTION",
+						   "WARRIORARMS", "WARRIORFURY", "WARRIORPROTECTION"}
+			
+	local ListOfTalentLists = {druid_balance_talents, druid_feral_talents, druid_restoration_talents,
+							   hunter_beastmastery_talents, hunter_marksmanship_talents, hunter_survival_talents,
+							   mage_arcane_talents, mage_fire_talents, mage_frost_talents,
+							   paladin_holy_talents, paladin_protection_talents, paladin_retribution_talents,
+							   priest_discipline_talents, priest_holy_talents, priest_shadow_talents,
+							   rogue_assassination_talents, rogue_combat_talents, rogue_subtlety_talents,
+							   shaman_elemental_talents, shaman_enhancement_talents, shaman_restoration_talents,
+							   warlock_affliction_talents, warlock_demonology_talents, warlock_destruction_talents,
+							   warrior_arms_talents, warrior_fury_talents, warrior_protection_talents}
+	------------------------------------------
+		for i,v in ipairs(ClassSpecList) do
+		if ClassSpec == v then
+			talentList = ListOfTalentLists[i]
+		end
+		end
+		for i,v in ipairs(talentList) do -- getting costs and id
+		local spellids = v[2]
+			for k,s in pairs(spellids) do
+				if (attached_talent[1] == s) then
+					spellID = s
+			currency_one = v[3]
+			currency_two = v[4]
+			LevelReq = v[5]
+				end
+			end -- check for spellid
+
+		end
 	
+	if not(spellID) then
+		successful = false
+	end
+
+	if (LevelReq > player:GetLevel()) then
+		successful = false
+	end -- end of hackfix
 	
 	if currency_one ~= 0 then
 		if player:HasItem(spell_essence, currency_one) == false then

@@ -2490,6 +2490,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			for i,v in ipairs(all_buttons) do
 				if spec_displaying == v then
 					AIO.Handle("sideBar", "SendAmountOfSpells", all_pass_varis[i][1], all_pass_varis[i][2])
+                    sideBar.CurrentSpellSpec = {all_pass_varis[i][1], all_pass_varis[i][2]}
 				end
 			end
 		
@@ -2535,7 +2536,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 				end
 			end
 			AIO.Handle("sideBar", "GetAllBGs", ClassSpec)
-
+            sideBar.CurrentTalentSpec = ClassSpec
 			display_frame_CA()
 		end
 	
@@ -2733,7 +2734,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 		
 		
 		if talent_attached ~= false then
-			AIO.Handle("sideBar","LearnThisTalent",talent_attached,indexAt)
+			AIO.Handle("sideBar","LearnThisTalent",talent_attached,indexAt,sideBar.CurrentTalentSpec)
 		end
 	
 	end
@@ -2901,6 +2902,8 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 	   PlaySound("igMainMenuOptionCheckBoxOn")
        local got_spell = nil
        local got_index
+       --check for preventing hacks
+       local class, spec = unpack(sideBar.CurrentSpellSpec)
 
 		for i,v in ipairs(all_learn_spell_buttons) do
 			if self == v then
@@ -2911,7 +2914,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 		end
 	
       if got_spell ~= nil then
-       AIO.Handle("sideBar", "LearnThisSpell", got_spell, got_index)
+       AIO.Handle("sideBar", "LearnThisSpell", got_spell, got_index, class,spec)
        end
 	end
 	
