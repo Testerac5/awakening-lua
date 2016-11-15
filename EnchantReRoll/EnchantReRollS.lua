@@ -3,11 +3,44 @@ local AIO = AIO or require("AIO")
 
 local MyHandlers = AIO.AddHandlers("EnchantReRoll", {})
 
+local ReforgeAltar = 8000051
+local ReforgeAltar_menu = 45004
+
+--gossip part
+local function OnGossipHello_ReforgeAltar(event, player, Altar)
+player:GossipClearMenu()
+enchantReRoll_OpenMenu(AIO.Msg(), player):Send(player)
+player:GossipSendMenu(1, Altar, ReforgeAltar_menu) 
+end
+
+RegisterGameObjectGossipEvent(ReforgeAltar, 1, OnGossipHello_ReforgeAltar)
+
+local function GameobjectCheck(player)
+	if (player:GetGameObjectsInRange(10, ReforgeAltar)) then
+		return true
+	else
+		enchantReRoll_CloseMenu(AIO.Msg(), player):Send(player)
+		return false
+	end
+	end
+
+	 function enchantReRoll_CloseMenu(msg,player)
+	return msg:Add("EnchantReRoll", "EnchantReRoll_Close")
+end
+
+	 function enchantReRoll_OpenMenu(msg,player)
+	return msg:Add("EnchantReRoll", "EnchantReRoll_Init")
+end
+--gossip part
+
 function EnchantItemCheck(player,item)
 	if (item:GetClass() == 2 or item:GetClass() == 4) then
        if (item:GetEnchantmentId(5) ~= 0) then
        	return true
        end
+   end
+   if not(GameobjectCheck(player)) then
+   	return false
    end
    player:SendBroadcastMessage("This item can't be reforged")
    return false

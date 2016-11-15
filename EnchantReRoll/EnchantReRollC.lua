@@ -156,6 +156,17 @@ GameTooltip:SetHyperlink(EnchantReRollMain.item)
 GameTooltip:Show()
     end
     end
+
+ function  MyHandlers.EnchantReRoll_Init(player)
+    PlaySound("Glyph_MajorCreate")
+BaseFrameFadeIn(EnchantReRollMain)
+end
+ function  MyHandlers.EnchantReRoll_Close(player)
+    if (EnchantReRollMain:IsVisible()) then
+        PlaySound("igMainMenuOptionCheckBoxOn")
+EnchantReRollMain:Hide()
+end
+end
 ---[[ITEM FRAME SETTINGS]]---
 
 local EnchantReRollMain_Item = CreateFrame("Frame", "EnchantReRollMain_Item", EnchantReRollMain, nil)
