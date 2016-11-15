@@ -34,14 +34,15 @@ end
 --gossip part
 
 function EnchantItemCheck(player,item)
-	if (item:GetClass() == 2 or item:GetClass() == 4) then
+	   if not(GameobjectCheck(player)) then
+   	return false
+   end
+   if (item:GetClass() == 2 or item:GetClass() == 4) then
        if (item:GetEnchantmentId(5) ~= 0) then
        	return true
        end
    end
-   if not(GameobjectCheck(player)) then
-   	return false
-   end
+
    player:SendBroadcastMessage("This item can't be reforged")
    return false
 end
