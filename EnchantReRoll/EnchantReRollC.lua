@@ -45,8 +45,8 @@ end
 
  function MyHandlers.EnchantReRollMain_Reforge(player,neweffect) -- AIO
 --Set up strings from server
-EnchantReRollMain.itemEffectName2 = GetSpellInfo(nameeffect)
-EnchantReRollMain.itemEffect2 = "|Hspell:"..nameeffect.."|h["..EnchantReRollMain.itemEffectName2.."]|h"
+EnchantReRollMain.itemEffectName2 = GetSpellInfo(neweffect)
+EnchantReRollMain.itemEffect2 = "|Hspell:"..neweffect.."|h["..EnchantReRollMain.itemEffectName2.."]|h"
 EnchantReRollMain_Item_EffectAFrame_BaseEffectAText:SetText("|cff00FF00"..EnchantReRollMain.itemEffect2.."|r")
 --Play Reforge Animations
 EnchantReRollMain_Item_EffectAFrame_Animgroup:Stop()

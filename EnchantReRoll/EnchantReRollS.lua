@@ -90,8 +90,6 @@ function MyHandlers.ReforgeItem(player,bag,slot)
 end
 
 function enchantReRoll_Reforge(msg,player,item)
-	player:SendBroadcastMessage("works")
-	player:SendBroadcastMessage(item:GetEnchantmentSpellId(5))
 	local neweffect = item:GetEnchantmentSpellId(5)
 	return msg:Add("EnchantReRoll", "EnchantReRollMain_Reforge", neweffect)
 end
