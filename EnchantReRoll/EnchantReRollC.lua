@@ -164,7 +164,7 @@ end
  function  MyHandlers.EnchantReRoll_Close(player)
     if (EnchantReRollMain:IsVisible()) then
         PlaySound("igMainMenuOptionCheckBoxOn")
-EnchantReRollMain:Hide()
+        EnchantReRollMain:Hide()
 end
 end
 ---[[ITEM FRAME SETTINGS]]---
