@@ -26,14 +26,15 @@ local function GameobjectCheck(player)
 	if (player:GetGameObjectsInRange(10, ReforgeAltar)) then
 		return true
 	else
-		enchantReRoll_CloseMenu(AIO.Msg(), player):Send(player)
 		return false
 	end
 	end
 
 local function PlayerIsFar(event, go, diff)
 	for k,player in pairs(go:GetPlayersInRange(60)) do
-		GameobjectCheck(player)
+		if not(GameobjectCheck(player)) then
+			enchantReRoll_CloseMenu(AIO.Msg(), player):Send(player)
+		end
 	end
 end
  RegisterGameObjectEvent(ReforgeAltar, 1, PlayerIsFar)
@@ -41,6 +42,7 @@ end
 
 function EnchantItemCheck(player,item)
 	   if not(GameobjectCheck(player)) then
+	   	enchantReRoll_CloseMenu(AIO.Msg(), player):Send(player)
    	return false
    end
    if (item:GetClass() == 2 or item:GetClass() == 4) then
