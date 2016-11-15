@@ -8,6 +8,7 @@ local ReforgeAltar_menu = 45004
 
 --gossip part
 	 function enchantReRoll_CloseMenu(msg,player)
+
 	return msg:Add("EnchantReRoll", "EnchantReRoll_Close")
 end
 
@@ -19,22 +20,23 @@ local function OnGossipHello_ReforgeAltar(event, player, Altar)
 player:GossipClearMenu()
 enchantReRoll_OpenMenu(AIO.Msg(), player):Send(player)
 player:GossipSendMenu(1, Altar, ReforgeAltar_menu) 
+player:GossipComplete()
 end
 RegisterGameObjectGossipEvent(ReforgeAltar, 1, OnGossipHello_ReforgeAltar)
 
-local function GameobjectCheck(player)
-	if (player:GetGameObjectsInRange(10, ReforgeAltar)) then
+ function GameobjectCheck(player)
+ 	local altar = nil
+ 	altar = player:GetNearestGameObject(10, ReforgeAltar)
+ 	if (altar) then
 		return true
-	else
-		return false
 	end
+	enchantReRoll_CloseMenu(AIO.Msg(), player):Send(player)
+	return false
 	end
 
 local function PlayerIsFar(event, go, diff)
 	for k,player in pairs(go:GetPlayersInRange(60)) do
-		if not(GameobjectCheck(player)) then
-			enchantReRoll_CloseMenu(AIO.Msg(), player):Send(player)
-		end
+		GameobjectCheck(player)
 	end
 end
  RegisterGameObjectEvent(ReforgeAltar, 1, PlayerIsFar)
@@ -42,7 +44,6 @@ end
 
 function EnchantItemCheck(player,item)
 	   if not(GameobjectCheck(player)) then
-	   	enchantReRoll_CloseMenu(AIO.Msg(), player):Send(player)
    	return false
    end
    if (item:GetClass() == 2 or item:GetClass() == 4) then
