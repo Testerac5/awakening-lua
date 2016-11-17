@@ -58,7 +58,7 @@ end
 
 function EnchantItemCost(item)
 	local cost = nil
-	cost = item:GetItemLevel()*1523
+	cost = item:GetItemLevel() * 2285
 	return cost
 end
 --MAIN SET ITEM FUNCTION
