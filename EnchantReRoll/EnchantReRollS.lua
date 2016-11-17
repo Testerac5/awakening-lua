@@ -120,9 +120,10 @@ function MyHandlers.ReforgeItem(player,bag,slot)
 		if not(enchantTierSQL) then
 		player:SendBroadcastMessage("Reforge Failed")
 		return false
-		end
-		
+		else
 		enchantTier = enchantTierSQL:GetInt32(0)
+		end
+
 		local neweffectSQL = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier = "..enchantTier.." AND class = '"..class.."';")
 		--choosing random row from our query
 		if (neweffectSQL) then
