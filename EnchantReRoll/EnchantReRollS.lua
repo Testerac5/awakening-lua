@@ -123,6 +123,7 @@ function MyHandlers.ReforgeItem(player,bag,slot)
 		local class = item:GetClass()
 		local enchantTier = EnchantItemTier(item)
 		local neweffect = math.random(1,10)
+		local neweffectSQL = nil
 
 		if (class == 4) then
 			class = "ANY"
@@ -145,7 +146,11 @@ function MyHandlers.ReforgeItem(player,bag,slot)
 		enchantTier = enchantTierSQL:GetInt32(0)
 		end]]--
 
-		local neweffectSQL = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier = "..enchantTier.." AND class = '"..class.."';")
+		if (class == 4) then
+			neweffectSQL = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier = "..enchantTier.." AND class = '"..class.."';")
+		else
+			neweffectSQL = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier = "..enchantTier..";")
+		end
 		--choosing random row from our query
 		if (neweffectSQL) then
 		for i = 1, math.random(1, neweffectSQL:GetRowCount()) do
