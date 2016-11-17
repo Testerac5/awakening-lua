@@ -153,11 +153,11 @@ function MyHandlers.ReforgeItem(player,bag,slot)
 		end
 		--choosing random row from our query
 		if (neweffectSQL) then
+			if (neweffectSQL:GetRowCount()>1) then
 		for i = 1, math.random(1, neweffectSQL:GetRowCount()) do
-			if (neweffectSQL:NextRow()) then
 			neweffectSQL:NextRow()
 		end
-		end
+	end
 		neweffect = neweffectSQL:GetInt32(0)
 		item:SetEnchantment(neweffect, 5)
 		enchantReRoll_Reforge(AIO.Msg(),player,item):Send(player)
