@@ -116,7 +116,13 @@ function MyHandlers.ReforgeItem(player,bag,slot)
 			player:SetCoinage(player:GetCoinage() - cost)
 		end
 
-		enchantTier = WorldDBQuery("SELECT tier FROM item_enchantment_random_tiers WHERE enchantID = "..effect..";"):GetInt32(0)
+		local enchantTierSQL = WorldDBQuery("SELECT tier FROM item_enchantment_random_tiers WHERE enchantID = "..effect..";")
+		if not(enchantTierSQL) then
+		player:SendBroadcastMessage("Reforge Failed")
+		return false
+		end
+		
+		enchantTier = enchantTierSQL:GetInt32(0)
 		local neweffectSQL = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier = "..enchantTier.." AND class = '"..class.."';")
 		--choosing random row from our query
 		if (neweffectSQL) then
@@ -127,7 +133,7 @@ function MyHandlers.ReforgeItem(player,bag,slot)
 		item:SetEnchantment(neweffect, 5)
 		enchantReRoll_Reforge(AIO.Msg(),player,item):Send(player)
 	else
-		player:SendBroadcastMessage("Your item can't be reforged")
+		player:SendBroadcastMessage("Reforge Failed")
 	end
 	end
 end
