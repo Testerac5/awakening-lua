@@ -153,6 +153,11 @@ function MyHandlers.ReforgeItem(player,bag,slot)
 		end
 		neweffect = neweffectSQL:GetInt32(0)
 		item:SetEnchantment(neweffect, 5)
+		--debug
+		player:SendBroadcastMessage(effect)
+		player:SendBroadcastMessage(enchantTier)
+		player:SendBroadcastMessage(class)
+		player:SendBroadcastMessage(neweffect)
 		enchantReRoll_Reforge(AIO.Msg(),player,item):Send(player)
 	else
 		player:SendBroadcastMessage("Reforge Failed")
