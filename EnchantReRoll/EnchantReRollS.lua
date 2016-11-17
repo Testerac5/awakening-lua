@@ -87,10 +87,12 @@ end
  local item = player:GetItemByPos(bag,slot)
 	if (EnchantItemCheck(player,item)) then
 	local itemlink = GetItemLink(item:GetEntry())
-	local effect = item:GetEnchantmentSpellId(5)
+	local effect = nil
 	local cost = EnchantItemCost(item)
 
-	if not(effect) then
+	if (item:GetEnchantmentSpellId(5)) then
+		effect = item:GetEnchantmentSpellId(5)
+	else
 		effect = 964998
 	end
 

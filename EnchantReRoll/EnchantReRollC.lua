@@ -133,10 +133,12 @@ ClearCursor()
 EnchantReRollMain_Item.Button:SetNormalTexture(texture)
 EnchantReRollMain.item = item
 EnchantReRollMain.itemEffectName = GetSpellInfo(nameeffect)
-if not(EnchantReRollMain.itemEffectName) or (EnchantReRollMain.itemEffectName == 964998) then
+
+if (not(EnchantReRollMain.itemEffectName)) or (EnchantReRollMain.itemEffectName == "Enchanting") then
     EnchantReRollMain.itemEffectName = "This item is ready to be enchanted"
     nameeffect = 964998
     end
+
 EnchantReRollMain.itemEffect = "|Hspell:"..nameeffect.."|h["..EnchantReRollMain.itemEffectName.."]|h"
 EnchantReRollMain.itemCost = cost
 --For Reforge
