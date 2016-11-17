@@ -61,6 +61,27 @@ function EnchantItemCost(item)
 	cost = item:GetItemLevel() * 2285
 	return cost
 end
+
+function EnchantItemTier(item)
+	local Tier = 1
+	local level = item:GetRequiredLevel()
+	if (1 <= level) and (level <=9) then
+		Tier = 1
+		elseif (10 <= level) and (level <=19) then
+			Tier = 2
+			elseif (20 <= level) and (level <=29) then
+				Tier = 3
+				elseif (30 <= level) and (level <=39) then
+					Tier = 4
+					elseif (40 <= level) and (level <=49) then
+						Tier = 5
+						elseif (50 <= level) and (level <=59) then
+							Tier = 6
+							elseif (level >= 60) then
+								Tier = 7
+		end
+	return Tier
+end
 --MAIN SET ITEM FUNCTION
  function MyHandlers.SetItem(player,bag,slot)
  local item = player:GetItemByPos(bag,slot)
@@ -100,7 +121,7 @@ function MyHandlers.ReforgeItem(player,bag,slot)
 
 		local cost = EnchantItemCost(item)
 		local class = item:GetClass()
-		local enchantTier = 1
+		local enchantTier = EnchantItemTier(item)
 		local neweffect = math.random(1,10)
 
 		if (class == 4) then
@@ -116,13 +137,13 @@ function MyHandlers.ReforgeItem(player,bag,slot)
 			player:SetCoinage(player:GetCoinage() - cost)
 		end
 
-		local enchantTierSQL = WorldDBQuery("SELECT tier FROM item_enchantment_random_tiers WHERE enchantID = "..effect..";")
+		--[[local enchantTierSQL = WorldDBQuery("SELECT tier FROM item_enchantment_random_tiers WHERE enchantID = "..effect..";")
 		if not(enchantTierSQL) then
 		player:SendBroadcastMessage("Reforge Failed")
 		return false
 		else
 		enchantTier = enchantTierSQL:GetInt32(0)
-		end
+		end]]--
 
 		local neweffectSQL = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier = "..enchantTier.." AND class = '"..class.."';")
 		--choosing random row from our query
