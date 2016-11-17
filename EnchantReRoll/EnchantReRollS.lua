@@ -47,7 +47,7 @@ function EnchantItemCheck(player,item)
    	return false
    end
    if (item:GetClass() == 2 or item:GetClass() == 4) then
-       if (Item:GetQuality() >= 3) then
+       if (item:GetQuality() >= 3) then
        	return true
        end
    end
