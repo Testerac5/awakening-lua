@@ -47,7 +47,7 @@ function EnchantItemCheck(player,item)
    	return false
    end
    if (item:GetClass() == 2 or item:GetClass() == 4) then
-       if (item:GetEnchantmentId(5) ~= 0) then
+       if (Item:GetQuality() >= 3) then
        	return true
        end
    end
@@ -90,6 +90,10 @@ end
 	local effect = item:GetEnchantmentSpellId(5)
 	local cost = EnchantItemCost(item)
 
+	if not(effect) then
+		effect = 964998
+	end
+
 	enchantReRoll_PlaceItem(AIO.Msg(), player,itemlink, effect, cost,bag,slot):Send(player)
 	end
 end
@@ -117,7 +121,6 @@ end
 function MyHandlers.ReforgeItem(player,bag,slot)
 	local item = player:GetItemByPos(bag,slot)
 	if (EnchantItemCheck(player,item)) then
-		local effect = item:GetEnchantmentId(5)
 
 		local cost = EnchantItemCost(item)
 		local class = item:GetClass()
