@@ -46,6 +46,12 @@ end
  function MyHandlers.EnchantReRollMain_Reforge(player,neweffect) -- AIO
 --Set up strings from server
 EnchantReRollMain.itemEffectName2 = GetSpellInfo(neweffect)
+
+if (not(EnchantReRollMain.itemEffectName2)) or (EnchantReRollMain.itemEffectName2 == "Enchanting") then
+    EnchantReRollMain.itemEffectName2 = "Enhant Reforged"
+    neweffect = 964998
+    end
+
 EnchantReRollMain.itemEffect2 = "|Hspell:"..neweffect.."|h["..EnchantReRollMain.itemEffectName2.."]|h"
 EnchantReRollMain_Item_EffectAFrame_BaseEffectAText:SetText("|cff00FF00"..EnchantReRollMain.itemEffect2.."|r")
 --Play Reforge Animations

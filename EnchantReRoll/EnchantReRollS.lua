@@ -173,6 +173,11 @@ function MyHandlers.ReforgeItem(player,bag,slot)
 end
 
 function enchantReRoll_Reforge(msg,player,item)
-	local neweffect = item:GetEnchantmentSpellId(5)
+	local neweffect = nil
+	if (item:GetEnchantmentSpellId(5)) then
+		neweffect = item:GetEnchantmentSpellId(5)
+	else
+		neweffect = 964998
+	end
 	return msg:Add("EnchantReRoll", "EnchantReRollMain_Reforge", neweffect)
 end
