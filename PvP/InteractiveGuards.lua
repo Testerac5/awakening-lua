@@ -21,7 +21,12 @@ local Guard_Factions = {
 	79, -- darnas
 	1575, -- straji pustoti
 	412, -- oskvernitely
-	1577 -- liga arathora
+	1577, -- liga arathora
+	105, -- thousand needles guards (horde)
+	83, -- thunder bluff
+	150, -- theramore
+	877, -- sen'jin watchers
+	1515, -- warsong guard (barrens)
 }
 for k, v in pairs(Guard_Factions) do 
 	local entry = WorldDBQuery("SELECT entry FROM creature_template WHERE faction = "..v..";")
@@ -49,7 +54,7 @@ local function Guard_MainAction(event, killer, killed)
 	end
 end
 
-RegisterPlayerEvent(6, Guard_MainAction)
+RegisterPlayerEvent(33, Guard_MainAction)
 
 local function Guard_Back(event, creature)
 	local faction = WorldDBQuery("SELECT faction FROM creature_template where entry = '"..creature:GetEntry().."';")
@@ -59,5 +64,5 @@ end
 for k,v in pairs(Guards_Entry) do
 	RegisterCreatureEvent(v, 2, Guard_Back)
 	RegisterCreatureEvent(v, 5, Guard_Back)
-	RegisterCreatureEvent(v, 23, Guard_Back)
+	--RegisterCreatureEvent(v, 23, Guard_Back)
 end
