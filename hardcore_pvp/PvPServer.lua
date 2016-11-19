@@ -199,6 +199,9 @@ local function CreatureDeath (event, pKiller, pKilled)
 			local slotToTake = math.random(SlotRange)
 					
 			local checkitem = pKilled:GetItemByPos(bagToTake, slotToTake)
+			if not(checkitem) then
+				return false
+			end
 			safe_to_take = true
 			if petkill == false then
 				if checkitem:GetClass() == 12 then

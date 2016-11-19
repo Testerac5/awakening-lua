@@ -300,6 +300,9 @@ local function OnPlayerLogin(event, player) -- Caps out at 302 stats wont show b
 	local player_guid = player:GetGUIDLow()
 	local stats_query = CharDBQuery("SELECT str, sta, agi, inte, spi FROM character_stat_allocation WHERE guid = "..player_guid.."")
 	local points_query = CharDBQuery("SELECT points FROM character_stat_points WHERE guid = "..player_guid.."")
+	if not(stats_query or points_query) then
+		return false
+	end
 	local statsq = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4)}
 	--for _,v in pairs(statsq) do
 		if ((statsq[1] + statsq[2] + statsq[3] + statsq[4] + statsq[5]) == 0) then
@@ -353,7 +356,11 @@ function player_stat_auras(player, stats)
 end
 
 local function OnRevive(event, player)
+	local player_guid = player:GetGUIDLow()
 	local stats_query = CharDBQuery("SELECT str, sta, agi, inte, spi FROM character_stat_allocation WHERE guid = "..player_guid.."")
+	if not(stats_query) then
+		return false
+	end
 	local stats = {stats_query:GetInt32(0), stats_query:GetInt32(1), stats_query:GetInt32(2), stats_query:GetInt32(3), stats_query:GetInt32(4)}
 	player_stat_auras(player, stats)
 end

@@ -92,13 +92,13 @@ function MassPurgeCheck(event, player)
 		local TE_add_amount = (player_level - 9) - TE_count
 		
 		if AE_add_amount < 0 then
-			player:RemoveItem(spell_essence, AE_add_amount)
+			player:RemoveItem(spell_essence, -AE_add_amount)
 		elseif AE_add_amount > 0 then
 			player:AddItem(spell_essence, AE_add_amount)
 		end
 		
 		if TE_add_amount < 0 then
-			player:RemoveItem(talent_essence, TE_add_amount)
+			player:RemoveItem(talent_essence, -TE_add_amount)
 		elseif TE_add_amount > 0 then
 			player:AddItem(talent_essence, TE_add_amount)
 		end
