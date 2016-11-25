@@ -5,7 +5,7 @@
 -- talents tab variables refers to talenttab dbc
 
 rogue_assassination_spells = {{2098, 2, 0, 1}, {5171, 2, 0, 10}, {8647, 2, 0, 14}, {703, 2, 0, 14}, {8676, 2, 0, 18},
-{1943, 2, 0, 20}, {2842, 2, 0, 20} {1833, 2, 0, 26}, {408, 2, 0, 30}, {32645, 2, 0, 62}, {26679, 2, 0, 64}, {51722, 2, 0, 80}}
+{1943, 2, 0, 20}, {2842, 2, 0, 20}, {1833, 2, 0, 26}, {408, 2, 0, 30}, {32645, 2, 0, 62}, {26679, 2, 0, 64}, {51722, 2, 0, 80}}
 
 rogue_assassination_spells_count = 12
 rogue_assassination_bgs = {"Interface\\TalentFrame\\RogueAssassination-TopLeft", "Interface\\TalentFrame\\RogueAssassination-TopRight",
