@@ -707,6 +707,54 @@ function MyHandlers.LearnThisSpell(player, got_spell, i,class,spec)
 	
 end
 
+
+--unlearn this spell part--
+function sendButtonToChangeSpellsBack(msg, player, i)
+
+	return msg:Add("sideBar", "ChangeLearnButtonBack", i,spell)
+
+end
+
+function MyHandlers.UnLearnThisSpell(player, got_spell, i,class,spec)
+	local successful = true
+
+	local currency_one = nil
+	local currency_two = nil
+	local spellID = nil
+	local LevelReq = nil
+	local spell = nil
+
+	local countofspells, spells = GetRightSpellTables(class,spec)
+	for k,v in pairs(spells) do
+		if (v[1] == got_spell[1]) then
+		currency_one = v[2]
+		currency_two = v[3]
+		spellID = v[1]
+		LevelReq = v[4]
+		spell = {spellID, currency_one, currency_two}
+	end
+	end
+
+	if (not(spellID)) or (LevelReq > player:GetLevel()) or (not(player:HasSpell(spellID))) then
+		successful = false
+	end
+	
+	if successful == false then
+		player:SendBroadcastMessage("You can't unlearn this spell!")
+		
+	else
+		player:RemoveSpell(spellID)
+		if (currency_one) then
+		player:AddItem( spell_essence, currency_one )
+		end
+		if (currency_two) then
+		player:AddItem( talent_essence, currency_two )
+	end
+		sendButtonToChangeSpellsBack(AIO.Msg(), player, i,spell):Send(player)
+	end
+	
+end
+--end of unlearn this spell part--
 function MyHandlers.GetAllBGs(player, ClassSpec)
 	local bgList = {druid_balance_bgs, druid_feral_bgs, druid_restoration_bgs,
 	hunter_beastmastery_bgs, hunter_marksmanship_bgs, hunter_survival_bgs,
