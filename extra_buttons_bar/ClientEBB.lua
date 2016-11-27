@@ -2809,7 +2809,73 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 		--all_learn_talent_buttons_t[indexAt]:SetTexture(texture_changed[1], texture_changed[2], texture_changed[3], 1)
 		
 	end
-	
+	--begin of the client talent unlearn part--
+    function unlearn_talent(self)
+        PlaySound("igMainMenuOptionCheckBoxOn")
+    local talent_attached = false
+    local indexAt
+  
+    for i,v in ipairs(all_talent_slot_buttons) do
+      if v == self then
+       spellName, spellRank, spellID = GameTooltip:GetSpell()
+        talent_attached = spellID
+        indexAt = i
+        break
+      end
+    end
+    
+    if talent_attached ~= false then
+      AIO.Handle("sideBar","UnLearnThisTalent",talent_attached,indexAt,sideBar.CurrentTalentSpec)
+    end
+  
+  end
+
+    function MyHandlers.UnLearnTalent(player, attached_talent, indexAt)
+        
+        local AE_cost = attached_talent[2]
+        local TE_cost = attached_talent[3]
+        local all_spellIds = attached_talent[4]
+        local spellId = attached_talent[1]
+        
+        local texture_changed = {0, .5, 0}
+        local text_changed = "|cffFFFFFFLearn|r"
+        local learn_tooltip = nil
+        local BG_File = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_bg"
+        local FN = 0
+        local BG_Color_U = {0.46,0.36,0.34,1}
+
+        all_talent_slot_buttons[indexAt].HyperLink = "|cffFFFFFF|Hspell:"..all_spellIds[1].."|h[Talent]|h|r"
+        
+        if learn_tooltip ~= nil then
+            local function learn_button_tooltip_Enter(self, motion)
+                GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+                GameTooltip:SetText(learn_tooltip)
+                GameTooltip:Show()
+            end
+            all_learn_talent_buttons[indexAt]:SetScript("OnEnter", learn_button_tooltip_Enter)
+        end
+
+        all_attached_talent[indexAt] = attached_talent
+        
+        
+        all_learn_talent_buttons[indexAt]:SetText(text_changed)
+            
+        all_talent_FrameNumber[indexAt]:SetText(FN)
+
+        all_talent_slots[indexAt]:SetBackdrop({
+                        bgFile = BG_File,
+                         insets = {
+                        left = -11,
+                        right = -11,
+                        top = -11,
+                        bottom = -11}
+                        })
+        all_talent_slot_buttons[indexAt]:SetBackdropColor(unpack(BG_Color_U))
+        
+        --all_learn_talent_buttons_t[indexAt]:SetTexture(texture_changed[1], texture_changed[2], texture_changed[3], 1)
+        
+    end
+    -- end of the client talent unlearn part--
 	function MyHandlers.GetSpellCount(player, spellCount, spellList)
 	
 		local start_ticker = 1
@@ -3639,7 +3705,7 @@ TrainingFrame:SetScript("OnUpdate" , function()
         v:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\buttonbackgroundold"
         })
-        v:SetScript("OnMouseUp",  nil)
+        v:SetScript("OnMouseUp",  unlearn_talent)
     end
     
     for i,v in ipairs(all_learn_talent_buttons) do
@@ -3673,11 +3739,13 @@ TrainingFrame:SetScript("OnUpdate" , function()
             top = -7,
             bottom = -7}
         })
+        v:EnableMouse(false)
         v:SetPoint("BOTTOMRIGHT", 2, -1)
     end
     
     for i,v in ipairs(all_talent_FNF) do
         v:SetFont("Fonts\\FRIZQT__.ttf", 13)
+        v:SetPoint("CENTER",0,-1)
         v:SetShadowOffset(1, 1)
         all_talent_FrameNumber[i]:SetFontString(v)
         all_talent_FrameNumber[i]:SetText(" ")

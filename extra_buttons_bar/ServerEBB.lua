@@ -933,4 +933,86 @@ function SendGoBackTalent(msg, player, attached_talent, indexAt)
 	return msg:Add("sideBar", "TalentGoBack", attached_talent, indexAt)
 end
 
+   --talent unlearning part--
+function MyHandlers.UnLearnThisTalent(player, attached_talent, indexAt,ClassSpec)
+  local talentList = nil
+  local successful = true
+  local currency_one = nil
+  local currency_two = nil
+  local spellID = nil
+  local LevelReq = nil
+  local TalentRank = nil
+  local talents_ranks = nil
+  local spellIDOriginal = nil
+  --preventing any spell learn hack--
+  --HACKFIX, VERY FUCKING HACK FIX OF HACK--
+    local ClassSpecList = {"DRUIDBALANCE", "DRUIDFERAL", "DRUIDRESTORATION",
+               "HUNTERBEASTMASTERY", "HUNTERMARKSMANSHIP", "HUNTERSURVIVAL",
+               "MAGEARCANE", "MAGEFIRE", "MAGEFROST",
+               "PALADINHOLY", "PALADINPROTECTION", "PALADINRETRIBUTION",
+               "PRIESTDISCIPLINE", "PRIESTHOLY", "PRIESTSHADOW",
+               "ROGUEASSASSINATION", "ROGUECOMBAT", "ROGUESUBTLETY",
+               "SHAMANELEMENTAL", "SHAMANENHANCEMENT", "SHAMANRESTORATION",
+               "WARLOCKAFFLICTION", "WARLOCK", "DEMONOLOGY", "WARLOCKDESTRUCTION",
+               "WARRIORARMS", "WARRIORFURY", "WARRIORPROTECTION"}
+      
+  local ListOfTalentLists = {druid_balance_talents, druid_feral_talents, druid_restoration_talents,
+                 hunter_beastmastery_talents, hunter_marksmanship_talents, hunter_survival_talents,
+                 mage_arcane_talents, mage_fire_talents, mage_frost_talents,
+                 paladin_holy_talents, paladin_protection_talents, paladin_retribution_talents,
+                 priest_discipline_talents, priest_holy_talents, priest_shadow_talents,
+                 rogue_assassination_talents, rogue_combat_talents, rogue_subtlety_talents,
+                 shaman_elemental_talents, shaman_enhancement_talents, shaman_restoration_talents,
+                 warlock_affliction_talents, warlock_demonology_talents, warlock_destruction_talents,
+                 warrior_arms_talents, warrior_fury_talents, warrior_protection_talents}
+  ------------------------------------------
+    for i,v in ipairs(ClassSpecList) do
+    if ClassSpec == v then
+      talentList = ListOfTalentLists[i]
+    end
+    end
+    for i,v in ipairs(talentList) do -- getting costs and id
+    local spellids = v[2]
+      for k,s in pairs(spellids) do
+        if (attached_talent == s) then
+          spellID = s
+          spellIDOriginal = spellids
+          currency_one = v[3]
+          currency_two = v[4]
+          LevelReq = v[5]
+          TalentRank = k
+          talents_ranks = talentList[i][1]
+        end
+      end -- check for spellid
 
+    end
+  
+  if (not(spellID)) or (LevelReq > player:GetLevel()) or (not(player:HasSpell(spellID))) then
+    successful = false
+  end
+  
+  if successful == false then
+    player:SendBroadcastMessage("You can't unlearn this talent!")
+    
+  else
+    for k,v in pairs(spellIDOriginal) do
+    player:RemoveSpell(v)
+  end
+    if (currency_one) then
+    player:AddItem( spell_essence, currency_one*TalentRank)
+    end
+    if (currency_two) then
+    player:AddItem( talent_essence, currency_two*TalentRank)
+  end
+    attached_talent = {spellIDOriginal[1],currency_one, currency_two,spellIDOriginal,talents_ranks}
+    sendUnlearnedTalent(AIO.Msg(), player, attached_talent, indexAt):Send(player)
+  end
+  
+end
+
+function sendUnlearnedTalent(msg, player, attached_talent, indexAt)
+
+  return msg:Add("sideBar", "UnLearnTalent", attached_talent, indexAt)
+
+end
+--end of the talent unlearning part--

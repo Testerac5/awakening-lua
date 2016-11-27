@@ -155,7 +155,9 @@ end
 local function OnLogoutPlayer(event ,player)
 	local guid = player:GetGUIDLow()
 	local hunger = player_hunger_table[guid]
+	if(hunger) then
 	CharDBExecute("UPDATE character_saved_hunger SET hunger = "..hunger.." WHERE guid = "..guid)
+end
 end
 
 RegisterPlayerEvent(3, OnLoginPlayer)
