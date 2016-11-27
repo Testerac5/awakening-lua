@@ -560,7 +560,7 @@ sideBar:SetFrameStrata("LOW")
         ResetButton_fast:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbutton")
         ResetButton_fast:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\roundbuttonhighlight")
         ResetButton_fast:SetBackdrop({
-            bgFile = "Interface\\Icons\\INV_Misc_Orb_03",
+            bgFile = "Interface\\Icons\\inv_custom_talentpurge",
              insets = {
             left = 12,
             right = 12,
@@ -642,7 +642,7 @@ sideBar:SetFrameStrata("LOW")
         
     local TrainingButton = CreateFrame("Button", "TrainingButton", sideBar)
         TrainingButton:SetSize(128, 64)
-        TrainingButton:SetPoint("CENTER", 230, -43)
+        TrainingButton:SetPoint("CENTER", 0, 20)
         TrainingButton:EnableMouse(true)
         TrainingButton:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b")
         TrainingButton:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b_h")
@@ -726,7 +726,7 @@ local function ResetButtonFast_Tooltip_OnLeave(self)
 
             local ResetUpgradesButton = CreateFrame("Button", "ResetUpgradesButton", sideBar)
         ResetUpgradesButton:SetSize(128, 64)
-        ResetUpgradesButton:SetPoint("CENTER", 0, 20)
+        ResetUpgradesButton:SetPoint("CENTER", 230, -43)
         ResetUpgradesButton:EnableMouse(true)
         ResetUpgradesButton:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b")
         ResetUpgradesButton:SetHighlightTexture("Interface\\AddOns\\AwAddons\\Textures\\Misc\\main_b_h")
@@ -832,13 +832,13 @@ end
         if (typeofpurge == "talent") then
             cost, nexcost = GetMoneyForReset(1)
             if (cost == "token") then
-                dialogText = "|cffE1AB18Reset: |TInterface\\Icons\\INV_Misc_Orb_03.blp:14:14:0:0|t|cffFFFFFFx1"
+                dialogText = "|cffE1AB18Reset: |TInterface\\Icons\\inv_custom_talentpurge.blp:14:14:0:0|t|cffFFFFFFx1"
             else
                 local gold,silver,copper = GetGoldForMoney(cost)
                 dialogText = "|cffE1AB18Reset: |cffFFFFFF"..gold.."|TInterface\\MONEYFRAME\\UI-GoldIcon.blp:11:11:0:-1|t "..silver.."|TInterface\\MONEYFRAME\\UI-SilverIcon.blp:11:11:0:-1|t "..copper.."|TInterface\\MONEYFRAME\\UI-CopperIcon.blp:11:11:0:-1|t|r"
             end
             if (nexcost == "token") then
-                  dialogText_2 = "|cffE1AB18Next Reset: |TInterface\\Icons\\INV_Misc_Orb_03.blp:14:14:0:0|t|cffFFFFFFx1"
+                  dialogText_2 = "|cffE1AB18Next Reset: |TInterface\\Icons\\inv_custom_talentpurge.blp:14:14:0:0|t|cffFFFFFFx1"
             else
                 local gold,silver,copper = GetGoldForMoney(nexcost)
                 dialogText_2 = "|cffE1AB18Next Reset: |cffFFFFFF"..gold.."|TInterface\\MONEYFRAME\\UI-GoldIcon.blp:11:11:0:-1|t "..silver.."|TInterface\\MONEYFRAME\\UI-SilverIcon.blp:11:11:0:-1|t "..copper.."|TInterface\\MONEYFRAME\\UI-CopperIcon.blp:11:11:0:-1|t|r"
@@ -848,13 +848,13 @@ end
             elseif (typeofpurge == "ability") then
                 cost, nexcost = GetMoneyForReset(2)
             if (cost == "token") then
-                dialogText = "|cffE1AB18Reset: |TInterface\\Icons\\INV_Misc_Orb_03.blp:14:14:0:0|t|cffFFFFFFx1"
+                dialogText = "|cffE1AB18Reset: |TInterface\\Icons\\inv_custom_abilitypurge.blp:14:14:0:0|t|cffFFFFFFx1"
             else
                 local gold,silver,copper = GetGoldForMoney(cost)
                 dialogText = "|cffE1AB18Reset: |cffFFFFFF"..gold.."|TInterface\\MONEYFRAME\\UI-GoldIcon.blp:11:11:0:-1|t "..silver.."|TInterface\\MONEYFRAME\\UI-SilverIcon.blp:11:11:0:-1|t "..copper.."|TInterface\\MONEYFRAME\\UI-CopperIcon.blp:11:11:0:-1|t|r"
             end
             if (nexcost == "token") then
-                  dialogText_2 = "|cffE1AB18Next Reset: |TInterface\\Icons\\INV_Misc_Orb_03.blp:14:14:0:0|t|cffFFFFFFx1"
+                  dialogText_2 = "|cffE1AB18Next Reset: |TInterface\\Icons\\inv_custom_abilitypurge.blp:14:14:0:0|t|cffFFFFFFx1"
             else
                 local gold,silver,copper = GetGoldForMoney(nexcost)
                 dialogText_2 = "|cffE1AB18Next Reset: |cffFFFFFF"..gold.."|TInterface\\MONEYFRAME\\UI-GoldIcon.blp:11:11:0:-1|t "..silver.."|TInterface\\MONEYFRAME\\UI-SilverIcon.blp:11:11:0:-1|t "..copper.."|TInterface\\MONEYFRAME\\UI-CopperIcon.blp:11:11:0:-1|t|r"
