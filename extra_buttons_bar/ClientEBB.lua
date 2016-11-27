@@ -3518,7 +3518,8 @@ TrainingFrame:SetScript("OnUpdate" , function()
         v:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\buttonbackground"
         })
-        v:SetScript("OnMouseUp",  unlearn_spell)
+        --v:SetScript("OnMouseUp",  unlearn_spell)
+        v:SetScript("OnMouseUp",  nil)
     end
     
     for i,v in ipairs(all_learn_spell_buttons) do
@@ -3705,7 +3706,8 @@ TrainingFrame:SetScript("OnUpdate" , function()
         v:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\buttonbackgroundold"
         })
-        v:SetScript("OnMouseUp",  unlearn_talent)
+        --v:SetScript("OnMouseUp",  unlearn_talent)
+        v:SetScript("OnMouseUp",  nil)
     end
     
     for i,v in ipairs(all_learn_talent_buttons) do
