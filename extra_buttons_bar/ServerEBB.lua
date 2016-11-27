@@ -709,9 +709,8 @@ end
 
 
 --unlearn this spell part--
-function sendButtonToChangeSpellsBack(msg, player, i)
-
-	return msg:Add("sideBar", "ChangeLearnButtonBack", i,spell)
+function sendButtonToChangeSpellsBack(msg, player, i,spellID,currency_one,currency_two)
+	return msg:Add("sideBar", "ChangeLearnButtonBack", i,spellID,currency_one,currency_two)
 
 end
 
@@ -726,12 +725,11 @@ function MyHandlers.UnLearnThisSpell(player, got_spell, i,class,spec)
 
 	local countofspells, spells = GetRightSpellTables(class,spec)
 	for k,v in pairs(spells) do
-		if (v[1] == got_spell[1]) then
+		if (v[1] == got_spell) then
 		currency_one = v[2]
 		currency_two = v[3]
 		spellID = v[1]
 		LevelReq = v[4]
-		spell = {spellID, currency_one, currency_two}
 	end
 	end
 
@@ -750,7 +748,7 @@ function MyHandlers.UnLearnThisSpell(player, got_spell, i,class,spec)
 		if (currency_two) then
 		player:AddItem( talent_essence, currency_two )
 	end
-		sendButtonToChangeSpellsBack(AIO.Msg(), player, i,spell):Send(player)
+		sendButtonToChangeSpellsBack(AIO.Msg(), player, i,spellID, currency_one, currency_two):Send(player)
 	end
 	
 end

@@ -2953,18 +2953,18 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
        end
     end
 
-    function MyHandlers.ChangeLearnButtonBack(player, i, spell)
-        local AE_cost = spell[2]
-        local TE_cost = spell[3]
-        local spell = spell[1]
+    function MyHandlers.ChangeLearnButtonBack(player, i, spellid,cost_one,cost_two)
+        local AE_cost = cost_one
+        local TE_cost = cost_two
+        local spell = spellid
         local function learn_button_tooltip_Enter(self, motion)
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-            learn_tooltip = "Cost: "..AE_cost.." AE "..TE_cost.." TE"
+            GameTooltip:SetText("Cost: "..AE_cost.." AE "..TE_cost.." TE")
             GameTooltip:Show()
         end
         all_learn_spell_buttons[i]:SetText("|cffFFFFFFLearn|r")
         all_learn_spell_buttons[i]:SetScript("OnEnter", learn_button_tooltip_Enter)
-        all_attached_spells[i] = spell
+        all_attached_spells[i] = {spell, cost_one, cost_two}
     end
     --end of unlearn spell part--
 	
