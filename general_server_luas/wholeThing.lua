@@ -83,8 +83,8 @@ function OnLoot(event, player, item, count)
 	local item_quality = item:GetQuality()
 	
 	if item_class == 2 or item_class == 4 then
-	
-		local boolRoll1		= math.random(100)
+		local boolRoll1		= math.random(1,100)
+		boolRoll1 = math.random(1,100)
 		if (boolRoll1 >= chance_increaser[item_quality]) then 
 			slotBools[1]	= true
 			slotIDs[1]		= RollEnchant(item)

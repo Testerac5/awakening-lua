@@ -3796,9 +3796,3 @@ end
 
 SpellBook_SkillTabOverFlowButton:Disable()
 SpellBook_SkillTabOverFlowButton_b:Disable()
-
-    
-
-	
-	
-	
