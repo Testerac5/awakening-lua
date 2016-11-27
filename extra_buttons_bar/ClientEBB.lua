@@ -2931,6 +2931,42 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 		--all_learn_spell_buttons_t[i]:SetTexture(.3, .3, .3, 1)
 		all_attached_spells[i] = nil
 	end
+
+    --unlearn spell part--
+        function unlearn_spell(self)
+       PlaySound("igMainMenuOptionCheckBoxOn")
+       local got_spell = nil
+       local got_index
+       --check for preventing hacks
+       local class, spec = unpack(sideBar.CurrentSpellSpec)
+
+        for i,v in ipairs(all_spell_slot_buttons) do
+            if self == v then
+                spellName, spellRank, spellID = GameTooltip:GetSpell()
+                got_spell = spellID
+                got_index = i
+            end
+        end
+    
+      if got_spell ~= nil then
+       AIO.Handle("sideBar", "UnLearnThisSpell", got_spell, got_index, class,spec)
+       end
+    end
+
+    function MyHandlers.ChangeLearnButtonBack(player, i, spell)
+        local AE_cost = spell[2]
+        local TE_cost = spell[3]
+        local spell = spell[1]
+        local function learn_button_tooltip_Enter(self, motion)
+            GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+            learn_tooltip = "Cost: "..AE_cost.." AE "..TE_cost.." TE"
+            GameTooltip:Show()
+        end
+        all_learn_spell_buttons[i]:SetText("|cffFFFFFFLearn|r")
+        all_learn_spell_buttons[i]:SetScript("OnEnter", learn_button_tooltip_Enter)
+        all_attached_spells[i] = spell
+    end
+    --end of unlearn spell part--
 	
 	-- ####################################### Basic Frame ##############################	
 	 local ProgressionPurpleCovertexture = TrainingFrame:CreateTexture() 
@@ -3416,7 +3452,7 @@ TrainingFrame:SetScript("OnUpdate" , function()
         v:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\buttonbackground"
         })
-        v:SetScript("OnMouseUp",  nil)
+        v:SetScript("OnMouseUp",  unlearn_spell)
     end
     
     for i,v in ipairs(all_learn_spell_buttons) do
