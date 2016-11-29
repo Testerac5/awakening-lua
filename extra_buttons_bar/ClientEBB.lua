@@ -248,8 +248,8 @@ sideBar:SetFrameStrata("LOW")
     sideBar.Text_CheckBox:SetText("|cffFFFFFFEnable/disable quick access to\ncharacter progression menu|r")
     --edited
     --edited
-    
-    
+	
+	
     --[[TRAINING FRAME]]--
      local TrainingFrame = CreateFrame("Frame", "TrainingFrame", UIParent, nil)
         TrainingFrame:SetSize(950, 860)
@@ -410,12 +410,12 @@ sideBar:SetFrameStrata("LOW")
         end)
 
     AIO.SavePosition(sideBar)
-        
-        --AIO.SavePosition(TrainingFrame)
-        
-        
-    --[[Skill Frame]]
-    local StatFrame = CreateFrame("Frame", "StatFrame", UIParent, nil)
+		
+		--AIO.SavePosition(TrainingFrame)
+		
+		
+	--[[Skill Frame]]
+	local StatFrame = CreateFrame("Frame", "StatFrame", UIParent, nil)
         StatFrame:SetSize(450, 500) --edited
         StatFrame:SetMovable(true)
         StatFrame:EnableMouse(true)
@@ -446,11 +446,11 @@ sideBar:SetFrameStrata("LOW")
         self:Hide()
         end
         end)
-        
-        AIO.SavePosition(StatFrame)
-    
-        
-    -- training button
+		
+		AIO.SavePosition(StatFrame)
+	
+		
+	-- training button
         --[[local sideBarOpeningFrameButton = CreateFrame("Button", "sideBarOpeningFrameButton", UIParent)
         sideBarOpeningFrameButton:SetSize(256, 128)
         sideBarOpeningFrameButton:SetPoint("CENTER", -60, 50)
@@ -1281,11 +1281,11 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
             end)
         ResetButton_fast_T:SetScript("OnEnter", ResetButton_t_Tooltip_OnEnter)
         ResetButton_fast_T:SetScript("OnLeave", ResetButton_t_Tooltip_OnLeave)]]--
-        
-    -- ================================ SPECIFIC UI SECTIONS ==============================================
-    
-    --[[ StatFrame UI ]]
-    
+		
+	-- ================================ SPECIFIC UI SECTIONS ==============================================
+	
+	--[[ StatFrame UI ]]
+	
     local StatFrame_CloseButton = CreateFrame("Button", "StatFrame_CloseButton", StatFrame, "UIPanelCloseButton")
         StatFrame_CloseButton:SetPoint("TOPRIGHT", -57, -52) --edited
         StatFrame_CloseButton:EnableMouse(true)
@@ -1478,10 +1478,10 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
             tileSize = 16,
             insets = { left = 5, right = 5, top = 5, bottom = 5 }
         })
-        StatFrame_PointsPanel:SetPoint("LEFT", 14, 6)]]--
-        
-        
-    -- Stat Names
+		StatFrame_PointsPanel:SetPoint("LEFT", 14, 6)]]--
+		
+		
+	-- Stat Names
         --[[local StatNames = CreateFrame("Button", "StatNames", StatFrame, nil)
         StatNames:SetSize(60, 100)
         StatNames:SetPoint("TOPLEFT", 15, -37.5)]]-- edited
@@ -1549,90 +1549,90 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
         Stat_Value:SetFont("Fonts\\MORPHEUS.TTF", 18, "OUTLINE")
         Stat_Value:SetSize(70, 5)
         Stat_Value:SetPoint("BOTTOM", 0, 46)--edited all
-        
-        
-    function MyHandlers.GetStatValues(player, stats)
-    
-        Str_Value:SetText(stats[1])
+		
+		
+	function MyHandlers.GetStatValues(player, stats)
+	
+		Str_Value:SetText(stats[1])
         Sta_Value:SetText(stats[2])
         Agi_Value:SetText(stats[3])
         Inte_Value:SetText(stats[4])
         Spi_Value:SetText(stats[5])
-        Stat_Value:SetText(stats[6])
-        
-    end
-    
-    function Increase_stats(self)
+		Stat_Value:SetText(stats[6])
+		
+	end
+	
+	function Increase_stats(self)
         PlaySound("igMainMenuOptionCheckBoxOn")
-    
-        local stat = nil
+	
+		local stat = nil
         local amount = nil
         if (IsShiftKeyDown()) then
             amount = 10
         end
-    
-        if self == Inc_Str then
-        
-            stat = 1
-            
-        elseif self == Inc_Sta then
-        
-            stat = 2
-            
-        elseif self == Inc_Agi then
-        
-            stat = 3
-            
-        elseif self == Inc_Inte then
-        
-            stat = 4
-            
-        elseif self == Inc_Spi then
-        
-            stat = 5
-        end
-            
-        AIO.Handle("sideBar", "AddStats", stat, amount)
+	
+		if self == Inc_Str then
+		
+			stat = 1
+			
+		elseif self == Inc_Sta then
+		
+			stat = 2
+			
+		elseif self == Inc_Agi then
+		
+			stat = 3
+			
+		elseif self == Inc_Inte then
+		
+			stat = 4
+			
+		elseif self == Inc_Spi then
+		
+			stat = 5
+		end
+			
+		AIO.Handle("sideBar", "AddStats", stat, amount)
 
-    
-    end
-    
-    function Reduce_stats(self)
+	
+	end
+	
+	function Reduce_stats(self)
         PlaySound("igMainMenuOptionCheckBoxOn")
-    
-        local stat = nil
+	
+		local stat = nil
          local amount = nil
         if (IsShiftKeyDown()) then
             amount = 10
         end
-    
-        if self == Dec_Str then
-        
-            stat = 1
-            
-        elseif self == Dec_Sta then
-        
-            stat = 2
-            
-        elseif self == Dec_Agi then
-        
-            stat = 3
-            
-        elseif self == Dec_Inte then
-        
-            stat = 4
-            
-        elseif self == Dec_Spi then
-        
-            stat = 5
-            
-        end 
-        AIO.Handle("sideBar", "ReduceStats", stat, amount)
+	
+		if self == Dec_Str then
+		
+			stat = 1
+			
+		elseif self == Dec_Sta then
+		
+			stat = 2
+			
+		elseif self == Dec_Agi then
+		
+			stat = 3
+			
+		elseif self == Dec_Inte then
+		
+			stat = 4
+			
+		elseif self == Dec_Spi then
+		
+			stat = 5
+			
+		end	
+		AIO.Handle("sideBar", "ReduceStats", stat, amount)
 
-    
-    end
-    
-    Inc_Str = CreateFrame("Button", "Inc_Str", StatFrame_Panel_Str, nil)
+	
+	end
+	
+	Inc_Str = CreateFrame("Button", "Inc_Str", StatFrame_Panel_Str, nil)
         Inc_Str:SetSize(23, 23)
         Inc_Str:SetPoint("CENTER", 60, -2)
         Inc_Str:EnableMouse(true)
@@ -1723,7 +1723,7 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
         --Dec_Spi:SetScript("OnMouseUp", Reduce_stats)
         --edited all
         
-    
+	
         Inc_Str:SetScript("OnMouseUp", Increase_stats)
        
     
@@ -1752,32 +1752,32 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
        
    
         Dec_Spi:SetScript("OnMouseUp", Reduce_stats)
-        
-        
-    --[[ Reset UI ]]
-    
-    
-    function Reset_spells_button(self)
+		
+		
+	--[[ Reset UI ]]
+	
+	
+	function Reset_spells_button(self)
         display_stuff(GeneralStuff)
-    if not(TrainingFrame:IsVisible()) then
-        AIO.Handle("sideBar", "ResetSpells")
-    end
-    end
-    
-    function Reset_talents_button(self)
+	if not(TrainingFrame:IsVisible()) then
+		AIO.Handle("sideBar", "ResetSpells")
+	end
+	end
+	
+	function Reset_talents_button(self)
         display_stuff(GeneralStuff)
-    if not(TrainingFrame:IsVisible()) then
-        AIO.Handle("sideBar", "ResetTalents")
-    end
-    end
-    
-    
-    --[[local ResetFrame_CloseButton = CreateFrame("Button", "ResetFrame_CloseButton", ResetFrame, "UIPanelCloseButton")
-        ResetFrame_CloseButton:SetPoint("TOPRIGHT", -5, -5)
-        ResetFrame_CloseButton:EnableMouse(true)
-        ResetFrame_CloseButton:SetSize(27, 27)
-        
-    local ResetFrame_TitleBar = CreateFrame("Frame", "ResetFrame_TitleBar", ResetFrame, nil)
+	if not(TrainingFrame:IsVisible()) then
+		AIO.Handle("sideBar", "ResetTalents")
+	end
+	end
+	
+	
+	--[[local ResetFrame_CloseButton = CreateFrame("Button", "ResetFrame_CloseButton", ResetFrame, "UIPanelCloseButton")
+		ResetFrame_CloseButton:SetPoint("TOPRIGHT", -5, -5)
+		ResetFrame_CloseButton:EnableMouse(true)
+		ResetFrame_CloseButton:SetSize(27, 27)
+		
+	local ResetFrame_TitleBar = CreateFrame("Frame", "ResetFrame_TitleBar", ResetFrame, nil)
         ResetFrame_TitleBar:SetSize(135, 25)
         ResetFrame_TitleBar:SetBackdrop({
             bgFile = "Interface/CHARACTERFRAME/UI-Party-Background",
@@ -1787,81 +1787,81 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
             tileSize = 16,
             insets = { left = 5, right = 5, top = 5, bottom = 5 }
         })
-        ResetFrame_TitleBar:SetPoint("TOP", 0, 9)
-        local ResetFrame_TitleText = ResetFrame_TitleBar:CreateFontString("ResetFrame_TitleText")
+		ResetFrame_TitleBar:SetPoint("TOP", 0, 9)
+		local ResetFrame_TitleText = ResetFrame_TitleBar:CreateFontString("ResetFrame_TitleText")
         ResetFrame_TitleText:SetFont("Fonts\\FRIZQT__.TTF", 13)
         ResetFrame_TitleText:SetSize(225, 5)
         ResetFrame_TitleText:SetPoint("CENTER", 0, 0)
         ResetFrame_TitleText:SetText("|cffFFC125Reset Spells/Talents|r")
-        
-        
-    local Reset_Spells = CreateFrame("Button", "Reset_Spells", ResetFrame, nil)
+		
+		
+	local Reset_Spells = CreateFrame("Button", "Reset_Spells", ResetFrame, nil)
         Reset_Spells:SetSize(100, 50)
         Reset_Spells:SetPoint("CENTER", -60, -20)
         Reset_Spells:EnableMouse(true)
-        local texture_spell = Reset_Spells:CreateTexture("Spell_Texture")
-        texture_spell:SetAllPoints(Reset_Spells)
-        texture_spell:SetTexture(0.5, 1, 1, 0.5)
+		local texture_spell = Reset_Spells:CreateTexture("Spell_Texture")
+		texture_spell:SetAllPoints(Reset_Spells)
+		texture_spell:SetTexture(0.5, 1, 1, 0.5)
         Reset_Spells:SetNormalTexture(texture_spell)
-        local font_spell = Reset_Spells:CreateFontString("Spell_Font")
-        font_spell:SetFont("Fonts\\FRIZQT__.TTF", 11)
-        font_spell:SetShadowOffset(1, -1)
-        Reset_Spells:SetFontString(font_spell)
-        Reset_Spells:SetText("Spells Reset")
+		local font_spell = Reset_Spells:CreateFontString("Spell_Font")
+		font_spell:SetFont("Fonts\\FRIZQT__.TTF", 11)
+		font_spell:SetShadowOffset(1, -1)
+		Reset_Spells:SetFontString(font_spell)
+		Reset_Spells:SetText("Spells Reset")
         Reset_Spells:SetScript("OnMouseUp", Reset_spells_button)
-        
-    local Reset_Talents = CreateFrame("Button", "Reset_Talents", ResetFrame, nil)
+		
+	local Reset_Talents = CreateFrame("Button", "Reset_Talents", ResetFrame, nil)
         Reset_Talents:SetSize(100, 50)
         Reset_Talents:SetPoint("CENTER", 60, -20)
         Reset_Talents:EnableMouse(true)
-        local texture_talent = Reset_Talents:CreateTexture("Talent_Texture")
-        texture_talent:SetAllPoints(Reset_Talents)
-        texture_talent:SetTexture(0.5, 1, 1, 0.5)
+		local texture_talent = Reset_Talents:CreateTexture("Talent_Texture")
+		texture_talent:SetAllPoints(Reset_Talents)
+		texture_talent:SetTexture(0.5, 1, 1, 0.5)
         Reset_Talents:SetNormalTexture(texture_talent)
-        local font_talent = Reset_Talents:CreateFontString("Talent_Font")
-        font_talent:SetFont("Fonts\\FRIZQT__.TTF", 11)
-        font_talent:SetShadowOffset(1, -1)
-        Reset_Talents:SetFontString(font_talent)
-        Reset_Talents:SetText("Talents Reset")
+		local font_talent = Reset_Talents:CreateFontString("Talent_Font")
+		font_talent:SetFont("Fonts\\FRIZQT__.TTF", 11)
+		font_talent:SetShadowOffset(1, -1)
+		Reset_Talents:SetFontString(font_talent)
+		Reset_Talents:SetText("Talents Reset")
         Reset_Talents:SetScript("OnMouseUp", Reset_talents_button)]]--
-        
-        
-        
-    --[[ Character Advancement UI ]]
-    spec_displaying = "ALL"
-    frame_displaying = "BASIC"
-    function display_stuff(self)
+		
+		
+		
+	--[[ Character Advancement UI ]]
+	spec_displaying = "ALL"
+	frame_displaying = "BASIC"
+	function display_stuff(self)
         PlaySound("TalentScreenOpen")
-    
-        local all_buttons = {BalanceDruid, FeralDruid, RestorationDruid, BeastMasteryHunter, MarksmanshipHunter, SurvivalHunter,
-        ArcaneMage, FireMage, FrostMage, HolyPaladin, ProtectionPaladin, RetributionPaladin,
-        DisciplinePriest, HolyPriest, ShadowPriest, AssassinationRogue, CombatRogue, SubtletyRogue,
-        ElementalShaman, EnhancementShaman, RestorationShaman, AfflictionWarlock, DemonologyWarlock, DestructionWarlock,
-        ArmsWarrior, FuryWarrior, ProtectionWarrior, GeneralStuff}
-        
-        local all_textures = {texture_BalanceDruid, texture_FeralDruid, texture_RestorationDruid, texture_BeastMasteryHunter, texture_MarksmanshipHunter, texture_SurvivalHunter,
-        texture_ArcaneMage,texture_FireMage,texture_FrostMage,texture_HolyPaladin, texture_ProtectionPaladin, texture_RetributionPaladin,
-        texture_DisciplinePriest, texture_HolyPriest, texture_ShadowPriest, texture_AssassinationRogue, texture_CombatRogue, texture_SubtletyRogue,
-        texture_ElementalShaman, texture_EnhancementShaman, texture_RestorationShaman, texture_AfflictionWarlock, texture_DemonologyWarlock, texture_DestructionWarlock,
-        texture_ArmsWarrior, texture_FuryWarrior, texture_ProtectionWarrior, texture_GeneralStuff}
-        
-        local all_texture_values = {{1, .49, .04,},{1, .49, .04,},{1, .49, .04,},{.67, .83, .45},{.67, .83, .45},{.67, .83, .45},
-        {.41, .8, .94},{.41, .8, .94},{.41, .8, .94},{.96, .55, .73},{.96, .55, .73},{.96, .55, .73},
-        {1, 1, 1},{1, 1, 1},{1, 1, 1},{1, .96, .41},{1, .96, .41},{1, .96, .41},
-        {0, .44, .87},{0, .44, .87},{0, .44, .87},{.58, .51, .79},{.58, .51, .79},{.58, .51, .79},
-        {.78, .61, .43},{.78, .61, .43},{.78, .61, .43},{.4,.4,.4}}
+	
+		local all_buttons = {BalanceDruid, FeralDruid, RestorationDruid, BeastMasteryHunter, MarksmanshipHunter, SurvivalHunter,
+		ArcaneMage, FireMage, FrostMage, HolyPaladin, ProtectionPaladin, RetributionPaladin,
+		DisciplinePriest, HolyPriest, ShadowPriest, AssassinationRogue, CombatRogue, SubtletyRogue,
+		ElementalShaman, EnhancementShaman, RestorationShaman, AfflictionWarlock, DemonologyWarlock, DestructionWarlock,
+		ArmsWarrior, FuryWarrior, ProtectionWarrior, GeneralStuff}
+		
+		local all_textures = {texture_BalanceDruid, texture_FeralDruid, texture_RestorationDruid, texture_BeastMasteryHunter, texture_MarksmanshipHunter, texture_SurvivalHunter,
+		texture_ArcaneMage,texture_FireMage,texture_FrostMage,texture_HolyPaladin, texture_ProtectionPaladin, texture_RetributionPaladin,
+		texture_DisciplinePriest, texture_HolyPriest, texture_ShadowPriest, texture_AssassinationRogue, texture_CombatRogue, texture_SubtletyRogue,
+		texture_ElementalShaman, texture_EnhancementShaman, texture_RestorationShaman, texture_AfflictionWarlock, texture_DemonologyWarlock, texture_DestructionWarlock,
+		texture_ArmsWarrior, texture_FuryWarrior, texture_ProtectionWarrior, texture_GeneralStuff}
+		
+		local all_texture_values = {{1, .49, .04,},{1, .49, .04,},{1, .49, .04,},{.67, .83, .45},{.67, .83, .45},{.67, .83, .45},
+		{.41, .8, .94},{.41, .8, .94},{.41, .8, .94},{.96, .55, .73},{.96, .55, .73},{.96, .55, .73},
+		{1, 1, 1},{1, 1, 1},{1, 1, 1},{1, .96, .41},{1, .96, .41},{1, .96, .41},
+		{0, .44, .87},{0, .44, .87},{0, .44, .87},{.58, .51, .79},{.58, .51, .79},{.58, .51, .79},
+		{.78, .61, .43},{.78, .61, .43},{.78, .61, .43},{.4,.4,.4}}
 
-    
-        for i,v in ipairs(all_buttons) do
-            if self == v then
-                 all_textures[i]:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button")
+	
+		for i,v in ipairs(all_buttons) do
+			if self == v then
+				 all_textures[i]:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button")
                 all_textures[i]:SetVertexColor(all_texture_values[i][1], all_texture_values[i][2], all_texture_values[i][3], .8)
-                spec_displaying = v
-            else
-                  all_textures[i]:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
+				spec_displaying = v
+			else
+				  all_textures[i]:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\button_h")
                 all_textures[i]:SetVertexColor(all_texture_values[i][1], all_texture_values[i][2], all_texture_values[i][3], .8)
-            end
-        end
+			end
+		end
 
         DisplaySpellsButton:Enable()
         DisplayTalentsButton:Enable()
@@ -1870,14 +1870,14 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
         BaseFrameFadeIn(TrainingFrame_SelectedTitle_Stars2)
         TrainingFrame_SelectedTitle_Stars2_glow:Show()
         BaseFrameFadeIn(TrainingFrame_SelectedTitle_Glow)
-        
-        frame_displaying = "BASIC"
-        display_frame_CA()
-    
-    end
-    
-    
-    
+		
+		frame_displaying = "BASIC"
+		display_frame_CA()
+	
+	end
+	
+	
+	
     local TrainingFrame_CloseButton = CreateFrame("Button", "TrainingFrame_CloseButton", TrainingFrame, "UIPanelCloseButton")
         TrainingFrame_CloseButton:SetPoint("TOPRIGHT", -63, -112)
         TrainingFrame_CloseButton:EnableMouse(true)
@@ -1887,9 +1887,9 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
             PlaySound("Glyph_MinorCreate")
             TrainingFrame:Hide()
             end)
-        
-        
-    --[[local TrainingFrame_TitleBar = CreateFrame("Frame", "TrainingFrame_TitleBar", TrainingFrame, nil)
+		
+		
+	--[[local TrainingFrame_TitleBar = CreateFrame("Frame", "TrainingFrame_TitleBar", TrainingFrame, nil)
         TrainingFrame_TitleBar:SetSize(180, 25)
         TrainingFrame_TitleBar:SetBackdrop({
             bgFile = "Interface/CHARACTERFRAME/UI-Party-Background",
@@ -1899,14 +1899,14 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
             tileSize = 16,
             insets = { left = 5, right = 5, top = 5, bottom = 5 }
         })
-        TrainingFrame_TitleBar:SetPoint("TOP", -90, 9)]]--
-         local TrainingFrame_TitleText = TrainingFrame:CreateFontString("TrainingFrame_TitleText")
+		TrainingFrame_TitleBar:SetPoint("TOP", -90, 9)]]--
+		 local TrainingFrame_TitleText = TrainingFrame:CreateFontString("TrainingFrame_TitleText")
         TrainingFrame_TitleText:SetFont("Fonts\\MORPHEUS.TTF", 17, "OUTLINE")
         --TrainingFrame_TitleText:SetSize(225, 255)
         TrainingFrame_TitleText:SetPoint("TOPRIGHT",-135, -97)
         TrainingFrame_TitleText:SetText("|cffFFC125Character|nProgression|r")
 
-     -- ####################################### Spec Buttons ##############################  
+	 -- ####################################### Spec Buttons ##############################  
 BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame, nil)
         BalanceDruid:SetSize(234, 25.5)
         BalanceDruid:SetPoint("TOPRIGHT", -68.5, -136)
@@ -2404,253 +2404,253 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
         GeneralStuff:SetFontString(font_GeneralStuff)
         GeneralStuff:SetText("General")
         GeneralStuff:SetScript("OnMouseUp",  display_stuff)
-        
-        spec_displaying = GeneralStuff
-        
-        
-    -- ####################################### Frame Handling ##############################    
-    
-    function display_frame_CA()
-    
-        if frame_displaying == "BASIC" then
-        TrainingFrame:SetBackdrop({
+		
+		spec_displaying = GeneralStuff
+		
+		
+	-- ####################################### Frame Handling ##############################	
+	
+	function display_frame_CA()
+	
+		if frame_displaying == "BASIC" then
+		TrainingFrame:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\progress",})
-            -- shows
-            DisplaySpellsButton:Show()
-            DisplayTalentsButton:Show()
+			-- shows
+			DisplaySpellsButton:Show()
+			DisplayTalentsButton:Show()
             TrainingFrame.Text_Ability:Hide()
 
             ProgressionBlueBookBorder:Hide()
             ProgressionPurpleBookBorder:Hide()
             TrainingFrame_model:Hide()
             TrainingFrame_model2:Hide()
-            
-            --hides
-            for i,v in ipairs(all_spell_slots) do
-                v[1]:Hide()
-            end
-            scrollframe:Hide()
-            scrollbar:Hide()
-            top_left_bg:Hide()
-            top_right_bg:Hide()
-            bottom_left_bg:Hide()
-            bottom_right_bg:Hide()
-            current_talenList = {}
-            current_known_talents_list = {}
-            
-        elseif frame_displaying == "SPELLS" then
-        
-            --shows
-            for i,v in ipairs(all_spell_slots) do
-                v[1]:Show()
-            end
-            
-            --hides
-            DisplaySpellsButton:Hide()
-            DisplayTalentsButton:Hide()
-            scrollframe:Hide()
-            scrollbar:Hide()
-            
-        elseif frame_displaying == "TALENTS" then
-        
-            --shows
-            scrollframe:Show()
-            scrollbar:Show()
-            
-            --hides
-            DisplaySpellsButton:Hide()
-            DisplayTalentsButton:Hide()
-            for i,v in ipairs(all_spell_slots) do
-                v[1]:Hide()
-            end
-        end
-    
-    end
-    
-    function display_next_frame_CA(self)
+			
+			--hides
+			for i,v in ipairs(all_spell_slots) do
+				v[1]:Hide()
+			end
+			scrollframe:Hide()
+			scrollbar:Hide()
+			top_left_bg:Hide()
+			top_right_bg:Hide()
+			bottom_left_bg:Hide()
+			bottom_right_bg:Hide()
+			current_talenList = {}
+			current_known_talents_list = {}
+			
+		elseif frame_displaying == "SPELLS" then
+		
+			--shows
+			for i,v in ipairs(all_spell_slots) do
+				v[1]:Show()
+			end
+			
+			--hides
+			DisplaySpellsButton:Hide()
+			DisplayTalentsButton:Hide()
+			scrollframe:Hide()
+			scrollbar:Hide()
+			
+		elseif frame_displaying == "TALENTS" then
+		
+			--shows
+			scrollframe:Show()
+			scrollbar:Show()
+			
+			--hides
+			DisplaySpellsButton:Hide()
+			DisplayTalentsButton:Hide()
+			for i,v in ipairs(all_spell_slots) do
+				v[1]:Hide()
+			end
+		end
+	
+	end
+	
+	function display_next_frame_CA(self)
         PlaySound("TalentScreenClose")
-    
-        if self == DisplaySpellsButton then
-        
-            frame_displaying = "SPELLS"
+	
+		if self == DisplaySpellsButton then
+		
+			frame_displaying = "SPELLS"
             TrainingFrame:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\progress_inside_blue",})
             ProgressionBlueBookBorder:Show()
             TrainingFrame.Text_Ability:Show()
             --TrainingFrameBorder:SetFrameStrata("FULLSCREEN")
-            
-            local all_buttons = {BalanceDruid, FeralDruid, RestorationDruid, BeastMasteryHunter, MarksmanshipHunter, SurvivalHunter,
-                ArcaneMage, FireMage, FrostMage, HolyPaladin, ProtectionPaladin, RetributionPaladin,
-                DisciplinePriest, HolyPriest, ShadowPriest, AssassinationRogue, CombatRogue, SubtletyRogue,
-                ElementalShaman, EnhancementShaman, RestorationShaman, AfflictionWarlock, DemonologyWarlock, DestructionWarlock,
-                ArmsWarrior, FuryWarrior, ProtectionWarrior, GeneralStuff}
-                
-            local all_pass_varis = {{"DRUID", "BALANCE"}, {"DRUID", "FERAL"}, {"DRUID", "RESTORATION"},
-            {"HUNTER", "BEASTMASTERY"},{"HUNTER", "MARKSMANSHIP"}, {"HUNTER", "SURVIVAL"},
-            {"MAGE", "ARCANE"}, {"MAGE", "FIRE"}, {"MAGE", "FROST"},
-            {"PALADIN", "HOLY"}, {"PALADIN", "PROTECTION"}, {"PALADIN", "RETRIBUTION"},
-            {"PRIEST", "DISCIPLINE"}, {"PRIEST", "HOLY"}, {"PRIEST", "SHADOW"},
-            {"ROGUE", "ASSASSINATION"}, {"ROGUE", "COMBAT"}, {"ROGUE", "SUBTLETY"},
-            {"SHAMAN", "ELEMENTAL"}, {"SHAMAN", "ENHANCEMENT"}, {"SHAMAN", "RESTORATION"},
-            {"WARLOCK", "AFFLICTION"}, {"WARLOCK", "DEMONOLOGY"}, {"WARLOCK", "DESTRUCTION"},
-            {"WARRIOR", "ARMS"}, {"WARRIOR", "FURY"}, {"WARRIOR", "PROTECTION"},
-            {"GENERAL", "GENERAL"}}
-            
-            for i,v in ipairs(all_buttons) do
-                if spec_displaying == v then
-                    AIO.Handle("sideBar", "SendAmountOfSpells", all_pass_varis[i][1], all_pass_varis[i][2])
+			
+			local all_buttons = {BalanceDruid, FeralDruid, RestorationDruid, BeastMasteryHunter, MarksmanshipHunter, SurvivalHunter,
+				ArcaneMage, FireMage, FrostMage, HolyPaladin, ProtectionPaladin, RetributionPaladin,
+				DisciplinePriest, HolyPriest, ShadowPriest, AssassinationRogue, CombatRogue, SubtletyRogue,
+				ElementalShaman, EnhancementShaman, RestorationShaman, AfflictionWarlock, DemonologyWarlock, DestructionWarlock,
+				ArmsWarrior, FuryWarrior, ProtectionWarrior, GeneralStuff}
+				
+			local all_pass_varis = {{"DRUID", "BALANCE"}, {"DRUID", "FERAL"}, {"DRUID", "RESTORATION"},
+			{"HUNTER", "BEASTMASTERY"},{"HUNTER", "MARKSMANSHIP"}, {"HUNTER", "SURVIVAL"},
+			{"MAGE", "ARCANE"}, {"MAGE", "FIRE"}, {"MAGE", "FROST"},
+			{"PALADIN", "HOLY"}, {"PALADIN", "PROTECTION"}, {"PALADIN", "RETRIBUTION"},
+			{"PRIEST", "DISCIPLINE"}, {"PRIEST", "HOLY"}, {"PRIEST", "SHADOW"},
+			{"ROGUE", "ASSASSINATION"}, {"ROGUE", "COMBAT"}, {"ROGUE", "SUBTLETY"},
+			{"SHAMAN", "ELEMENTAL"}, {"SHAMAN", "ENHANCEMENT"}, {"SHAMAN", "RESTORATION"},
+			{"WARLOCK", "AFFLICTION"}, {"WARLOCK", "DEMONOLOGY"}, {"WARLOCK", "DESTRUCTION"},
+			{"WARRIOR", "ARMS"}, {"WARRIOR", "FURY"}, {"WARRIOR", "PROTECTION"},
+			{"GENERAL", "GENERAL"}}
+			
+			for i,v in ipairs(all_buttons) do
+				if spec_displaying == v then
+					AIO.Handle("sideBar", "SendAmountOfSpells", all_pass_varis[i][1], all_pass_varis[i][2])
                     sideBar.CurrentSpellSpec = {all_pass_varis[i][1], all_pass_varis[i][2]}
-                end
-            end
-        
-        end
-        
-        display_frame_CA()
-    
-    end
-    
-    function display_talents(self)
+				end
+			end
+		
+		end
+		
+		display_frame_CA()
+	
+	end
+	
+	function display_talents(self)
         PlaySound("TalentScreenClose")
-    
-        if spec_displaying ~= GeneralStuff then
-            frame_displaying = "TALENTS"
+	
+		if spec_displaying ~= GeneralStuff then
+			frame_displaying = "TALENTS"
             TrainingFrame:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\progress_inside_purple",})
             ProgressionPurpleBookBorder:Show()
             TrainingFrame.Text_Ability:Show()
             --TrainingFrameBorder:SetFrameStrata("FULLSCREEN")
-            
-            local all_buttons = {BalanceDruid, FeralDruid, RestorationDruid, BeastMasteryHunter, MarksmanshipHunter, SurvivalHunter,
-                ArcaneMage, FireMage, FrostMage, HolyPaladin, ProtectionPaladin, RetributionPaladin,
-                DisciplinePriest, HolyPriest, ShadowPriest, AssassinationRogue, CombatRogue, SubtletyRogue,
-                ElementalShaman, EnhancementShaman, RestorationShaman, AfflictionWarlock, DemonologyWarlock, DestructionWarlock,
-                ArmsWarrior, FuryWarrior, ProtectionWarrior, GeneralStuff}
-            
-            local all_pass_varis = {"DRUIDBALANCE", "DRUIDFERAL", "DRUIDRESTORATION",
-            "HUNTERBEASTMASTERY", "HUNTERMARKSMANSHIP", "HUNTERSURVIVAL",
-            "MAGEARCANE", "MAGEFIRE", "MAGEFROST",
-            "PALADINHOLY", "PALADINPROTECTION", "PALADINRETRIBUTION",
-            "PRIESTDISCIPLINE", "PRIESTHOLY", "PRIESTSHADOW",
-            "ROGUEASSASSINATION", "ROGUECOMBAT", "ROGUESUBTLETY",
-            "SHAMANELEMENTAL", "SHAMANENHANCEMENT", "SHAMANRESTORATION",
-            "WARLOCKAFFLICTION", "WARLOCK", "DEMONOLOGY", "WARLOCKDESTRUCTION",
-            "WARRIORARMS", "WARRIORFURY", "WARRIORPROTECTION"}
-            local ClassSpec = nil
-            for i,v in ipairs(all_buttons) do
+			
+			local all_buttons = {BalanceDruid, FeralDruid, RestorationDruid, BeastMasteryHunter, MarksmanshipHunter, SurvivalHunter,
+				ArcaneMage, FireMage, FrostMage, HolyPaladin, ProtectionPaladin, RetributionPaladin,
+				DisciplinePriest, HolyPriest, ShadowPriest, AssassinationRogue, CombatRogue, SubtletyRogue,
+				ElementalShaman, EnhancementShaman, RestorationShaman, AfflictionWarlock, DemonologyWarlock, DestructionWarlock,
+				ArmsWarrior, FuryWarrior, ProtectionWarrior, GeneralStuff}
+			
+			local all_pass_varis = {"DRUIDBALANCE", "DRUIDFERAL", "DRUIDRESTORATION",
+			"HUNTERBEASTMASTERY", "HUNTERMARKSMANSHIP", "HUNTERSURVIVAL",
+			"MAGEARCANE", "MAGEFIRE", "MAGEFROST",
+			"PALADINHOLY", "PALADINPROTECTION", "PALADINRETRIBUTION",
+			"PRIESTDISCIPLINE", "PRIESTHOLY", "PRIESTSHADOW",
+			"ROGUEASSASSINATION", "ROGUECOMBAT", "ROGUESUBTLETY",
+			"SHAMANELEMENTAL", "SHAMANENHANCEMENT", "SHAMANRESTORATION",
+			"WARLOCKAFFLICTION", "WARLOCK", "DEMONOLOGY", "WARLOCKDESTRUCTION",
+			"WARRIORARMS", "WARRIORFURY", "WARRIORPROTECTION"}
+			local ClassSpec = nil
+			for i,v in ipairs(all_buttons) do
 
-                if v == spec_displaying then
-                    ClassSpec = all_pass_varis[i]
-                    
-                    break
-                end
-            end
-            AIO.Handle("sideBar", "GetAllBGs", ClassSpec)
+				if v == spec_displaying then
+					ClassSpec = all_pass_varis[i]
+					
+					break
+				end
+			end
+			AIO.Handle("sideBar", "GetAllBGs", ClassSpec)
             sideBar.CurrentTalentSpec = ClassSpec
-            display_frame_CA()
-        end
-    
-    end
-    
-    current_talentList = {}
-    current_known_talents_list = {}
-    
-    function MyHandlers.SetBackgroundImages(player, ClassSpec, bgList, talentList, known_talents_list, tabIndex)
-    
-        local all_pass_varis = {"DRUIDBALANCE", "DRUIDFERAL", "DRUIDRESTORATION",
-            "HUNTERBEASTMASTERY", "HUNTERMARKSMANSHIP", "HUNTERSURVIVAL",
-            "MAGEARCANE", "MAGEFIRE", "MAGEFROST",
-            "PALADINHOLY", "PALADINPROTECTION", "PALADINRETRIBUTION",
-            "PRIESTDISCIPLINE", "PRIESTHOLY", "PRIESTSHADOW",
-            "ROGUEASSASSINATION", "ROGUECOMBAT", "ROGUESUBTLETY",
-            "SHAMANELEMENTAL", "SHAMANENHANCEMENT", "SHAMANRESTORATION",
-            "WARLOCKAFFLICTION", "WARLOCK", "DEMONOLOGY", "WARLOCKDESTRUCTION",
-            "WARRIORARMS", "WARRIORFURY", "WARRIORPROTECTION"}
-        current_talentList = talentList
-        current_known_talents_list = known_talents_list 
-            
-        for i,v in ipairs(all_pass_varis) do
-        
-            if v == ClassSpec then
-                
-                top_left_bg_t:SetTexture(bgList[i][1]) 
-                top_left_bg:Show()
-                
-                top_right_bg_t:SetTexture(bgList[i][2]) 
-                top_right_bg:Show()
+			display_frame_CA()
+		end
+	
+	end
+	
+	current_talentList = {}
+	current_known_talents_list = {}
+	
+	function MyHandlers.SetBackgroundImages(player, ClassSpec, bgList, talentList, known_talents_list, tabIndex)
+	
+		local all_pass_varis = {"DRUIDBALANCE", "DRUIDFERAL", "DRUIDRESTORATION",
+			"HUNTERBEASTMASTERY", "HUNTERMARKSMANSHIP", "HUNTERSURVIVAL",
+			"MAGEARCANE", "MAGEFIRE", "MAGEFROST",
+			"PALADINHOLY", "PALADINPROTECTION", "PALADINRETRIBUTION",
+			"PRIESTDISCIPLINE", "PRIESTHOLY", "PRIESTSHADOW",
+			"ROGUEASSASSINATION", "ROGUECOMBAT", "ROGUESUBTLETY",
+			"SHAMANELEMENTAL", "SHAMANENHANCEMENT", "SHAMANRESTORATION",
+			"WARLOCKAFFLICTION", "WARLOCK", "DEMONOLOGY", "WARLOCKDESTRUCTION",
+			"WARRIORARMS", "WARRIORFURY", "WARRIORPROTECTION"}
+		current_talentList = talentList
+		current_known_talents_list = known_talents_list	
+			
+		for i,v in ipairs(all_pass_varis) do
+		
+			if v == ClassSpec then
+				
+				top_left_bg_t:SetTexture(bgList[i][1]) 
+				top_left_bg:Show()
+				
+				top_right_bg_t:SetTexture(bgList[i][2]) 
+				top_right_bg:Show()
 
-                bottom_left_bg_t:SetTexture(bgList[i][3]) 
-                bottom_left_bg:Show()
+				bottom_left_bg_t:SetTexture(bgList[i][3]) 
+				bottom_left_bg:Show()
 
-                bottom_right_bg_t:SetTexture(bgList[i][4]) 
-                bottom_right_bg:Show()
-            end
-        end
-        
-        for i,v in ipairs(button_on_off_state) do
-            button_on_off_state[i] = false
-        end
-        on_talent = 1
-        talent_index = 1
-        for i,v in ipairs(talentList) do
-            local player_knows_a_talent = false
-            local player_talent_known = 0
-            local learn_text = "|cff6b625bLearn|r"
-            local learn_tooltip = "Requires: Level "..v[5]
-            local learn_texture = {.3, .3, .3}
-            local attach_it = false
-            local number_of_ranks = v[1]
-            local tabIndexee = tabIndex
-            
-            local spellIds = v[2]
-            local AE_cost = v[3]
-            local TE_cost = v[4]
-            local requiredLevel = v[5]
-            local column = v[6]
-            local talent_ID = v[7]
+				bottom_right_bg_t:SetTexture(bgList[i][4]) 
+				bottom_right_bg:Show()
+			end
+		end
+		
+		for i,v in ipairs(button_on_off_state) do
+			button_on_off_state[i] = false
+		end
+		on_talent = 1
+		talent_index = 1
+		for i,v in ipairs(talentList) do
+			local player_knows_a_talent = false
+			local player_talent_known = 0
+			local learn_text = "|cff6b625bLearn|r"
+			local learn_tooltip = "Requires: Level "..v[5]
+			local learn_texture = {.3, .3, .3}
+			local attach_it = false
+			local number_of_ranks = v[1]
+			local tabIndexee = tabIndex
+			
+			local spellIds = v[2]
+			local AE_cost = v[3]
+			local TE_cost = v[4]
+			local requiredLevel = v[5]
+			local column = v[6]
+			local talent_ID = v[7]
             local BG_New = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_bg"
             local BG_Color = {0.46,0.36,0.34,1}
-            
-            local get_spell_link = GetSpellLink(spellIds[1])
-            local name,_, icon, _,_,_,_ = GetSpellInfo(spellIds[1])
-            
-            if known_talents_list[i] ~= false then
-                player_knows_a_talent = true
-                player_talent_known = known_talents_list[i]
-            end
-            
-            if requiredLevel <= UnitLevel("player") then
-            
-                learn_tooltip = "Cost: "..AE_cost.." AE "..TE_cost.." TE"
-            
-                if player_knows_a_talent == true then
-            
-                    get_spell_link = "|cffFFFFFF|Hspell:"..spellIds[player_talent_known].."|h[Talent]|h|r"
-                    BG_Color = {1,1,1,1}
-                    if player_talent_known == number_of_ranks then
-                        learn_tooltip = "Maxed Out"
-                        learn_texture = {1, 1, 0}
-                        learn_text = "|cff6b625bMax|r"
+			
+			local get_spell_link = GetSpellLink(spellIds[1])
+			local name,_, icon, _,_,_,_ = GetSpellInfo(spellIds[1])
+			
+			if known_talents_list[i] ~= false then
+				player_knows_a_talent = true
+				player_talent_known = known_talents_list[i]
+			end
+			
+			if requiredLevel <= UnitLevel("player") then
+			
+				learn_tooltip = "Cost: "..AE_cost.." AE "..TE_cost.." TE"
+			
+				if player_knows_a_talent == true then
+			
+					get_spell_link = "|cffFFFFFF|Hspell:"..spellIds[player_talent_known].."|h[Talent]|h|r"
+					BG_Color = {1,1,1,1}
+					if player_talent_known == number_of_ranks then
+						learn_tooltip = "Maxed Out"
+						learn_texture = {1, 1, 0}
+						learn_text = "|cff6b625bMax|r"
                         BG_New = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_rank_max"
-                    else
-                        attach_it = {spellIds[player_talent_known + 1],AE_cost,TE_cost,spellIds,number_of_ranks}
-                        learn_texture = {0, .5, 0}
-                        learn_text = "|cffE1AB18Upgrade|r"
+					else
+						attach_it = {spellIds[player_talent_known + 1],AE_cost,TE_cost,spellIds,number_of_ranks}
+						learn_texture = {0, .5, 0}
+						learn_text = "|cffE1AB18Upgrade|r"
                         BG_New = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_rank"
-                    end
-                else
-                
-                    learn_text="Learn" -- used for talent texts
-                    
-                    attach_it = {spellIds[1],AE_cost,TE_cost,spellIds,number_of_ranks}
-                
-                end
-            
-            end
-        
-            local button_using = (((requiredLevel - 10) / 5) * 4) + column
-            all_talent_slot_buttons[button_using]:SetBackdrop({
-                bgFile = icon
-            })
+					end
+				else
+				
+					learn_text="Learn" -- used for talent texts
+					
+					attach_it = {spellIds[1],AE_cost,TE_cost,spellIds,number_of_ranks}
+				
+				end
+			
+			end
+		
+			local button_using = (((requiredLevel - 10) / 5) * 4) + column
+			all_talent_slot_buttons[button_using]:SetBackdrop({
+				bgFile = icon
+			})
             all_talent_slot_buttons[button_using]:SetBackdropColor(unpack(BG_Color))
             all_talent_slots[button_using]:SetBackdrop({
                         bgFile = BG_New,
@@ -2662,15 +2662,15 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
                         })
             all_talent_slot_buttons[button_using].HyperLink = get_spell_link
 
-            local talent_indexee = talent_index
-            local function talent_icon_tooltip_Enter(self, motion)
-                GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-                if self.HyperLink ~= nil then
-                    GameTooltip:SetHyperlink(self.HyperLink)
-                else
-                    GameTooltip:SetTalent(tabIndexee, talent_indexee, false, false, nil)
-                end
-                GameTooltip:Show()
+			local talent_indexee = talent_index
+			local function talent_icon_tooltip_Enter(self, motion)
+				GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+				if self.HyperLink ~= nil then
+					GameTooltip:SetHyperlink(self.HyperLink)
+				else
+					GameTooltip:SetTalent(tabIndexee, talent_indexee, false, false, nil)
+				end
+				GameTooltip:Show()
                 --for unlearn spell
                 --[[local red, green, blue, alpha = self:GetBackdropColor()
                 if (red) and (red > 0.98) then
@@ -2678,144 +2678,144 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
                 GameTooltip:AppendText("\n|cffFF0000Click on the icon to use |cff00FF00[Scroll of unlearning]|r")
                 end]]--
                 -- end
-            end
-            all_talent_slot_buttons[button_using]:SetScript("OnEnter", talent_icon_tooltip_Enter)
-            local function talent_icon_tooltip_OnLeave(self)
+			end
+			all_talent_slot_buttons[button_using]:SetScript("OnEnter", talent_icon_tooltip_Enter)
+			local function talent_icon_tooltip_OnLeave(self)
                 --for unlearn talent
                 --[[if (self.UnlearnTex:IsVisible()) then
                 BaseFrameFadeOut(self.UnlearnTex)
                 end]]--
                 -- end
-                GameTooltip:Hide()
-            end
-            all_talent_slot_buttons[button_using]:SetScript("OnLeave", talent_icon_tooltip_OnLeave)
-            
-            all_learn_talent_buttons_t[button_using]:SetTexture(learn_texture[1], learn_texture[2], learn_texture[3], 0)
-            
-            local function learn_button_tooltip_Enter(self, motion)
-                GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-                GameTooltip:SetText(learn_tooltip)
-                GameTooltip:Show()
-            end
-            all_learn_talent_buttons[button_using]:SetScript("OnEnter", learn_button_tooltip_Enter)
-            local function learn_button_tooltip_Leave(self, motion)
-                GameTooltip:Hide()
-            end
-            all_learn_talent_buttons[button_using]:SetScript("OnLeave", learn_button_tooltip_Leave)
-            
-            all_attached_talent[button_using] = attach_it
-            
-            all_learn_talent_buttons[button_using]:SetText(learn_text)
-            
-            all_talent_FrameNumber[button_using]:SetText(player_talent_known)
+				GameTooltip:Hide()
+			end
+			all_talent_slot_buttons[button_using]:SetScript("OnLeave", talent_icon_tooltip_OnLeave)
+			
+			all_learn_talent_buttons_t[button_using]:SetTexture(learn_texture[1], learn_texture[2], learn_texture[3], 0)
+			
+			local function learn_button_tooltip_Enter(self, motion)
+				GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+				GameTooltip:SetText(learn_tooltip)
+				GameTooltip:Show()
+			end
+			all_learn_talent_buttons[button_using]:SetScript("OnEnter", learn_button_tooltip_Enter)
+			local function learn_button_tooltip_Leave(self, motion)
+				GameTooltip:Hide()
+			end
+			all_learn_talent_buttons[button_using]:SetScript("OnLeave", learn_button_tooltip_Leave)
+			
+			all_attached_talent[button_using] = attach_it
+			
+			all_learn_talent_buttons[button_using]:SetText(learn_text)
+			
+			all_talent_FrameNumber[button_using]:SetText(player_talent_known)
 
-            button_on_off_state[button_using] = true 
-            on_talent = on_talent + 1
-            talent_index = talent_index + 1
-        
-        end
-        for i,v in ipairs(button_on_off_state) do
-        
-            if v == true then
-                all_talent_slots[i]:Show()
-        
-                all_talent_slot_buttons[i]:Show()
-                
-                all_learn_talent_buttons[i]:Show()
-                
-                all_talent_FrameNumber[i]:Show()
-            else
-                all_talent_slots[i]:Hide()
-        
-                all_talent_slot_buttons[i]:Hide()
-                
-                all_learn_talent_buttons[i]:Hide()
-                
-                all_talent_FrameNumber[i]:Hide()
-            end
-        end
-        
-        content:Show()
-    end
-    
-    function upgrade_talent(self)
+			button_on_off_state[button_using] = true 
+			on_talent = on_talent + 1
+			talent_index = talent_index + 1
+		
+		end
+		for i,v in ipairs(button_on_off_state) do
+		
+			if v == true then
+				all_talent_slots[i]:Show()
+		
+				all_talent_slot_buttons[i]:Show()
+				
+				all_learn_talent_buttons[i]:Show()
+				
+				all_talent_FrameNumber[i]:Show()
+			else
+				all_talent_slots[i]:Hide()
+		
+				all_talent_slot_buttons[i]:Hide()
+				
+				all_learn_talent_buttons[i]:Hide()
+				
+				all_talent_FrameNumber[i]:Hide()
+			end
+		end
+		
+		content:Show()
+	end
+	
+	function upgrade_talent(self)
         PlaySound("igMainMenuOptionCheckBoxOn")
-        local talent_attached = false
-        local indexAt
-    
-        for i,v in ipairs(all_learn_talent_buttons) do
-            if v == self then
-                talent_attached = all_attached_talent[i]
-                all_attached_talent[i] = nil
-                indexAt = i
-                break
-            end
-        end
-        
-        
-        
-        if talent_attached ~= false then
-            AIO.Handle("sideBar","LearnThisTalent",talent_attached,indexAt,sideBar.CurrentTalentSpec)
-        end
-    
-    end
-    
-    function MyHandlers.TalentGoBack(player, attached_talent, indexAt)
-        all_attached_talent[indexAt] = attached_talent
-    end
-    
-    function MyHandlers.UpdateTalent(player, attached_talent, indexAt)
-        
-        local AE_cost = attached_talent[2]
-        local TE_cost = attached_talent[3]
-        local all_spellIds = attached_talent[4]
-        local talents_ranks = attached_talent[5]
-        local previous_spellId = attached_talent[1]
-        
-        local texture_changed = {0, .5, 0}
-        local text_changed = "|cffE1AB18Upgrade|r"
-        local learn_tooltip = nil
-        local attached_talent = nil
+		local talent_attached = false
+		local indexAt
+	
+		for i,v in ipairs(all_learn_talent_buttons) do
+			if v == self then
+				talent_attached = all_attached_talent[i]
+				all_attached_talent[i] = nil
+				indexAt = i
+				break
+			end
+		end
+		
+		
+		
+		if talent_attached ~= false then
+			AIO.Handle("sideBar","LearnThisTalent",talent_attached,indexAt,sideBar.CurrentTalentSpec)
+		end
+	
+	end
+	
+	function MyHandlers.TalentGoBack(player, attached_talent, indexAt)
+		all_attached_talent[indexAt] = attached_talent
+	end
+	
+	function MyHandlers.UpdateTalent(player, attached_talent, indexAt)
+		
+		local AE_cost = attached_talent[2]
+		local TE_cost = attached_talent[3]
+		local all_spellIds = attached_talent[4]
+		local talents_ranks = attached_talent[5]
+		local previous_spellId = attached_talent[1]
+		
+		local texture_changed = {0, .5, 0}
+		local text_changed = "|cffE1AB18Upgrade|r"
+		local learn_tooltip = nil
+		local attached_talent = nil
         local BG_File = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_bg"
-        local FN = 1
+		local FN = 1
         local BG_Color_U = {0.46,0.36,0.34,1}
 
 
-        for i,v in ipairs(all_spellIds) do
-            if v == previous_spellId then
-                FN = i
-                if i == talents_ranks then
-                    texture_changed = {1, 1, 0}
-                    learn_tooltip = "Maxed Out" -- used for talent texts
-                    text_changed = "|cff6b625bMax|r"
+		for i,v in ipairs(all_spellIds) do
+			if v == previous_spellId then
+				FN = i
+				if i == talents_ranks then
+					texture_changed = {1, 1, 0}
+					learn_tooltip = "Maxed Out" -- used for talent texts
+					text_changed = "|cff6b625bMax|r"
                     all_talent_slot_buttons[indexAt].HyperLink = "|cffFFFFFF|Hspell:"..all_spellIds[i].."|h[Talent]|h|r"
                     BG_File = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_rank_max"
                     BG_Color_U = {1,1,1,1}
-                else
+				else
                     all_talent_slot_buttons[indexAt].HyperLink = "|cffFFFFFF|Hspell:"..all_spellIds[i].."|h[Talent]|h|r"
-                    attached_talent = {all_spellIds[i + 1],AE_cost, TE_cost,all_spellIds,talents_ranks}
+					attached_talent = {all_spellIds[i + 1],AE_cost, TE_cost,all_spellIds,talents_ranks}
                     BG_File = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_rank"
                     BG_Color_U = {1,1,1,1}
-                end
-                break
-            end
-        end
-        
-        if learn_tooltip ~= nil then
-            local function learn_button_tooltip_Enter(self, motion)
-                GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-                GameTooltip:SetText(learn_tooltip)
-                GameTooltip:Show()
-            end
-            all_learn_talent_buttons[indexAt]:SetScript("OnEnter", learn_button_tooltip_Enter)
-        end
+				end
+				break
+			end
+		end
+		
+		if learn_tooltip ~= nil then
+			local function learn_button_tooltip_Enter(self, motion)
+				GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+				GameTooltip:SetText(learn_tooltip)
+				GameTooltip:Show()
+			end
+			all_learn_talent_buttons[indexAt]:SetScript("OnEnter", learn_button_tooltip_Enter)
+		end
 
-        all_attached_talent[indexAt] = attached_talent
-        
-        
-        all_learn_talent_buttons[indexAt]:SetText(text_changed)
-            
-        all_talent_FrameNumber[indexAt]:SetText(FN)
+		all_attached_talent[indexAt] = attached_talent
+		
+		
+		all_learn_talent_buttons[indexAt]:SetText(text_changed)
+			
+		all_talent_FrameNumber[indexAt]:SetText(FN)
 
         all_talent_slots[indexAt]:SetBackdrop({
                         bgFile = BG_File,
@@ -2826,11 +2826,11 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
                         bottom = -11}
                         })
         all_talent_slot_buttons[indexAt]:SetBackdropColor(unpack(BG_Color_U))
-        
-        --all_learn_talent_buttons_t[indexAt]:SetTexture(texture_changed[1], texture_changed[2], texture_changed[3], 1)
-        
-    end
-    --begin of the client talent unlearn part--
+		
+		--all_learn_talent_buttons_t[indexAt]:SetTexture(texture_changed[1], texture_changed[2], texture_changed[3], 1)
+		
+	end
+	--begin of the client talent unlearn part--
     function unlearn_talent(self)
         PlaySound("igMainMenuOptionCheckBoxOn")
     local talent_attached = false
@@ -2897,43 +2897,43 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
         
     end
     -- end of the client talent unlearn part--
-    function MyHandlers.GetSpellCount(player, spellCount, spellList)
-    
-        local start_ticker = 1
-        
-        repeat
-            local spellId = spellList[start_ticker][1]
-            local spellCostAE = spellList[start_ticker][2]
-            local spellCostTE = spellList[start_ticker][3]
-            local RequiredLevel = spellList[start_ticker][4]
-            local name, rank, icon, _,_,_,_ = GetSpellInfo(spellId)
-            local player_knows = IsSpellKnown(spellId)
-            local learn_tooltip = "Cost: "..spellCostAE.." AE "..spellCostTE.." TE"
-            local learn_texture = {.9, .2, .1}
+	function MyHandlers.GetSpellCount(player, spellCount, spellList)
+	
+		local start_ticker = 1
+		
+		repeat
+			local spellId = spellList[start_ticker][1]
+			local spellCostAE = spellList[start_ticker][2]
+			local spellCostTE = spellList[start_ticker][3]
+			local RequiredLevel = spellList[start_ticker][4]
+			local name, rank, icon, _,_,_,_ = GetSpellInfo(spellId)
+			local player_knows = IsSpellKnown(spellId)
+			local learn_tooltip = "Cost: "..spellCostAE.." AE "..spellCostTE.." TE"
+			local learn_texture = {.9, .2, .1}
             local learn_text = "Learn" -- used for spell texts
-            local attach_it = {spellId, spellCostAE, spellCostTE}
-            if player_knows == true then
-                learn_tooltip = "Already Known"
+			local attach_it = {spellId, spellCostAE, spellCostTE}
+			if player_knows == true then
+				learn_tooltip = "Already Known"
                 learn_text = "|cff6b625bLearn|r"
-                learn_texture = {.3, .3, .3}
-                attach_it = nil
-            elseif RequiredLevel > UnitLevel("player") then
-                learn_tooltip = "Requires: Level "..RequiredLevel
+				learn_texture = {.3, .3, .3}
+				attach_it = nil
+			elseif RequiredLevel > UnitLevel("player") then
+				learn_tooltip = "Requires: Level "..RequiredLevel
                 learn_text = "|cff6b625bLearn|r"
-                learn_texture = {.3, .3, .3}
-                attach_it = nil
-            end
-            
-             -- spell_desc = GetSpellDescription(spellId) -- Doesn't work? Added in cata... lame
-        
-            all_spell_slot_buttons[start_ticker]:SetBackdrop({
-                bgFile = icon
-            })
-            local get_spell_link = GetSpellLink(spellId)
-            local function spell_icon_tooltip_Enter(self, motion)
-                GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-                GameTooltip:SetHyperlink(get_spell_link)
-                GameTooltip:Show()
+				learn_texture = {.3, .3, .3}
+				attach_it = nil
+			end
+			
+			 -- spell_desc = GetSpellDescription(spellId) -- Doesn't work? Added in cata... lame
+		
+			all_spell_slot_buttons[start_ticker]:SetBackdrop({
+				bgFile = icon
+			})
+			local get_spell_link = GetSpellLink(spellId)
+			local function spell_icon_tooltip_Enter(self, motion)
+				GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+				GameTooltip:SetHyperlink(get_spell_link)
+				GameTooltip:Show()
                 --for unlearn spell
                 if (CanBeUnlearned()) then
                 GameTooltip:AppendText("\n|cffFF0000Click on the icon to use |cff00FF00[Scroll of unlearning]|r")
@@ -2941,95 +2941,95 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
                 all_spell_slot_buttons_UnLearnEffect:SetPoint("CENTER",self,"CENTER",0,0)
                 BaseFrameFadeIn(all_spell_slot_buttons_UnLearnEffect)
                 end
-            end
-            all_spell_slot_buttons[start_ticker]:SetScript("OnEnter", spell_icon_tooltip_Enter)
-            local function spell_icon_tooltip_OnLeave(self)
-                GameTooltip:Hide()
+			end
+			all_spell_slot_buttons[start_ticker]:SetScript("OnEnter", spell_icon_tooltip_Enter)
+			local function spell_icon_tooltip_OnLeave(self)
+				GameTooltip:Hide()
                 -- for unlearn spell
                 if (_G[self:GetName().."_UnlearnTex"]:IsVisible()) then
                 BaseFrameFadeOut(_G[self:GetName().."_UnlearnTex"])
                 BaseFrameFadeOut(all_spell_slot_buttons_UnLearnEffect)
                 end
-            end
-            all_spell_slot_buttons[start_ticker]:SetScript("OnLeave", spell_icon_tooltip_OnLeave)
-            
-            --all_learn_spell_buttons_t[start_ticker]:SetTexture(learn_texture[1], learn_texture[2], learn_texture[3], 1)
-            
-            local function learn_button_tooltip_Enter(self, motion)
-                GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-                GameTooltip:SetText(learn_tooltip)
-                GameTooltip:Show()
-            end
-            all_learn_spell_buttons[start_ticker]:SetScript("OnEnter", learn_button_tooltip_Enter)
-            local function learn_button_tooltip_Leave(self, motion)
-                GameTooltip:Hide()
-            end
-            all_learn_spell_buttons[start_ticker]:SetScript("OnLeave", learn_button_tooltip_Leave)
-            
-            all_attached_spells[start_ticker] = attach_it
-            
-            all_learn_spell_buttons[start_ticker]:SetText(learn_text)
+			end
+			all_spell_slot_buttons[start_ticker]:SetScript("OnLeave", spell_icon_tooltip_OnLeave)
+			
+			--all_learn_spell_buttons_t[start_ticker]:SetTexture(learn_texture[1], learn_texture[2], learn_texture[3], 1)
+			
+			local function learn_button_tooltip_Enter(self, motion)
+				GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+				GameTooltip:SetText(learn_tooltip)
+				GameTooltip:Show()
+			end
+			all_learn_spell_buttons[start_ticker]:SetScript("OnEnter", learn_button_tooltip_Enter)
+			local function learn_button_tooltip_Leave(self, motion)
+				GameTooltip:Hide()
+			end
+			all_learn_spell_buttons[start_ticker]:SetScript("OnLeave", learn_button_tooltip_Leave)
+			
+			all_attached_spells[start_ticker] = attach_it
+			
+			all_learn_spell_buttons[start_ticker]:SetText(learn_text)
 
-            start_ticker = start_ticker + 1
-        
-        until start_ticker == spellCount + 1
-        
-        repeat
-            all_spell_slot_buttons[start_ticker]:SetBackdrop({
-                bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\buttonbackgroundold"
-            })
-            
-            
-            all_spell_slot_buttons[start_ticker]:SetScript("OnEnter", nil)
-            
-            
-            all_spell_slot_buttons[start_ticker]:SetScript("OnLeave", nil)
-            
-            all_learn_spell_buttons[start_ticker]:SetScript("OnEnter", nil)
-            
-            all_learn_spell_buttons[start_ticker]:SetScript("OnLeave", nil)
-        
-            --all_learn_spell_buttons_t[start_ticker]:SetTexture(.3, .3, .3, 1)
-            all_learn_spell_buttons[start_ticker]:SetText("|cff6b625bEmpty|r")
-            all_attached_spells[start_ticker] = nil
-            start_ticker = start_ticker + 1
-        until start_ticker == 36 + 1
-    
-    end
-    
-    function learn_spell(self)
-       PlaySound("igMainMenuOptionCheckBoxOn")
+			start_ticker = start_ticker + 1
+		
+		until start_ticker == spellCount + 1
+		
+		repeat
+			all_spell_slot_buttons[start_ticker]:SetBackdrop({
+				bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\buttonbackgroundold"
+			})
+			
+			
+			all_spell_slot_buttons[start_ticker]:SetScript("OnEnter", nil)
+			
+			
+			all_spell_slot_buttons[start_ticker]:SetScript("OnLeave", nil)
+			
+			all_learn_spell_buttons[start_ticker]:SetScript("OnEnter", nil)
+			
+			all_learn_spell_buttons[start_ticker]:SetScript("OnLeave", nil)
+		
+			--all_learn_spell_buttons_t[start_ticker]:SetTexture(.3, .3, .3, 1)
+			all_learn_spell_buttons[start_ticker]:SetText("|cff6b625bEmpty|r")
+			all_attached_spells[start_ticker] = nil
+			start_ticker = start_ticker + 1
+		until start_ticker == 36 + 1
+	
+	end
+	
+	function learn_spell(self)
+	   PlaySound("igMainMenuOptionCheckBoxOn")
        local got_spell = nil
        local got_index
        --check for preventing hacks
        local class, spec = unpack(sideBar.CurrentSpellSpec)
 
-        for i,v in ipairs(all_learn_spell_buttons) do
-            if self == v then
-                got_spell = all_attached_spells[i]
-                all_attached_spells[i] = nil
+		for i,v in ipairs(all_learn_spell_buttons) do
+			if self == v then
+				got_spell = all_attached_spells[i]
+				all_attached_spells[i] = nil
                 got_index = i
-            end
-        end
-    
+			end
+		end
+	
       if got_spell ~= nil then
        AIO.Handle("sideBar", "LearnThisSpell", got_spell, got_index, class,spec)
        end
-    end
-    
-    function MyHandlers.ChangeLearnButton(player, i)
-    
-        local function learn_button_tooltip_Enter(self, motion)
-            GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-            GameTooltip:SetText("Already Known")
-            GameTooltip:Show()
-        end
+	end
+	
+	function MyHandlers.ChangeLearnButton(player, i)
+	
+		local function learn_button_tooltip_Enter(self, motion)
+			GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+			GameTooltip:SetText("Already Known")
+			GameTooltip:Show()
+		end
         all_learn_spell_buttons[i]:SetText("|cff6b625bLearn|r")
-        all_learn_spell_buttons[i]:SetScript("OnEnter", learn_button_tooltip_Enter)
+		all_learn_spell_buttons[i]:SetScript("OnEnter", learn_button_tooltip_Enter)
 
-        --all_learn_spell_buttons_t[i]:SetTexture(.3, .3, .3, 1)
-        all_attached_spells[i] = nil
-    end
+		--all_learn_spell_buttons_t[i]:SetTexture(.3, .3, .3, 1)
+		all_attached_spells[i] = nil
+	end
 
     --unlearn spell part--
         function unlearn_spell(self)
@@ -3068,9 +3068,9 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
         all_attached_spells[i] = {spell, cost_one, cost_two}
     end
     --end of unlearn spell part--
-    
-    -- ####################################### Basic Frame ##############################   
-     local ProgressionPurpleCovertexture = TrainingFrame:CreateTexture() 
+	
+	-- ####################################### Basic Frame ##############################	
+	 local ProgressionPurpleCovertexture = TrainingFrame:CreateTexture() 
     ProgressionPurpleCovertexture:SetAllPoints() 
     ProgressionPurpleCovertexture:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\progress_cover_purple") 
     ProgressionPurpleCovertexture:SetSize(TrainingFrame:GetSize())
@@ -3221,321 +3221,321 @@ TrainingFrame:SetScript("OnUpdate" , function()
         end
             end)
         
-        
-        
-    -- ####################################### Spells Frame ##############################  
-    
-    Spell_slot1 = CreateFrame("Frame", "TrainingFrame_Spell_slot1", TrainingFrame, nil)
-    Spell_slot1Button = CreateFrame("Button", "TrainingFrame_Spell_slot1Button", Spell_slot1, nil)
-    Spell_slot1ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot1ButtonL", Spell_slot1, nil)
-    Spell_slot1ButtonLT = Spell_slot1ButtonL:CreateTexture("Spell_slot1ButtonLT")
-    Spell_slot1ButtonF = Spell_slot1ButtonL:CreateFontString("Spell_slot1ButtonF")
-    Spell_slot1_AttachedSpell = nil
-    
-    Spell_slot2 = CreateFrame("Frame", "TrainingFrame_Spell_slot2", TrainingFrame, nil)
-    Spell_slot2Button = CreateFrame("Button", "TrainingFrame_Spell_slot2Button", Spell_slot2, nil)
-    Spell_slot2ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot2ButtonL", Spell_slot2, nil)
-    Spell_slot2ButtonLT = Spell_slot2ButtonL:CreateTexture("Spell_slot2ButtonLT")
-    Spell_slot2ButtonF = Spell_slot2ButtonL:CreateFontString("Spell_slot2ButtonF")
-    Spell_slot2_AttachedSpell = nil
-    
-    Spell_slot3 = CreateFrame("Frame", "TrainingFrame_Spell_slot3", TrainingFrame, nil)
-    Spell_slot3Button = CreateFrame("Button", "TrainingFrame_Spell_slot3Button", Spell_slot3, nil)
-    Spell_slot3ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot3ButtonL", Spell_slot3, nil)
-    Spell_slot3ButtonLT = Spell_slot3ButtonL:CreateTexture("Spell_slot3ButtonLT")
-    Spell_slot3ButtonF = Spell_slot3ButtonL:CreateFontString("Spell_slot3ButtonF")
-    Spell_slot3_AttachedSpell = nil
-    
-    Spell_slot4 = CreateFrame("Frame", "TrainingFrame_Spell_slot4", TrainingFrame, nil)
-    Spell_slot4Button = CreateFrame("Button", "TrainingFrame_Spell_slot4Button", Spell_slot4, nil)
-    Spell_slot4ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot4ButtonL", Spell_slot4, nil)
-    Spell_slot4ButtonLT = Spell_slot4ButtonL:CreateTexture("Spell_slot4ButtonLT")
-    Spell_slot4ButtonF = Spell_slot1ButtonL:CreateFontString("Spell_slot4ButtonF")
-    Spell_slot4_AttachedSpell = nil
-    
-    Spell_slot5 = CreateFrame("Frame", "TrainingFrame_Spell_slot5", TrainingFrame, nil)
-    Spell_slot5Button = CreateFrame("Button", "TrainingFrame_Spell_slot5Button", Spell_slot5, nil)
-    Spell_slot5ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot5ButtonL", Spell_slot5, nil)
-    Spell_slot5ButtonLT = Spell_slot5ButtonL:CreateTexture("Spell_slot5ButtonLT")
-    Spell_slot5ButtonF = Spell_slot5ButtonL:CreateFontString("Spell_slot5ButtonF")
-    Spell_slot5_AttachedSpell = nil
-    
-    Spell_slot6 = CreateFrame("Frame", "TrainingFrame_Spell_slot6", TrainingFrame, nil)
-    Spell_slot6Button = CreateFrame("Button", "TrainingFrame_Spell_slot6Button", Spell_slot6, nil)
-    Spell_slot6ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot6ButtonL", Spell_slot6, nil)
-    Spell_slot6ButtonLT = Spell_slot6ButtonL:CreateTexture("Spell_slot6ButtonLT")
-    Spell_slot6ButtonF = Spell_slot6ButtonL:CreateFontString("Spell_slot6ButtonF")
-    Spell_slot6_AttachedSpell = nil
-    
-    Spell_slot7 = CreateFrame("Frame", "TrainingFrame_Spell_slot7", TrainingFrame, nil)
-    Spell_slot7Button = CreateFrame("Button", "TrainingFrame_Spell_slot7Button", Spell_slot7, nil)
-    Spell_slot7ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot7ButtonL", Spell_slot7, nil)
-    Spell_slot7ButtonLT = Spell_slot7ButtonL:CreateTexture("Spell_slot7ButtonLT")
-    Spell_slot7ButtonF = Spell_slot7ButtonL:CreateFontString("Spell_slot7ButtonF")
-    Spell_slot7_AttachedSpell = nil
-    
-    Spell_slot8 = CreateFrame("Frame", "TrainingFrame_Spell_slot8", TrainingFrame, nil)
-    Spell_slot8Button = CreateFrame("Button", "TrainingFrame_Spell_slot8Button", Spell_slot8, nil)
-    Spell_slot8ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot8ButtonL", Spell_slot8, nil)
-    Spell_slot8ButtonLT = Spell_slot8ButtonL:CreateTexture("Spell_slot8ButtonLT")
-    Spell_slot8ButtonF = Spell_slot8ButtonL:CreateFontString("Spell_slot8ButtonF")
-    Spell_slot8_AttachedSpell = nil
-    
-    Spell_slot9 = CreateFrame("Frame", "TrainingFrame_Spell_slot9", TrainingFrame, nil)
-    Spell_slot9Button = CreateFrame("Button", "TrainingFrame_Spell_slot9Button", Spell_slot9, nil)
-    Spell_slot9ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot9ButtonL", Spell_slot9, nil)
-    Spell_slot9ButtonLT = Spell_slot9ButtonL:CreateTexture("Spell_slot9ButtonLT")
-    Spell_slot9ButtonF = Spell_slot9ButtonL:CreateFontString("Spell_slot9ButtonF")
-    Spell_slot9_AttachedSpell = nil
-    
-    Spell_slot10 = CreateFrame("Frame", "TrainingFrame_Spell_slot10", TrainingFrame, nil)
-    Spell_slot10Button = CreateFrame("Button", "TrainingFrame_Spell_slot10Button", Spell_slot10, nil)
-    Spell_slot10ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot10ButtonL", Spell_slot10, nil)
-    Spell_slot10ButtonLT = Spell_slot10ButtonL:CreateTexture("Spell_slot10ButtonLT")
-    Spell_slot10ButtonF = Spell_slot10ButtonL:CreateFontString("Spell_slot10ButtonF")
-    Spell_slot10_AttachedSpell = nil
-    
-    Spell_slot11 = CreateFrame("Frame", "TrainingFrame_Spell_slot11", TrainingFrame, nil)
-    Spell_slot11Button = CreateFrame("Button", "TrainingFrame_Spell_slot11Button", Spell_slot11, nil)
-    Spell_slot11ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot11ButtonL", Spell_slot11, nil)
-    Spell_slot11ButtonLT = Spell_slot11ButtonL:CreateTexture("Spell_slot11ButtonLT")
-    Spell_slot11ButtonF = Spell_slot11ButtonL:CreateFontString("Spell_slot11ButtonF")
-    Spell_slot11_AttachedSpell = nil
-    
-    Spell_slot12 = CreateFrame("Frame", "TrainingFrame_Spell_slot12", TrainingFrame, nil)
-    Spell_slot12Button = CreateFrame("Button", "TrainingFrame_Spell_slot12Button", Spell_slot12, nil)
-    Spell_slot12ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot12ButtonL", Spell_slot12, nil)
-    Spell_slot12ButtonLT = Spell_slot12ButtonL:CreateTexture("Spell_slot12ButtonLT")
-    Spell_slot12ButtonF = Spell_slot12ButtonL:CreateFontString("Spell_slot12ButtonF")
-    Spell_slot12_AttachedSpell = nil
-    
-    Spell_slot13 = CreateFrame("Frame", "TrainingFrame_Spell_slot13", TrainingFrame, nil)
-    Spell_slot13Button = CreateFrame("Button", "TrainingFrame_Spell_slot13Button", Spell_slot13, nil)
-    Spell_slot13ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot13ButtonL", Spell_slot13, nil)
-    Spell_slot13ButtonLT = Spell_slot13ButtonL:CreateTexture("Spell_slot13ButtonLT")
-    Spell_slot13ButtonF = Spell_slot13ButtonL:CreateFontString("Spell_slot13ButtonF")
-    Spell_slot13_AttachedSpell = nil
-    
-    Spell_slot14 = CreateFrame("Frame", "TrainingFrame_Spell_slot14", TrainingFrame, nil)
-    Spell_slot14Button = CreateFrame("Button", "TrainingFrame_Spell_slot14Button", Spell_slot14, nil)
-    Spell_slot14ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot14ButtonL", Spell_slot14, nil)
-    Spell_slot14ButtonLT = Spell_slot14ButtonL:CreateTexture("Spell_slot14ButtonLT")
-    Spell_slot14ButtonF = Spell_slot14ButtonL:CreateFontString("Spell_slot14ButtonF")
-    Spell_slot14_AttachedSpell = nil
-    
-    Spell_slot15 = CreateFrame("Frame", "TrainingFrame_Spell_slot15", TrainingFrame, nil)
-    Spell_slot15Button = CreateFrame("Button", "TrainingFrame_Spell_slot15Button", Spell_slot15, nil)
-    Spell_slot15ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot15ButtonL", Spell_slot15, nil)
-    Spell_slot15ButtonLT = Spell_slot15ButtonL:CreateTexture("Spell_slot15ButtonLT")
-    Spell_slot15ButtonF = Spell_slot15ButtonL:CreateFontString("Spell_slot15ButtonF")
-    Spell_slot15_AttachedSpell = nil
-    
-    Spell_slot16 = CreateFrame("Frame", "TrainingFrame_Spell_slot16", TrainingFrame, nil)
-    Spell_slot16Button = CreateFrame("Button", "TrainingFrame_Spell_slot16Button", Spell_slot16, nil)
-    Spell_slot16ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot16ButtonL", Spell_slot16, nil)
-    Spell_slot16ButtonLT = Spell_slot16ButtonL:CreateTexture("Spell_slot16ButtonLT")
-    Spell_slot16ButtonF = Spell_slot16ButtonL:CreateFontString("Spell_slot16ButtonF")
-    Spell_slot16_AttachedSpell = nil
-    
-    Spell_slot17 = CreateFrame("Frame", "TrainingFrame_Spell_slot17", TrainingFrame, nil)
-    Spell_slot17Button = CreateFrame("Button", "TrainingFrame_Spell_slot17Button", Spell_slot17, nil)
-    Spell_slot17ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot17ButtonL", Spell_slot17, nil)
-    Spell_slot17ButtonLT = Spell_slot17ButtonL:CreateTexture("Spell_slot17ButtonLT")
-    Spell_slot17ButtonF = Spell_slot17ButtonL:CreateFontString("Spell_slot17ButtonF")
-    Spell_slot17_AttachedSpell = nil
-    
-    Spell_slot18 = CreateFrame("Frame", "TrainingFrame_Spell_slot18", TrainingFrame, nil)
-    Spell_slot18Button = CreateFrame("Button", "TrainingFrame_Spell_slot18Button", Spell_slot18, nil)
-    Spell_slot18ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot18ButtonL", Spell_slot18, nil)
-    Spell_slot18ButtonLT = Spell_slot18ButtonL:CreateTexture("Spell_slot18ButtonLT")
-    Spell_slot18ButtonF = Spell_slot18ButtonL:CreateFontString("Spell_slot18ButtonF")
-    Spell_slot18_AttachedSpell = nil
-    
-    Spell_slot19 = CreateFrame("Frame", "TrainingFrame_Spell_slot19", TrainingFrame, nil)
-    Spell_slot19Button = CreateFrame("Button", "TrainingFrame_Spell_slot19Button", Spell_slot19, nil)
-    Spell_slot19ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot19ButtonL", Spell_slot19, nil)
-    Spell_slot19ButtonLT = Spell_slot19ButtonL:CreateTexture("Spell_slot19ButtonLT")
-    Spell_slot19ButtonF = Spell_slot19ButtonL:CreateFontString("Spell_slot19ButtonF")
-    Spell_slot19_AttachedSpell = nil
-    
-    Spell_slot20 = CreateFrame("Frame", "TrainingFrame_Spell_slot20", TrainingFrame, nil)
-    Spell_slot20Button = CreateFrame("Button", "TrainingFrame_Spell_slot20Button", Spell_slot20, nil)
-    Spell_slot20ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot20ButtonL", Spell_slot20, nil)
-    Spell_slot20ButtonLT = Spell_slot20ButtonL:CreateTexture("Spell_slot20ButtonLT")
-    Spell_slot20ButtonF = Spell_slot20ButtonL:CreateFontString("Spell_slot20ButtonF")
-    Spell_slot20_AttachedSpell = nil
-    
-    Spell_slot21 = CreateFrame("Frame", "TrainingFrame_Spell_slot21", TrainingFrame, nil)
-    Spell_slot21Button = CreateFrame("Button", "TrainingFrame_Spell_slot21Button", Spell_slot21, nil)
-    Spell_slot21ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot21ButtonL", Spell_slot21, nil)
-    Spell_slot21ButtonLT = Spell_slot21ButtonL:CreateTexture("Spell_slot21ButtonLT")
-    Spell_slot21ButtonF = Spell_slot21ButtonL:CreateFontString("Spell_slot21ButtonF")
-    Spell_slot21_AttachedSpell = nil
-    
-    Spell_slot22 = CreateFrame("Frame", "TrainingFrame_Spell_slot22", TrainingFrame, nil)
-    Spell_slot22Button = CreateFrame("Button", "TrainingFrame_Spell_slot22Button", Spell_slot22, nil)
-    Spell_slot22ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot22ButtonL", Spell_slot22, nil)
-    Spell_slot22ButtonLT = Spell_slot22ButtonL:CreateTexture("Spell_slot22ButtonLT")
-    Spell_slot22ButtonF = Spell_slot22ButtonL:CreateFontString("Spell_slot22ButtonF")
-    Spell_slot22_AttachedSpell = nil
-    
-    Spell_slot23 = CreateFrame("Frame", "TrainingFrame_Spell_slot23", TrainingFrame, nil)
-    Spell_slot23Button = CreateFrame("Button", "TrainingFrame_Spell_slot23Button", Spell_slot23, nil)
-    Spell_slot23ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot23ButtonL", Spell_slot23, nil)
-    Spell_slot23ButtonLT = Spell_slot23ButtonL:CreateTexture("Spell_slot23ButtonLT")
-    Spell_slot23ButtonF = Spell_slot23ButtonL:CreateFontString("Spell_slot23ButtonF")
-    Spell_slot23_AttachedSpell = nil
-    
-    Spell_slot24 = CreateFrame("Frame", "TrainingFrame_Spell_slot24", TrainingFrame, nil)
-    Spell_slot24Button = CreateFrame("Button", "TrainingFrame_Spell_slot24Button", Spell_slot24, nil)
-    Spell_slot24ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot24ButtonL", Spell_slot24, nil)
-    Spell_slot24ButtonLT = Spell_slot24ButtonL:CreateTexture("Spell_slot24ButtonLT")
-    Spell_slot24ButtonF = Spell_slot24ButtonL:CreateFontString("Spell_slot24ButtonF")
-    Spell_slot24_AttachedSpell = nil
-    
-    Spell_slot25 = CreateFrame("Frame", "TrainingFrame_Spell_slot25", TrainingFrame, nil)
-    Spell_slot25Button = CreateFrame("Button", "TrainingFrame_Spell_slot25Button", Spell_slot25, nil)
-    Spell_slot25ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot25ButtonL", Spell_slot25, nil)
-    Spell_slot25ButtonLT = Spell_slot25ButtonL:CreateTexture("Spell_slot25ButtonLT")
-    Spell_slot25ButtonF = Spell_slot25ButtonL:CreateFontString("Spell_slot25ButtonF")
-    Spell_slot25_AttachedSpell = nil
-    
-    Spell_slot26 = CreateFrame("Frame", "TrainingFrame_Spell_slot26", TrainingFrame, nil)
-    Spell_slot26Button = CreateFrame("Button", "TrainingFrame_Spell_slot26Button", Spell_slot26, nil)
-    Spell_slot26ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot26ButtonL", Spell_slot26, nil)
-    Spell_slot26ButtonLT = Spell_slot26ButtonL:CreateTexture("Spell_slot26ButtonLT")
-    Spell_slot26ButtonF = Spell_slot26ButtonL:CreateFontString("Spell_slot26ButtonF")
-    Spell_slot26_AttachedSpell = nil
-    
-    Spell_slot27 = CreateFrame("Frame", "TrainingFrame_Spell_slot27", TrainingFrame, nil)
-    Spell_slot27Button = CreateFrame("Button", "TrainingFrame_Spell_slot27Button", Spell_slot27, nil)
-    Spell_slot27ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot27ButtonL", Spell_slot27, nil)
-    Spell_slot27ButtonLT = Spell_slot27ButtonL:CreateTexture("Spell_slot27ButtonLT")
-    Spell_slot27ButtonF = Spell_slot27ButtonL:CreateFontString("Spell_slot27ButtonF")
-    Spell_slot27_AttachedSpell = nil
-    
-    Spell_slot28 = CreateFrame("Frame", "TrainingFrame_Spell_slot28", TrainingFrame, nil)
-    Spell_slot28Button = CreateFrame("Button", "TrainingFrame_Spell_slot28Button", Spell_slot28, nil)
-    Spell_slot28ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot28ButtonL", Spell_slot28, nil)
-    Spell_slot28ButtonLT = Spell_slot28ButtonL:CreateTexture("Spell_slot28ButtonLT")
-    Spell_slot28ButtonF = Spell_slot28ButtonL:CreateFontString("Spell_slot28ButtonF")
-    Spell_slot28_AttachedSpell = nil
-    
-    Spell_slot29 = CreateFrame("Frame", "TrainingFrame_Spell_slot29", TrainingFrame, nil)
-    Spell_slot29Button = CreateFrame("Button", "TrainingFrame_Spell_slot29Button", Spell_slot29, nil)
-    Spell_slot29ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot29ButtonL", Spell_slot29, nil)
-    Spell_slot29ButtonLT = Spell_slot29ButtonL:CreateTexture("Spell_slot29ButtonLT")
-    Spell_slot29ButtonF = Spell_slot29ButtonL:CreateFontString("Spell_slot29ButtonF")
-    Spell_slot29_AttachedSpell = nil
-    
-    Spell_slot30 = CreateFrame("Frame", "TrainingFrame_Spell_slot30", TrainingFrame, nil)
-    Spell_slot30Button = CreateFrame("Button", "TrainingFrame_Spell_slot30Button", Spell_slot30, nil)
-    Spell_slot30ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot30ButtonL", Spell_slot30, nil)
-    Spell_slot30ButtonLT = Spell_slot30ButtonL:CreateTexture("Spell_slot30ButtonLT")
-    Spell_slot30ButtonF = Spell_slot30ButtonL:CreateFontString("Spell_slot30ButtonF")
-    Spell_slot30_AttachedSpell = nil
-    
-    Spell_slot31 = CreateFrame("Frame", "TrainingFrame_Spell_slot31", TrainingFrame, nil)
-    Spell_slot31Button = CreateFrame("Button", "TrainingFrame_Spell_slot31Button", Spell_slot31, nil)
-    Spell_slot31ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot31ButtonL", Spell_slot31, nil)
-    Spell_slot31ButtonLT = Spell_slot31ButtonL:CreateTexture("Spell_slot31ButtonLT")
-    Spell_slot31ButtonF = Spell_slot31ButtonL:CreateFontString("Spell_slot31ButtonF")
-    Spell_slot31_AttachedSpell = nil
-    
-    Spell_slot32 = CreateFrame("Frame", "TrainingFrame_Spell_slot32", TrainingFrame, nil)
-    Spell_slot32Button = CreateFrame("Button", "TrainingFrame_Spell_slot32Button", Spell_slot32, nil)
-    Spell_slot32ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot32ButtonL", Spell_slot32, nil)
-    Spell_slot32ButtonLT = Spell_slot32ButtonL:CreateTexture("Spell_slot32ButtonLT")
-    Spell_slot32ButtonF = Spell_slot32ButtonL:CreateFontString("Spell_slot32ButtonF")
-    Spell_slot32_AttachedSpell = nil
-    
-    Spell_slot33 = CreateFrame("Frame", "TrainingFrame_Spell_slot33", TrainingFrame, nil)
-    Spell_slot33Button = CreateFrame("Button", "TrainingFrame_Spell_slot33Button", Spell_slot33, nil)
-    Spell_slot33ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot33ButtonL", Spell_slot33, nil)
-    Spell_slot33ButtonLT = Spell_slot33ButtonL:CreateTexture("Spell_slot33ButtonLT")
-    Spell_slot33ButtonF = Spell_slot33ButtonL:CreateFontString("Spell_slot33ButtonF")
-    Spell_slot33_AttachedSpell = nil
-    
-    Spell_slot34 = CreateFrame("Frame", "TrainingFrame_Spell_slot34", TrainingFrame, nil)
-    Spell_slot34Button = CreateFrame("Button", "TrainingFrame_Spell_slot34Button", Spell_slot34, nil)
-    Spell_slot34ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot34ButtonL", Spell_slot34, nil)
-    Spell_slot34ButtonLT = Spell_slot34ButtonL:CreateTexture("Spell_slot34ButtonLT")
-    Spell_slot34ButtonF = Spell_slot34ButtonL:CreateFontString("Spell_slot34ButtonF")
-    Spell_slot34_AttachedSpell = nil
-    
-    Spell_slot35 = CreateFrame("Frame", "TrainingFrame_Spell_slot35", TrainingFrame, nil)
-    Spell_slot35Button = CreateFrame("Button", "TrainingFrame_Spell_slot35Button", Spell_slot35, nil)
-    Spell_slot35ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot35ButtonL", Spell_slot35, nil)
-    Spell_slot35ButtonLT = Spell_slot35ButtonL:CreateTexture("Spell_slot35ButtonLT")
-    Spell_slot35ButtonF = Spell_slot35ButtonL:CreateFontString("Spell_slot35ButtonF")
-    Spell_slot35_AttachedSpell = nil
-    
-    Spell_slot36 = CreateFrame("Frame", "TrainingFrame_Spell_slot36", TrainingFrame, nil)
-    Spell_slot36Button = CreateFrame("Button", "TrainingFrame_Spell_slot36Button", Spell_slot36, nil)
-    Spell_slot36ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot36ButtonL", Spell_slot36, nil)
-    Spell_slot36ButtonLT = Spell_slot36ButtonL:CreateTexture("Spell_slot36ButtonLT")
-    Spell_slot36ButtonF = Spell_slot36ButtonL:CreateFontString("Spell_slot36ButtonF")
-    Spell_slot36_AttachedSpell = nil
-    
-    all_spell_slots = {
+		
+		
+	-- ####################################### Spells Frame ##############################	
+	
+	Spell_slot1 = CreateFrame("Frame", "TrainingFrame_Spell_slot1", TrainingFrame, nil)
+	Spell_slot1Button = CreateFrame("Button", "TrainingFrame_Spell_slot1Button", Spell_slot1, nil)
+	Spell_slot1ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot1ButtonL", Spell_slot1, nil)
+	Spell_slot1ButtonLT = Spell_slot1ButtonL:CreateTexture("Spell_slot1ButtonLT")
+	Spell_slot1ButtonF = Spell_slot1ButtonL:CreateFontString("Spell_slot1ButtonF")
+	Spell_slot1_AttachedSpell = nil
+	
+	Spell_slot2 = CreateFrame("Frame", "TrainingFrame_Spell_slot2", TrainingFrame, nil)
+	Spell_slot2Button = CreateFrame("Button", "TrainingFrame_Spell_slot2Button", Spell_slot2, nil)
+	Spell_slot2ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot2ButtonL", Spell_slot2, nil)
+	Spell_slot2ButtonLT = Spell_slot2ButtonL:CreateTexture("Spell_slot2ButtonLT")
+	Spell_slot2ButtonF = Spell_slot2ButtonL:CreateFontString("Spell_slot2ButtonF")
+	Spell_slot2_AttachedSpell = nil
+	
+	Spell_slot3 = CreateFrame("Frame", "TrainingFrame_Spell_slot3", TrainingFrame, nil)
+	Spell_slot3Button = CreateFrame("Button", "TrainingFrame_Spell_slot3Button", Spell_slot3, nil)
+	Spell_slot3ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot3ButtonL", Spell_slot3, nil)
+	Spell_slot3ButtonLT = Spell_slot3ButtonL:CreateTexture("Spell_slot3ButtonLT")
+	Spell_slot3ButtonF = Spell_slot3ButtonL:CreateFontString("Spell_slot3ButtonF")
+	Spell_slot3_AttachedSpell = nil
+	
+	Spell_slot4 = CreateFrame("Frame", "TrainingFrame_Spell_slot4", TrainingFrame, nil)
+	Spell_slot4Button = CreateFrame("Button", "TrainingFrame_Spell_slot4Button", Spell_slot4, nil)
+	Spell_slot4ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot4ButtonL", Spell_slot4, nil)
+	Spell_slot4ButtonLT = Spell_slot4ButtonL:CreateTexture("Spell_slot4ButtonLT")
+	Spell_slot4ButtonF = Spell_slot1ButtonL:CreateFontString("Spell_slot4ButtonF")
+	Spell_slot4_AttachedSpell = nil
+	
+	Spell_slot5 = CreateFrame("Frame", "TrainingFrame_Spell_slot5", TrainingFrame, nil)
+	Spell_slot5Button = CreateFrame("Button", "TrainingFrame_Spell_slot5Button", Spell_slot5, nil)
+	Spell_slot5ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot5ButtonL", Spell_slot5, nil)
+	Spell_slot5ButtonLT = Spell_slot5ButtonL:CreateTexture("Spell_slot5ButtonLT")
+	Spell_slot5ButtonF = Spell_slot5ButtonL:CreateFontString("Spell_slot5ButtonF")
+	Spell_slot5_AttachedSpell = nil
+	
+	Spell_slot6 = CreateFrame("Frame", "TrainingFrame_Spell_slot6", TrainingFrame, nil)
+	Spell_slot6Button = CreateFrame("Button", "TrainingFrame_Spell_slot6Button", Spell_slot6, nil)
+	Spell_slot6ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot6ButtonL", Spell_slot6, nil)
+	Spell_slot6ButtonLT = Spell_slot6ButtonL:CreateTexture("Spell_slot6ButtonLT")
+	Spell_slot6ButtonF = Spell_slot6ButtonL:CreateFontString("Spell_slot6ButtonF")
+	Spell_slot6_AttachedSpell = nil
+	
+	Spell_slot7 = CreateFrame("Frame", "TrainingFrame_Spell_slot7", TrainingFrame, nil)
+	Spell_slot7Button = CreateFrame("Button", "TrainingFrame_Spell_slot7Button", Spell_slot7, nil)
+	Spell_slot7ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot7ButtonL", Spell_slot7, nil)
+	Spell_slot7ButtonLT = Spell_slot7ButtonL:CreateTexture("Spell_slot7ButtonLT")
+	Spell_slot7ButtonF = Spell_slot7ButtonL:CreateFontString("Spell_slot7ButtonF")
+	Spell_slot7_AttachedSpell = nil
+	
+	Spell_slot8 = CreateFrame("Frame", "TrainingFrame_Spell_slot8", TrainingFrame, nil)
+	Spell_slot8Button = CreateFrame("Button", "TrainingFrame_Spell_slot8Button", Spell_slot8, nil)
+	Spell_slot8ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot8ButtonL", Spell_slot8, nil)
+	Spell_slot8ButtonLT = Spell_slot8ButtonL:CreateTexture("Spell_slot8ButtonLT")
+	Spell_slot8ButtonF = Spell_slot8ButtonL:CreateFontString("Spell_slot8ButtonF")
+	Spell_slot8_AttachedSpell = nil
+	
+	Spell_slot9 = CreateFrame("Frame", "TrainingFrame_Spell_slot9", TrainingFrame, nil)
+	Spell_slot9Button = CreateFrame("Button", "TrainingFrame_Spell_slot9Button", Spell_slot9, nil)
+	Spell_slot9ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot9ButtonL", Spell_slot9, nil)
+	Spell_slot9ButtonLT = Spell_slot9ButtonL:CreateTexture("Spell_slot9ButtonLT")
+	Spell_slot9ButtonF = Spell_slot9ButtonL:CreateFontString("Spell_slot9ButtonF")
+	Spell_slot9_AttachedSpell = nil
+	
+	Spell_slot10 = CreateFrame("Frame", "TrainingFrame_Spell_slot10", TrainingFrame, nil)
+	Spell_slot10Button = CreateFrame("Button", "TrainingFrame_Spell_slot10Button", Spell_slot10, nil)
+	Spell_slot10ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot10ButtonL", Spell_slot10, nil)
+	Spell_slot10ButtonLT = Spell_slot10ButtonL:CreateTexture("Spell_slot10ButtonLT")
+	Spell_slot10ButtonF = Spell_slot10ButtonL:CreateFontString("Spell_slot10ButtonF")
+	Spell_slot10_AttachedSpell = nil
+	
+	Spell_slot11 = CreateFrame("Frame", "TrainingFrame_Spell_slot11", TrainingFrame, nil)
+	Spell_slot11Button = CreateFrame("Button", "TrainingFrame_Spell_slot11Button", Spell_slot11, nil)
+	Spell_slot11ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot11ButtonL", Spell_slot11, nil)
+	Spell_slot11ButtonLT = Spell_slot11ButtonL:CreateTexture("Spell_slot11ButtonLT")
+	Spell_slot11ButtonF = Spell_slot11ButtonL:CreateFontString("Spell_slot11ButtonF")
+	Spell_slot11_AttachedSpell = nil
+	
+	Spell_slot12 = CreateFrame("Frame", "TrainingFrame_Spell_slot12", TrainingFrame, nil)
+	Spell_slot12Button = CreateFrame("Button", "TrainingFrame_Spell_slot12Button", Spell_slot12, nil)
+	Spell_slot12ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot12ButtonL", Spell_slot12, nil)
+	Spell_slot12ButtonLT = Spell_slot12ButtonL:CreateTexture("Spell_slot12ButtonLT")
+	Spell_slot12ButtonF = Spell_slot12ButtonL:CreateFontString("Spell_slot12ButtonF")
+	Spell_slot12_AttachedSpell = nil
+	
+	Spell_slot13 = CreateFrame("Frame", "TrainingFrame_Spell_slot13", TrainingFrame, nil)
+	Spell_slot13Button = CreateFrame("Button", "TrainingFrame_Spell_slot13Button", Spell_slot13, nil)
+	Spell_slot13ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot13ButtonL", Spell_slot13, nil)
+	Spell_slot13ButtonLT = Spell_slot13ButtonL:CreateTexture("Spell_slot13ButtonLT")
+	Spell_slot13ButtonF = Spell_slot13ButtonL:CreateFontString("Spell_slot13ButtonF")
+	Spell_slot13_AttachedSpell = nil
+	
+	Spell_slot14 = CreateFrame("Frame", "TrainingFrame_Spell_slot14", TrainingFrame, nil)
+	Spell_slot14Button = CreateFrame("Button", "TrainingFrame_Spell_slot14Button", Spell_slot14, nil)
+	Spell_slot14ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot14ButtonL", Spell_slot14, nil)
+	Spell_slot14ButtonLT = Spell_slot14ButtonL:CreateTexture("Spell_slot14ButtonLT")
+	Spell_slot14ButtonF = Spell_slot14ButtonL:CreateFontString("Spell_slot14ButtonF")
+	Spell_slot14_AttachedSpell = nil
+	
+	Spell_slot15 = CreateFrame("Frame", "TrainingFrame_Spell_slot15", TrainingFrame, nil)
+	Spell_slot15Button = CreateFrame("Button", "TrainingFrame_Spell_slot15Button", Spell_slot15, nil)
+	Spell_slot15ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot15ButtonL", Spell_slot15, nil)
+	Spell_slot15ButtonLT = Spell_slot15ButtonL:CreateTexture("Spell_slot15ButtonLT")
+	Spell_slot15ButtonF = Spell_slot15ButtonL:CreateFontString("Spell_slot15ButtonF")
+	Spell_slot15_AttachedSpell = nil
+	
+	Spell_slot16 = CreateFrame("Frame", "TrainingFrame_Spell_slot16", TrainingFrame, nil)
+	Spell_slot16Button = CreateFrame("Button", "TrainingFrame_Spell_slot16Button", Spell_slot16, nil)
+	Spell_slot16ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot16ButtonL", Spell_slot16, nil)
+	Spell_slot16ButtonLT = Spell_slot16ButtonL:CreateTexture("Spell_slot16ButtonLT")
+	Spell_slot16ButtonF = Spell_slot16ButtonL:CreateFontString("Spell_slot16ButtonF")
+	Spell_slot16_AttachedSpell = nil
+	
+	Spell_slot17 = CreateFrame("Frame", "TrainingFrame_Spell_slot17", TrainingFrame, nil)
+	Spell_slot17Button = CreateFrame("Button", "TrainingFrame_Spell_slot17Button", Spell_slot17, nil)
+	Spell_slot17ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot17ButtonL", Spell_slot17, nil)
+	Spell_slot17ButtonLT = Spell_slot17ButtonL:CreateTexture("Spell_slot17ButtonLT")
+	Spell_slot17ButtonF = Spell_slot17ButtonL:CreateFontString("Spell_slot17ButtonF")
+	Spell_slot17_AttachedSpell = nil
+	
+	Spell_slot18 = CreateFrame("Frame", "TrainingFrame_Spell_slot18", TrainingFrame, nil)
+	Spell_slot18Button = CreateFrame("Button", "TrainingFrame_Spell_slot18Button", Spell_slot18, nil)
+	Spell_slot18ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot18ButtonL", Spell_slot18, nil)
+	Spell_slot18ButtonLT = Spell_slot18ButtonL:CreateTexture("Spell_slot18ButtonLT")
+	Spell_slot18ButtonF = Spell_slot18ButtonL:CreateFontString("Spell_slot18ButtonF")
+	Spell_slot18_AttachedSpell = nil
+	
+	Spell_slot19 = CreateFrame("Frame", "TrainingFrame_Spell_slot19", TrainingFrame, nil)
+	Spell_slot19Button = CreateFrame("Button", "TrainingFrame_Spell_slot19Button", Spell_slot19, nil)
+	Spell_slot19ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot19ButtonL", Spell_slot19, nil)
+	Spell_slot19ButtonLT = Spell_slot19ButtonL:CreateTexture("Spell_slot19ButtonLT")
+	Spell_slot19ButtonF = Spell_slot19ButtonL:CreateFontString("Spell_slot19ButtonF")
+	Spell_slot19_AttachedSpell = nil
+	
+	Spell_slot20 = CreateFrame("Frame", "TrainingFrame_Spell_slot20", TrainingFrame, nil)
+	Spell_slot20Button = CreateFrame("Button", "TrainingFrame_Spell_slot20Button", Spell_slot20, nil)
+	Spell_slot20ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot20ButtonL", Spell_slot20, nil)
+	Spell_slot20ButtonLT = Spell_slot20ButtonL:CreateTexture("Spell_slot20ButtonLT")
+	Spell_slot20ButtonF = Spell_slot20ButtonL:CreateFontString("Spell_slot20ButtonF")
+	Spell_slot20_AttachedSpell = nil
+	
+	Spell_slot21 = CreateFrame("Frame", "TrainingFrame_Spell_slot21", TrainingFrame, nil)
+	Spell_slot21Button = CreateFrame("Button", "TrainingFrame_Spell_slot21Button", Spell_slot21, nil)
+	Spell_slot21ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot21ButtonL", Spell_slot21, nil)
+	Spell_slot21ButtonLT = Spell_slot21ButtonL:CreateTexture("Spell_slot21ButtonLT")
+	Spell_slot21ButtonF = Spell_slot21ButtonL:CreateFontString("Spell_slot21ButtonF")
+	Spell_slot21_AttachedSpell = nil
+	
+	Spell_slot22 = CreateFrame("Frame", "TrainingFrame_Spell_slot22", TrainingFrame, nil)
+	Spell_slot22Button = CreateFrame("Button", "TrainingFrame_Spell_slot22Button", Spell_slot22, nil)
+	Spell_slot22ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot22ButtonL", Spell_slot22, nil)
+	Spell_slot22ButtonLT = Spell_slot22ButtonL:CreateTexture("Spell_slot22ButtonLT")
+	Spell_slot22ButtonF = Spell_slot22ButtonL:CreateFontString("Spell_slot22ButtonF")
+	Spell_slot22_AttachedSpell = nil
+	
+	Spell_slot23 = CreateFrame("Frame", "TrainingFrame_Spell_slot23", TrainingFrame, nil)
+	Spell_slot23Button = CreateFrame("Button", "TrainingFrame_Spell_slot23Button", Spell_slot23, nil)
+	Spell_slot23ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot23ButtonL", Spell_slot23, nil)
+	Spell_slot23ButtonLT = Spell_slot23ButtonL:CreateTexture("Spell_slot23ButtonLT")
+	Spell_slot23ButtonF = Spell_slot23ButtonL:CreateFontString("Spell_slot23ButtonF")
+	Spell_slot23_AttachedSpell = nil
+	
+	Spell_slot24 = CreateFrame("Frame", "TrainingFrame_Spell_slot24", TrainingFrame, nil)
+	Spell_slot24Button = CreateFrame("Button", "TrainingFrame_Spell_slot24Button", Spell_slot24, nil)
+	Spell_slot24ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot24ButtonL", Spell_slot24, nil)
+	Spell_slot24ButtonLT = Spell_slot24ButtonL:CreateTexture("Spell_slot24ButtonLT")
+	Spell_slot24ButtonF = Spell_slot24ButtonL:CreateFontString("Spell_slot24ButtonF")
+	Spell_slot24_AttachedSpell = nil
+	
+	Spell_slot25 = CreateFrame("Frame", "TrainingFrame_Spell_slot25", TrainingFrame, nil)
+	Spell_slot25Button = CreateFrame("Button", "TrainingFrame_Spell_slot25Button", Spell_slot25, nil)
+	Spell_slot25ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot25ButtonL", Spell_slot25, nil)
+	Spell_slot25ButtonLT = Spell_slot25ButtonL:CreateTexture("Spell_slot25ButtonLT")
+	Spell_slot25ButtonF = Spell_slot25ButtonL:CreateFontString("Spell_slot25ButtonF")
+	Spell_slot25_AttachedSpell = nil
+	
+	Spell_slot26 = CreateFrame("Frame", "TrainingFrame_Spell_slot26", TrainingFrame, nil)
+	Spell_slot26Button = CreateFrame("Button", "TrainingFrame_Spell_slot26Button", Spell_slot26, nil)
+	Spell_slot26ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot26ButtonL", Spell_slot26, nil)
+	Spell_slot26ButtonLT = Spell_slot26ButtonL:CreateTexture("Spell_slot26ButtonLT")
+	Spell_slot26ButtonF = Spell_slot26ButtonL:CreateFontString("Spell_slot26ButtonF")
+	Spell_slot26_AttachedSpell = nil
+	
+	Spell_slot27 = CreateFrame("Frame", "TrainingFrame_Spell_slot27", TrainingFrame, nil)
+	Spell_slot27Button = CreateFrame("Button", "TrainingFrame_Spell_slot27Button", Spell_slot27, nil)
+	Spell_slot27ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot27ButtonL", Spell_slot27, nil)
+	Spell_slot27ButtonLT = Spell_slot27ButtonL:CreateTexture("Spell_slot27ButtonLT")
+	Spell_slot27ButtonF = Spell_slot27ButtonL:CreateFontString("Spell_slot27ButtonF")
+	Spell_slot27_AttachedSpell = nil
+	
+	Spell_slot28 = CreateFrame("Frame", "TrainingFrame_Spell_slot28", TrainingFrame, nil)
+	Spell_slot28Button = CreateFrame("Button", "TrainingFrame_Spell_slot28Button", Spell_slot28, nil)
+	Spell_slot28ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot28ButtonL", Spell_slot28, nil)
+	Spell_slot28ButtonLT = Spell_slot28ButtonL:CreateTexture("Spell_slot28ButtonLT")
+	Spell_slot28ButtonF = Spell_slot28ButtonL:CreateFontString("Spell_slot28ButtonF")
+	Spell_slot28_AttachedSpell = nil
+	
+	Spell_slot29 = CreateFrame("Frame", "TrainingFrame_Spell_slot29", TrainingFrame, nil)
+	Spell_slot29Button = CreateFrame("Button", "TrainingFrame_Spell_slot29Button", Spell_slot29, nil)
+	Spell_slot29ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot29ButtonL", Spell_slot29, nil)
+	Spell_slot29ButtonLT = Spell_slot29ButtonL:CreateTexture("Spell_slot29ButtonLT")
+	Spell_slot29ButtonF = Spell_slot29ButtonL:CreateFontString("Spell_slot29ButtonF")
+	Spell_slot29_AttachedSpell = nil
+	
+	Spell_slot30 = CreateFrame("Frame", "TrainingFrame_Spell_slot30", TrainingFrame, nil)
+	Spell_slot30Button = CreateFrame("Button", "TrainingFrame_Spell_slot30Button", Spell_slot30, nil)
+	Spell_slot30ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot30ButtonL", Spell_slot30, nil)
+	Spell_slot30ButtonLT = Spell_slot30ButtonL:CreateTexture("Spell_slot30ButtonLT")
+	Spell_slot30ButtonF = Spell_slot30ButtonL:CreateFontString("Spell_slot30ButtonF")
+	Spell_slot30_AttachedSpell = nil
+	
+	Spell_slot31 = CreateFrame("Frame", "TrainingFrame_Spell_slot31", TrainingFrame, nil)
+	Spell_slot31Button = CreateFrame("Button", "TrainingFrame_Spell_slot31Button", Spell_slot31, nil)
+	Spell_slot31ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot31ButtonL", Spell_slot31, nil)
+	Spell_slot31ButtonLT = Spell_slot31ButtonL:CreateTexture("Spell_slot31ButtonLT")
+	Spell_slot31ButtonF = Spell_slot31ButtonL:CreateFontString("Spell_slot31ButtonF")
+	Spell_slot31_AttachedSpell = nil
+	
+	Spell_slot32 = CreateFrame("Frame", "TrainingFrame_Spell_slot32", TrainingFrame, nil)
+	Spell_slot32Button = CreateFrame("Button", "TrainingFrame_Spell_slot32Button", Spell_slot32, nil)
+	Spell_slot32ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot32ButtonL", Spell_slot32, nil)
+	Spell_slot32ButtonLT = Spell_slot32ButtonL:CreateTexture("Spell_slot32ButtonLT")
+	Spell_slot32ButtonF = Spell_slot32ButtonL:CreateFontString("Spell_slot32ButtonF")
+	Spell_slot32_AttachedSpell = nil
+	
+	Spell_slot33 = CreateFrame("Frame", "TrainingFrame_Spell_slot33", TrainingFrame, nil)
+	Spell_slot33Button = CreateFrame("Button", "TrainingFrame_Spell_slot33Button", Spell_slot33, nil)
+	Spell_slot33ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot33ButtonL", Spell_slot33, nil)
+	Spell_slot33ButtonLT = Spell_slot33ButtonL:CreateTexture("Spell_slot33ButtonLT")
+	Spell_slot33ButtonF = Spell_slot33ButtonL:CreateFontString("Spell_slot33ButtonF")
+	Spell_slot33_AttachedSpell = nil
+	
+	Spell_slot34 = CreateFrame("Frame", "TrainingFrame_Spell_slot34", TrainingFrame, nil)
+	Spell_slot34Button = CreateFrame("Button", "TrainingFrame_Spell_slot34Button", Spell_slot34, nil)
+	Spell_slot34ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot34ButtonL", Spell_slot34, nil)
+	Spell_slot34ButtonLT = Spell_slot34ButtonL:CreateTexture("Spell_slot34ButtonLT")
+	Spell_slot34ButtonF = Spell_slot34ButtonL:CreateFontString("Spell_slot34ButtonF")
+	Spell_slot34_AttachedSpell = nil
+	
+	Spell_slot35 = CreateFrame("Frame", "TrainingFrame_Spell_slot35", TrainingFrame, nil)
+	Spell_slot35Button = CreateFrame("Button", "TrainingFrame_Spell_slot35Button", Spell_slot35, nil)
+	Spell_slot35ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot35ButtonL", Spell_slot35, nil)
+	Spell_slot35ButtonLT = Spell_slot35ButtonL:CreateTexture("Spell_slot35ButtonLT")
+	Spell_slot35ButtonF = Spell_slot35ButtonL:CreateFontString("Spell_slot35ButtonF")
+	Spell_slot35_AttachedSpell = nil
+	
+	Spell_slot36 = CreateFrame("Frame", "TrainingFrame_Spell_slot36", TrainingFrame, nil)
+	Spell_slot36Button = CreateFrame("Button", "TrainingFrame_Spell_slot36Button", Spell_slot36, nil)
+	Spell_slot36ButtonL = CreateFrame("Button", "TrainingFrame_Spell_slot36ButtonL", Spell_slot36, nil)
+	Spell_slot36ButtonLT = Spell_slot36ButtonL:CreateTexture("Spell_slot36ButtonLT")
+	Spell_slot36ButtonF = Spell_slot36ButtonL:CreateFontString("Spell_slot36ButtonF")
+	Spell_slot36_AttachedSpell = nil
+	
+	all_spell_slots = {
     {Spell_slot1, -300, -160}, {Spell_slot2, -220, -160}, {Spell_slot3, -140, -160}, {Spell_slot4, -60, -160}, {Spell_slot5, 20, -160}, {Spell_slot6, 100, -160}, 
     {Spell_slot7, -300, -260}, {Spell_slot8, -220, -260}, {Spell_slot9, -140, -260}, {Spell_slot10, -60, -260}, {Spell_slot11, 20, -260}, {Spell_slot12, 100, -260},
     {Spell_slot13, -300, -360}, {Spell_slot14, -220, -360}, {Spell_slot15, -140, -360}, {Spell_slot16, -60, -360}, {Spell_slot17, 20, -360}, {Spell_slot18, 100, -360}, 
     {Spell_slot19, -300, -460}, {Spell_slot20, -220, -460}, {Spell_slot21, -140, -460}, {Spell_slot22, -60, -460}, {Spell_slot23, 20, -460}, {Spell_slot24, 100, -460},
     {Spell_slot25, -300, -560}, {Spell_slot26, -220, -560}, {Spell_slot27, -140, -560}, {Spell_slot28, -60, -560}, {Spell_slot29, 20, -560}, {Spell_slot30, 100, -560},
     {Spell_slot31, -300, -660}, {Spell_slot32, -220, -660}, {Spell_slot33, -140, -660}, {Spell_slot34, -60, -660}, {Spell_slot35, 20, -660}, {Spell_slot36, 100, -660}}
-    
-    all_spell_slot_buttons = {Spell_slot1Button, Spell_slot2Button, Spell_slot3Button, Spell_slot4Button,
-    Spell_slot5Button, Spell_slot6Button, Spell_slot7Button, Spell_slot8Button,
-    Spell_slot9Button, Spell_slot10Button, Spell_slot11Button, Spell_slot12Button,
-    Spell_slot13Button, Spell_slot14Button, Spell_slot15Button, Spell_slot16Button,
-    Spell_slot17Button, Spell_slot18Button, Spell_slot19Button, Spell_slot20Button,
-    Spell_slot21Button, Spell_slot22Button, Spell_slot23Button, Spell_slot24Button,
-    Spell_slot25Button, Spell_slot26Button, Spell_slot27Button, Spell_slot28Button,
-    Spell_slot29Button, Spell_slot30Button, Spell_slot31Button, Spell_slot32Button,
-    Spell_slot33Button, Spell_slot34Button, Spell_slot35Button, Spell_slot36Button}
-    
-    all_learn_spell_buttons = {Spell_slot1ButtonL, Spell_slot2ButtonL, Spell_slot3ButtonL, Spell_slot4ButtonL,
-    Spell_slot5ButtonL, Spell_slot6ButtonL, Spell_slot7ButtonL, Spell_slot8ButtonL,
-    Spell_slot9ButtonL, Spell_slot10ButtonL, Spell_slot11ButtonL, Spell_slot12ButtonL,
-    Spell_slot13ButtonL, Spell_slot14ButtonL, Spell_slot15ButtonL, Spell_slot16ButtonL,
-    Spell_slot17ButtonL, Spell_slot18ButtonL, Spell_slot19ButtonL, Spell_slot20ButtonL,
-    Spell_slot21ButtonL, Spell_slot22ButtonL, Spell_slot23ButtonL, Spell_slot24ButtonL,
-    Spell_slot25ButtonL, Spell_slot26ButtonL, Spell_slot27ButtonL, Spell_slot28ButtonL,
-    Spell_slot29ButtonL, Spell_slot30ButtonL, Spell_slot31ButtonL, Spell_slot32ButtonL,
-    Spell_slot33ButtonL, Spell_slot34ButtonL, Spell_slot35ButtonL, Spell_slot36ButtonL}
-    
-    all_learn_spell_buttons_t = {Spell_slot1ButtonLT, Spell_slot2ButtonLT, Spell_slot3ButtonLT, Spell_slot4ButtonLT,
-    Spell_slot5ButtonLT, Spell_slot6ButtonLT, Spell_slot7ButtonLT, Spell_slot8ButtonLT,
-    Spell_slot9ButtonLT, Spell_slot10ButtonLT, Spell_slot11ButtonLT, Spell_slot12ButtonLT,
-    Spell_slot13ButtonLT, Spell_slot14ButtonLT, Spell_slot15ButtonLT, Spell_slot16ButtonLT,
-    Spell_slot17ButtonLT, Spell_slot19ButtonLT, Spell_slot18ButtonLT, Spell_slot20ButtonLT,
-    Spell_slot21ButtonLT, Spell_slot22ButtonLT, Spell_slot23ButtonLT, Spell_slot24ButtonLT,
-    Spell_slot25ButtonLT, Spell_slot26ButtonLT, Spell_slot27ButtonLT, Spell_slot28ButtonLT,
-    Spell_slot29ButtonLT, Spell_slot30ButtonLT, Spell_slot31ButtonLT, Spell_slot32ButtonLT,
-    Spell_slot33ButtonLT, Spell_slot34ButtonLT, Spell_slot35ButtonLT, Spell_slot36ButtonLT}
-    
-    all_learn_spell_buttons_f = {Spell_slot1ButtonF, Spell_slot2ButtonF, Spell_slot3ButtonF, Spell_slot4ButtonF,
-    Spell_slot5ButtonF, Spell_slot6ButtonF, Spell_slot7ButtonF, Spell_slot8ButtonF,
-    Spell_slot9ButtonF, Spell_slot10ButtonF, Spell_slot11ButtonF, Spell_slot12ButtonF,
-    Spell_slot13ButtonF, Spell_slot14ButtonF, Spell_slot15ButtonF, Spell_slot16ButtonF,
-    Spell_slot17ButtonF, Spell_slot18ButtonF, Spell_slot19ButtonF, Spell_slot20ButtonF,
-    Spell_slot21ButtonF, Spell_slot22ButtonF, Spell_slot23ButtonF, Spell_slot24ButtonF,
-    Spell_slot25ButtonF, Spell_slot26ButtonF, Spell_slot27ButtonF, Spell_slot28ButtonF,
-    Spell_slot29ButtonF, Spell_slot30ButtonF, Spell_slot31ButtonF, Spell_slot32ButtonF,
-    Spell_slot33ButtonF, Spell_slot34ButtonF, Spell_slot35ButtonF, Spell_slot36ButtonF}
-    
-    all_attached_spells = {Spell_slot1_AttachedSpell, Spell_slot2_AttachedSpell, Spell_slot3_AttachedSpell, Spell_slot4_AttachedSpell,
-    Spell_slot5_AttachedSpell, Spell_slot6_AttachedSpell, Spell_slot7_AttachedSpell, Spell_slot8_AttachedSpell,
-    Spell_slot9_AttachedSpell, Spell_slot10_AttachedSpell, Spell_slot11_AttachedSpell, Spell_slot12_AttachedSpell,
-    Spell_slot13_AttachedSpell, Spell_slot14_AttachedSpell, Spell_slot15_AttachedSpell, Spell_slot16_AttachedSpell,
-    Spell_slot17_AttachedSpell, Spell_slot18_AttachedSpell, Spell_slot19_AttachedSpell, Spell_slot20_AttachedSpell,
-    Spell_slot21_AttachedSpell, Spell_slot22_AttachedSpell, Spell_slot23_AttachedSpell, Spell_slot24_AttachedSpell,
-    Spell_slot25_AttachedSpell, Spell_slot26_AttachedSpell, Spell_slot27_AttachedSpell, Spell_slot28_AttachedSpell,
-    Spell_slot29_AttachedSpell, Spell_slot30_AttachedSpell, Spell_slot31_AttachedSpell, Spell_slot32_AttachedSpell,
-    Spell_slot33_AttachedSpell, Spell_slot34_AttachedSpell, Spell_slot35_AttachedSpell, Spell_slot36_AttachedSpell}
-    
-    for i,v in ipairs(all_spell_slots) do
+	
+	all_spell_slot_buttons = {Spell_slot1Button, Spell_slot2Button, Spell_slot3Button, Spell_slot4Button,
+	Spell_slot5Button, Spell_slot6Button, Spell_slot7Button, Spell_slot8Button,
+	Spell_slot9Button, Spell_slot10Button, Spell_slot11Button, Spell_slot12Button,
+	Spell_slot13Button, Spell_slot14Button, Spell_slot15Button, Spell_slot16Button,
+	Spell_slot17Button, Spell_slot18Button, Spell_slot19Button, Spell_slot20Button,
+	Spell_slot21Button, Spell_slot22Button, Spell_slot23Button, Spell_slot24Button,
+	Spell_slot25Button, Spell_slot26Button, Spell_slot27Button, Spell_slot28Button,
+	Spell_slot29Button, Spell_slot30Button, Spell_slot31Button, Spell_slot32Button,
+	Spell_slot33Button, Spell_slot34Button, Spell_slot35Button, Spell_slot36Button}
+	
+	all_learn_spell_buttons = {Spell_slot1ButtonL, Spell_slot2ButtonL, Spell_slot3ButtonL, Spell_slot4ButtonL,
+	Spell_slot5ButtonL, Spell_slot6ButtonL, Spell_slot7ButtonL, Spell_slot8ButtonL,
+	Spell_slot9ButtonL, Spell_slot10ButtonL, Spell_slot11ButtonL, Spell_slot12ButtonL,
+	Spell_slot13ButtonL, Spell_slot14ButtonL, Spell_slot15ButtonL, Spell_slot16ButtonL,
+	Spell_slot17ButtonL, Spell_slot18ButtonL, Spell_slot19ButtonL, Spell_slot20ButtonL,
+	Spell_slot21ButtonL, Spell_slot22ButtonL, Spell_slot23ButtonL, Spell_slot24ButtonL,
+	Spell_slot25ButtonL, Spell_slot26ButtonL, Spell_slot27ButtonL, Spell_slot28ButtonL,
+	Spell_slot29ButtonL, Spell_slot30ButtonL, Spell_slot31ButtonL, Spell_slot32ButtonL,
+	Spell_slot33ButtonL, Spell_slot34ButtonL, Spell_slot35ButtonL, Spell_slot36ButtonL}
+	
+	all_learn_spell_buttons_t = {Spell_slot1ButtonLT, Spell_slot2ButtonLT, Spell_slot3ButtonLT, Spell_slot4ButtonLT,
+	Spell_slot5ButtonLT, Spell_slot6ButtonLT, Spell_slot7ButtonLT, Spell_slot8ButtonLT,
+	Spell_slot9ButtonLT, Spell_slot10ButtonLT, Spell_slot11ButtonLT, Spell_slot12ButtonLT,
+	Spell_slot13ButtonLT, Spell_slot14ButtonLT, Spell_slot15ButtonLT, Spell_slot16ButtonLT,
+	Spell_slot17ButtonLT, Spell_slot19ButtonLT, Spell_slot18ButtonLT, Spell_slot20ButtonLT,
+	Spell_slot21ButtonLT, Spell_slot22ButtonLT, Spell_slot23ButtonLT, Spell_slot24ButtonLT,
+	Spell_slot25ButtonLT, Spell_slot26ButtonLT, Spell_slot27ButtonLT, Spell_slot28ButtonLT,
+	Spell_slot29ButtonLT, Spell_slot30ButtonLT, Spell_slot31ButtonLT, Spell_slot32ButtonLT,
+	Spell_slot33ButtonLT, Spell_slot34ButtonLT, Spell_slot35ButtonLT, Spell_slot36ButtonLT}
+	
+	all_learn_spell_buttons_f = {Spell_slot1ButtonF, Spell_slot2ButtonF, Spell_slot3ButtonF, Spell_slot4ButtonF,
+	Spell_slot5ButtonF, Spell_slot6ButtonF, Spell_slot7ButtonF, Spell_slot8ButtonF,
+	Spell_slot9ButtonF, Spell_slot10ButtonF, Spell_slot11ButtonF, Spell_slot12ButtonF,
+	Spell_slot13ButtonF, Spell_slot14ButtonF, Spell_slot15ButtonF, Spell_slot16ButtonF,
+	Spell_slot17ButtonF, Spell_slot18ButtonF, Spell_slot19ButtonF, Spell_slot20ButtonF,
+	Spell_slot21ButtonF, Spell_slot22ButtonF, Spell_slot23ButtonF, Spell_slot24ButtonF,
+	Spell_slot25ButtonF, Spell_slot26ButtonF, Spell_slot27ButtonF, Spell_slot28ButtonF,
+	Spell_slot29ButtonF, Spell_slot30ButtonF, Spell_slot31ButtonF, Spell_slot32ButtonF,
+	Spell_slot33ButtonF, Spell_slot34ButtonF, Spell_slot35ButtonF, Spell_slot36ButtonF}
+	
+	all_attached_spells = {Spell_slot1_AttachedSpell, Spell_slot2_AttachedSpell, Spell_slot3_AttachedSpell, Spell_slot4_AttachedSpell,
+	Spell_slot5_AttachedSpell, Spell_slot6_AttachedSpell, Spell_slot7_AttachedSpell, Spell_slot8_AttachedSpell,
+	Spell_slot9_AttachedSpell, Spell_slot10_AttachedSpell, Spell_slot11_AttachedSpell, Spell_slot12_AttachedSpell,
+	Spell_slot13_AttachedSpell, Spell_slot14_AttachedSpell, Spell_slot15_AttachedSpell, Spell_slot16_AttachedSpell,
+	Spell_slot17_AttachedSpell, Spell_slot18_AttachedSpell, Spell_slot19_AttachedSpell, Spell_slot20_AttachedSpell,
+	Spell_slot21_AttachedSpell, Spell_slot22_AttachedSpell, Spell_slot23_AttachedSpell, Spell_slot24_AttachedSpell,
+	Spell_slot25_AttachedSpell, Spell_slot26_AttachedSpell, Spell_slot27_AttachedSpell, Spell_slot28_AttachedSpell,
+	Spell_slot29_AttachedSpell, Spell_slot30_AttachedSpell, Spell_slot31_AttachedSpell, Spell_slot32_AttachedSpell,
+	Spell_slot33_AttachedSpell, Spell_slot34_AttachedSpell, Spell_slot35_AttachedSpell, Spell_slot36_AttachedSpell}
+	
+	for i,v in ipairs(all_spell_slots) do
         v[1]:SetSize(50, 50)
         v[1]:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\buttonbackground",
@@ -3598,11 +3598,11 @@ TrainingFrame:SetScript("OnUpdate" , function()
         all_learn_spell_buttons[i]:SetFontString(v)
         all_learn_spell_buttons[i]:SetText("|cffFFFFFFLearn|r")
     end
-        
-        
-    -- ####################################### Talents Frame ############################## 
+		
+		
+	-- ####################################### Talents Frame ##############################	
 
-     --scrollframe 
+	 --scrollframe 
     scrollframe = CreateFrame("ScrollFrame", nil, TrainingFrame) 
     scrollframe:SetPoint("TOPLEFT", 95, -135) 
     scrollframe:SetSize(500, 650)
@@ -3629,11 +3629,11 @@ TrainingFrame:SetScript("OnUpdate" , function()
     TrainingFrame.scrollbar = scrollbar 
     scrollbar:Hide()
     
-    
-    
-     
-    
-    -- backgrounds
+	
+	
+	 
+	
+	-- backgrounds
     top_left_bg = CreateFrame("Frame", nil, TrainingFrame) 
     top_left_bg:SetSize(305, 402) 
     top_left_bg:SetPoint("TOPLEFT", 90, -138)
@@ -3669,66 +3669,66 @@ TrainingFrame:SetScript("OnUpdate" , function()
     bottom_right_bg_t:SetTexture("Interface\\TalentFrame\\MageFire-BottomRight") 
     bottom_right_bg.texture = bottom_right_bg_t
     bottom_right_bg:Hide()
-    
-    --content frame 
-    content = CreateFrame("Frame", nil, scrollframe) 
-    content:SetSize(500, 1320)  
-    scrollframe.content = content 
-    content:Hide()
-     
-    scrollframe:SetScrollChild(content)
-    
-    all_talent_slots = {}
-    
-    all_talent_slot_buttons = {}
-    
-    all_learn_talent_buttons = {}
-    
-    all_learn_talent_buttons_t = {}
-    
-    all_learn_talent_buttons_f = {}
-    
-    all_attached_talent = {}
-    
-    all_talent_FrameNumber = {}
-    
-    all_talent_FNF = {}
-    
-    button_on_off_state = {} 
-    
-    local max_number_of_buttons = 44
-    
-    local button_making = 1
-    
-    repeat
-    
-        local talent_slot = CreateFrame("Frame", "TrainingFrame_talent_slot1", content, nil)
-        table.insert(all_talent_slots, talent_slot)
-        local talent_slotButton = CreateFrame("Button", "TrainingFrame_talent_slotButton", talent_slot, nil)
-        table.insert(all_talent_slot_buttons, talent_slotButton)
-        local talent_slotButtonL = CreateFrame("Button", "TrainingFrame_talent_slotButtonL", talent_slot, nil)
-        table.insert(all_learn_talent_buttons, talent_slotButtonL)
-        local talent_slotButtonLT = talent_slotButtonL:CreateTexture("talent_slotButtonLT")
-        table.insert(all_learn_talent_buttons_t, talent_slotButtonLT)
-        local talent_slotButtonF = talent_slotButtonL:CreateFontString("talent_slotButtonF")
-        table.insert(all_learn_talent_buttons_f, talent_slotButtonF)
-        local talent_slot_AttachedTalent = nil
-        table.insert(all_attached_talent, talent_slot_AttachedTalent)
-        local talent_slotFrameNumber = CreateFrame("Button", "TrainingFrame_talent_slotFrameNumber", talent_slot, nil)
-        table.insert(all_talent_FrameNumber, talent_slotFrameNumber)
-        local talent_slotFNF = talent_slotFrameNumber:CreateFontString("talent_stotFNF")
-        table.insert(all_talent_FNF, talent_slotFNF)
-        table.insert(button_on_off_state, false)
-        
-    
-        button_making = button_making + 1
-    until(button_making > max_number_of_buttons)
-    
+	
+	--content frame 
+	content = CreateFrame("Frame", nil, scrollframe) 
+	content:SetSize(500, 1320)  
+	scrollframe.content = content 
+	content:Hide()
+	 
+	scrollframe:SetScrollChild(content)
+	
+	all_talent_slots = {}
+	
+	all_talent_slot_buttons = {}
+	
+	all_learn_talent_buttons = {}
+	
+	all_learn_talent_buttons_t = {}
+	
+	all_learn_talent_buttons_f = {}
+	
+	all_attached_talent = {}
+	
+	all_talent_FrameNumber = {}
+	
+	all_talent_FNF = {}
+	
+	button_on_off_state = {} 
+	
+	local max_number_of_buttons = 44
+	
+	local button_making = 1
+	
+	repeat
+	
+		local talent_slot = CreateFrame("Frame", "TrainingFrame_talent_slot1", content, nil)
+		table.insert(all_talent_slots, talent_slot)
+		local talent_slotButton = CreateFrame("Button", "TrainingFrame_talent_slotButton", talent_slot, nil)
+		table.insert(all_talent_slot_buttons, talent_slotButton)
+		local talent_slotButtonL = CreateFrame("Button", "TrainingFrame_talent_slotButtonL", talent_slot, nil)
+		table.insert(all_learn_talent_buttons, talent_slotButtonL)
+		local talent_slotButtonLT = talent_slotButtonL:CreateTexture("talent_slotButtonLT")
+		table.insert(all_learn_talent_buttons_t, talent_slotButtonLT)
+		local talent_slotButtonF = talent_slotButtonL:CreateFontString("talent_slotButtonF")
+		table.insert(all_learn_talent_buttons_f, talent_slotButtonF)
+		local talent_slot_AttachedTalent = nil
+		table.insert(all_attached_talent, talent_slot_AttachedTalent)
+		local talent_slotFrameNumber = CreateFrame("Button", "TrainingFrame_talent_slotFrameNumber", talent_slot, nil)
+		table.insert(all_talent_FrameNumber, talent_slotFrameNumber)
+		local talent_slotFNF = talent_slotFrameNumber:CreateFontString("talent_stotFNF")
+		table.insert(all_talent_FNF, talent_slotFNF)
+		table.insert(button_on_off_state, false)
+		
+	
+		button_making = button_making + 1
+	until(button_making > max_number_of_buttons)
+	
 
-    
-    
-    
-     all_talent_coords = {{-165, -83}, {-40, -83}, {85, -83}, {210, -83},
+	
+	
+	
+	 all_talent_coords = {{-165, -83}, {-40, -83}, {85, -83}, {210, -83},
                          {-165, -191}, {-40, -191}, {85, -191}, {210, -191},
                          {-165, -299}, {-40, -299}, {85, -299}, {210, -299},
                          {-165, -407}, {-40, -407}, {85, -407}, {210, -407},
@@ -3739,9 +3739,9 @@ TrainingFrame:SetScript("OnUpdate" , function()
                          {-165, -947}, {-40, -947}, {85, -947}, {210, -947},
                          {-165, -1055}, {-40, -1055}, {85, -1055}, {210, -1055},
                          {-165, -1163}, {-40, -1163}, {85, -1163}, {210, -1163}}
-    
-    
-    for i,v in ipairs(all_talent_slots) do
+	
+	
+	for i,v in ipairs(all_talent_slots) do
         v:SetSize(56, 56)
         v:SetBackdrop({
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\progress\\talent_bg",
