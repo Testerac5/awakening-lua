@@ -3033,6 +3033,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 
     --unlearn spell part--
         function unlearn_spell(self)
+             if (CanBeUnlearned()) then
        PlaySound("igMainMenuOptionCheckBoxOn")
        local got_spell = nil
        local got_index
@@ -3050,6 +3051,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
       if got_spell ~= nil then
        AIO.Handle("sideBar", "UnLearnThisSpell", got_spell, got_index, class,spec)
        end
+   end
     end
 
     function MyHandlers.ChangeLearnButtonBack(player, i, spellid,cost_one,cost_two)
