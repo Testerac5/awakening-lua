@@ -4,6 +4,7 @@ local AIO = AIO or require("AIO")
 local MyHandlers = AIO.AddHandlers("sideBar", {})
 local ghost = {8326}
 
+local scrollitem = 1101243
 local Reset_Level = {
     [0] = {2500, 2700, 105},
     [10] = {5000, 7500, 150},
@@ -733,7 +734,7 @@ function MyHandlers.UnLearnThisSpell(player, got_spell, i,class,spec)
 	end
 	end
 
-	if (not(spellID)) or (LevelReq > player:GetLevel()) or (not(player:HasSpell(spellID))) then
+	if (not(spellID)) or (LevelReq > player:GetLevel()) or (not(player:HasItem(scrollitem)) or (not(player:HasSpell(spellID))) then
 		successful = false
 	end
 	
@@ -741,6 +742,7 @@ function MyHandlers.UnLearnThisSpell(player, got_spell, i,class,spec)
 		player:SendBroadcastMessage("You can't unlearn this spell!")
 		
 	else
+		player:RemoveItem(scrollitem,1)
 		player:RemoveSpell(spellID)
 		if (currency_one) then
 		player:AddItem( spell_essence, currency_one )
