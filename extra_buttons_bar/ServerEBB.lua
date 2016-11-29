@@ -739,7 +739,7 @@ function MyHandlers.UnLearnThisSpell(player, got_spell, i,class,spec)
 	end
 	
 	if successful == false then
-		player:SendBroadcastMessage("You can't unlearn this spell!")
+		--player:SendBroadcastMessage("You can't unlearn this spell!")
 		
 	else
 		player:RemoveItem(scrollitem,1)
