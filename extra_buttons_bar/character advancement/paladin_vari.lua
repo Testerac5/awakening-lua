@@ -4,12 +4,12 @@
 -- 																															column, talentId}
 -- talents tab variables refers to talenttab dbc
 
-paladin_holy_spells = {{635, 2, 0, 1}, {20154, 2, 0, 1}, {1152, 2, 0, 8}, {633, 2, 0, 10}, {19742, 2, 0, 14},
+paladin_holy_spells = {{635, 2, 0, 1}, {20154, 2, 0, 1}, {1152, 2, 0, 8}, {633, 2, 0, 10}, {7328, 2, 0, 12}, {19742, 2, 0, 14},
 {26573, 2, 0, 20}, {879, 2, 0, 20}, {19750, 2, 0, 20}, {5502, 2, 0 ,20}, {19746, 2, 0, 22}, {10326, 2, 0, 24},
 {20165, 2, 0, 30}, {20166, 2, 0, 38}, {4987, 2, 0, 42}, {2812, 2, 0, 50}, {54428, 2, 0, 71},
 {53601, 2, 0, 80}}
 
-paladin_holy_spells_count = 17
+paladin_holy_spells_count = 18
 paladin_holy_bgs = {"Interface\\TalentFrame\\PaladinHoly-TopLeft", "Interface\\TalentFrame\\PaladinHoly-TopRight",
 "Interface\\TalentFrame\\PaladinHoly-BottomLeft", "Interface\\TalentFrame\\PaladinHoly-BottomRight"}
 
