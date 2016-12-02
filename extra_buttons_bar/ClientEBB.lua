@@ -3095,7 +3095,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
         TrainingFrame.Text_Ability = TrainingFrameBorder:CreateFontString()
 TrainingFrame.Text_Ability:SetFontObject(GameFontNormal)
 TrainingFrame.Text_Ability:SetPoint("BOTTOM", TrainingFrame,  75, 67);
-TrainingFrame.Text_Ability:SetFont("Fonts\\FRIZQT__.TTF", 14, "OUTLINE")
+TrainingFrame.Text_Ability:SetFont("Fonts\\FRIZQT__.TTF", 12)
 local itemCount = GetItemCount(383080) or 0
 local itemCount2 = GetItemCount(383080) or 0
 TrainingFrame.Text_Ability:SetText("|cffE1AB18AE: |cffFFFFFF"..itemCount.." |cffE1AB18TE: |cffFFFFFF"..itemCount2)
@@ -3212,7 +3212,7 @@ DisplayTalentsButton:Disable()
 TrainingFrame:SetScript("OnUpdate" , function() 
                     local itemCount_t = GetItemCount(383080) or 0
     local itemCount2_t = GetItemCount(383081) or 0
-    TrainingFrame.Text_Ability:SetText("|cffE1AB18AE: |cffFFFFFF"..itemCount_t.." |cffE1AB18TE: |cffFFFFFF"..itemCount2_t)
+    TrainingFrame.Text_Ability:SetText("|cffFFFFFF"..itemCount_t.." |cffE1AB18|TInterface\\Icons\\inv_custom_abilityessence.blp:15:15:0:0|t|r    |cffFFFFFF"..itemCount2_t.." |cffE1AB18|TInterface\\Icons\\inv_custom_talentessence.blp:15:15:0:0|t |cffFFFFFF")
 
                 if not(DisplaySpellsButton:IsVisible()) then
             TrainingFrame_SelectedTitle_Stars1:Hide()
