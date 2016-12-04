@@ -461,6 +461,7 @@ function MyHandlers.ResetSpells(player)
 			local temp_cost, temp_t_mult, temp_a_mult = GetMoneyForReset(player, 1)
 			resetFrame_Refresh(AIO.Msg(), player,temp_t_mult, temp_a_mult+1):Send(player)
 			--
+			player:CastSpell(player, 65632)
 			player:SendBroadcastMessage("Refund Complete for Spells")
 		else
 			player:SendBroadcastMessage("You are missing the required token to do this!")
@@ -525,6 +526,7 @@ function MyHandlers.ResetTalents(player)
 			local temp_cost, temp_t_mult, temp_a_mult = GetMoneyForReset(player, 1)
 			resetFrame_Refresh(AIO.Msg(), player,temp_t_mult+1, temp_a_mult):Send(player)
 			--
+			player:CastSpell(player, 65632)
 			player:SendBroadcastMessage("Refund Complete for talents")
 		else
 			player:SendBroadcastMessage("You are missing the required token to do this!")
@@ -696,6 +698,7 @@ function MyHandlers.LearnThisSpell(player, got_spell, i,class,spec)
 	end
 	
 	if player_has_currency == true then
+		player:CastSpell(player, 966006)
 		player:LearnSpell(spellID)
 	end
 	
@@ -912,6 +915,7 @@ function MyHandlers.LearnThisTalent(player, attached_talent, indexAt,ClassSpec)
 	end
 	
 	if player_has_currency == true then
+		player:CastSpell(player, 966006)
 		player:LearnSpell(spellID)
 	end
 	
