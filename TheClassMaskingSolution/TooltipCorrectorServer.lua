@@ -13,10 +13,21 @@ end
 function tTHandler.CostGrabber(player, spellid)
 	local y = player:GetSpellCost(spellid)
 	local x = player:GetSpellCooldown(spellid)
-	AIO.Handle(player, "TooltipAIO", "ReceiveCostGrab", y)
+	local z = player:GetSpellRange(spellid)
+	local w = player:GetSpellPowerType(spellid)
+	local v = player:GetSpellCastTime(spellid)
+
+	AIO.Handle(player, "TooltipAIO", "ReceiveCostGrab", y, w)
 	AIO.Handle(player, "TooltipAIO", "ReceiveCDGrab", x)
+	AIO.Handle(player, "TooltipAIO", "ReceiveRangeGrab", z)
+	AIO.Handle(player, "TooltipAIO", "ReceiveCastTime", v)
 	AIO.Handle(player, "TooltipAIO", "UpdateTooltips")
 end
 
+function tTHandler.SendRefresh(event, player, spellid)
+	AIO.Handle(player, "TooltipAIO", "RefreshTable")
+end
 
-RegisterPlayerEvent(42, SpellCostOnCommand)
+
+RegisterPlayerEvent(45, tTHandler.SendRefresh)
+

@@ -14,6 +14,10 @@ local spellCheck = false
 
 local modCost
 
+local modCastTime
+
+local modRange
+
 local modCooldown
 
 local tempNum
@@ -96,23 +100,24 @@ local TaggedSpells =
 --so does Fire Blast
 }
 
---format: [templateNumber] = {powerLine, powerType, cooldownLine, rangeLine}
+--format: [templateNumber] = {powerLine, powerType, cooldownLine, rangeLine, castLine}
 --powerLine tells which line cost is located. powerType is the type of resource.
 --cooldownLine is which line cooldowns are located.
 local TemplateTable = 
 {
-	[1] = {0, 0, 6, 3},
-	[2] = {3, 1, 0, 4},
-	[3] = {3, 1, 6, 0},
-	[4] = {3, 1, 0, 0},
-	[5] = {0, 0, 0, 3},
-	[6] = {3, 1, 6, 4}
+	[1] = {0, 0, 6, 3, 0},
+	[2] = {3, 1, 0, 4, 0},
+	[3] = {3, 1, 6, 0, 0},
+	[4] = {3, 1, 0, 0, 0},
+	[5] = {0, 0, 0, 3, 0},
+	[6] = {3, 1, 6, 4, 0},
+	[7] = {0, 0, 6, 3, 5}
 --This reads as "Template Number 1 has a Mana Cost value on line 3, and a cooldown on line 6."
 }
 
 --Don't touch this table if you're editing tooltips, it's used for optimization and data storing.
 --data table for tooltip correction
---format [spellid] = {powerLine, powerVal, powerType, cooldownLine, CD val, rangeLine, rangeVal, updateVal?}
+--format [spellid] = {powerLine, powerVal, powerType, cooldownLine, CD val, rangeLine, rangeVal, updateVal?, castLine, castVal}
 local dataTable = {}
 
 
@@ -131,6 +136,7 @@ local function RequestIDCheck(spellid)
 	AIO.Handle("TooltipAIO", "HasSpellID", spellid)
 
 end
+
 
 function tTHandler.ReceiveIDCheck(player, check)
 	spellCheck = check
@@ -155,10 +161,10 @@ function RequestSpellCost(spellid)
 
 		--print("Fresh spell detected. Need to update.")
 		AIO.Handle("TooltipAIO", "CostGrabber", spellid)
-		AIO.Handle("TooltipAIO", "CooldownGrabber", spellid)
+		--AIO.Handle("TooltipAIO", "CooldownGrabber", spellid)
 		local skipCheck = true
 		local tmpTemplate = TemplateTable[TaggedSpells[spellid]]
-		local insertFmt = {tmpTemplate[1], 0, tmpTemplate[2], tmpTemplate[3], 0, tmpTemplate[4], 0, true}
+		local insertFmt = {tmpTemplate[1], 0, tmpTemplate[2], tmpTemplate[3], 0, tmpTemplate[4], 0, true, tmpTemplate[5], 0}
 		dataTable[spellid] = insertFmt
 		--table.insert(dataTable[spellid], insertFmt)
 		--print(dataTable[spellid][8])
@@ -168,11 +174,20 @@ function RequestSpellCost(spellid)
 
 end
 
-function tTHandler.ReceiveCostGrab(player, cost)
+function tTHandler.RefreshTable(player)
+
+	for k,v in pairs(dataTable) do 
+		dataTable[k][8] = true
+	end
+end
+
+function tTHandler.ReceiveCostGrab(player, cost, powerType)
 	--print(cost)
+
 	modCost = cost
 	dataTable[TipID][2] = modCost
-	--print("ReceiveCostGrab Fired")
+	dataTable[TipID][3] = powerType
+--print("ReceiveCostGrab Fired")
 end
 
 function tTHandler.ReceiveCDGrab(player, cooldown)
@@ -180,6 +195,17 @@ function tTHandler.ReceiveCDGrab(player, cooldown)
 	modCooldown = (cooldown / 1000)
 	dataTable[TipID][5] = modCooldown
 	--print("ReceiveCDGrab Fired")	
+end
+
+function tTHandler.ReceiveRangeGrab(player, range)
+
+	modRange = range
+	dataTable[TipID][7] = modRange
+end
+
+function tTHandler.ReceiveCastTime(player, castTime)
+	modCastTime = castTime
+	dataTable[TipID][10] = modCastTime
 end
 
 local function EnumerateTooltipLines_helper(...)
@@ -205,15 +231,42 @@ end
 
 function tTHandler.UpdateTooltips()
 
+	local powerString
+	if(dataTable[TipID][3] == 0) then
+	powerString = " Mana"
+	elseif(dataTable[TipID][3] == 1) then
+	powerString = " Rage"
+	elseif(dataTable[TipID][3] == 2) then 
+	powerString = " Focus"
+	elseif(dataTable[TipID][3] == 3) then 
+	powerString = " Energy"
+	elseif(dataTable[TipID][3] > 8) then
+	powerString = " Health"	
+	end
+	
+
 
 	for x = 10, 35 do 
 
 		if(x == (dataTable[TipID][1] + 9)) then
-			tab[x] = dataTable[TipID][2] .. " Mana"
+			if(dataTable[TipID][3] == 1) then 
+				tab[x] = (dataTable[TipID][2] / 10) .. powerString
+			else 
+				tab[x] = dataTable[TipID][2] .. powerString
+			end
+
 		end
 
 		if(x == (dataTable[TipID][4] + 9)) then
 			tab[x] = dataTable[TipID][5] .. " sec cooldown"
+		end
+
+		if(x == dataTable[TipID][6] + 9) then
+			tab[x] = dataTable[TipID][7] .. " yds"
+		end
+
+		if(x == dataTable[TipID][9] + 9) then 
+			tab[x] = (dataTable[TipID][10] / 1000) .. " sec cast"
 		end
 	
 	end
@@ -244,20 +297,38 @@ end
 
 function locUpdateTooltips() 
 
+	local powerString
+	if(dataTable[TipID][3] == 0) then
+		powerString = " Mana"
+	elseif(dataTable[TipID][3] == 1) then
+		powerString = " Rage"
+	end
+	
+
 	for x = 10, 35 do 
-		if(x == dataTable[TipID][1] + 9) then
-			--TODO: read the powertype
-			tab[x] = dataTable[TipID][2] .. " Mana"
+
+		if(x == (dataTable[TipID][1] + 9)) then
+			if(dataTable[TipID][3] == 1) then 
+				tab[x] = (dataTable[TipID][2] / 10) .. powerString
+			else 
+				tab[x] = dataTable[TipID][2] .. powerString
+			end
+
 		end
 
-		if(x == dataTable[TipID][4] + 9) then
+		if(x == (dataTable[TipID][4] + 9)) then
 			tab[x] = dataTable[TipID][5] .. " sec cooldown"
 		end
+
+		if(x == dataTable[TipID][6] + 9) then
+			tab[x] = dataTable[TipID][7] .. " yds"
+		end
 	
+		if(x == dataTable[TipID][9] + 9) then 
+			tab[x] = (dataTable[TipID][10] / 1000) .. " sec cast"
+		end
 	end
 
-
-	
 	local i = 10
 	GameTooltip:ClearLines ()
 
