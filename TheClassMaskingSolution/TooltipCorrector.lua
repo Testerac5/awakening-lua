@@ -26,6 +26,8 @@ local pTemplateTable
 
 local skipCheck
 
+currentlyProcessing = false
+
 
 --TODO: Polish passes on spell entries
 --TODO: Deal with "request interference"
@@ -1757,19 +1759,16 @@ function RequestSpellCost(spellid)
 		else 
 			--print("no need to updates values")
 			skipCheck = false
-		--locUpdateTooltips()
 		end	
 	else
 
-		--print("Fresh spell detected. Need to update.")
 		AIO.Handle("TooltipAIO", "CostGrabber", spellid)
-		--AIO.Handle("TooltipAIO", "CooldownGrabber", spellid)
+
 		local skipCheck = true
 		local tmpTemplate = TemplateTable[TaggedSpells[spellid]]
 		local insertFmt = {tmpTemplate[1], 0, tmpTemplate[2], tmpTemplate[3], 0, tmpTemplate[4], 0, true, tmpTemplate[5], 0}
 		dataTable[spellid] = insertFmt
-		--table.insert(dataTable[spellid], insertFmt)
-		--print(dataTable[spellid][8])
+
 
 		dataTable[spellid][8] = false
 	end
@@ -1890,11 +1889,12 @@ function tTHandler.UpdateTooltips()
 		end
 	end
 	GameTooltip:Show()
-local o = 10
-while o <= 35 do
-	tab[o] = nil
-	o = o + 1
-end
+	currentlyProcessing = false
+	local o = 10
+	while o <= 35 do
+		tab[o] = nil
+		o = o + 1
+	end
 end
 
 function locUpdateTooltips() 
@@ -1904,6 +1904,12 @@ function locUpdateTooltips()
 		powerString = " Mana"
 	elseif(dataTable[TipID][3] == 1) then
 		powerString = " Rage"
+	elseif(dataTable[TipID][3] == 2) then 
+		powerString = " Focus"
+	elseif(dataTable[TipID][3] == 3) then 
+		powerString = " Energy"
+	elseif(dataTable[TipID][3] > 8) then
+		powerString = " Health"	
 	end
 	
 
@@ -1927,7 +1933,11 @@ function locUpdateTooltips()
 		end
 	
 		if(x == dataTable[TipID][9] + 9) then 
-			tab[x] = (dataTable[TipID][10] / 1000) .. " sec cast"
+			if(dataTable[TipID][10] == 0) then 
+				tab[x] = "Instant cast"
+			else 
+				tab[x] = (dataTable[TipID][10] / 1000) .. " sec cast"
+			end
 		end
 	end
 
@@ -1947,7 +1957,7 @@ function locUpdateTooltips()
 		end
 	end
 	GameTooltip:Show()
-
+	currentlyProcessing = false
 	local o = 10
 	while o <= 35 do
 		tab[o] = nil
@@ -1966,21 +1976,28 @@ end
 
 
 local function ModifyTip ()
-	if(GameTooltip:GetSpell ()) then
-		GetID()
-		if(TaggedSpells[TipID]) then 
-			GetTipNum()
-			GetCorrection(TipID)
+	if(currentlyProcessing == false) then 
+		currentlyProcessing = true
+		if(GameTooltip:GetSpell ()) then
+			GetID()
+			if(TaggedSpells[TipID]) then 
+				GetTipNum()
+				GetCorrection(TipID)
 
-			EnumerateTooltipLines(GameTooltip)
-			RequestSpellCost(TipID)
-
-			if((dataTable[TipID][8] == false) and (skipCheck == false)) then 
-				locUpdateTooltips()
+				EnumerateTooltipLines(GameTooltip)
+				RequestSpellCost(TipID)
+				if((dataTable[TipID][8] == false) and (skipCheck == false)) then 
+					locUpdateTooltips()
+				end
+			else 
+			currentlyProcessing = false
 			end
-
+		else 
+		currentlyProcessing = false
 		end
+	elseif(not GameTooltip:GetSpell()) then
+		currentlyProcessing = false
 	end
 end
 
-GameTooltip:SetScript("OnShow", ModifyTip)
+GameTooltip:HookScript("OnShow", ModifyTip)
