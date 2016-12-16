@@ -69,7 +69,7 @@ local function EntropyPvP(event, pKiller, pKilled)
 			--if (pKilled:GetGuildName()~=nil) then
 				--killedguild_name = " of"..pkilled:GetGuildName()..""
 			--end
-			if (((pKiller:GetLevel()-pKilled:GetLevel())<=leveldiff) and ((pKiller:GetLevel()-pKilled:GetLevel())>=(leveldiff * -1)) and ((pKilled:HasAura(2479) == true))) then		
+			if (((pKiller:GetLevel()-pKilled:GetLevel())<=leveldiff) and ((pKiller:GetLevel()-pKilled:GetLevel())>=(leveldiff * -1)) and ((pKilled:HasAura(2479) == false))) then		
 				local pKilledGUID = pKilled:GetGUIDLow()
 				local pKillerGUID = pKiller:GetGUIDLow()
 				local x,y,z,o = pKilled:GetX(),pKilled:GetY(),pKilled:GetZ(),pKilled:GetO()
