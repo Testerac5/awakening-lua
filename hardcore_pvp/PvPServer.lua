@@ -57,7 +57,8 @@ local function EntropyPvP(event, pKiller, pKilled)
 		leveldiff = 6
 	end
 	if not (pKilled == pKiller) then
-		if (playerdeath==true and check_safe == false and instanceID == 0 and (pKilled:HasAura(2479) == false)) then
+		if pKilled:HasAura(2479) == false then
+		if (playerdeath==true and check_safe == false and instanceID == 0) then
 			local killed_color = ClassColorCodes[pKilled:GetClass()]
 			local killer_color = ClassColorCodes[pKiller:GetClass()]
 			local killerguild_name = ", a Lone Wolf"
@@ -136,6 +137,7 @@ local function EntropyPvP(event, pKiller, pKilled)
 
 	else
 		pKilled:SendBroadcastMessage("You have commited suicide, none of your items were lost.")
+	end
 	end
 end
 
