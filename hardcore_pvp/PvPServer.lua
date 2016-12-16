@@ -57,87 +57,88 @@ local function EntropyPvP(event, pKiller, pKilled)
 		leveldiff = 6
 	end
 	if not (pKilled == pKiller) then
+		-- check for honorless target
 		if pKilled:HasAura(2479) == false then
-		if (playerdeath==true and check_safe == false and instanceID == 0) then
-			local killed_color = ClassColorCodes[pKilled:GetClass()]
-			local killer_color = ClassColorCodes[pKiller:GetClass()]
-			local killerguild_name = ", a Lone Wolf"
-			local killedguild_name = ", a Lone Wolf"
-			--Fetch Guild Names
-			--if (pKiller:GetGuildName()~=nil) then
-				--killerguild_name = " of "..pKiller:GetGuildName()..""
-			--end
-			--if (pKilled:GetGuildName()~=nil) then
-				--killedguild_name = " of"..pkilled:GetGuildName()..""
-			--end
-			if (((pKiller:GetLevel()-pKilled:GetLevel())<=leveldiff) and ((pKiller:GetLevel()-pKilled:GetLevel())>=(leveldiff * -1))) then		
-				local pKilledGUID = pKilled:GetGUIDLow()
-				local pKillerGUID = pKiller:GetGUIDLow()
-				local x,y,z,o = pKilled:GetX(),pKilled:GetY(),pKilled:GetZ(),pKilled:GetO()
-				local ContainerID = 818001
-				local FullLootContainer = PerformIngameSpawn(spawnType,ContainerID,pKiller_loc,instanceID, x, y, z, o)	--Spawn a Sack of Belongings
-				guid_linking_table[FullLootContainer:GetGUIDLow()] = pKilled:GetGUIDLow()
-				--Get Items
-				local bagslot = 255
-				local inven_ticker = 0
-				local item_ticker = 0
-				local maxitems = 25 --Equal to amount of buttons that I have declared.
-				item_table[FullLootContainer:GetGUIDLow()] = {}
-				remove_table[FullLootContainer:GetGUIDLow()] = {}
-				repeat
-					local SlotRange = 35
-					inven_ticker = inven_ticker+1
-					local bagToTake = math.random(3)
-					if bagToTake < 3 then
-						SlotRange = 38
-						bagToTake = 255
-					else
-						bagToTake = math.random(4)
-						bagToTake = bagToTake + 6 -- Original 18, changes the amount of items dropped on death
-					end								
-					local slotToTake = math.random(SlotRange)
-							
-					local checkitem = pKilled:GetItemByPos(bagToTake, slotToTake)
-					if (checkitem ~= 0) then -- Checks to make sure player has an item
-						if (checkitem~=nil) and (checkitem:IsBag()==false) and (checkitem:GetEntry()~=6948) then
-							item_ticker = item_ticker+1
-							if (checkitem:GetClass() == 2 or checkitem:GetClass() == 4) then
-								if (checkitem:GetEnchantmentId(5) == 0 or checkitem:GetEnchantmentId(5) == nil) then
-									table.insert (item_table[FullLootContainer:GetGUIDLow()], {checkitem:GetItemLink(), checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()), pKilled:GetName()})
-								else
-									table.insert (item_table[FullLootContainer:GetGUIDLow()], {checkitem:GetItemLink(), checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()), pKilled:GetName(), checkitem:GetEnchantmentId(5)})
+			if (playerdeath==true and check_safe == false and instanceID == 0) then
+				local killed_color = ClassColorCodes[pKilled:GetClass()]
+				local killer_color = ClassColorCodes[pKiller:GetClass()]
+				local killerguild_name = ", a Lone Wolf"
+				local killedguild_name = ", a Lone Wolf"
+				--Fetch Guild Names
+				--if (pKiller:GetGuildName()~=nil) then
+					--killerguild_name = " of "..pKiller:GetGuildName()..""
+				--end
+				--if (pKilled:GetGuildName()~=nil) then
+					--killedguild_name = " of"..pkilled:GetGuildName()..""
+				--end
+				if (((pKiller:GetLevel()-pKilled:GetLevel())<=leveldiff) and ((pKiller:GetLevel()-pKilled:GetLevel())>=(leveldiff * -1))) then		
+					local pKilledGUID = pKilled:GetGUIDLow()
+					local pKillerGUID = pKiller:GetGUIDLow()
+					local x,y,z,o = pKilled:GetX(),pKilled:GetY(),pKilled:GetZ(),pKilled:GetO()
+					local ContainerID = 818001
+					local FullLootContainer = PerformIngameSpawn(spawnType,ContainerID,pKiller_loc,instanceID, x, y, z, o)	--Spawn a Sack of Belongings
+					guid_linking_table[FullLootContainer:GetGUIDLow()] = pKilled:GetGUIDLow()
+					--Get Items
+					local bagslot = 255
+					local inven_ticker = 0
+					local item_ticker = 0
+					local maxitems = 25 --Equal to amount of buttons that I have declared.
+					item_table[FullLootContainer:GetGUIDLow()] = {}
+					remove_table[FullLootContainer:GetGUIDLow()] = {}
+					repeat
+						local SlotRange = 35
+						inven_ticker = inven_ticker+1
+						local bagToTake = math.random(3)
+						if bagToTake < 3 then
+							SlotRange = 38
+							bagToTake = 255
+						else
+							bagToTake = math.random(4)
+							bagToTake = bagToTake + 6 -- Original 18, changes the amount of items dropped on death
+						end								
+						local slotToTake = math.random(SlotRange)
+								
+						local checkitem = pKilled:GetItemByPos(bagToTake, slotToTake)
+						if (checkitem ~= 0) then -- Checks to make sure player has an item
+							if (checkitem~=nil) and (checkitem:IsBag()==false) and (checkitem:GetEntry()~=6948) then
+								item_ticker = item_ticker+1
+								if (checkitem:GetClass() == 2 or checkitem:GetClass() == 4) then
+									if (checkitem:GetEnchantmentId(5) == 0 or checkitem:GetEnchantmentId(5) == nil) then
+										table.insert (item_table[FullLootContainer:GetGUIDLow()], {checkitem:GetItemLink(), checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()), pKilled:GetName()})
+									else
+										table.insert (item_table[FullLootContainer:GetGUIDLow()], {checkitem:GetItemLink(), checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()), pKilled:GetName(), checkitem:GetEnchantmentId(5)})
+									end
 								end
+								table.insert (remove_table[FullLootContainer:GetGUIDLow()], {item_ticker, false})
+								pKilled:RemoveItem(checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()))
 							end
-							table.insert (remove_table[FullLootContainer:GetGUIDLow()], {item_ticker, false})
-							pKilled:RemoveItem(checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()))
 						end
-					end
-				until (inven_ticker>=38) or (item_ticker>=maxitems)
-			end
-			--Kill Announcer
-			local DeathAnnouncements = {
-			"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", was slain by |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name.."!",
-			"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", met the maker to the hand of |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name.."!",
-			"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", was vanquished by |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name.."!",
-			"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", has fallen to |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name.."!",
-			"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", died a swift death, courtesy of |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name..".",
-			"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", wanted a piece of |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name..", but bit off a little more than they could chew!"
-			}
-			if (pKilled == pKiller) then
-				EnableDeathAnnouncer = false			
-			else
-				if (EnableDeathAnnouncer==true) then
-					local DeathAnnounce_Roll = math.random(1,6)
-					SendWorldMessage(DeathAnnouncements[DeathAnnounce_Roll])
+					until (inven_ticker>=38) or (item_ticker>=maxitems)
 				end
+				--Kill Announcer
+				local DeathAnnouncements = {
+				"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", was slain by |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name.."!",
+				"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", met the maker to the hand of |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name.."!",
+				"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", was vanquished by |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name.."!",
+				"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", has fallen to |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name.."!",
+				"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", died a swift death, courtesy of |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name..".",
+				"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", wanted a piece of |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name..", but bit off a little more than they could chew!"
+				}
+				if (pKilled == pKiller) then
+					EnableDeathAnnouncer = false			
+				else
+					if (EnableDeathAnnouncer==true) then
+						local DeathAnnounce_Roll = math.random(1,6)
+						SendWorldMessage(DeathAnnouncements[DeathAnnounce_Roll])
+					end
+				end
+			else
+				SendWorldMessage("[PvP]: |cffff0000Everyone give a big round of applause to|r |CFF"..killer_color..""..pKiller:GetName().."|r |cffff0000"..killerguild_name..", whom is level "..pKiller:GetLevel()..", killed|r |CFF"..killed_color..""..pKilled:GetName().."|r|cffff0000, a level "..pKilled:GetLevel()..".|r")		
 			end
-		else
-			SendWorldMessage("[PvP]: |cffff0000Everyone give a big round of applause to|r |CFF"..killer_color..""..pKiller:GetName().."|r |cffff0000"..killerguild_name..", whom is level "..pKiller:GetLevel()..", killed|r |CFF"..killed_color..""..pKilled:GetName().."|r|cffff0000, a level "..pKilled:GetLevel()..".|r")		
-		end
 
-	else
-		pKilled:SendBroadcastMessage("You have commited suicide, none of your items were lost.")
-	end
+		else
+			pKilled:SendBroadcastMessage("You have commited suicide, none of your items were lost.")
+		end
 	end
 end
 
