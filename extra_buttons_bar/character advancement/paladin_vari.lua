@@ -30,7 +30,7 @@ paladin_holy_talents_tab = 26
 
 
 paladin_retribution_spells = {{19740, 2, 0, 4}, {20271, 2, 0 ,4}, {53408, 2, 0, 12}, {7294, 2, 0, 16}, {53407, 2, 0, 28},
-{24275, 2, 0, 44}, {25782, 2, 0, 52}, {32223, 2, 0, 62}, {31801, 2, 0, 64}, {31884, 2, 0, 70}}
+{24275, 2, 0, 44}, {32223, 2, 0, 62}, {31801, 2, 0, 64}, {31884, 2, 0, 70}}
 
 paladin_retribution_spells_count = 10
 paladin_retribution_bgs = {"Interface\\TalentFrame\\Paladincombat-TopLeft", "Interface\\TalentFrame\\Paladincombat-TopRight",
