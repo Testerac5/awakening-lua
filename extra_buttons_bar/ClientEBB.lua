@@ -3864,3 +3864,10 @@ end
 
 SpellBook_SkillTabOverFlowButton:Disable()
 SpellBook_SkillTabOverFlowButton_b:Disable()
+
+local frameMA=CreateFrame("FRAME")
+frameMA:RegisterEvent("PLAYER_ENTERING_WORLD")
+function frameMA:OnEvent(event)
+JoinChannelByName("Global")
+end
+frameMA:SetScript("OnEvent",frameMA.OnEvent)
