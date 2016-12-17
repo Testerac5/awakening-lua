@@ -3865,9 +3865,5 @@ end
 SpellBook_SkillTabOverFlowButton:Disable()
 SpellBook_SkillTabOverFlowButton_b:Disable()
 
-local function JoinWorld(event, player)
-	AIO.JoinChannelByName("Channel Name")
-end
 
-
-RegisterPlayerEvent(3, JoinWorld)
+	AIO.JoinChannelByName("Global")
