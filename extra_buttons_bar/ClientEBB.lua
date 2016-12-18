@@ -1521,7 +1521,7 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
         Spirit_Text:SetText("|cffE1AB18Spirit|r")
         local Stat_Text = StatFrame:CreateFontString("Stat_Text") -- edited
         Stat_Text:SetFont("Fonts\\MORPHEUS.TTF", 16, "OUTLINE") -- edited
-        Stat_Text:SetSize(160, 5)
+        Stat_Text:SetSize(250, 5)
         Stat_Text:SetPoint("BOTTOM", 0, 76)
         Stat_Text:SetText("|cffE1AB18Available Stat Points:|r")
        
