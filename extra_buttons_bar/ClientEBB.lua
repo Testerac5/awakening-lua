@@ -879,9 +879,11 @@ function MyHandlers.ResetFrame_Init(player, t_mult, a_mult)
 ResetFrame_GetAmountOfResets()
 ResetFrame_GetPurgeCost("talent")
 ResetFrame_GetPurgeCost("ability")
+if not(ResetFrame_AmountOfResets:IsVisible()) then
 BaseFrameFadeIn(ResetFrame_AmountOfResets)
 BaseFrameFadeIn(ResetFrame_TalentFrame)
 BaseFrameFadeIn(ResetFrame_AbilityFrame)
+end
 if (GetMoneyForReset(1) == "token") or (GetMoneyForReset(1) <= GetMoney()) then
     ResetFrame_main_TalentResetButton:Enable()
 else
@@ -922,9 +924,9 @@ ResetFrame_main:SetBackdrop({
 })
 
 local ResetFrame_main_CloseButton = CreateFrame("Button", "ResetFrame_main_CloseButton", ResetFrame_main, "UIPanelCloseButton")
-ResetFrame_main_CloseButton:SetPoint("TOPRIGHT", -15, 9) 
+ResetFrame_main_CloseButton:SetPoint("TOPRIGHT", -13, 10) 
 ResetFrame_main_CloseButton:EnableMouse(true)
-ResetFrame_main_CloseButton:SetSize(25, 25) 
+ResetFrame_main_CloseButton:SetSize(29, 29) 
 ResetFrame_main_CloseButton:SetScript("OnMouseUp", function()
     PlaySound("TalentScreenOpen")
     ResetFrame_main:Hide()
@@ -1287,7 +1289,7 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
 	--[[ StatFrame UI ]]
 	
     local StatFrame_CloseButton = CreateFrame("Button", "StatFrame_CloseButton", StatFrame, "UIPanelCloseButton")
-        StatFrame_CloseButton:SetPoint("TOPRIGHT", -57, -52) --edited
+        StatFrame_CloseButton:SetPoint("TOPRIGHT", -40, -31) --edited
         StatFrame_CloseButton:EnableMouse(true)
         StatFrame_CloseButton:SetSize(29, 29) --edited
         StatFrame_CloseButton:SetScript("OnMouseUp", function(self)
@@ -1309,7 +1311,7 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
                 local StatFrame_TitleText = StatFrame:CreateFontString("StatFrame_TitleText") -- edited
         StatFrame_TitleText:SetFont("Fonts\\MORPHEUS.TTF", 15) -- edited
         StatFrame_TitleText:SetSize(190, 5)
-        StatFrame_TitleText:SetPoint("TOP", 0, -45) -- edited
+        StatFrame_TitleText:SetPoint("TOP", 0, -30) -- edited
         StatFrame_TitleText:SetText("|cff110000Stat Allocation|r") -- edited
        
     local StatFrame_Panel_Str = CreateFrame("Frame", "StatFrame_Panel_Str", StatFrame, nil) -- edited
