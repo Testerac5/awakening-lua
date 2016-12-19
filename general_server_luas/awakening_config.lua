@@ -7,7 +7,7 @@
 ]]
 EnableDeathAnnouncer			= true
 ClassColorCodes 				= {"C79C6E", "F58CBA", "ABD473", "FFF569", "FFFFFF", "C41F3B", "0070DE", "69CCF0", "9482C9", nil, "FF7D0A"}
-PvPExpRate						= 1
+PvPExpRate						= 3.5
 
 --[[AWAKENING PREFERENCES
 	-----------------
