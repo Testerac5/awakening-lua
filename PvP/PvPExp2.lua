@@ -30,12 +30,14 @@ local function PvPExp(event, pKiller, pKilled)
 			if (exp2 >= exp1 - 10 and exp2 <= exp1 + 10) then
 				-- check for group and if group above max party count (so raid)
 				local group = pKiller:GetGroup()
-				local groupmem = group:GetMembersCount()
-				if (group ~= nil) and (group <= 5) then
-					local partymember = group:GetMembers()
-						for x=1,#partymember,1 do
-							partymember[x]:GiveXP(ExpBase / groupmem)
-						end
+				if (group ~= nil) then
+					local groupmem = group:GetMembersCount()
+					if (groupmem <= 5) then
+						local partymember = group:GetMembers()
+							for x=1,#partymember,1 do
+								partymember[x]:GiveXP(ExpBase / groupmem)
+							end
+					end
 				else
 					pKiller:GiveXP(ExpBase)
 				end
@@ -48,12 +50,14 @@ local function PvPExp(event, pKiller, pKilled)
 					if (exp2 >= exp1 - 10 and exp2 <= exp1 + 10) then
 						-- check for group and if group above max party count (so raid)
 						local group = pKiller:GetGroup()
-						local groupmem = group:GetMembersCount()
-						if (group ~= nil) and (group <= 5) then
-							local partymember = group:GetMembers()
-								for x=1,#partymember,1 do
-									partymember[x]:GiveXP(ExpBase / groupmem)
-								end
+						if (group ~= nil) then
+							local groupmem = group:GetMembersCount()
+							if (groupmem <= 5) then
+								local partymember = group:GetMembers()
+									for x=1,#partymember,1 do
+										partymember[x]:GiveXP(ExpBase / groupmem)
+									end
+							end
 						else
 							pKiller:GiveXP(ExpBase)
 							CharDBQuery("UPDATE character_kill_count SET count = "..AddKill.." WHERE killerguid = "..killerguid.." AND victimguid = "..victimguid)
