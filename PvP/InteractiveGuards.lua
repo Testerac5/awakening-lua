@@ -39,15 +39,15 @@ for k, v in pairs(Guard_Factions) do
 	end
 
 	--attack player when player attacks player of the same faction
-local function Guard_MainAction(event, player, enemy)
-	if (player:ToPlayer() and enemy:ToPlayer()) and (( (player:IsAlliance() and enemy:IsAlliance()) or (player:IsHorde() and enemy:IsHorde()) )) then
-		local FriendlyCreatures = player:GetFriendlyUnitsInRange(60)
+local function Guard_MainAction(event, killer, killed)
+	if (killer:ToPlayer() and killed:ToPlayer()) and (( (killer:IsAlliance() and killed:IsAlliance()) or (killer:IsHorde() and killed:IsHorde()) )) then
+		local FriendlyCreatures = killer:GetFriendlyUnitsInRange(60)
 
 		for n, creature in pairs(FriendlyCreatures) do
 			for m,faction_g in pairs(Guard_Factions) do
 				if (faction_g == creature:GetFaction()) then
 					creature:SetFaction(7)
-					creature:AttackStart(player)
+					creature:AttackStart(killer)
 				end
 			end
 		end
