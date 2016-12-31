@@ -1,3 +1,11 @@
+local function SpiritHello(event, player, creature)
+	player:GossipClearMenu()
+	creature:ClearCreatureGossipEvents(6491)
+	player:GossipMenuAddItem(0, "Pepsi", 83, 1)
+	player:GossipMenuAddItem(0, "Coke", 83, 7)
+	player:GossipSendMenu(83, creature, MenuId)
+end
+
 local function SpiritSelect(event, player, creature, sender, intid, code)
 	-- teleport based on gossip option
 	if (intid == 1) then
@@ -22,4 +30,5 @@ local function SpiritSelect(event, player, creature, sender, intid, code)
 	end
 end
 
+RegisterCreatureGossipEvent(6491, 1, SpiritHello)
 RegisterCreatureGossipEvent(6491, 2, SpiritSelect)
