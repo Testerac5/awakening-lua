@@ -11,7 +11,7 @@ local function SpiritSelect(event, player, creature, sender, intid, code)
 			else
 			player:SendBroadcastMessage("An error has occurred within script:SpiritHealer.lua. Please report this to an administrator.")
 		end
-	elseif (intid == 2) then
+	elseif (intid == 7) then
 		player:ResurrectPlayer(25, true)
 		player:AddAura(15007, player)
 		player:DurabilityLossAll(25, true)
