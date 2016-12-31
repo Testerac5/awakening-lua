@@ -15,6 +15,10 @@ local function SpiritSelect(event, player, creature, sender, intid, code)
 		player:ResurrectPlayer(25, true)
 		player:AddAura(15007, player)
 		player:DurabilityLossAll(25, true)
+	else
+		player:ResurrectPlayer(25, true)
+		player:AddAura(15007, player)
+		player:DurabilityLossAll(25, true)
 	end
 end
 
