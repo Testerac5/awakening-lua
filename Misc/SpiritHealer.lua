@@ -8,6 +8,7 @@ end
 
 local function SpiritSelect(event, player, creature, sender, intid, code)
 	-- teleport based on gossip option
+	player:SendBroadcastMessage("The intid is " ..intid.. ".")
 	if (intid == 1) then
 		local RQuery1 = WorldDBQuery("SELECT race, map, x, y, z, o FROM player_resurrect_locations WHERE race = " ..player:GetRace().. ";")
 		if (RQuery1:GetInt32(0) ~= nil) then
