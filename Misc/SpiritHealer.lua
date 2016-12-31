@@ -13,3 +13,5 @@ local function SpiritSelect(event, player, creature, sender, intid, code)
 		end
 	end
 end
+
+RegisterCreatureGossipEvent(6491, 2, SpiritSelect)
