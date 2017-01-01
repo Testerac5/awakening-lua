@@ -11,16 +11,22 @@ function Buff(event, player)
 	if (Buff1 ~= nil) then
 		--so we dont dupe the same timer 100000 times
 		if (timing == false) then
-			player:RegisterEvent(Redo, 120000, 0)
+			player:RegisterEvent(Redo, 10000, 0)
 			--DEBUG--player:SendBroadcastMessage("timing now")
 			timing = true
 		end
 	local mobs = player:GetCreaturesInRange(533)
-	local buffspell = Buff1:GetInt32(1)
+	local buffspell = {}
+		for z=1,Buff1:GetRowCount(),1 do
+			buffspell[z] = Buff1:GetInt32(1)
+			Buff1:NextRow()
+		end
 		-- add aura based on DB query above and loop for mobs in range
 		for x=1,#mobs,1 do
-			if mobs[x]:HasAura(buffspell) == false then
-				mobs[x]:AddAura(buffspell, mobs[x])
+			for y=1,#buffspell,1 do
+				if mobs[x]:HasAura(buffspell[y]) == false then
+					mobs[x]:AddAura(buffspell[y], mobs[x])
+				end
 			end
 		end
 	else
