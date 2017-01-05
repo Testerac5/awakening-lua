@@ -48,6 +48,9 @@ local function Guard_MainAction(event, killer, killed)
 				if (faction_g == creature:GetFaction()) then
 					creature:SetFaction(7)
 					creature:AttackStart(killer)
+					if ((killer:GetLevel()-creature:GetLevel()) > 5) then
+						creature:AddAura(26662, creature)
+					end
 				end
 			end
 		end
@@ -57,12 +60,15 @@ end
 RegisterPlayerEvent(33, Guard_MainAction)
 
 local function Guard_Back(event, creature)
+	if (creature:GetFaction() == 7) and not(creature:IsInCombat()) then
 	local faction = WorldDBQuery("SELECT faction FROM creature_template where entry = '"..creature:GetEntry().."';")
 		creature:SetFaction(faction:GetInt32(0))
 		creature:MoveHome()
+	end
 end
 for k,v in pairs(Guards_Entry) do
 	RegisterCreatureEvent(v, 2, Guard_Back)
 	RegisterCreatureEvent(v, 5, Guard_Back)
+	RegisterCreatureEvent(v, 27, Guard_Back)
 	--RegisterCreatureEvent(v, 23, Guard_Back)
 end

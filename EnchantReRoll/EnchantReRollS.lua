@@ -151,7 +151,7 @@ function MyHandlers.ReforgeItem(player,bag,slot)
 		enchantTier = enchantTierSQL:GetInt32(0)
 		end]]--
 
-		if (class == 4) then
+		if (class == "ANY") then
 			neweffectSQL = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier = "..enchantTier.." AND class = '"..class.."';")
 		else
 			neweffectSQL = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier = "..enchantTier..";")
