@@ -6,11 +6,10 @@ local MyHandlers = AIO.AddHandlers("PvP", {})
 
 --local guid_linking_table = {}
 item_table = {}
-local bag_nums = {[1] = {255,38},[2] = {19,35},[3] = {20,35},[4] = {21,35},[5] ={22,35}}
 local prohibited_items = {
 6948,
 }
-local dropmodifier = 2
+local dropmodifier = 4
 --local playerdeath = true
 --local creaturedeath = true
 --local leveldiff = 6
@@ -54,7 +53,7 @@ local function EntropyPvP(event, pKiller, pKilled)
 	local check_safe = false
 	local pKiller_loc = pKiller:GetMapId()
 	local pKiller_zone = pKiller:GetZoneId()
-
+	local items_droplist = {}
 	local spawnType = 2
 	local instanceID = pKiller:GetInstanceId()
 	for i,v in ipairs(safety_ids) do
@@ -90,9 +89,22 @@ local function EntropyPvP(event, pKiller, pKilled)
 					-- my updated part
 					local amountofdroppeditems = math.floor(pKilled:GetLevel()/dropmodifier)
 						if (amountofdroppeditems >= 1) then
+							--list of items player have
+							for slot = 0,38 do
+								if (pKilled:GetItemByPos(255, slot)) then
+								table.insert(items_droplist, {255,slot})
+								end
+							end
+							for slot = 0,35 do
+								for bag = 19,22 do
+								if (pKilled:GetItemByPos(bag, slot)) then
+								table.insert(items_droplist, {bag,slot})
+								end
+							end
+							end
+							-- list is done
 							for i = 1, amountofdroppeditems do
-							local bag = bag_nums[math.random(1,5)]
-							local item = pKilled:GetItemByPos(bag[1], math.random(0,bag[2]))
+							local item = pKilled:GetItemByPos(items_droplist[math.random(1,#items_droplist)][1],items_droplist[math.random(1,#items_droplist)][2])
 								if (item) then
 								local itemcount = math.random(1,item:GetCount())
 									if (PVP_ItemCheck(item,pKilled)) then
