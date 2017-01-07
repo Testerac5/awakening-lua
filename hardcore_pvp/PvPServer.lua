@@ -4,17 +4,19 @@ local AIO = AIO or require("AIO")
 
 local MyHandlers = AIO.AddHandlers("PvP", {})
 
-local guid_linking_table = {}
+--local guid_linking_table = {}
 item_table = {}
-local remove_table = {}
-all_chests = {}
-
-local playerdeath = true
-local creaturedeath = true
+local bag_nums = {[1] = {255,38},[2] = {19,35},[3] = {20,35},[4] = {21,35},[5] ={22,35}}
+local prohibited_items = {
+6948,
+}
+local dropmodifier = 2
+--local playerdeath = true
+--local creaturedeath = true
 --local leveldiff = 6
 
 -- this function is never called for some unknown reason, known bug with ElunaCore
-function Remove_FullLootContainer(event, delay, call, object)
+--[[function Remove_FullLootContainer(event, delay, call, object)
 	print("I got here!")
 	print("I got here!")
 	local nearbyplayers = object:GetPlayersInRange(100)
@@ -27,15 +29,26 @@ function Remove_FullLootContainer(event, delay, call, object)
     guid_linking_table[object:GetGUIDLow()] = nil
 	item_table[object:GetGUIDLow()] = nil
 	print("Chest removed from world")
+end]]--
+
+local function PVP_ItemCheck(item, target)
+					for k,v in pairs(prohibited_items) do
+						if (item:GetEntry() == v) then
+							return false
+						end
+					end -- check for special item ids
+		  			if (target:HasQuestForItem(item:GetEntry()) or (item:IsBag()==true)) then
+		   			 return false
+					end -- check for bags and quest items
+					return true
 end
 
-
 local function EntropyPvP(event, pKiller, pKilled)
+	math.random(1,10)
 	local check_safe = false
 	local pKiller_loc = pKiller:GetMapId()
 	local pKiller_zone = pKiller:GetZoneId()
-	print(pKiller_loc)
-	print(pKiller_zone)
+
 	local spawnType = 2
 	local instanceID = pKiller:GetInstanceId()
 	for i,v in ipairs(safety_ids) do
@@ -55,94 +68,61 @@ local function EntropyPvP(event, pKiller, pKilled)
 		leveldiff = 255
 	else
 		leveldiff = 6
-	end
-	if not (pKilled == pKiller) then
+	end --some checks for safe zones and other stuff
+	if not (pKilled == pKiller) then -- if player commited suicide, no drop
 		-- check for honorless target
 		if pKilled:HasAura(2479) == false then
-			if (playerdeath==true and check_safe == false and instanceID == 0) then
-				local killed_color = ClassColorCodes[pKilled:GetClass()]
-				local killer_color = ClassColorCodes[pKiller:GetClass()]
-				local killerguild_name = ", a Lone Wolf"
-				local killedguild_name = ", a Lone Wolf"
-				--Fetch Guild Names
-				--if (pKiller:GetGuildName()~=nil) then
-					--killerguild_name = " of "..pKiller:GetGuildName()..""
-				--end
-				--if (pKilled:GetGuildName()~=nil) then
-					--killedguild_name = " of"..pkilled:GetGuildName()..""
-				--end
-				if (((pKiller:GetLevel()-pKilled:GetLevel())<=leveldiff) and ((pKiller:GetLevel()-pKilled:GetLevel())>=(leveldiff * -1))) then		
+			if (check_safe == false and instanceID == 0) then -- begin main action
+
+				if (((pKiller:GetLevel()-pKilled:GetLevel())<=leveldiff) and ((pKiller:GetLevel()-pKilled:GetLevel())>=(leveldiff * -1))) then -- level difference check	
 					local pKilledGUID = pKilled:GetGUIDLow()
 					local pKillerGUID = pKiller:GetGUIDLow()
 					local x,y,z,o = pKilled:GetX(),pKilled:GetY(),pKilled:GetZ(),pKilled:GetO()
 					local ContainerID = 818001
 					local FullLootContainer = PerformIngameSpawn(spawnType,ContainerID,pKiller_loc,instanceID, x, y, z, o)	--Spawn a Sack of Belongings
-					guid_linking_table[FullLootContainer:GetGUIDLow()] = pKilled:GetGUIDLow()
-					--Get Items
-					local bagslot = 255
-					local inven_ticker = 0
-					local item_ticker = 0
-					local maxitems = 25 --Equal to amount of buttons that I have declared.
 					item_table[FullLootContainer:GetGUIDLow()] = {}
-					remove_table[FullLootContainer:GetGUIDLow()] = {}
-					repeat
-						local SlotRange = 35
-						inven_ticker = inven_ticker+1
-						local bagToTake = math.random(3)
-						if bagToTake < 3 then
-							SlotRange = 38
-							bagToTake = 255
-						else
-							bagToTake = math.random(4)
-							bagToTake = bagToTake + 6 -- Original 18, changes the amount of items dropped on death
-						end								
-						local slotToTake = math.random(SlotRange)
-								
-						local checkitem = pKilled:GetItemByPos(bagToTake, slotToTake)
-						if (checkitem ~= 0) then -- Checks to make sure player has an item
-							if (checkitem~=nil) and (checkitem:IsBag()==false) and (checkitem:GetEntry()~=6948) then
-								item_ticker = item_ticker+1
-								if (checkitem:GetClass() == 2 or checkitem:GetClass() == 4) then
-									if (checkitem:GetEnchantmentId(5) == 0 or checkitem:GetEnchantmentId(5) == nil) then
-										table.insert (item_table[FullLootContainer:GetGUIDLow()], {checkitem:GetItemLink(), checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()), pKilled:GetName()})
+					-- my updated part
+					local amountofdroppeditems = math.floor(pKilled:GetLevel()/dropmodifier)
+						if (amountofdroppeditems >= 1) then
+							for i = 1, amountofdroppeditems do
+							local bag = bag_nums[math.random(1,5)]
+							local item = pKilled:GetItemByPos(bag[1], math.random(0,bag[2]))
+								if (item) then
+								local itemcount = math.random(1,item:GetCount())
+									if (PVP_ItemCheck(item,pKilled)) then
+									-- loot part
+										if (item:GetClass() == 2 or item:GetClass() == 4) then
+											if (item:GetEnchantmentId(5) == 0 or item:GetEnchantmentId(5) == nil) then
+											table.insert (item_table[FullLootContainer:GetGUIDLow()], {item:GetItemLink(), item:GetEntry(), itemcount, pKilled:GetName()})
+											else
+											table.insert (item_table[FullLootContainer:GetGUIDLow()], {item:GetItemLink(), item:GetEntry(), itemcount, pKilled:GetName(), item:GetEnchantmentId(5)})
+											end
+										else
+										table.insert (item_table[FullLootContainer:GetGUIDLow()], {item:GetItemLink(), item:GetEntry(), itemcount, pKilled:GetName()})
+										end
+										pKilled:RemoveItem(item:GetEntry(), itemcount)
+										-- end of loot part
 									else
-										table.insert (item_table[FullLootContainer:GetGUIDLow()], {checkitem:GetItemLink(), checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()), pKilled:GetName(), checkitem:GetEnchantmentId(5)})
+									amountofdroppeditems = amountofdroppeditems+1
 									end
 								end
-								table.insert (remove_table[FullLootContainer:GetGUIDLow()], {item_ticker, false})
-								pKilled:RemoveItem(checkitem:GetEntry(), pKilled:GetItemCount(checkitem:GetEntry()))
 							end
 						end
-					until (inven_ticker>=38) or (item_ticker>=maxitems)
-				end
-				--Kill Announcer
-				local DeathAnnouncements = {
-				"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", was slain by |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name.."!",
-				"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", met the maker to the hand of |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name.."!",
-				"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", was vanquished by |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name.."!",
-				"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", has fallen to |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name.."!",
-				"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", died a swift death, courtesy of |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name..".",
-				"[PvP]: |CFF"..killed_color..""..pKilled:GetName().."|r"..killedguild_name..", wanted a piece of |CFF"..killer_color..""..pKiller:GetName().."|r"..killerguild_name..", but bit off a little more than they could chew!"
-				}
-				if (pKilled == pKiller) then
-					EnableDeathAnnouncer = false			
-				else
-					if (EnableDeathAnnouncer==true) then
-						local DeathAnnounce_Roll = math.random(1,6)
-						SendWorldMessage(DeathAnnouncements[DeathAnnounce_Roll])
+					
+					if not(item_table[FullLootContainer:GetGUIDLow()][1]) then
+							FullLootContainer:Despawn()
+							FullLootContainer:RemoveFromWorld(true)
 					end
-				end
-			else
-				SendWorldMessage("[PvP]: |cffff0000Everyone give a big round of applause to|r |CFF"..killer_color..""..pKiller:GetName().."|r |cffff0000"..killerguild_name..", whom is level "..pKiller:GetLevel()..", killed|r |CFF"..killed_color..""..pKilled:GetName().."|r|cffff0000, a level "..pKilled:GetLevel()..".|r")		
-			end
+				end -- end of lvl diff check
 
+			end -- end of main action
+		end -- end of aura check
 		else
-			pKilled:SendBroadcastMessage("You have commited suicide, none of your items were lost.")
-		end
-	end
+			pKilled:SendBroadcastMessage("You have commited suicide, none of your items were lost")
+		end -- end of suicide check
 end
 
-local function CreatureDeath (event, pKiller, pKilled)
+--[[local function CreatureDeath (event, pKiller, pKilled)
 	local check_safe = false
 	local pKilled_loc = pKilled:GetMapId()
 	local spawnType = 2
@@ -275,7 +255,7 @@ local function CreatureDeath (event, pKiller, pKilled)
 			end
 		end
 	end
-end
+end]]--
 
 
 local function Init_FullLootFrame(event, player, object)
@@ -312,11 +292,16 @@ function MyHandlers.AddPlayerItem(player, itemEntry, itemCount, object)
 
 	for i,v in pairs(item_table[object]) do
 		if v[2] == itemEntry then
-			player:AddItem(itemEntry, itemCount)
+			-- check the possibility to add item
+			if (player:AddItem(itemEntry, itemCount)) then
 			if (item_table[object][i][5] ~= nil or item_table[object][i][5] ~= 0) then
 				player:GetItemByEntry(itemEntry):SetEnchantment(item_table[object][i][5], 5)
 				item_table[object][i][5] = nil
 			end
+		else 
+			player:SendBroadcastMessage("You don't have enough space in bags")
+			return false
+		end
 			item_table[object][i][2] = nil
 			item_table[object][i][1] = nil
 			item_table[object][i][3] = nil
@@ -337,7 +322,6 @@ end
 
 
 RegisterPlayerEvent(6, EntropyPvP)	
-RegisterPlayerEvent(8, CreatureDeath)
 RegisterGameObjectGossipEvent(818001, 1, Container_Interact)
 
 
