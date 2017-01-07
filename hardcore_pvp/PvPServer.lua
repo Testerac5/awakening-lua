@@ -40,6 +40,12 @@ local function PVP_ItemCheck(item, target)
 		  			if (target:HasQuestForItem(item:GetEntry()) or (item:IsBag()==true)) then
 		   			 return false
 					end -- check for bags and quest items
+
+					local mv = WorldDBQuery("SELECT bonding FROM item_template WHERE entry = "..item:GetEntry().."")
+					if (mv:GetInt32(0) >= 4) then
+						return false
+					end
+
 					return true
 end
 
