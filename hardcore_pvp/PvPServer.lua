@@ -8,6 +8,8 @@ local MyHandlers = AIO.AddHandlers("PvP", {})
 item_table = {}
 local prohibited_items = {
 6948,
+597600,
+597601,
 }
 local dropmodifier = 4
 --local playerdeath = true
@@ -87,18 +89,22 @@ local function EntropyPvP(event, pKiller, pKilled)
 					local FullLootContainer = PerformIngameSpawn(spawnType,ContainerID,pKiller_loc,instanceID, x, y, z, o)	--Spawn a Sack of Belongings
 					item_table[FullLootContainer:GetGUIDLow()] = {}
 					-- my updated part
-					local amountofdroppeditems = math.floor(pKilled:GetLevel()/dropmodifier)
+					local amountofdroppeditems = math.ceil(pKilled:GetLevel()/dropmodifier)
 						if (amountofdroppeditems >= 1) then
 							--list of items player have
 							for slot = 0,38 do
 								if (pKilled:GetItemByPos(255, slot)) then
-								table.insert(items_droplist, {255,slot})
+									if not(pKilled:HasQuestForItem(pKilled:GetItemByPos(255, slot):GetEntry())) and not(pKilled:GetItemByPos(255, slot):IsBag()==true) then
+									table.insert(items_droplist, {255,slot})
+									end
 								end
 							end
 							for slot = 0,35 do
 								for bag = 19,22 do
 								if (pKilled:GetItemByPos(bag, slot)) then
-								table.insert(items_droplist, {bag,slot})
+									if not(pKilled:HasQuestForItem(pKilled:GetItemByPos(bag, slot):GetEntry())) and not(pKilled:GetItemByPos(bag, slot):IsBag()==true) then
+									table.insert(items_droplist, {bag,slot})
+									end
 								end
 							end
 							end
