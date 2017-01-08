@@ -109,7 +109,7 @@ local function EntropyPvP(event, pKiller, pKilled)
 							end
 							end
 							-- list is done
-							if (itemslot_temp) then
+							if (items_droplist[1]) then
 							for i = 1, amountofdroppeditems do
 							local itemslot_temp = math.random(1,#items_droplist)
 							local item = pKilled:GetItemByPos(items_droplist[itemslot_temp][1],items_droplist[itemslot_temp][2])
