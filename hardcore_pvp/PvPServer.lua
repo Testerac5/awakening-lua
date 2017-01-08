@@ -109,6 +109,7 @@ local function EntropyPvP(event, pKiller, pKilled)
 							end
 							end
 							-- list is done
+							if (itemslot_temp) then
 							for i = 1, amountofdroppeditems do
 							local itemslot_temp = math.random(1,#items_droplist)
 							local item = pKilled:GetItemByPos(items_droplist[itemslot_temp][1],items_droplist[itemslot_temp][2])
@@ -133,6 +134,7 @@ local function EntropyPvP(event, pKiller, pKilled)
 								end
 							end
 						end
+					end
 					
 					if not(item_table[FullLootContainer:GetGUIDLow()][1]) then
 							FullLootContainer:Despawn()
