@@ -669,7 +669,7 @@ function MyHandlers.LearnThisSpell(player, got_spell, i,class,spec)
 	end
 	end
 
-	if not(spellID) then
+	if not(spellID) or player:HasSpell(spellID) then
 		successful = false
 	end
 
@@ -886,7 +886,7 @@ function MyHandlers.LearnThisTalent(player, attached_talent, indexAt,ClassSpec)
 
 		end
 	
-	if not(spellID) then
+	if not(spellID) or player:HasSpell(spellID) then
 		successful = false
 	end
 
