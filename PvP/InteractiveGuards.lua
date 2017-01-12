@@ -69,6 +69,6 @@ end
 for k,v in pairs(Guards_Entry) do
 	RegisterCreatureEvent(v, 2, Guard_Back)
 	RegisterCreatureEvent(v, 5, Guard_Back)
-	RegisterCreatureEvent(v, 27, Guard_Back)
+	RegisterCreatureEvent(v, 7, Guard_Back)
 	--RegisterCreatureEvent(v, 23, Guard_Back)
 end
