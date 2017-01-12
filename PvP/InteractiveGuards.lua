@@ -60,7 +60,7 @@ end
 RegisterPlayerEvent(33, Guard_MainAction)
 
 local function Guard_Back(event, creature)
-	if (creature:GetFaction() == 7) and not(creature:IsInCombat()) then
+	if (creature:GetFaction() == 7) and not(creature:GetVictim()) then
 	local faction = WorldDBQuery("SELECT faction FROM creature_template where entry = '"..creature:GetEntry().."';")
 		creature:SetFaction(faction:GetInt32(0))
 		creature:MoveHome()
