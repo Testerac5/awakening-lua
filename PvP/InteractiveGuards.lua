@@ -63,7 +63,11 @@ local function Guard_Back(event, creature)
 	if (creature:GetFaction() == 7) and not(creature:GetVictim()) then
 	local faction = WorldDBQuery("SELECT faction FROM creature_template where entry = '"..creature:GetEntry().."';")
 		creature:SetFaction(faction:GetInt32(0))
+		if (creature:GetWaypointPath()) then
+			creature:MoveWaypoint()
+		else
 		creature:MoveHome()
+	end
 	end
 end
 for k,v in pairs(Guards_Entry) do
