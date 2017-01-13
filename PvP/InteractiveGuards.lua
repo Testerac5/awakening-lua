@@ -64,6 +64,7 @@ local function Guard_Back(event, creature)
 	local faction = WorldDBQuery("SELECT faction FROM creature_template where entry = '"..creature:GetEntry().."';")
 		creature:SetFaction(faction:GetInt32(0))
 		if (creature:GetWaypointPath()) then
+			creature:MoveHome()
 			creature:MoveWaypoint()
 		else
 		creature:MoveHome()
