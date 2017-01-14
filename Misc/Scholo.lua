@@ -16,7 +16,8 @@ local function Spooky(event, player, item, target)
 	local px = player:GetX()
 	local gambit = player:GetNearestGameobject(10, 177304)
 	gambit:RemoveFromWorld(true)
-	player:RegisterEvent(14000, SpookyItUp, 0)
+	player:RegisterEvent(14000, SpookyItUp, 1)
+	player:SendBroadcastMessage("gambit removed: " ..gambit.. ".")
 end
 
 RegisterItemEvent(17191, 2, Spooky)
