@@ -13,7 +13,12 @@ local function SpookyItUp(eventId, delay, repeats, player)
 end
 
 local function Spooky(event, player, item, target)
-	local px = player:GetX()
+	local dummy = player:GetNearestCreature(100, 750018, 0, 0)
+	local cx = dummy:GetX()
+	local cy = dummy:GetY()
+	local cz = dummy:GetZ()
+	local co = dummy:GetO()
+	player:SummonGameObject(177304, cx, cy, cz, co)
 	local gambit = player:GetNearestGameobject(10, 177304)
 	gambit:RemoveFromWorld(true)
 	player:RegisterEvent(14000, SpookyItUp, 1)
