@@ -3,4 +3,4 @@ local function MaraStaff(event, player, item, target)
 	player:CastSpell(player, 21127, false)
 end
 
-RegisterItemEvent(17191, 2, Scroll)
+RegisterItemEvent(17191, 2, MaraStaff)
