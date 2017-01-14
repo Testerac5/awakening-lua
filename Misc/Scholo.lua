@@ -19,4 +19,4 @@ local function Spooky(event, player, item, target)
 	player:RegisterEvent(14000, funk, 0)
 end
 
-RegisterItemEvent(17191, 2, MaraStaff)
+RegisterItemEvent(17191, 2, Spooky)
