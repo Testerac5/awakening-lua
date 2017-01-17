@@ -159,7 +159,7 @@ function MyHandlers.ReforgeItem(player,bag,slot)
 		--choosing random row from our query
 		if (neweffectSQL) then
 			if (neweffectSQL:GetRowCount()>1) then
-		for i = 1, math.random(1, neweffectSQL:GetRowCount()) do
+		for i = 1, math.random(1, (neweffectSQL:GetRowCount()-1)) do
 			neweffectSQL:NextRow()
 		end
 	end
