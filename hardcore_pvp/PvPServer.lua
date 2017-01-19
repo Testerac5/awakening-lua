@@ -11,6 +11,7 @@ local prohibited_items = {
 597600,
 597601,
 977020,
+977021,
 }
 local dropmodifier = 4
 --local playerdeath = true
