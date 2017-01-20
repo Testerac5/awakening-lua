@@ -1985,6 +1985,17 @@ local function ModifyTip ()
 	if(currentlyProcessing == false) then 
 		currentlyProcessing = true
 		if(GameTooltip:GetSpell ()) then
+			--skip check if training frame and spell is known--
+				local frame =  GetMouseFocus()
+				if (frame and frame:GetName()) then
+					if string.find(frame:GetName(), "TrainingFrame") then
+				 local spellname,rank,spellid = GameTooltip:GetSpell()
+    				if (GameTooltip:GetSpell() and IsSpellKnown(spellid) and (GetItemCount(1101243) > 0)) then
+        				return false
+    				end
+    			end
+    			end
+				-- end--
 			GetID()
 			if(TaggedSpells[TipID]) then 
 				GetTipNum()
