@@ -72,8 +72,9 @@ local function Guard_Back(event, creature)
 	end
 end
 for k,v in pairs(Guards_Entry) do
-	RegisterCreatureEvent(v, 2, Guard_Back)
-	RegisterCreatureEvent(v, 5, Guard_Back)
-	RegisterCreatureEvent(v, 7, Guard_Back)
+	RegisterCreatureEvent(v, 2, Guard_Back) -- on leave combat
+	RegisterCreatureEvent(v, 3, Guard_Back) -- on target died
+	RegisterCreatureEvent(v, 5, Guard_Back) -- on spawn
+	RegisterCreatureEvent(v, 7, Guard_Back) -- on aiupdate
 	--RegisterCreatureEvent(v, 23, Guard_Back)
 end
