@@ -60,7 +60,7 @@ end
 RegisterPlayerEvent(33, Guard_MainAction)
 
 local function Guard_Back(event, creature)
-	if (creature:GetFaction() == 7) and (not(creature:GetVictim()) or creature:GetVictim():IsDead()) then
+	if (creature:GetFaction() == 7) and (not(creature:GetVictim()) or (creature:GetVictim():IsDead())) then
 	local faction = WorldDBQuery("SELECT faction FROM creature_template where entry = '"..creature:GetEntry().."';")
 		creature:SetFaction(faction:GetInt32(0))
 		if (creature:GetWaypointPath()) then
@@ -75,7 +75,7 @@ for k,v in pairs(Guards_Entry) do
 	RegisterCreatureEvent(v, 2, Guard_Back) -- on leave combat
 	RegisterCreatureEvent(v, 3, Guard_Back) -- on target died
 	RegisterCreatureEvent(v, 5, Guard_Back) -- on spawn
-	RegisterCreatureEvent(v, 10, Guard_Back) -- on precombat
+	--RegisterCreatureEvent(v, 10, Guard_Back) -- on precombat
 	RegisterCreatureEvent(v, 27, Guard_Back) -- on move in los
 	--RegisterCreatureEvent(v, 23, Guard_Back)
 end
