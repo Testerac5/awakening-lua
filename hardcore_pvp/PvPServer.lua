@@ -323,20 +323,17 @@ function MyHandlers.AddPlayerItem(player, itemEntry, itemCount, object)
 		if v[2] == itemEntry then
 			-- check the possibility to add item
 			if (player:AddItem(itemEntry, itemCount)) then
+			item_table[object][i][2] = nil
+			item_table[object][i][1] = nil
+			item_table[object][i][3] = nil
 			if (item_table[object][i][5] ~= nil or item_table[object][i][5] ~= 0) then
 				player:GetItemByEntry(itemEntry):SetEnchantment(item_table[object][i][5], 5)
 				item_table[object][i][5] = nil
 			end
 		else 
 			player:SendBroadcastMessage("You don't have enough space in bags")
-			return false
 		end
-			item_table[object][i][2] = nil
-			item_table[object][i][1] = nil
-			item_table[object][i][3] = nil
-			
 		end
-	
 	end
 
 end
