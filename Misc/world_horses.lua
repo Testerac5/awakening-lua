@@ -1,6 +1,9 @@
 ﻿local horse_id = {5403, 5406, 5405, 5404, 12376, 14559, 15460, 14561, 28899, 4269, 27214}
 
 local function HourseCustomSpell(event, creature, unit)
+	if not(creature.num) then
+		creature.num = 0
+	end
 	creature.num = creature.num+1
 if (creature.num == 140) then
 	local customspellornot = math.random(1, 2)
