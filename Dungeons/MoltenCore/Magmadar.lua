@@ -1,4 +1,4 @@
-local BossEntry_Magmadar = 11982
+--[[local BossEntry_Magmadar = 11982
 local GameObject_LavaBomb1 = 19411
 local GameObject_LavaBomb2 = 20474
 local Spell_LavaBomb = 177704
@@ -9,4 +9,4 @@ local function LavaBombSpawn(event, creature, target, spellid)
 	end
 end
 
-RegisterCreatureEvent(BossEntry_Magmadar, 15, LavaBombSpawn)
+RegisterCreatureEvent(BossEntry_Magmadar, 15, LavaBombSpawn)]]--
