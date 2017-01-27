@@ -2,7 +2,7 @@
 local num = 0
 local function HourseCustomSpell(event, creature, unit)
 	num = num+1
-if (num == 70) then
+if (num == 700) then
 	local customspellornot = math.random(1, 2)
 		if (customspellornot == 1) then
 				creature:RemoveAura(55587)
@@ -13,5 +13,5 @@ num = 0
 end
 end
 for k, v in pairs(horse_id) do
-RegisterCreatureEvent(v, 27, HourseCustomSpell)
+RegisterCreatureEvent(v, 7, HourseCustomSpell)
 end
