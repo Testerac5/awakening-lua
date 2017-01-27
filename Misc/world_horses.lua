@@ -2,7 +2,7 @@
 local num = 0
 local function HourseCustomSpell(event, creature, unit)
 	num = num+1
-if (num == 70) then
+if (num == 210) then
 	local customspellornot = math.random(1, 2)
 		if (customspellornot == 1) then
 				creature:RemoveAura(55587)
