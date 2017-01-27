@@ -41,6 +41,11 @@ for k, v in pairs(Guard_Factions) do
 	--attack player when player attacks player of the same faction
 local function Guard_MainAction(event, killer, killed)
 	if (killer:ToPlayer() and killed:ToPlayer()) and (( (killer:IsAlliance() and killed:IsAlliance()) or (killer:IsHorde() and killed:IsHorde()) )) then
+		--check for cities--
+		if not(killer:IsFFAPvP()) then
+			return false
+		end
+		-- end
 		local FriendlyCreatures = killer:GetFriendlyUnitsInRange(60)
 
 		for n, creature in pairs(FriendlyCreatures) do
@@ -76,6 +81,6 @@ for k,v in pairs(Guards_Entry) do
 	RegisterCreatureEvent(v, 3, Guard_Back) -- on target died
 	RegisterCreatureEvent(v, 5, Guard_Back) -- on spawn
 	--RegisterCreatureEvent(v, 10, Guard_Back) -- on precombat
-	RegisterCreatureEvent(v, 27, Guard_Back) -- on move in los
+	RegisterCreatureEvent(v, 7, Guard_Back) -- on aiupdate
 	--RegisterCreatureEvent(v, 23, Guard_Back)
 end
