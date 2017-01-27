@@ -5,7 +5,7 @@ local Spell_LavaBomb2 = 20474
 
 local function LavaBombSpawn(event, creature, target, spellid)
 	if (spellid == Spell_LavaBomb1) or (spellid == Spell_LavaBomb2) then
-		PerformIngameSpawn( 2, GameObject_LavaBomb1, target:GetMapId(), target:GetInstanceId(), target:GetX(), target:GetY(), target:GetZ(), target:GetO(), 0, 1800, target:GetPhaseMask())
+		LavaBomb = creature:SummonGameObject( GameObject_LavaBomb1, target:GetX(), target:GetY(), target:GetZ(), target:GetO(), 30)
 	end
 end
 
