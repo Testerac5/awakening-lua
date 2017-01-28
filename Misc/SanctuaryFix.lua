@@ -12,7 +12,7 @@
 ]]
 
 local function SanctuaryFix(event, player, target)
-	if (target:IsPvPFlagged() == false) then
+	if (target:IsFFAPvP() == false) then
 		player:AttackStop()
 	end
 end
