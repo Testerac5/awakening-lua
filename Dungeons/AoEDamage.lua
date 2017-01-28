@@ -1,4 +1,4 @@
-local dmg = 0
+--[[local dmg = 0
 
 local function Apply(eventId, delay, repeats, creature)
 	local people = creature:GetUnfriendlyUnitsInRange(100)
@@ -21,6 +21,10 @@ local function AoE(event, creature, attacker, damage)
 	hp1 = creature:GetHealth()
 	attacker:SendBroadcastMessage("current hp is " ..hp1.. ".")
 	end
+end--]]
+
+local function AoE(event, creature, attacker, damage)
+	attacker:SendBroadcastMessage("LUA is working.")
 end
 
 RegisterCreatureEvent( 12264, 9, AoE )
