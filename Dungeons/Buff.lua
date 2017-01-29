@@ -24,7 +24,8 @@ function Buff(event, player)
 		-- add aura based on DB query above and loop for mobs in range
 		for x=1,#mobs,1 do
 			for y=1,#buffspell,1 do
-				if mobs[x]:HasAura(buffspell[y]) == false then
+				-- checks for aura first, then possible pet, then for player
+				if (mobs[x]:HasAura(buffspell[y]) == false) and (mobs[x]:GetPetGUID() == nil) and (mobs[x]:HasSpell(818011) == false) then
 					mobs[x]:AddAura(buffspell[y], mobs[x])
 				end
 			end
