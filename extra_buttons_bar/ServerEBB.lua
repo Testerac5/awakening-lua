@@ -660,12 +660,16 @@ function MyHandlers.LearnThisSpell(player, got_spell, i,class,spec)
 	local LevelReq = nil
 
 	local countofspells, spells = GetRightSpellTables(class,spec)
+	if not(spells) then
+		successful = false
+	else
 	for k,v in pairs(spells) do
 		if (v[1] == got_spell[1]) then
 		currency_one = v[2]
 		currency_two = v[3]
 		spellID = v[1]
 		LevelReq = v[4]
+	end
 	end
 	end
 
@@ -887,7 +891,7 @@ function MyHandlers.LearnThisTalent(player, attached_talent, indexAt,ClassSpec)
 
 		end
 	
-	if not(spellID) or player:HasSpell(spellID) then
+	if not(spellID) or player:HasSpell(spellID) or not(talentList) then
 		successful = false
 	end
 
