@@ -699,7 +699,7 @@ function MyHandlers.LearnThisSpell(player, got_spell, i,class,spec)
 		player:RemoveItem(talent_essence, currency_two)
 	end
 	
-	if player_has_currency == true then
+	if successful == true then
 		player:CastSpell(player, 966006)
 		player:LearnSpell(spellID)
 		player:SaveToDB()
@@ -917,7 +917,7 @@ function MyHandlers.LearnThisTalent(player, attached_talent, indexAt,ClassSpec)
 		player:RemoveItem(talent_essence, currency_two)
 	end
 	
-	if player_has_currency == true then
+	if successful == true then
 		player:CastSpell(player, 966006)
 		player:LearnSpell(spellID)
 		player:SaveToDB()
