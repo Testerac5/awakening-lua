@@ -10,10 +10,3 @@
 		ii) Select Self - N/A
 
 ]]
-
-local function SanctuaryFix(event, player, target)
-	if (target:IsFFAPvP() == false) then
-		player:AttackStop()
-	end
-end
-RegisterPlayerEvent(33, SanctuaryFix)
