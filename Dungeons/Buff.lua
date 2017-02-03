@@ -11,7 +11,7 @@ function Buff(event, player)
 	if (Buff1 ~= nil) then
 		--so we dont dupe the same timer 100000 times
 		if (timing == false) then
-			player:RegisterEvent(Redo, 120000, 0)
+			player:RegisterEvent(Redo, 60000, 0)
 			--DEBUG--player:SendBroadcastMessage("timing now")
 			timing = true
 		end
