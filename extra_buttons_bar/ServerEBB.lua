@@ -706,7 +706,7 @@ function MyHandlers.LearnThisSpell(player, got_spell, i,class,spec)
 	if successful == true then
 		player:CastSpell(player, 966006)
 		player:LearnSpell(spellID)
-		player:SaveToDB()
+		--player:SaveToDB()
 	end
 	
 	if successful == false then
@@ -924,7 +924,7 @@ function MyHandlers.LearnThisTalent(player, attached_talent, indexAt,ClassSpec)
 	if successful == true then
 		player:CastSpell(player, 966006)
 		player:LearnSpell(spellID)
-		player:SaveToDB()
+		--player:SaveToDB()
 	end
 	
 	if successful == false then
