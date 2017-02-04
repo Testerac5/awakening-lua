@@ -1,4 +1,4 @@
-local function Redo(eventId, delay, repeats, player)
+--[[local function Redo(eventId, delay, repeats, player)
 	Buff(event, player)
 	--DEBUG--player:SendBroadcastMessage("test")
 end
@@ -37,4 +37,78 @@ function Buff(event, player)
 	end
 end
 
-RegisterPlayerEvent(28, Buff)
+RegisterPlayerEvent(28, Buff)]]--
+
+-- my edit of this script -- Need to be tested -- 
+local instance_buff = {
+	
+[43]={966010}, -- WC
+[389]={966010}, -- RFC
+[36]={966010}, -- Deadmines
+[33]={966011}, -- SFK
+[48]={966011}, -- BFD
+[34]={966011}, -- Stockades
+[90]={966012}, -- Gnomer
+[47]={966012}, -- RFK
+[189]={966012}, -- SM
+[129]={966013}, -- RFD
+[70]={966013}, -- Uld
+[209]={966013}, -- ZF
+[349]={966013}, -- Mara
+[109]={966014}, -- ST
+[230]={966014}, -- BRD
+[229]={966016}, -- Scholo
+[429]={966016}, -- DM
+[329]={966016}, -- Strat
+[289]={966015}, -- BRS
+
+}
+local instance_flag_buff = 966026
+
+local function Instance_Buff(event,player,enemy)
+	if not(enemy:ToCreature()) then
+		return false
+	end
+
+	if (enemy:HasAura(instance_flag_buff)) then -- flag check
+		return false
+	end
+
+	local Instance_Map = player:GetMap()
+	local Instance_Creatures_ToBuff = {}
+	local Instance_Buffs = {}
+
+	if not(Instance_Map:IsDungeon()) and not(Instance_Map:IsRaid()) then
+		return false
+	end	
+
+	Instance_Buffs = instance_buff[Instance_Map:GetMapId()]
+
+	if not(Instance_Buffs[1]) then 
+		return false
+	end
+
+	local Instance_Creatures = player:GetCreaturesInRange(300)
+	for id,creature in pairs(Instance_Creatures) do
+		if not(creature:HasAura(instance_flag_buff)) and not(creature:GetOwner():ToPlayer()) and not(creature:HasSpell(818011)) then -- flag check (replaced with special aura which works the same way as auras we have) pet check spell check
+			table.insert(Instance_Creatures_ToBuff, creature)
+		end
+	end
+
+	if not(Instance_Creatures_ToBuff[1]) then
+		return false
+	end
+
+	for k,cre_to_buff in pairs(Instance_Creatures_ToBuff) do
+		for i,cre_aura in pairs(Instance_Buffs) do
+			if not(cre_to_buff:HasAura(cre_aura) then
+			cre_to_buff:AddAura(cre_aura, cre_to_buff)
+			cre_to_buff:AddAura(instance_flag_buff, cre_to_buff)
+		end
+		end
+	end
+
+end
+--RegisterPlayerEvent(28, Instance_Buff) -- run the script on mapchange event
+
+RegisterPlayerEvent(33, Instance_Buff) -- on enter combat
