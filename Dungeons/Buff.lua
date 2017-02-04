@@ -101,7 +101,7 @@ local function Instance_Buff(event,player,enemy)
 
 	for k,cre_to_buff in pairs(Instance_Creatures_ToBuff) do
 		for i,cre_aura in pairs(Instance_Buffs) do
-			if not(cre_to_buff:HasAura(cre_aura) then
+			if not(cre_to_buff:HasAura(cre_aura)) then
 			cre_to_buff:AddAura(cre_aura, cre_to_buff)
 			cre_to_buff:AddAura(instance_flag_buff, cre_to_buff)
 		end
