@@ -90,8 +90,16 @@ local function Instance_Buff(event,player,enemy)
 
 	local Instance_Creatures = player:GetCreaturesInRange(300)
 	for id,creature in pairs(Instance_Creatures) do
-		if not(creature:HasAura(instance_flag_buff)) and not(creature:GetOwner():ToPlayer()) and not(creature:HasSpell(818011)) then -- flag check (replaced with special aura which works the same way as auras we have) pet check spell check
+		if not(creature:HasAura(instance_flag_buff)) and not(creature:HasSpell(818011)) then -- flag check (replaced with special aura which works the same way as auras we have)
+			-- pet check -- 
+			if (creature:GetOwner()) then
+				if not(creature:GetOwner():ToPlayer()) then
+					table.insert(Instance_Creatures_ToBuff, creature)
+				end
+			else
+			--           --
 			table.insert(Instance_Creatures_ToBuff, creature)
+		end
 		end
 	end
 
@@ -104,6 +112,7 @@ local function Instance_Buff(event,player,enemy)
 			if not(cre_to_buff:HasAura(cre_aura)) then
 			cre_to_buff:AddAura(cre_aura, cre_to_buff)
 			cre_to_buff:AddAura(instance_flag_buff, cre_to_buff)
+			cre_to_buff:SendUnitSay("Aura Applied", 0) -- DEBUG
 		end
 		end
 	end
