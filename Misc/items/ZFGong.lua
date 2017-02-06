@@ -9,4 +9,4 @@ local function ZFGong(event, player, item, target)
 	end
 end
 
-RegisterItemEvent(17191, 2, ZFGong)
+RegisterItemEvent(9240, 2, ZFGong)
