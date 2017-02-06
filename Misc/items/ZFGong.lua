@@ -5,7 +5,7 @@ local function ZFGong(event, player, item, target)
 		player:SendBroadcastMessage("no goober")
 		return false;
 	elseif (dupe ~= 0) then
-		player:SendBroadcastMessage("there are " ..tostring(dupe).. " ghazrillas.")
+		player:SendBroadcastMessage("there are " ..dupe:GetRowCount().. " ghazrillas.")
 		return false;
 	else
 		player:SpawnCreature(7273, 1665.56, 1187.32, 6.64, 3.9, 7)
