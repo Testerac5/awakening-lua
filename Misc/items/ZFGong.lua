@@ -3,7 +3,7 @@ local function ZFGong(event, player, item, target)
 	if (goober == nil) then
 		player:SendBroadcastMessage("no goober")
 		return false;
-	elseif (player:GetCreaturesInRange(100, 7273, 0, 0) ~= nil) then
+	elseif (player:GetCreaturesInRange(100, 7273, 0, 0) ~= 0) then
 		player:SendBroadcastMessage("multiple boss")
 		return false;
 	else
