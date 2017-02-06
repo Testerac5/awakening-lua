@@ -10,3 +10,10 @@
 		ii) Select Self - N/A
 
 ]]
+
+local function sanctuary_fix_2(event, player, newZone, newArea) -- using to prevent saving flags after leaving the inn
+if not(player:IsRested()) and not(player:IsFFAPVP()) then
+	player:SetFFA(true)
+end
+end
+RegisterPlayerEvent(27, sanctuary_fix) -- zone change
