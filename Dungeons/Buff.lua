@@ -112,7 +112,7 @@ local function Instance_Buff(event,player,enemy)
 			if not(cre_to_buff:HasAura(cre_aura)) then
 			cre_to_buff:AddAura(cre_aura, cre_to_buff)
 			cre_to_buff:AddAura(instance_flag_buff, cre_to_buff)
-			cre_to_buff:SendUnitSay("Aura Applied", 0) -- DEBUG
+			--cre_to_buff:SendUnitSay("Aura Applied", 0) -- DEBUG
 		end
 		end
 	end

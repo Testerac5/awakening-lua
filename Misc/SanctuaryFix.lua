@@ -10,11 +10,13 @@
 		ii) Select Self - N/A
 
 ]]
---[[
+
 local function sanctuary_fix_2(eventId, delay, repeats, player) -- using to prevent saving flags after leaving the inn
 if not(player:IsRested()) and not(player:IsFFAPVP()) then
 	player:SetFFA(true)
 end
+
+player:SendBroadcastMessage("test") -- DEBUG
 
 if player:IsInCombat() and player:GetVictim() then
 	if not player:GetVictim():ToPlayer() then
@@ -33,4 +35,4 @@ local function TimingChecks(event,player)
 	player:RegisterEvent(sanctuary_fix_2, 2000, 0)
 end
 
-RegisterPlayerEvent(3, TimingChecks)]]--
+RegisterPlayerEvent(3, TimingChecks)
