@@ -18,12 +18,12 @@ end
 
 player:SendBroadcastMessage("test") -- DEBUG
 
-if player:IsInCombat() and player:GetVictim() then
-	if not player:GetVictim():ToPlayer() then
+if (player:IsInCombat() and player:GetVictim()) then
+	if not(player:GetVictim():ToPlayer()) then
 		return false
 	end
 	local victim = player:GetVictim():ToPlayer()
-	if ((player:IsAlliance() and victim:IsAlliance()) or (player:IsHorde() and victim:IsHorde())) then
+	if ((player:IsAlliance() and victim:IsAlliance()) or (player:IsHorde() and victim:IsHorde()) then
 		if not(victim:IsFFAPVP()) then
 			player:ClearInCombat()
 		end
