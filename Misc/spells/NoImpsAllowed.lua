@@ -1,4 +1,4 @@
-local function FuckingImps(event, creature, target)
+local function FuckingImps(event, creature, attacker, damage)
 	local owner = creature:GetOwner()
 	if (owner:HasAura(19028) == false) then
 		return false
@@ -11,4 +11,4 @@ local function FuckingImps(event, creature, target)
 end
 
 
-RegisterCreatureEvent(416, 12, FuckingImps)
+RegisterCreatureEvent(9, FuckingImps)
