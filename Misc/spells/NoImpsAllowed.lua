@@ -11,4 +11,4 @@ local function FuckingImps(event, creature, attacker, damage)
 end
 
 
-RegisterCreatureEvent(9, FuckingImps)
+RegisterCreatureEvent(416, 9, FuckingImps)
