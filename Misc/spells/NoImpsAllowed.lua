@@ -2,7 +2,7 @@ local function FuckingImps(event, creature, attacker, damage)
 	local owner = creature:GetOwner()
 	if (owner:HasAura(19028) == false) then
 		return false
-	elseif (creature:HasAura(20329) == false) then
+	elseif (creature:HasAura(4511) == false) then
 		return false
 	else
 		player:RemoveAura(19028)
