@@ -38,29 +38,7 @@ for k, v in pairs(Guard_Factions) do
 	end
 	end
 
-	--attack player when player attacks player of the same faction
-local function Guard_MainAction(event, killer, killed)
-	if killer:IsFFAPvP() and (killer:ToPlayer() and killed:ToPlayer()) and ( (killer:IsAlliance() and killed:IsAlliance()) or (killer:IsHorde() and killed:IsHorde()) ) then
-
-		local FriendlyCreatures = killer:GetFriendlyUnitsInRange(60)
-
-		for n, creature in pairs(FriendlyCreatures) do
-			for m,faction_g in pairs(Guard_Factions) do
-				if (faction_g == creature:GetFaction()) then
-					creature:SetFaction(7)
-					creature:AttackStart(killer)
-					if ((killer:GetLevel()-creature:GetLevel()) > 5) then
-						creature:AddAura(26662, creature)
-					end
-				end
-			end
-		end
-	end
-end
-
-RegisterPlayerEvent(33, Guard_MainAction)
-
-local function Guard_Back(event, creature)
+local function Guard_Back(eventId, delay, repeats, creature)
 	if (creature:GetFaction() == 7) and (not(creature:GetVictim()) or (creature:GetVictim():IsDead())) then
 	local faction = WorldDBQuery("SELECT faction FROM creature_template where entry = '"..creature:GetEntry().."';")
 		creature:SetFaction(faction:GetInt32(0))
@@ -72,11 +50,35 @@ local function Guard_Back(event, creature)
 	end
 	end
 end
-for k,v in pairs(Guards_Entry) do
+	--attack player when player attacks player of the same faction
+local function Guard_MainAction(event, killer, killed)
+	if killer:IsFFAPvP() and (killer:ToPlayer() and killed:ToPlayer()) and ( (killer:IsAlliance() and killed:IsAlliance()) or (killer:IsHorde() and killed:IsHorde()) ) then
+
+		local FriendlyCreatures = killer:GetFriendlyUnitsInRange(60)
+
+		for n, creature in pairs(FriendlyCreatures) do
+			for m,faction_g in pairs(Guard_Factions) do
+				if (faction_g == creature:GetFaction()) then
+					creature:SetFaction(7)
+					creature:AttackStart(killer)
+					creature:RegisterEvent(Guard_Back, 2000, 0)
+					if ((killer:GetLevel()-creature:GetLevel()) > 5) then
+						creature:AddAura(26662, creature)
+					end
+				end
+			end
+		end
+	end
+end
+
+RegisterPlayerEvent(33, Guard_MainAction)
+
+
+--[[for k,v in pairs(Guards_Entry) do
 	RegisterCreatureEvent(v, 2, Guard_Back) -- on leave combat
 	RegisterCreatureEvent(v, 3, Guard_Back) -- on target died
 	RegisterCreatureEvent(v, 5, Guard_Back) -- on spawn
 	--RegisterCreatureEvent(v, 10, Guard_Back) -- on precombat
 	RegisterCreatureEvent(v, 7, Guard_Back) -- on aiupdate
 	--RegisterCreatureEvent(v, 23, Guard_Back)
-end
+end]]--
