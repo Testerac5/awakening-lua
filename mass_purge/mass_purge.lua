@@ -9,31 +9,31 @@ function MassPurgeCheck(event, player)
 		
 		
 		-- ############ Removing all spell tomes from player ##########################
-		local all_tomes = WorldDBQuery('SELECT entry FROM item_template WHERE name like "%tome:%"')
+		--local all_tomes = WorldDBQuery('SELECT entry FROM item_template WHERE name like "%tome:%"')
 		
-		if all_tomes == nil then
-			print("No tomes in the item_template")
-		end
+		--if all_tomes == nil then
+			--print("No tomes in the item_template")
+		--end
 		
-		local current_tome = all_tomes:GetInt32(0)
+		--local current_tome = all_tomes:GetInt32(0)
 		
-		while player:HasItem(current_tome,1,true) == true do
-			player:RemoveItem(current_tome, 1)
-		end
+		-while player:HasItem(current_tome,1,true) == true do
+			--player:RemoveItem(current_tome, 1)
+		--end
 		
-		local bool_nextRow = all_tomes:NextRow()
+		--local bool_nextRow = all_tomes:NextRow()
 		
-		if bool_nextRow == true then
-			while bool_nextRow == true do
+		--if bool_nextRow == true then
+			--while bool_nextRow == true do
 				
-				current_tome = all_tomes:GetInt32(0)
+				--current_tome = all_tomes:GetInt32(0)
 				
-				while player:HasItem(current_tome, 1, true) == true do
-					player:RemoveItem(current_tome, 1)
-				end
-				bool_nextRow = all_tomes:NextRow()
-			end
-		end
+				--while player:HasItem(current_tome, 1, true) == true do
+					--player:RemoveItem(current_tome, 1)
+				--end
+				--bool_nextRow = all_tomes:NextRow()
+			--end
+		--end
 		
 		
 		-- #################### removing all spells from player ######################################
