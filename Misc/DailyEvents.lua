@@ -4,30 +4,29 @@ local function DailyGloryFlush(event, player)
 	WorldDBQuery("DELETE FROM timestamps WHERE state = 1")
 	WorldDBQuery("INSERT INTO timestamps VALUES ( 1, " ..Stime2.. ");")
 	player:UnbindInstance(409)
-	player:SendBroadcastMessage("Daily function.")
 end
 
 local function ResetCheck(event, player)
+	if (player == nil) then
+		print("[Eluna]: Error pushing timestamps on reset. No players are online. See: DailyEvents.lua.")
+		return false
+	local GUpdate1 = WorldDBQuery("SELECT * FROM timestamps WHERE state = 1")
+	elseif (GUpdate1 == nil) then
+		if (player:IsGM() == true) then
+		-- sends an error message to GMs and server if there is no flush time in the DB
+		player:SendBroadcastMessage("The daily timer system has broken! Contact an administrator ASAP!")
+		print("[Eluna]: Error loading LUA script: DailyEvents.lua - There is a nil value in the database `timestamps`. Check entries!")
+		return false
+		end
+	return false
 	-- the time, in seconds
 	-- use integers that divide evenly into the "save players interval" value in world.conf for best results
-	local timerdaily = 86400
-	local GUpdate1 = WorldDBQuery("SELECT * FROM timestamps WHERE state = 1")
 	local Stime = GetGameTime()
-	player:SendBroadcastMessage("players saved")
-	if (player ~= nil) then
-		player:SendBroadcastMessage("player true")
-		if (GUpdate1 ~= nil) then
-			player:SendBroadcastMessage("timestamp check true")
-			if (Stime >= GUpdate1:GetInt32(1) + timerdaily) then
+	local timerdaily = 86400
+	elseif (Stime >= GUpdate1:GetInt32(1) + timerdaily) then
 				DailyGloryFlush(event, player)
-				player:SendBroadcastMessage("Daily timer has triggered.")
-			--	player:SendBroadcastMessage("Raids are now reset.")
-			end
-		elseif (player:IsGM() == true) then
-			-- sends an error message to GMs and server if there is no flush time in the DB
-			player:SendBroadcastMessage("The Glory system has broken! Contact an administrator ASAP!")
-			print("[Eluna]: Error loading LUA script: Glory.lua - There is a nil value in the database `timestamps`. Check entries!")
-		end
+	else
+		return false
 	end
 end
 
