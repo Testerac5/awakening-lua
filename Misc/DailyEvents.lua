@@ -9,7 +9,7 @@ end
 local function ResetCheck(event, player)
 	-- the time, in seconds
 	-- use integers that divide evenly into the "save players interval" value in world.conf for best results
-	local timerdaily = 90
+	local timerdaily = 86400
 	local GUpdate1 = CharDBQuery("SELECT * FROM timestamps WHERE state = 1")
 	local Stime = GetGameTime()
 	if (player ~= nil) then
