@@ -4,6 +4,7 @@ local function DailyGloryFlush(event, player)
 	CharDBQuery("DELETE FROM timestamps WHERE state = 1")
 	CharDBQuery("INSERT INTO timestamps VALUES ( 1, " ..Stime2.. ");")
 	player:UnbindInstance(409)
+	player:SendBroadcastMessage("Daily function.")
 end
 
 local function ResetCheck(event, player)
@@ -12,11 +13,14 @@ local function ResetCheck(event, player)
 	local timerdaily = 86400
 	local GUpdate1 = CharDBQuery("SELECT * FROM timestamps WHERE state = 1")
 	local Stime = GetGameTime()
+	player:SendBroadcastMessage("players saved")
 	if (player ~= nil) then
+		player:SendBroadcastMessage("player true")
 		if (GUpdate1 ~= nil) then
+			player:SendBroadcastMessage("timestamp check true")
 			if (Stime >= GUpdate1:GetInt32(1) + timerdaily) then
 				DailyGloryFlush(event, player)
-			--	player:SendBroadcastMessage("Daily timer has triggered.")
+				player:SendBroadcastMessage("Daily timer has triggered.")
 			--	player:SendBroadcastMessage("Raids are now reset.")
 			end
 		elseif (player:IsGM() == true) then
