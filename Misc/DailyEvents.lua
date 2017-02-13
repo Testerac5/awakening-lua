@@ -7,10 +7,14 @@ local function DailyGloryFlush(event, player)
 end
 
 local function ResetCheck(event, player)
+	-- the time, in seconds
+	-- use integers that divide evenly into the "save players interval" value in world.conf for best results
+	local Stime = GetGameTime()
+	local timerdaily = 86400	
+	local GUpdate1 = WorldDBQuery("SELECT * FROM timestamps WHERE state = 1")
 	if (player == nil) then
 		print("[Eluna]: Error pushing timestamps on reset. No players are online. See: DailyEvents.lua.")
 		return false
-	local GUpdate1 = WorldDBQuery("SELECT * FROM timestamps WHERE state = 1")
 	elseif (GUpdate1 == nil) then
 		if (player:IsGM() == true) then
 		-- sends an error message to GMs and server if there is no flush time in the DB
@@ -18,11 +22,7 @@ local function ResetCheck(event, player)
 		print("[Eluna]: Error loading LUA script: DailyEvents.lua - There is a nil value in the database `timestamps`. Check entries!")
 		return false
 		end
-	return false
-	-- the time, in seconds
-	-- use integers that divide evenly into the "save players interval" value in world.conf for best results
-	local Stime = GetGameTime()
-	local timerdaily = 86400
+		return false
 	elseif (Stime >= GUpdate1:GetInt32(1) + timerdaily) then
 				DailyGloryFlush(event, player)
 	else
