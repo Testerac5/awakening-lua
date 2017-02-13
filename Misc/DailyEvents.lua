@@ -1,8 +1,8 @@
 local function DailyGloryFlush(event, player)
 	local Stime2 = tostring(GetGameTime())
 	-- readies for next timer
-	CharDBQuery("DELETE FROM timestamps WHERE state = 1")
-	CharDBQuery("INSERT INTO timestamps VALUES ( 1, " ..Stime2.. ");")
+	WorldDBQuery("DELETE FROM timestamps WHERE state = 1")
+	WorldDBQuery("INSERT INTO timestamps VALUES ( 1, " ..Stime2.. ");")
 	player:UnbindInstance(409)
 	player:SendBroadcastMessage("Daily function.")
 end
@@ -11,7 +11,7 @@ local function ResetCheck(event, player)
 	-- the time, in seconds
 	-- use integers that divide evenly into the "save players interval" value in world.conf for best results
 	local timerdaily = 86400
-	local GUpdate1 = CharDBQuery("SELECT * FROM timestamps WHERE state = 1")
+	local GUpdate1 = WorldDBQuery("SELECT * FROM timestamps WHERE state = 1")
 	local Stime = GetGameTime()
 	player:SendBroadcastMessage("players saved")
 	if (player ~= nil) then
