@@ -53,7 +53,7 @@ druid_feral_talents_tab = 16
 
 druid_restoration_spells = {{5185, 2, 0, 1}, {1126, 2, 0, 1}, {774, 2, 0, 4}, {8936, 2, 0, 12}, {50769, 2, 0, 12},
 {8946, 2, 0, 14}, {20484, 2, 0, 20}, {2782, 2, 0, 24}, {2893, 2, 0, 26}, {740, 2, 0 ,30},
-{33763, 2, 0, 64}}
+{33763, 2, 0, 64}{504642, 0, 80}}
 
 druid_restoration_spells_count = 11
 druid_restoration_bgs = {"Interface\\TalentFrame\\DruidRestoration-TopLeft", "Interface\\TalentFrame\\DruidRestoration-TopRight",
