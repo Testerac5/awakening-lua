@@ -30,3 +30,5 @@ local function ResetCheck(event, player)
 		end
 	end
 end
+
+RegisterPlayerEvent(25, ResetCheck)
