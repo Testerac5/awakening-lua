@@ -111,10 +111,6 @@ sideBar:SetFrameStrata("LOW")
             bgFile = "Interface\\AddOns\\AwAddons\\Textures\\misc\\main",}) 
 
     sideBar:SetScript("OnUpdate" , function() 
-        if (LFDMicroButton:IsVisible()) then
-            LFDMicroButton:Hide()
-        CharUpdatesMicroButton:Show()
-    end
     local itemCount_sb = GetItemCount(383080) or 0
     sideBar.Text_Ability:SetText("|cffE1AB18Ability Essence: |cffFFFFFF"..itemCount_sb)
     local itemCount_sb2 = GetItemCount(383081) or 0
