@@ -9,6 +9,7 @@ local MicroButtons = {
         AchievementMicroButton,
         QuestLogMicroButton,
         SocialsMicroButton,
+        PVPMicroButton,
         CharUpdatesMicroButton,
         MainMenuMicroButton,
         HelpMicroButton,
