@@ -6,12 +6,12 @@ if AIO.AddAddon() then
 end
 
 local MicroButtons = {
-        AchievementMicroButton
-        QuestLogMicroButton
-        SocialsMicroButton
-        CharUpdatesMicroButton
-        MainMenuMicroButton
-        HelpMicroButton
+        AchievementMicroButton,
+        QuestLogMicroButton,
+        SocialsMicroButton,
+        CharUpdatesMicroButton,
+        MainMenuMicroButton,
+        HelpMicroButton,
 }
 
 BI_i = CreateFrame("Frame", nil, UIParent)
