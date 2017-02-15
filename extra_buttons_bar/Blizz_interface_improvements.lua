@@ -10,9 +10,9 @@ local MicroButtons = {
         QuestLogMicroButton,
         SocialsMicroButton,
         PVPMicroButton,
-        CharUpdatesMicroButton,
+        LFDMicroButton,
         MainMenuMicroButton,
-        HelpMicroButton,
+        HelpMicroButton
 }
 
 BI_i = CreateFrame("Frame", nil, UIParent)
