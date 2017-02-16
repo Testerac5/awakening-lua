@@ -52,7 +52,10 @@ local function Guard_Back(eventId, delay, repeats, creature)
 end
 	--attack player when player attacks player of the same faction
 local function Guard_MainAction(event, killer, killed)
-	if killer:IsFFAPvP() and (killer:ToPlayer() and killed:ToPlayer()) and ( (killer:IsAlliance() and killed:IsAlliance()) or (killer:IsHorde() and killed:IsHorde()) ) then
+	if not(killer:IsFFAPvP()) then
+		return false
+	end
+	if (killer:ToPlayer() and killed:ToPlayer()) and ( (killer:IsAlliance() and killed:IsAlliance()) or (killer:IsHorde() and killed:IsHorde()) ) then
 
 		local FriendlyCreatures = killer:GetFriendlyUnitsInRange(60)
 
