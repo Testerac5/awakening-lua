@@ -12,11 +12,11 @@
 ]]
 
 local function sanctuary_fix_2(eventId, delay, repeats, player) -- using to prevent saving flags after leaving the inn
-if not(player:IsRested()) and not(player:IsFFAPvP()) then
+if not(player:HasFlag(150,6)) and not(player:IsFFAPvP()) then
 	player:SetFFA(true)
 end
 
-if (player:IsRested()) and (player:IsFFAPvP()) then
+if (player:HasFlag(150,6)) and (player:IsFFAPvP()) then
 	player:SetFFA(false)
 end
 
