@@ -17,7 +17,7 @@ function MassPurgeCheck(event, player)
 		
 		--local current_tome = all_tomes:GetInt32(0)
 		
-		-while player:HasItem(current_tome,1,true) == true do
+		--while player:HasItem(current_tome,1,true) == true do
 			--player:RemoveItem(current_tome, 1)
 		--end
 		
