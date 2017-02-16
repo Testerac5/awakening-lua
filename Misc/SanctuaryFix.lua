@@ -24,7 +24,7 @@ if (player:IsInCombat() and player:GetVictim()) then
 		return false
 	end
 	local victim = player:GetVictim():ToPlayer()
-	if ((player:IsAlliance() and victim:IsAlliance()) or (player:IsHorde() and victim:IsHorde()) then
+	if (player:IsAlliance() and victim:IsAlliance()) or (player:IsHorde() and victim:IsHorde()) then
 		if not(victim:IsFFAPvP()) then
 			player:ClearInCombat()
 		end
