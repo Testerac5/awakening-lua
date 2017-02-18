@@ -17,9 +17,14 @@ local MicroButtons = {
 
 BI_i = CreateFrame("Frame", nil, UIParent)
 BI_i:SetScript("OnUpdate", function()
+    if (InspectFrameTab3:IsVisible()) then
+    InspectFrameTab3:Hide()
+    end
+
     if (FriendsFrameTab2:IsVisible()) then
     FriendsFrameTab2:Hide()
     end
+    
     if (LFDMicroButton:IsVisible()) then
         LFDMicroButton:Hide()
         CharUpdatesMicroButton:Show()
