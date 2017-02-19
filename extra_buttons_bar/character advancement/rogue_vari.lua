@@ -50,7 +50,7 @@ rogue_combat_talents_tab = 7
 
 
 rogue_subtlety_spells = {{1784, 2, 0, 1}, {921, 2, 0, 4}, {6770, 2, 0, 10}, {1725, 2, 0, 10}, {1804, 2, 0, 10}, {2836, 1, 0, 24},
-{1856, 2, 0, 35}, {1842, 1, 0, 30}, {2094, 2, 0, 34}, {1860, 2, 0, 40}, {31224, 2, 0, 66}, {57934, 2, 0, 80}}
+{1856, 2, 0, 35}, {1842, 1, 0, 30}, {2094, 2, 0, 34}, {1860, 1, 0, 40}, {31224, 2, 0, 66}, {57934, 2, 0, 80}}
 
 rogue_subtlety_spells_count = 12
 rogue_subtlety_bgs = {"Interface\\TalentFrame\\RogueSubtlety-TopLeft", "Interface\\TalentFrame\\RogueSubtlety-TopRight",
