@@ -11,20 +11,23 @@
 
 ]]
 
---[[local function sanctuary_fix_2(eventId, delay, repeats, player) -- using to prevent saving flags after leaving the inn
-if (not(player:IsRested()) and not(player:IsFFAPVP())) then
+local function sanctuary_fix_2(eventId, delay, repeats, player) -- using to prevent saving flags after leaving the inn
+if not(player:HasFlag(150,0x00000020)) and not(player:IsFFAPvP()) then
 	player:SetFFA(true)
 end
 
-player:SendBroadcastMessage("test") -- DEBUG
+if (player:HasFlag(150,0x00000020)) and (player:IsFFAPvP()) then
+	player:SetFFA(false)
+end
 
---[[if (player:IsInCombat() and player:GetVictim()) then
+if (player:IsInCombat() and player:GetVictim()) then
 	if not(player:GetVictim():ToPlayer()) then
+
 		return false
 	end
 	local victim = player:GetVictim():ToPlayer()
-	if ((player:IsAlliance() and victim:IsAlliance()) or (player:IsHorde() and victim:IsHorde()) then
-		if not(victim:IsFFAPVP()) then
+	if (player:IsAlliance() and victim:IsAlliance()) or (player:IsHorde() and victim:IsHorde()) then
+		if not(victim:IsFFAPvP()) then
 			player:ClearInCombat()
 		end
 	end
@@ -35,4 +38,4 @@ local function TimingChecks(event,player)
 	player:RegisterEvent(sanctuary_fix_2, 2000, 0)
 end
 
-RegisterPlayerEvent(3, TimingChecks)]]--
+RegisterPlayerEvent(3, TimingChecks)
