@@ -17,8 +17,10 @@ local MicroButtons = {
 
 BI_i = CreateFrame("Frame", nil, UIParent)
 BI_i:SetScript("OnUpdate", function()
+    if (InspectFrame) then
     if (InspectFrameTab3:IsVisible()) then
     InspectFrameTab3:Hide()
+    end
     end
 
     if (FriendsFrameTab2:IsVisible()) then
