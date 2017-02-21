@@ -77,7 +77,7 @@ local function EntropyPvP(event, pKiller, pKilled)
 	if setcap == true then
 		leveldiff = 255
 	else
-		leveldiff = 6
+		leveldiff = 5
 	end --some checks for safe zones and other stuff
 	if not (pKilled == pKiller) then -- if player commited suicide, no drop
 		-- check for honorless target
