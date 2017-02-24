@@ -31,9 +31,9 @@ local function GetMoneyForReset(player,purgemissing)
 for k,v in pairs(Reset_Level) do
     if (player:GetLevel() >= k) and (player:GetLevel() < k+10) then
 
-    	if (purgetype == 2) then
+    	if (purgemissing == 1) then
         mult = TalentMult
-        elseif (purgetype == 1) then
+        elseif (purgemissing == 2) then
         mult = SpellMult
     	end
 
