@@ -31,9 +31,9 @@ local function GetMoneyForReset(player,purgemissing)
 for k,v in pairs(Reset_Level) do
     if (player:GetLevel() >= k) and (player:GetLevel() < k+10) then
 
-    	if (purgetype == 2) then
+    	if (purgemissing == 1) then
         mult = TalentMult
-        elseif (purgetype == 1) then
+        elseif (purgemissing == 2) then
         mult = SpellMult
     	end
 
@@ -448,7 +448,7 @@ function MyHandlers.ResetSpells(player)
 				
 					if player:HasSpell(spellid) == true then
 						player:RemoveSpell(spellid)
-						player:AddItem(spell_essence, AE_cost)
+												--player:AddItem(spell_essence, AE_cost)
 						if TE_cost ~= 0 then
 							player:Additem(talent_essence, TE_cost)
 						end
@@ -459,6 +459,8 @@ function MyHandlers.ResetSpells(player)
 				end
 			end
 			--custom mult part
+			player:RemoveItem(spell_essence, 10000)
+			player:AddItem(spell_essence, player:GetLevel())
 			CharDBExecute("UPDATE custom_resets SET ability_resets = ability_resets+1 WHERE char_guid = "..player:GetGUIDLow()..";")
 			local temp_cost, temp_t_mult, temp_a_mult = GetMoneyForReset(player, 1)
 			resetFrame_Refresh(AIO.Msg(), player,temp_t_mult, temp_a_mult+1):Send(player)
@@ -516,7 +518,7 @@ function MyHandlers.ResetTalents(player)
 					end
 
 					if spell_removed == true then
-						player:AddItem(talent_essence, (rank_removed*TE_cost))
+						--player:AddItem(talent_essence, (rank_removed*TE_cost))
 						if AE_cost ~= 0 then
 							player:AddItem(spell_essence, (rank_removed*AE_cost))
 						end
@@ -524,6 +526,8 @@ function MyHandlers.ResetTalents(player)
 				end
 			end
 			--custom mult part
+			player:RemoveItem(talent_essence, 10000)
+			player:AddItem(talent_essence, player:GetLevel()-9)
 			CharDBExecute("UPDATE custom_resets SET talent_resets = talent_resets+1 WHERE char_guid = "..player:GetGUIDLow()..";")
 			local temp_cost, temp_t_mult, temp_a_mult = GetMoneyForReset(player, 1)
 			resetFrame_Refresh(AIO.Msg(), player,temp_t_mult+1, temp_a_mult):Send(player)
