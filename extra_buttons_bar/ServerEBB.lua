@@ -459,7 +459,7 @@ function MyHandlers.ResetSpells(player)
 				end
 			end
 			--custom mult part
-			player:RemoveItem(spell_essence, 10000)
+			player:RemoveItem(spell_essence, player:GetItemCount(spell_essence))
 			player:AddItem(spell_essence, player:GetLevel())
 			CharDBExecute("UPDATE custom_resets SET ability_resets = ability_resets+1 WHERE char_guid = "..player:GetGUIDLow()..";")
 			local temp_cost, temp_t_mult, temp_a_mult = GetMoneyForReset(player, 1)
@@ -526,7 +526,7 @@ function MyHandlers.ResetTalents(player)
 				end
 			end
 			--custom mult part
-			player:RemoveItem(talent_essence, 10000)
+			player:RemoveItem(talent_essence, player:GetItemCount(talent_essence))
 			player:AddItem(talent_essence, player:GetLevel()-9)
 			CharDBExecute("UPDATE custom_resets SET talent_resets = talent_resets+1 WHERE char_guid = "..player:GetGUIDLow()..";")
 			local temp_cost, temp_t_mult, temp_a_mult = GetMoneyForReset(player, 1)
