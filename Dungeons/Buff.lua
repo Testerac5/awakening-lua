@@ -65,9 +65,9 @@ local instance_buff = {
 [249]={966020}, -- Onyxias Lair
 [309]={966022}, -- Zul'Gurub
 [469]={966021}, -- Blackwing Lair
-[509]={966021}, -- Ahn'qiraj 20
-[531]={966024}, -- Ahn'qiraj 40
-[533]={966025}, -- Naxxramas
+[509]={966021}, -- AQ20
+[531]={966024}, -- AQ40
+[533]={966025}, -- Naxx
 
 
 
