@@ -19,7 +19,7 @@ function update(event, player, msg, Type, lang)
 			os.execute ('bash /home/develop/awake/main/bin/lua_scripts/update_dbc.sh &')
 			player:SendBroadcastMessage("Successfully pushed DBC Files. This requires a restart")
 		
-		elseif msg == "%push sargeras" then
+		elseif msg == "%push core sargeras" then
 		
 			os.execute ('bash /home/develop/compile.sh &')
 			player:SendBroadcastMessage("Successfully started compiling core. This requires a restart but please wait a few minutes for compiling to finish.")
@@ -39,7 +39,7 @@ function update(event, player, msg, Type, lang)
 			os.execute ('bash /home/develop/awake/proudmoore/bin/lua_scripts/update_dbc.sh &')
 			player:SendBroadcastMessage("Successfully pushed DBC Files. This requires a restart")
 			
-		elseif msg == "%push proudmoore" then
+		elseif msg == "%push core proudmoore" then
 		
 			os.execute ('bash /home/develop/develop.sh &')
 			player:SendBroadcastMessage("Successfully started compiling core. This requires a restart but please wait a few minutes for compiling to finish.")
