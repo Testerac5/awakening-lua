@@ -413,6 +413,7 @@ sideBar:SetFrameStrata("LOW")
 	--[[Skill Frame]]
 	local StatFrame = CreateFrame("Frame", "StatFrame", UIParent, nil)
         StatFrame:SetSize(450, 500) --edited
+        --StatFrame:SetScale(0.88)--making everything more or less fit standart sizes of blizz interfaces
         StatFrame:SetMovable(true)
         StatFrame:EnableMouse(true)
         StatFrame:RegisterForDrag("LeftButton")

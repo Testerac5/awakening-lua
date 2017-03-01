@@ -15,6 +15,7 @@ local prohibited_items = {
 5863,
 }
 local dropmodifier = 4
+local item_looted = {}
 --local playerdeath = true
 --local creaturedeath = true
 --local leveldiff = 6
@@ -340,6 +341,10 @@ function MyHandlers.AddPlayerItem(player, itemEntry, itemCount, object)
 end
 
 local function Container_Interact(event, player, object)
+	if (item_looted[object:GetGUIDLow()]) then
+		return false
+	end
+	table.insert(item_looted, object:GetGUIDLow())
 	Init_FullLootFrame(event, player, object)
 	object:Despawn()
 	object:RemoveFromWorld(false)

@@ -13,6 +13,7 @@ local MyHandlers = AIO.AddHandlers("PvP", {})
 Framework = CreateFrame("Frame", "first_frame", UIParent, nil)
 local FullLootFrame = Framework
 FullLootFrame:SetSize(500, 500)
+FullLootFrame:SetScale(0.88) --making everything more or less fit standart sizes of blizz interfaces
 FullLootFrame:SetMovable(true)
 FullLootFrame:EnableMouse(true)
 FullLootFrame:RegisterForDrag("LeftButton")
