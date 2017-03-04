@@ -158,7 +158,7 @@ local function OnLoginPlayer(event, player) -- load hunger from table, works ok
 	end
 	player_hunger_table[guid] = player_hunger
 	AIO.Handle(player, "HungerBar", "OnLogin")
-	player:RegisterEvent(hunger_ticker, 150000, 0) -- register deal damage function
+	player:RegisterEvent(hunger_ticker, 78000, 0) -- register deal damage function
 	update_display_hunger(AIO.Msg(), player):Send(player)
 end
 
