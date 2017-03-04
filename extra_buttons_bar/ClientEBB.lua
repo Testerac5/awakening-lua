@@ -801,6 +801,14 @@ for k,v in pairs(Reset_Level) do
             purge_cost = Reset_Level[k][purgetype] + Reset_Level[k][3]*(UnitLevel("player")-k+mult*2)
             next_purge_cost = Reset_Level[k][purgetype] + Reset_Level[k][3]*(UnitLevel("player")-k+(mult+1)*2)
          end
+         --cap
+           if (purge_cost>Reset_Level[k][purgetype]*1.75) then
+            purge_cost = Reset_Level[k][purgetype]*1.75
+            end
+            if (next_purge_cost>Reset_Level[k][purgetype]*1.75) then
+            next_purge_cost = Reset_Level[k][purgetype]*1.75
+            end
+         --end cap
         return purge_cost, next_purge_cost
     end
 end

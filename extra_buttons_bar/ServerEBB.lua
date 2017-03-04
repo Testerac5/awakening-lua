@@ -38,6 +38,9 @@ for k,v in pairs(Reset_Level) do
     	end
 
         local talent_cost = Reset_Level[k][purgemissing] + Reset_Level[k][3]*(player:GetLevel()-k+mult*2)
+        if (talent_cost>Reset_Level[k][purgemissing]*1.75) then
+        	talent_cost = Reset_Level[k][purgemissing]*1.75
+        end
         return talent_cost,TalentMult,SpellMult
     end
 end
