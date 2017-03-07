@@ -412,7 +412,7 @@ sideBar:SetFrameStrata("LOW")
 		
 	--[[Skill Frame]]
 	local StatFrame = CreateFrame("Frame", "StatFrame", UIParent, nil)
-        StatFrame:SetSize(450, 500) --edited
+        StatFrame:SetSize(430, 480) --edited
         --StatFrame:SetScale(0.88)--making everything more or less fit standart sizes of blizz interfaces
         StatFrame:SetMovable(true)
         StatFrame:EnableMouse(true)
@@ -509,16 +509,16 @@ sideBar:SetFrameStrata("LOW")
         --SetBinding("I", togglesiderframe())
 
         --fast acces to frames--
-        local fastaccessframe = CreateFrame("frame", "fastaccessframe", UIParent)
+       local fastaccessframe = CreateFrame("frame", "fastaccessframe", UIParent)
         fastaccessframe:SetSize(210,210)
-        fastaccessframe:SetPoint("TOPLEFT", 0, -80)
-        fastaccessframe:EnableMouse(true)
+        fastaccessframe:SetPoint("LEFT", 0, -80)
+        --fastaccessframe:EnableMouse(true)
         fastaccessframe:SetMovable(true)
-        fastaccessframe:EnableMouse(true)
+        --[[fastaccessframe:EnableMouse(true)
         fastaccessframe:RegisterForDrag("LeftButton")
         fastaccessframe:SetScript("OnDragStart", fastaccessframe.StartMoving)
         fastaccessframe:SetScript("OnHide", fastaccessframe.StopMovingOrSizing)
-        fastaccessframe:SetScript("OnDragStop", fastaccessframe.StopMovingOrSizing)
+        fastaccessframe:SetScript("OnDragStop", fastaccessframe.StopMovingOrSizing)]]--
         fastaccessframe:SetFrameStrata("BACKGROUND")
         fastaccessframe:SetBackdrop({
            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Misc\\fastbuttonHighlight",
@@ -541,6 +541,11 @@ sideBar:SetFrameStrata("LOW")
             top = 18,
             bottom = 18}
                 }) -- edited
+        --TrainingButton_fast:SetMovable(true)
+        TrainingButton_fast:RegisterForDrag("LeftButton")
+        TrainingButton_fast:SetScript("OnDragStart", function(self) fastaccessframe:StartMoving() end)
+        TrainingButton_fast:SetScript("OnHide", function(self) fastaccessframe:StopMovingOrSizing() end)
+        TrainingButton_fast:SetScript("OnDragStop", function(self) fastaccessframe:StopMovingOrSizing() end)
 
 
             local AllocateButton_fast = CreateFrame("Button", "AllocateButton_fast", fastaccessframe)
@@ -557,6 +562,10 @@ sideBar:SetFrameStrata("LOW")
             top = 14,
             bottom = 14}
                 }) -- edited
+        AllocateButton_fast:RegisterForDrag("LeftButton")
+        AllocateButton_fast:SetScript("OnDragStart", function(self) fastaccessframe:StartMoving() end)
+        AllocateButton_fast:SetScript("OnHide", function(self) fastaccessframe:StopMovingOrSizing() end)
+        AllocateButton_fast:SetScript("OnDragStop", function(self) fastaccessframe:StopMovingOrSizing() end)
 
 
              local ResetButton_fast = CreateFrame("Button", "ResetButton_fast", fastaccessframe)
@@ -574,6 +583,10 @@ sideBar:SetFrameStrata("LOW")
             bottom = 12}
                 }) -- edited
         ResetButton_fast:SetFrameLevel(3)
+        ResetButton_fast:RegisterForDrag("LeftButton")
+        ResetButton_fast:SetScript("OnDragStart", function(self) fastaccessframe:StartMoving() end)
+        ResetButton_fast:SetScript("OnHide", function(self) fastaccessframe:StopMovingOrSizing() end)
+        ResetButton_fast:SetScript("OnDragStop", function(self) fastaccessframe:StopMovingOrSizing() end)
 
         --[[local ResetButton_fast_T = CreateFrame("Button", "ResetButton_fast_T", fastaccessframe)
         ResetButton_fast_T:SetSize(46, 46)
@@ -1294,7 +1307,7 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
 	--[[ StatFrame UI ]]
 	
     local StatFrame_CloseButton = CreateFrame("Button", "StatFrame_CloseButton", StatFrame, "UIPanelCloseButton")
-        StatFrame_CloseButton:SetPoint("TOPRIGHT", -40, -31) --edited
+        StatFrame_CloseButton:SetPoint("TOPRIGHT", -38, -29)  --edited
         StatFrame_CloseButton:EnableMouse(true)
         StatFrame_CloseButton:SetSize(29, 29) --edited
         StatFrame_CloseButton:SetScript("OnMouseUp", function(self)
@@ -1316,7 +1329,7 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
                 local StatFrame_TitleText = StatFrame:CreateFontString("StatFrame_TitleText") -- edited
         StatFrame_TitleText:SetFont("Fonts\\MORPHEUS.TTF", 15) -- edited
         StatFrame_TitleText:SetSize(190, 5)
-        StatFrame_TitleText:SetPoint("TOP", 0, -30) -- edited
+        StatFrame_TitleText:SetPoint("TOP", 0, -27) -- edited
         StatFrame_TitleText:SetText("|cff110000Stat Allocation|r") -- edited
        
     local StatFrame_Panel_Str = CreateFrame("Frame", "StatFrame_Panel_Str", StatFrame, nil) -- edited
@@ -1555,7 +1568,7 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
         local Stat_Value = StatFrame:CreateFontString("Stat_Value")
         Stat_Value:SetFont("Fonts\\MORPHEUS.TTF", 18, "OUTLINE")
         Stat_Value:SetSize(70, 5)
-        Stat_Value:SetPoint("BOTTOM", 0, 46)--edited all
+        Stat_Value:SetPoint("BOTTOM", 0, 43)--edited all
 		
 		
 	function MyHandlers.GetStatValues(player, stats)

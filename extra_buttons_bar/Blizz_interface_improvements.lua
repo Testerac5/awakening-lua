@@ -17,6 +17,14 @@ local MicroButtons = {
 
 BI_i = CreateFrame("Frame", nil, UIParent)
 BI_i:SetScript("OnUpdate", function()
+    if (PlayerTalentFrame) then
+    if (PlayerTalentFrame:IsVisible()) then
+        PlayerTalentFrameTab2:Hide()
+        PlayerTalentFrameTab3:Hide()
+        PlayerTalentFrameTab4:Hide()
+    end
+end
+
     if (InspectFrame) then
     if (InspectFrameTab3:IsVisible()) then
     InspectFrameTab3:Hide()
@@ -44,3 +52,14 @@ BI_i:SetScript("OnUpdate", function()
     end
     end)
 BI_i:Show()
+
+--Pet talents tab
+table.insert(UnitPopupMenus["PET"], table.getn(UnitPopupMenus["PET"]), "ASCENSION_PETTALENTS");
+UnitPopupButtons["ASCENSION_PETTALENTS"] = {text = "Pet Talents", dist = 0}
+hooksecurefunc("UnitPopup_OnClick", function (self)
+    local name = UIDROPDOWNMENU_INIT_MENU.name
+    if (name == MC_PLAYER) then return end
+    if (self.value == "ASCENSION_PETTALENTS") then
+      ToggleTalentFrame()
+    end
+  end);
