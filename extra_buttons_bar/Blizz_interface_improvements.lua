@@ -63,3 +63,25 @@ hooksecurefunc("UnitPopup_OnClick", function (self)
       ToggleTalentFrame()
     end
   end);
+
+function IsSpellLearned(entry)
+    local spellname = GetSpellInfo(entry)
+    local done = false
+    local known = false
+    local i = 1
+    local id = nil
+    if not(spellname) then
+      return false
+    end
+    spellname = string.gsub(spellname,"%(Rank %d+%)","");
+    while not done do
+        local name = GetSpellName(i,BOOKTYPE_SPELL);
+        if not name then
+        done=true;
+            elseif (name==spellname) then
+            known = true
+            end
+        i = i+1;
+    end
+return known
+end

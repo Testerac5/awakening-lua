@@ -92,7 +92,7 @@ local function CanBeUnlearned(slot, item)
     -- item check
     -- player has spell check
     local spellname,rank,spellid = GameTooltip:GetSpell()
-    if (GameTooltip:GetSpell() and IsSpellKnown(spellid) and (GetItemCount(scrollitem) > 0)) then
+    if (GameTooltip:GetSpell() and IsSpellLearned(spellid) and (GetItemCount(scrollitem) > 0)) then
         return true
     end
     return false
@@ -2935,7 +2935,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			local spellCostTE = spellList[start_ticker][3]
 			local RequiredLevel = spellList[start_ticker][4]
 			local name, rank, icon, _,_,_,_ = GetSpellInfo(spellId)
-			local player_knows = IsSpellKnown(spellId)
+			local player_knows = IsSpellLearned(spellId)
 			local learn_tooltip = "Cost: "..spellCostAE.." AE "..spellCostTE.." TE"
 			local learn_texture = {.9, .2, .1}
             local learn_text = "Learn" -- used for spell texts
