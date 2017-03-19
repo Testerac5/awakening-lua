@@ -53,7 +53,7 @@ local function update_display_hunger(msg, player)
 		player:RemoveAura(818055)
 	elseif percent <= 20 then
 		player:AddAura(818054, player)
-		player:AddAura(818055, player)
+		player:CastSpell(player, 818055)
 		player:RemoveAura(818053)
 	elseif (percent >= 21 and percent <= 79) then
 		if player:HasAura(818053) then
