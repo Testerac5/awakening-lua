@@ -2708,7 +2708,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
                 -- end
                 -- for ranks with learned talents
                 if self.HyperLink ~= nil then
-                    GameTooltip:AppendText("Rank "..player_talent_known.."/"..number_of_ranks)
+                    GameTooltip:AppendText("\nRank "..all_talent_FrameNumber[button_using]:GetText().."/"..number_of_ranks.."\n")
                 end
 			end
 			all_talent_slot_buttons[button_using]:SetScript("OnEnter", talent_icon_tooltip_Enter)
