@@ -2706,6 +2706,10 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
                 GameTooltip:AppendText("\n|cffFF0000Click on the icon to use |cff00FF00[Scroll of unlearning]|r")
                 end]]--
                 -- end
+                -- for ranks with learned talents
+                if self.HyperLink ~= nil then
+                    GameTooltip:AppendText("Rank "..player_talent_known.."/"..number_of_ranks)
+                end
 			end
 			all_talent_slot_buttons[button_using]:SetScript("OnEnter", talent_icon_tooltip_Enter)
 			local function talent_icon_tooltip_OnLeave(self)
