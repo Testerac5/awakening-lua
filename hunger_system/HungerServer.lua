@@ -38,6 +38,9 @@ local all_food_drink = {117, 414, 422, 724, 733, 787, 961, 1017, 1082, 1113, 111
 44837, 44838, 44839, 44840, 44854, 44855, 44940, 46690, 46691, 46793, 46797,
 } -- food item ids
 
+-- 818053 -- positive buff
+-- 818054 -- negative buff
+-- 818055 -- starvation
 local function update_display_hunger(msg, player)
 	local hunger = player_hunger_table[player:GetGUIDLow()]
 	local level = player:GetLevel()
@@ -50,6 +53,7 @@ local function update_display_hunger(msg, player)
 		player:RemoveAura(818055)
 	elseif percent <= 20 then
 		player:AddAura(818054, player)
+		player:AddAura(818055, player)
 		player:RemoveAura(818053)
 	elseif (percent >= 21 and percent <= 79) then
 		if player:HasAura(818053) then
