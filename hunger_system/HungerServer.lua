@@ -63,6 +63,9 @@ local function update_display_hunger(msg, player,food_hack)
 			player:RemoveAura(818055)
 		end
 	end
+	if not(food_hack) then
+		food_hack = false
+	end
 	return msg:Add("HungerBar", "GetHungerPct", hunger,food_hack)
 end
 
