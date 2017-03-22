@@ -75,7 +75,7 @@ frame:SetScript("OnLeave", frame2_Tooltip_OnLeave)
 
 
 
-function MyHandlers.GetHungerPct(player,current_hunger)
+function MyHandlers.GetHungerPct(player,current_hunger, food_hack)
 
 	local level = UnitLevel("player")
 
@@ -88,13 +88,16 @@ function MyHandlers.GetHungerPct(player,current_hunger)
     local percent =  rough_pct - (rough_pct % 1)
     
     if percent <= 0 then
-    
+        if not(food_hack) then
         print("|cffFFFF00I am extremely hungry, and I am beginning to starve.|r") -- edited
+    end
     
     elseif percent < 25 then
     
         second_frame:SetStatusBarColor(1,.35,0,0.8)
+        if not(food_hack) then
         print("|cffFFFF00I must eat soon or I will start taking damage.|r") -- edited
+    end
     
     elseif percent < 65 then
     

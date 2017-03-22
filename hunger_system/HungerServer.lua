@@ -41,7 +41,7 @@ local all_food_drink = {117, 414, 422, 724, 733, 787, 961, 1017, 1082, 1113, 111
 -- 818053 -- positive buff
 -- 818054 -- negative buff
 -- 818055 -- starvation
-local function update_display_hunger(msg, player)
+local function update_display_hunger(msg, player,food_hack)
 	local hunger = player_hunger_table[player:GetGUIDLow()]
 	local level = player:GetLevel()
 	local max_hunger = (level * 5) + 100
@@ -63,7 +63,7 @@ local function update_display_hunger(msg, player)
 			player:RemoveAura(818055)
 		end
 	end
-	return msg:Add("HungerBar", "GetHungerPct", hunger)
+	return msg:Add("HungerBar", "GetHungerPct", hunger,food_hack)
 end
 
 local function hunger_ticker(event, timer, delay, player) -- deal damage if player has low hunger level, runs all the time after OnLoginPlayer
@@ -121,7 +121,7 @@ local function fill_hunger(event, timer, delay, player)
 		player_hunger_table[player:GetGUIDLow()] = max_hunger
 		end
 
-	update_display_hunger(AIO.Msg(), player):Send(player)
+	update_display_hunger(AIO.Msg(), player,true):Send(player)
 end
 
 
