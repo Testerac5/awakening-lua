@@ -96,7 +96,7 @@ local function EntropyPvP(event, pKiller, pKilled)
 					local amountofdroppeditems = math.ceil(pKilled:GetLevel()/dropmodifier)
 						if (amountofdroppeditems >= 1) then
 							--list of items player have
-							for i = 1, 6 do
+							for i = 1, 8 do
 							math.random(1,10)
 							slot = math.random(0,38)
 								if (pKilled:GetItemByPos(255, slot)) then
