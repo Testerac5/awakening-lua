@@ -63,9 +63,6 @@ local function update_display_hunger(msg, player,food_hack)
 			player:RemoveAura(818055)
 		end
 	end
-	if not(food_hack) then
-		food_hack = false
-	end
 	return msg:Add("HungerBar", "GetHungerPct", hunger,food_hack)
 end
 
@@ -89,7 +86,7 @@ local function hunger_ticker(event, timer, delay, player) -- deal damage if play
 			player_hunger_table[player:GetGUIDLow()] = 0
 			player:DealDamage(player, damage_dealt, false, 7)
 		end
-		update_display_hunger(AIO.Msg(), player):Send(player)
+		update_display_hunger(AIO.Msg(), player,false):Send(player)
 		
 		end
 
@@ -166,7 +163,7 @@ local function OnLoginPlayer(event, player) -- load hunger from table, works ok
 	player_hunger_table[guid] = player_hunger
 	AIO.Handle(player, "HungerBar", "OnLogin")
 	player:RegisterEvent(hunger_ticker, 78000, 0) -- register deal damage function
-	update_display_hunger(AIO.Msg(), player):Send(player)
+	update_display_hunger(AIO.Msg(), player,false):Send(player)
 end
 
 local function OnLogoutPlayer(event ,player)
