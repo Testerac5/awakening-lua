@@ -6,3 +6,15 @@ local function RemoveTalentPoints(event,player)
 end
 
 RegisterPlayerEvent(3, RemoveTalentPoints)
+
+--ressurect and tele to city
+local AIO = AIO or require("AIO")
+
+
+local MyHandlers = AIO.AddHandlers("DeathRessurect", {})
+
+ function MyHandlers.Ressurect(player)
+ 	if player:HasAura(8326) then
+ 		player:RemoveAura(8326)
+ 	end
+end
