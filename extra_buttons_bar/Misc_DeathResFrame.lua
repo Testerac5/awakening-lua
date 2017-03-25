@@ -30,7 +30,7 @@ DeathDialog:ClearAllPoints()
 DeathDialog:SetBackdrop(StaticPopup1:GetBackdrop())
 DeathDialog:SetHeight(115)
 DeathDialog:SetWidth(390)
-DeathDialog:SetPoint("TOP", UIParent, 0, -185)
+DeathDialog:SetPoint("TOP", UIParent, 0, -215)
 DeathDialog:Hide()
 
 DeathDialog.text = DeathDialog:CreateFontString(nil, "BACKGROUND", "GameFontHighlight")
