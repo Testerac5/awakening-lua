@@ -14,7 +14,7 @@ local AIO = AIO or require("AIO")
 local MyHandlers = AIO.AddHandlers("DeathRessurect", {})
 
  function MyHandlers.Ressurect(player)
- 	if player:HasAura(8326) then
+ 	if player:HasAura(8326) and (player:GetLevel() >= 10) then
  		player:ResurrectPlayer(20, true)
  		player:DurabilityLossAll(70, true)
  		if player:IsAlliance() then

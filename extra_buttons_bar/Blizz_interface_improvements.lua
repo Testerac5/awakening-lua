@@ -51,11 +51,13 @@ end
         end
     end
 
+    if (UnitLevel("player") >= 10) then
     if (UnitIsGhost("player")) and not(DeathCapitalTeleportButton:IsVisible()) then
         DeathCapitalTeleportButton:Show()
         elseif not(UnitIsGhost("player")) and (DeathCapitalTeleportButton:IsVisible()) then
         DeathCapitalTeleportButton:Hide()
     end
+end
     end)
 BI_i:Show()
 
