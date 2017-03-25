@@ -14,7 +14,7 @@ local prohibited_items = {
 977021,
 5863,
 }
-local dropmodifier = 4
+local dropmodifier = 5
 local item_looted = {}
 --local playerdeath = true
 --local creaturedeath = true

@@ -50,6 +50,10 @@ end
         end
         end
     end
+
+    if (UnitIsGhost("player")) and not(DeathCapitalTeleportButton:IsVisible()) then
+        DeathCapitalTeleportButton:Show()
+    end
     end)
 BI_i:Show()
 
