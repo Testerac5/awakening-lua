@@ -15,6 +15,6 @@ local MyHandlers = AIO.AddHandlers("DeathRessurect", {})
 
  function MyHandlers.Ressurect(player)
  	if player:HasAura(8326) then
- 		Player:ResurrectPlayer(20, 1)
+ 		Player:ResurrectPlayer(20, true)
  	end
 end
