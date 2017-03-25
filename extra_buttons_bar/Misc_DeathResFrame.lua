@@ -9,7 +9,7 @@ local MyHandlers = AIO.AddHandlers("DeathRessurect", {})
 DeathCapitalTeleportButton = CreateFrame("Button", "DeathCapitalTeleportButton", UIParent, nil) 
 DeathCapitalTeleportButton:SetWidth(200) 
 DeathCapitalTeleportButton:SetHeight(100) 
-DeathCapitalTeleportButton:SetPoint("TOP", 0,-23) 
+DeathCapitalTeleportButton:SetPoint("TOP", 0,-20) 
 DeathCapitalTeleportButton:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textures\\misc\\pvprev")
 --font
 local DeathCapitalTeleportButton_text = DeathCapitalTeleportButton:CreateFontString("TicketMasterFrame_Title")
