@@ -2,7 +2,7 @@ function update(event, player, msg, Type, lang)
 
     player_type = player:GetGMRank()
     
-    if player_type == 3 then 
+    if player_type == 4 then 
 	
 		if msg == "%push lua sargeras" then
 		
