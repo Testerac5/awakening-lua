@@ -2,7 +2,7 @@ local function TMLock1(event, player)
 	if (player:GetGMRank() ~= 2) then
 		return false
 	else
-		player:AddAura(9454, player)
+		player:AddAura(39331, player)
 	end
 end
 
