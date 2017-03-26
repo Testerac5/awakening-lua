@@ -36,7 +36,7 @@ DeathDialog:Hide()
 DeathDialog.text = DeathDialog:CreateFontString(nil, "BACKGROUND", "GameFontHighlight")
 --DeathDialog.text:SetAllPoints()
 DeathDialog.text:SetFont("Fonts\\FRIZQT__.TTF", 11)
-DeathDialog.text:SetText("If you'll be resurrected by Ley lines all of your items\n will take up to 70% durability damage\n (equipped and inventory) and you will be\n afflicted by 10 minutes of Resurrection Sickness.")
+DeathDialog.text:SetText("If you'll be resurrected by Ley lines all of your items\n will take 100% durability damage\n (equipped and inventory) and you will be\n afflicted by 10 minutes of Resurrection Sickness.")
 DeathDialog.text:SetPoint("TOP",0,-20)
 
 

@@ -16,7 +16,7 @@ local MyHandlers = AIO.AddHandlers("DeathRessurect", {})
  function MyHandlers.Ressurect(player)
  	if player:HasAura(8326) and (player:GetLevel() >= 10) then
  		player:ResurrectPlayer(20, true)
- 		player:DurabilityLossAll(70, true)
+ 		player:DurabilityLossAll(100, true)
  		if player:IsAlliance() then
  			player:Teleport(0, -8525, 851, 106.6, 3.8)
  		else
