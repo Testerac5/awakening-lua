@@ -3,6 +3,7 @@ local function TMLock1(event, player)
 		return false
 	else
 		player:AddAura(6462, player)
+		player:AddAura(42201, player)
 	end
 end
 
@@ -11,6 +12,7 @@ local function TMLock3(event, player)
 		return false
 	else
 		player:AddAura(6462, player)
+		player:AddAura(42201, player)
 	end
 end
 
