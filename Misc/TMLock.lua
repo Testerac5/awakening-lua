@@ -6,7 +6,7 @@ local function TMLock1(event, player)
 	end
 end
 
-local function TMLock1(event, player)
+local function TMLock3(event, player)
 	if (player:GetGMRank() ~= 3) then
 		return false
 	else
