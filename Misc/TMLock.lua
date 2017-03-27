@@ -1,5 +1,5 @@
 local function TMLock1(event, player) -- prevent using spells by gms rank 2
-	if (player:GetGMRank() ~= 2) then
+	if (player:GetGMRank() < 2) or (player:GetGMRank() > 3) then
 		return false
 	else
 		--player:AddAura(6462, player)
