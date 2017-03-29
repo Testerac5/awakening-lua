@@ -16,7 +16,6 @@ end
 local function maxLevel(event, delay, pCall, player)
 	player:SetLevel(60)
 	player:AddItem(106722)
-	player:AddItem(106722)
 	player:AddItem(106723)
 	player:AddItem(106724)
 	player:AddItem(106725)
