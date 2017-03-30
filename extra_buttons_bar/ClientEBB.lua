@@ -92,7 +92,7 @@ local function CanBeUnlearned(slot, item)
     -- item check
     -- player has spell check
     local spellname,rank,spellid = GameTooltip:GetSpell()
-    if (GameTooltip:GetSpell() and IsSpellKnown(spellid) and (GetItemCount(scrollitem) > 0)) then
+    if (GameTooltip:GetSpell() and IsSpellLearned(spellid) and (GetItemCount(scrollitem) > 0)) then
         return true
     end
     return false
@@ -133,6 +133,7 @@ sideBar:SetFrameStrata("LOW")
 
     AIO.SavePosition(sideBar)
     local ui_w, ui_h = UIParent:GetSize()
+    local ui_diff = 1
     local uiScale = 1
 
         local MainFrame_ButtonModels_Ulduar1 = CreateFrame("Model", "MainFrame_ButtonModels_Ulduar1", sideBar)
@@ -169,28 +170,30 @@ sideBar:SetFrameStrata("LOW")
         --MainFrame_ButtonModels_Ulduar1:Hide()
         sideBar:Hide()
         sideBar:SetScript("OnShow", function()
-                if (GetCVar("useUiScale") == "1") then
+                 if (GetCVar("useUiScale") == "1") then
+                ui_diff = 1
                 uiScale = GetCVar("uiScale")
             else
                 --SetCVar("useUiScale","1")
                 SetCVar("uiScale","1")
+                ui_diff = ui_h/768
                 uiScale = 1
                 end -- resolution and uiscale fix
             MainFrame_ButtonModels_Ulduar1:SetModel("World\\Expansion02\\doodads\\ulduar\\ul_statue_03.m2")
             MainFrame_ButtonModels_Ulduar1:SetModelScale(0.23)
-            MainFrame_ButtonModels_Ulduar1:SetPosition(-0.27,0.0,1.662/uiScale)
+            MainFrame_ButtonModels_Ulduar1:SetPosition(-0.27,0.0,1.662/uiScale*ui_diff)
             MainFrame_ButtonModels_Ulduar1:SetFacing(-0.3)
             MainFrame_ButtonModels_Ulduar1:SetAlpha(0.8)
 
             MainFrame_ButtonModels_Ulduar2:SetModel("World\\Expansion02\\doodads\\ulduar\\ul_smallstatue_druid.m2")
             MainFrame_ButtonModels_Ulduar2:SetModelScale(0.17)
-            MainFrame_ButtonModels_Ulduar2:SetPosition(0.1,0.0,1.785/uiScale)
+            MainFrame_ButtonModels_Ulduar2:SetPosition(0.1,0.0,1.785/uiScale*ui_diff)
             MainFrame_ButtonModels_Ulduar2:SetFacing(3.9)
             MainFrame_ButtonModels_Ulduar2:SetAlpha(0.8)
 
             MainFrame_ButtonModels_Ulduar3:SetModel("World\\Expansion02\\doodads\\ulduar\\ul_statue_02.m2")
             MainFrame_ButtonModels_Ulduar3:SetModelScale(0.17)
-            MainFrame_ButtonModels_Ulduar3:SetPosition(0.05,0.0,1.685/uiScale)
+            MainFrame_ButtonModels_Ulduar3:SetPosition(0.05,0.0,1.685/uiScale*ui_diff)
             MainFrame_ButtonModels_Ulduar3:SetFacing(3.6)
             MainFrame_ButtonModels_Ulduar3:SetAlpha(0.8)
             end)
@@ -346,20 +349,22 @@ sideBar:SetFrameStrata("LOW")
         TrainingFrame_SelectedTitle_Stars2_glow:Hide()
 
         TrainingFrame_SelectedTitle:SetScript("OnShow", function()
-               if (GetCVar("useUiScale") == "1") then
+                 if (GetCVar("useUiScale") == "1") then
+                ui_diff = 1
                 uiScale = GetCVar("uiScale")
             else
                 --SetCVar("useUiScale","1")
                 SetCVar("uiScale","1")
+                ui_diff = ui_h/768
                 uiScale = 1
-            end
+                end -- resolution and uiscale fix
             TrainingFrame_SelectedTitle_Stars1:SetModel("Particles\\Lootfx2.m2")
             TrainingFrame_SelectedTitle_Stars1:SetModelScale(0.1)
-            TrainingFrame_SelectedTitle_Stars1:SetPosition(0.2,0.0,1.85/uiScale)
+            TrainingFrame_SelectedTitle_Stars1:SetPosition(0.2,0.0,1.85/uiScale*ui_diff)
             TrainingFrame_SelectedTitle_Stars1:SetAlpha(0.8)
             TrainingFrame_SelectedTitle_Stars2:SetModel("Particles\\Lootfx2.m2")
             TrainingFrame_SelectedTitle_Stars2:SetModelScale(0.1)
-            TrainingFrame_SelectedTitle_Stars2:SetPosition(0.2,0.0,1.85/uiScale)
+            TrainingFrame_SelectedTitle_Stars2:SetPosition(0.2,0.0,1.85/uiScale*ui_diff)
             TrainingFrame_SelectedTitle_Stars2:SetAlpha(0.8)
             end)
 
@@ -369,31 +374,32 @@ sideBar:SetFrameStrata("LOW")
         TrainingFrame_SelectedTitle_Glow:SetSize(TrainingFrame_SelectedTitle:GetSize())
         TrainingFrame_SelectedTitle_Glow:Hide()
 
-        local TrainingFrame_SelectedTitle_Spells = TrainingFrame_SelectedTitle:CreateTexture("TrainingFrame_SelectedTitle_Spells") 
+        --[[07032017local TrainingFrame_SelectedTitle_Spells = TrainingFrame_SelectedTitle:CreateTexture("TrainingFrame_SelectedTitle_Spells")  08032017
         --TrainingFrame_SelectedTitle_Spells:SetAllPoints() 
         TrainingFrame_SelectedTitle_Spells:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\spellicon") 
         TrainingFrame_SelectedTitle_Spells:SetPoint("CENTER", TrainingFrame_SelectedTitle, "CENTER", -114, 55)
-        TrainingFrame_SelectedTitle_Spells:SetSize(64,64)
+        TrainingFrame_SelectedTitle_Spells:SetSize(64,64)]]-- 08032017
         font_TrainingFrame_SelectedTitle_Spells = TrainingFrame_SelectedTitle:CreateFontString("TrainingFrame_SelectedTitle_Spells")
-        font_TrainingFrame_SelectedTitle_Spells:SetFont("Fonts\\MORPHEUS.TTF", 22, "OUTLINE")
+        font_TrainingFrame_SelectedTitle_Spells:SetFontObject(GameFontNormal)
         font_TrainingFrame_SelectedTitle_Spells:SetShadowOffset(1, -1)
-        font_TrainingFrame_SelectedTitle_Spells:SetText("Show Spells")
-        font_TrainingFrame_SelectedTitle_Spells:SetPoint("CENTER", TrainingFrame_SelectedTitle_Spells, "CENTER", 0, -38)
+        font_TrainingFrame_SelectedTitle_Spells:SetText("Click to display spells")
+        font_TrainingFrame_SelectedTitle_Spells:SetPoint("CENTER", TrainingFrame_SelectedTitle, "CENTER", -114, -300)
         font_TrainingFrame_SelectedTitle_Spells:Hide()
-        TrainingFrame_SelectedTitle_Spells:Hide()
+        --TrainingFrame_SelectedTitle_Spells:Hide()
 
-        local TrainingFrame_SelectedTitle_Talents = TrainingFrame_SelectedTitle:CreateTexture("TrainingFrame_SelectedTitle_Talents") 
+        --[[07032017local TrainingFrame_SelectedTitle_Talents = TrainingFrame_SelectedTitle:CreateTexture("TrainingFrame_SelectedTitle_Talents")  08032017
         --TrainingFrame_SelectedTitle_Talents:SetAllPoints() 
         TrainingFrame_SelectedTitle_Talents:SetTexture("Interface\\AddOns\\AwAddons\\Textures\\progress\\talenticon") 
         TrainingFrame_SelectedTitle_Talents:SetPoint("CENTER", TrainingFrame_SelectedTitle, "CENTER", -114, 55)
-        TrainingFrame_SelectedTitle_Talents:SetSize(64,64)
+        TrainingFrame_SelectedTitle_Talents:SetSize(64,64)]]-- 08032017
         font_TrainingFrame_SelectedTitle_Talents = TrainingFrame_SelectedTitle:CreateFontString("TrainingFrame_SelectedTitle_Talents")
-        font_TrainingFrame_SelectedTitle_Talents:SetFont("Fonts\\MORPHEUS.TTF", 22, "OUTLINE")
+        font_TrainingFrame_SelectedTitle_Talents:SetFontObject(GameFontNormal)
+        --font_TrainingFrame_SelectedTitle_Talents:SetFont("Fonts\\MORPHEUS.TTF", 22, "OUTLINE")
         font_TrainingFrame_SelectedTitle_Talents:SetShadowOffset(1, -1)
-        font_TrainingFrame_SelectedTitle_Talents:SetText("Show Talents")
-        font_TrainingFrame_SelectedTitle_Talents:SetPoint("CENTER", TrainingFrame_SelectedTitle_Talents, "CENTER", 0, -38)
+        font_TrainingFrame_SelectedTitle_Talents:SetText("Click to display talents")
+        font_TrainingFrame_SelectedTitle_Talents:SetPoint("CENTER", TrainingFrame_SelectedTitle, "CENTER", -114, -300)
         font_TrainingFrame_SelectedTitle_Talents:Hide()
-        TrainingFrame_SelectedTitle_Talents:Hide()
+        --TrainingFrame_SelectedTitle_Talents:Hide()
         
         --TrainingFrame:SetScript("OnDragStart", TrainingFrame.StartMoving)
         --TrainingFrame:SetScript("OnHide", TrainingFrame.StopMovingOrSizing)
@@ -412,7 +418,8 @@ sideBar:SetFrameStrata("LOW")
 		
 	--[[Skill Frame]]
 	local StatFrame = CreateFrame("Frame", "StatFrame", UIParent, nil)
-        StatFrame:SetSize(450, 500) --edited
+        StatFrame:SetSize(430, 480) --edited
+        --StatFrame:SetScale(0.88)--making everything more or less fit standart sizes of blizz interfaces
         StatFrame:SetMovable(true)
         StatFrame:EnableMouse(true)
         StatFrame:RegisterForDrag("LeftButton")
@@ -508,16 +515,16 @@ sideBar:SetFrameStrata("LOW")
         --SetBinding("I", togglesiderframe())
 
         --fast acces to frames--
-        local fastaccessframe = CreateFrame("frame", "fastaccessframe", UIParent)
+       local fastaccessframe = CreateFrame("frame", "fastaccessframe", UIParent)
         fastaccessframe:SetSize(210,210)
-        fastaccessframe:SetPoint("TOPLEFT", 0, -80)
-        fastaccessframe:EnableMouse(true)
+        fastaccessframe:SetPoint("LEFT", 0, -80)
+        --fastaccessframe:EnableMouse(true)
         fastaccessframe:SetMovable(true)
-        fastaccessframe:EnableMouse(true)
+        --[[fastaccessframe:EnableMouse(true)
         fastaccessframe:RegisterForDrag("LeftButton")
         fastaccessframe:SetScript("OnDragStart", fastaccessframe.StartMoving)
         fastaccessframe:SetScript("OnHide", fastaccessframe.StopMovingOrSizing)
-        fastaccessframe:SetScript("OnDragStop", fastaccessframe.StopMovingOrSizing)
+        fastaccessframe:SetScript("OnDragStop", fastaccessframe.StopMovingOrSizing)]]--
         fastaccessframe:SetFrameStrata("BACKGROUND")
         fastaccessframe:SetBackdrop({
            bgFile = "Interface\\AddOns\\AwAddons\\Textures\\Misc\\fastbuttonHighlight",
@@ -540,6 +547,11 @@ sideBar:SetFrameStrata("LOW")
             top = 18,
             bottom = 18}
                 }) -- edited
+        --TrainingButton_fast:SetMovable(true)
+        TrainingButton_fast:RegisterForDrag("LeftButton")
+        TrainingButton_fast:SetScript("OnDragStart", function(self) fastaccessframe:StartMoving() end)
+        TrainingButton_fast:SetScript("OnHide", function(self) fastaccessframe:StopMovingOrSizing() end)
+        TrainingButton_fast:SetScript("OnDragStop", function(self) fastaccessframe:StopMovingOrSizing() end)
 
 
             local AllocateButton_fast = CreateFrame("Button", "AllocateButton_fast", fastaccessframe)
@@ -556,6 +568,10 @@ sideBar:SetFrameStrata("LOW")
             top = 14,
             bottom = 14}
                 }) -- edited
+        AllocateButton_fast:RegisterForDrag("LeftButton")
+        AllocateButton_fast:SetScript("OnDragStart", function(self) fastaccessframe:StartMoving() end)
+        AllocateButton_fast:SetScript("OnHide", function(self) fastaccessframe:StopMovingOrSizing() end)
+        AllocateButton_fast:SetScript("OnDragStop", function(self) fastaccessframe:StopMovingOrSizing() end)
 
 
              local ResetButton_fast = CreateFrame("Button", "ResetButton_fast", fastaccessframe)
@@ -573,6 +589,10 @@ sideBar:SetFrameStrata("LOW")
             bottom = 12}
                 }) -- edited
         ResetButton_fast:SetFrameLevel(3)
+        ResetButton_fast:RegisterForDrag("LeftButton")
+        ResetButton_fast:SetScript("OnDragStart", function(self) fastaccessframe:StartMoving() end)
+        ResetButton_fast:SetScript("OnHide", function(self) fastaccessframe:StopMovingOrSizing() end)
+        ResetButton_fast:SetScript("OnDragStop", function(self) fastaccessframe:StopMovingOrSizing() end)
 
         --[[local ResetButton_fast_T = CreateFrame("Button", "ResetButton_fast_T", fastaccessframe)
         ResetButton_fast_T:SetSize(46, 46)
@@ -769,7 +789,9 @@ local Reset_Level = {
     [30] = {50000,150000,3250},
     [40] = {150000,300000,9250},
     [50] = {300000,1000000,10550},
-    [60] = {500000,2500000,0},
+    [60] = {350000,1500000,20000},
+    [70] = {500000,2500000,20000},
+    [80] = {500000,2500000,20000},
 }
 
 local function GetMoneyForReset(purgetype)
@@ -800,6 +822,18 @@ for k,v in pairs(Reset_Level) do
             purge_cost = Reset_Level[k][purgetype] + Reset_Level[k][3]*(UnitLevel("player")-k+mult*2)
             next_purge_cost = Reset_Level[k][purgetype] + Reset_Level[k][3]*(UnitLevel("player")-k+(mult+1)*2)
          end
+         --cap
+         if (tonumber(purge_cost)) then
+           if (purge_cost>Reset_Level[k][purgetype]*1.75) then
+            purge_cost = Reset_Level[k][purgetype]*1.75
+            end
+        end
+        if (tonumber(next_purge_cost)) then
+            if (next_purge_cost>Reset_Level[k][purgetype]*1.75) then
+            next_purge_cost = Reset_Level[k][purgetype]*1.75
+            end
+        end
+         --end cap
         return purge_cost, next_purge_cost
     end
 end
@@ -1285,7 +1319,7 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
 	--[[ StatFrame UI ]]
 	
     local StatFrame_CloseButton = CreateFrame("Button", "StatFrame_CloseButton", StatFrame, "UIPanelCloseButton")
-        StatFrame_CloseButton:SetPoint("TOPRIGHT", -40, -31) --edited
+        StatFrame_CloseButton:SetPoint("TOPRIGHT", -38, -29)  --edited
         StatFrame_CloseButton:EnableMouse(true)
         StatFrame_CloseButton:SetSize(29, 29) --edited
         StatFrame_CloseButton:SetScript("OnMouseUp", function(self)
@@ -1307,7 +1341,7 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
                 local StatFrame_TitleText = StatFrame:CreateFontString("StatFrame_TitleText") -- edited
         StatFrame_TitleText:SetFont("Fonts\\MORPHEUS.TTF", 15) -- edited
         StatFrame_TitleText:SetSize(190, 5)
-        StatFrame_TitleText:SetPoint("TOP", 0, -30) -- edited
+        StatFrame_TitleText:SetPoint("TOP", 0, -27) -- edited
         StatFrame_TitleText:SetText("|cff110000Stat Allocation|r") -- edited
        
     local StatFrame_Panel_Str = CreateFrame("Frame", "StatFrame_Panel_Str", StatFrame, nil) -- edited
@@ -1546,7 +1580,7 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
         local Stat_Value = StatFrame:CreateFontString("Stat_Value")
         Stat_Value:SetFont("Fonts\\MORPHEUS.TTF", 18, "OUTLINE")
         Stat_Value:SetSize(70, 5)
-        Stat_Value:SetPoint("BOTTOM", 0, 46)--edited all
+        Stat_Value:SetPoint("BOTTOM", 0, 43)--edited all
 		
 		
 	function MyHandlers.GetStatValues(player, stats)
@@ -2676,6 +2710,10 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
                 GameTooltip:AppendText("\n|cffFF0000Click on the icon to use |cff00FF00[Scroll of unlearning]|r")
                 end]]--
                 -- end
+                -- for ranks with learned talents
+                if self.HyperLink ~= nil then
+                    GameTooltip:AppendText("\nRank "..all_talent_FrameNumber[button_using]:GetText().."/"..number_of_ranks.."")
+                end
 			end
 			all_talent_slot_buttons[button_using]:SetScript("OnEnter", talent_icon_tooltip_Enter)
 			local function talent_icon_tooltip_OnLeave(self)
@@ -2905,7 +2943,7 @@ BalanceDruid = CreateFrame("Button", "TrainingFrame_BalanceDruid", TrainingFrame
 			local spellCostTE = spellList[start_ticker][3]
 			local RequiredLevel = spellList[start_ticker][4]
 			local name, rank, icon, _,_,_,_ = GetSpellInfo(spellId)
-			local player_knows = IsSpellKnown(spellId)
+			local player_knows = IsSpellLearned(spellId)
 			local learn_tooltip = "Cost: "..spellCostAE.." AE "..spellCostTE.." TE"
 			local learn_texture = {.9, .2, .1}
             local learn_text = "Learn" -- used for spell texts
@@ -3149,7 +3187,7 @@ TrainingFrame.Text_Ability:Hide()
             TrainingFrame_SelectedTitle_Stars2_glow:Hide()
             BaseFrameFadeOut(TrainingFrame_SelectedTitle_Glow)
             BaseFrameFadeIn(font_TrainingFrame_SelectedTitle_Spells)
-            BaseFrameFadeIn(TrainingFrame_SelectedTitle_Spells)
+            --BaseFrameFadeIn(TrainingFrame_SelectedTitle_Spells)
             end)
         DisplaySpellsButton:SetScript("OnLeave", function()
            BaseFrameFadeOut(ProgressionBlueCovertexture)
@@ -3160,7 +3198,7 @@ TrainingFrame.Text_Ability:Hide()
             TrainingFrame_SelectedTitle_Stars2_glow:Show()
             BaseFrameFadeIn(TrainingFrame_SelectedTitle_Glow)
             BaseFrameFadeOut(font_TrainingFrame_SelectedTitle_Spells)
-            BaseFrameFadeOut(TrainingFrame_SelectedTitle_Spells)
+            --BaseFrameFadeOut(TrainingFrame_SelectedTitle_Spells)
             end)
         
         
@@ -3191,7 +3229,7 @@ TrainingFrame.Text_Ability:Hide()
             TrainingFrame_SelectedTitle_Stars2_glow:Hide()
             BaseFrameFadeOut(TrainingFrame_SelectedTitle_Glow)
             BaseFrameFadeIn(font_TrainingFrame_SelectedTitle_Talents)
-            BaseFrameFadeIn(TrainingFrame_SelectedTitle_Talents)
+            --BaseFrameFadeIn(TrainingFrame_SelectedTitle_Talents)
             end)
         DisplayTalentsButton:SetScript("OnLeave", function()
            BaseFrameFadeOut(ProgressionPurpleCovertexture)
@@ -3202,7 +3240,7 @@ TrainingFrame.Text_Ability:Hide()
             TrainingFrame_SelectedTitle_Stars2_glow:Show()
             BaseFrameFadeIn(TrainingFrame_SelectedTitle_Glow)
             BaseFrameFadeOut(font_TrainingFrame_SelectedTitle_Talents)
-            BaseFrameFadeOut(TrainingFrame_SelectedTitle_Talents)
+            --BaseFrameFadeOut(TrainingFrame_SelectedTitle_Talents)
             end)
         DisplaySpellsButton:Disable()
 DisplayTalentsButton:Disable()

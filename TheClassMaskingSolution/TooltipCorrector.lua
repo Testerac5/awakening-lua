@@ -1989,7 +1989,7 @@ local function ModifyTip ()
 				if (frame and frame:GetName()) then
 					if string.find(frame:GetName(), "TrainingFrame") then
 				 local spellname,rank,spellid = GameTooltip:GetSpell()
-    				if (GameTooltip:GetSpell() and IsSpellKnown(spellid) and (GetItemCount(1101243) > 0)) then
+    				if (GameTooltip:GetSpell() and IsSpellLearned(spellid) and (GetItemCount(1101243) > 0)) then
         				return false
     				end
     			end

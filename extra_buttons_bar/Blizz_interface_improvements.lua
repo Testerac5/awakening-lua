@@ -17,6 +17,14 @@ local MicroButtons = {
 
 BI_i = CreateFrame("Frame", nil, UIParent)
 BI_i:SetScript("OnUpdate", function()
+    if (PlayerTalentFrame) then
+    if (PlayerTalentFrame:IsVisible()) then
+        PlayerTalentFrameTab2:Hide()
+        PlayerTalentFrameTab3:Hide()
+        PlayerTalentFrameTab4:Hide()
+    end
+end
+
     if (InspectFrame) then
     if (InspectFrameTab3:IsVisible()) then
     InspectFrameTab3:Hide()
@@ -42,5 +50,46 @@ BI_i:SetScript("OnUpdate", function()
         end
         end
     end
+
+    if (UnitLevel("player") >= 10) then
+    if (UnitIsGhost("player")) and not(DeathCapitalTeleportButton:IsVisible()) then
+        DeathCapitalTeleportButton:Show()
+        elseif not(UnitIsGhost("player")) and (DeathCapitalTeleportButton:IsVisible()) then
+        DeathCapitalTeleportButton:Hide()
+    end
+end
     end)
 BI_i:Show()
+
+--Pet talents tab
+table.insert(UnitPopupMenus["PET"], table.getn(UnitPopupMenus["PET"]), "ASCENSION_PETTALENTS");
+UnitPopupButtons["ASCENSION_PETTALENTS"] = {text = "Pet Talents", dist = 0}
+hooksecurefunc("UnitPopup_OnClick", function (self)
+    local name = UIDROPDOWNMENU_INIT_MENU.name
+    if (name == MC_PLAYER) then return end
+    if (self.value == "ASCENSION_PETTALENTS") then
+      ToggleTalentFrame()
+    end
+  end);
+
+function IsSpellLearned(entry)
+    local spellname = GetSpellInfo(entry)
+    local done = false
+    local known = false
+    local i = 1
+    local id = nil
+    if not(spellname) then
+      return false
+    end
+    spellname = string.gsub(spellname,"%(Rank %d+%)","");
+    while not done do
+        local name = GetSpellName(i,BOOKTYPE_SPELL);
+        if not name then
+        done=true;
+            elseif (name==spellname) then
+            known = true
+            end
+        i = i+1;
+    end
+return known
+end

@@ -3,123 +3,21 @@ local AIO = AIO or require("AIO")
 
 local MyHandlers = AIO.AddHandlers("HungerBar", {})
 
+-- max_hunger = (level * 5) + 100 MAX HUNGER IS PLAYERLEVEL*5+100
 
-player_hunger_table = {}
+local player_hunger_table = {} -- table for adding hunger level during player playing game
 
-function hunger_ticker(event, timer, delay, player)
-		local level = player:GetLevel()
-		local damage_dealt = 25
-		local deficit = 5
-			if level > 10 then
-				damage_dealt = level * 15
-			elseif level > 30 then
-				deficit = 20
-				damage_dealt = level * 30
-			elseif level > 50 then
-				deficit = 40
-				damage_dealt = level * 45
-			end
-		if (player:IsDead() == false) then	
-			player_hunger_table[player:GetGUIDLow()] = player_hunger_table[player:GetGUIDLow()] - (deficit)
-		end
-		if player_hunger_table[player:GetGUIDLow()] <= 0 and (player:IsGM() == false) then
-			player_hunger_table[player:GetGUIDLow()] = 0
-			player:DealDamage(player, damage_dealt, false, 7)
-		end
-		update_display_hunger(AIO.Msg(), player):Send(player)
-		
-		end
+local player_hunger_itemused = {} -- table for food itemlevel player used last time
 
-function update_display_hunger(msg, player)
-	local hunger = player_hunger_table[player:GetGUIDLow()]
-	local level = player:GetLevel()
-	max_hunger = (level * 5) + 100
-	local percent = (player_hunger_table[player:GetGUIDLow()] / max_hunger) * 100
-	if percent >= 80 then
-		player:RemoveAura(818053)
-		player:AddAura(818053, player)
-		player:RemoveAura(818054)
-		player:RemoveAura(818055)
-	elseif percent <= 20 then
-		player:AddAura(818054, player)
-		player:RemoveAura(818053)
-	elseif (percent >= 21 and percent <= 79) then
-		if player:HasAura(818053) then
-			player:RemoveAura(818053)
-		elseif (player:HasAura(818054) or player:HasAura(818055)) then
-			player:RemoveAura(818054)
-			player:RemoveAura(818055)
-		end
-	end
-	return msg:Add("HungerBar", "GetHungerPct", hunger)
-end
 
-local function OnLoginPlayer(event, player)
-	local guid = player:GetGUIDLow()
-	local char_query = CharDBQuery("select hunger from character_saved_hunger where guid = "..guid)
-	local player_hunger = 100
-	if char_query == nil then
-		CharDBExecute("INSERT INTO character_saved_hunger(guid, hunger) VALUES("..guid..",100)")	
-	else
-		--print("Successfully loaded from table")
-		player_hunger = char_query:GetInt32(0)
-	end
-	player_hunger_table[guid] = player_hunger
-	AIO.Handle(player, "HungerBar", "OnLogin")
-	player:RegisterEvent(hunger_ticker, 300000, 0)
-	update_display_hunger(AIO.Msg(), player):Send(player)
-end
-
-function fill_hunger(event, timer, delay, player)
-	local level = player:GetLevel()
-	max_hunger = (level * 5) + 100
-	local food = 50
-	local auras = {433, 434, 435, 1127, 1129, 1131, 2639, 5004, 5005, 
+local auras = {433, 434, 435, 1127, 1129, 1131, 2639, 5004, 5005, 
 					5006, 5007, 6410, 7737, 10256, 18229, 18230, 18231, 18232, 18233, 
 					18234, 22731, 24005, 24800, 24869, 25660, 25690, 25691, 27094, 29008, 
 					29073, 32112, 33253, 33255, 33258, 33260, 33262, 33264, 33266, 33269, 
 					33725, 35270, 35271, 40768, 41030, 42309, 43180, 43763, 43777, 45548, 
-					45618, 46683, 46898, 48720, 53283, 61874, 64056, 65418, 65419, 65420, 65421, 65422}
-	--local drinks = {430, 431, 432, 1133, 1135, 1137, 22734, 27089, 34291, 43182, 43183, 43706, 45020, 5291}
-					
-	for k, v in pairs(auras) do
-		if player:HasAura(v) then
-			if itemLevel >= level or itemLevel +  5 >= level then
-				local food = (max_hunger / 25) / 12
-			elseif itemLevel - 5 <= level and itemLevel - 5 >= level - 10 then
-				local food = (max_hunger / 25) / 18
-			else
-				local food = (max_hunger / 25) / 24
-				if food < 0 then
-					food = 0
-				end
-			end
-		end	
-		if player:HasAura(v) then
-			if ((player_hunger_table[player:GetGUIDLow()] + (food)) >= max_hunger) then
-				player_hunger_table[player:GetGUIDLow()] = max_hunger
-			else
-				player_hunger_table[player:GetGUIDLow()] = player_hunger_table[player:GetGUIDLow()] + (food)
-			end
-		end
-	end
-	update_display_hunger(AIO.Msg(), player):Send(player)
-end
+					45618, 46683, 46898, 48720, 53283, 61874, 64056, 65418, 65419, 65420, 65421, 65422} -- food auras
 
-
-local function OnItemUse(event, player, item, target)
-	itemLevel = item:GetItemLevel()
-	if (player:IsMoving() == false) then
-		player:RegisterEvent(fill_hunger, 5000, 6)
-	else
-		player:SendBroadcastMessage("You can't do that while moving.")
-	end
-	if player_hunger_table[player:GetGUIDLow()] > max_hunger then
-		player_hunger_table[player:GetGUIDLow()] = max_hunger
-	end
-end
-
-all_food_drink = {117, 414, 422, 724, 733, 787, 961, 1017, 1082, 1113, 1114, 1326, 1487, 1707, 2070, 
+local all_food_drink = {117, 414, 422, 724, 733, 787, 961, 1017, 1082, 1113, 1114, 1326, 1487, 1707, 2070, 
 2287, 2679, 2680, 2681, 2682, 2683, 2684, 2685, 2687, 2888, 3220, 3448, 3662, 3663, 3664, 3665, 3666, 3726, 
 3727, 3728, 3729, 3770, 3771, 3927, 4457, 4536, 4537, 4538, 4539, 4540, 4541, 4542, 4544, 4592, 4593, 4594, 
 4599, 4601, 4602, 4604, 4605, 4606, 4607, 4608, 4656, 5057, 5066, 5095, 5349, 5472, 5473, 5474, 5476, 5477, 
@@ -138,7 +36,108 @@ all_food_drink = {117, 414, 422, 724, 733, 787, 961, 1017, 1082, 1113, 1114, 132
 37452, 38427, 38428, 38706, 40202, 40356, 40358, 40359, 41729, 41751, 42428, 42429, 42430, 42431, 42432, 
 42433, 42434, 42778, 42779, 43087, 44049, 44071, 44072, 44607, 44608, 44609, 44722, 44749, 44791, 44836, 
 44837, 44838, 44839, 44840, 44854, 44855, 44940, 46690, 46691, 46793, 46797,
-}
+} -- food item ids
+
+-- 818053 -- positive buff
+-- 818054 -- negative buff
+-- 818055 -- starvation
+local function update_display_hunger(msg, player,food_hack)
+	local hunger = player_hunger_table[player:GetGUIDLow()]
+	local level = player:GetLevel()
+	local max_hunger = (level * 5) + 100
+	local percent = (player_hunger_table[player:GetGUIDLow()] / max_hunger) * 100
+	if percent >= 80 then
+		player:RemoveAura(818053)
+		player:AddAura(818053, player)
+		player:RemoveAura(818054)
+		player:RemoveAura(818055)
+	elseif percent <= 20 then
+		player:AddAura(818054, player)
+		player:CastSpell(player, 818055)
+		player:RemoveAura(818053)
+	elseif (percent >= 21 and percent <= 79) then
+		if player:HasAura(818053) then
+			player:RemoveAura(818053)
+		elseif (player:HasAura(818054) or player:HasAura(818055)) then
+			player:RemoveAura(818054)
+			player:RemoveAura(818055)
+		end
+	end
+	return msg:Add("HungerBar", "GetHungerPct", hunger,food_hack)
+end
+
+local function hunger_ticker(event, timer, delay, player) -- deal damage if player has low hunger level, runs all the time after OnLoginPlayer
+		local level = player:GetLevel()
+		local damage_dealt = 25
+		local deficit = 5
+			if level > 10 then
+				damage_dealt = level * 15
+			elseif level > 30 then
+				deficit = 20
+				damage_dealt = level * 30
+			elseif level > 50 then
+				deficit = 40
+				damage_dealt = level * 45
+			end
+		if (player:IsDead() == false) then	
+			player_hunger_table[player:GetGUIDLow()] = player_hunger_table[player:GetGUIDLow()] - (deficit)
+		end
+		if player_hunger_table[player:GetGUIDLow()] <= 0 and player:IsGM() == false then
+			player_hunger_table[player:GetGUIDLow()] = 0
+			player:DealDamage(player, damage_dealt, false, 7)
+		end
+		update_display_hunger(AIO.Msg(), player,false):Send(player)
+		
+		end
+
+local function fill_hunger(event, timer, delay, player)
+	local level = player:GetLevel()
+	local itemLevel = player_hunger_itemused[player:GetGUIDLow()]
+	local hunger =  player_hunger_table[player:GetGUIDLow()]
+	local max_hunger = (level * 5) + 100
+	local food = 0
+
+	if not(hunger) then 
+		return false
+	end
+	
+	--local drinks = {430, 431, 432, 1133, 1135, 1137, 22734, 27089, 34291, 43182, 43183, 43706, 45020, 5291}
+					
+	for k, v in pairs(auras) do
+
+		---
+		if (itemLevel>level) or ((itemLevel+5)>=level) then
+			food = 25
+		elseif ((itemLevel+5) < level) and ((itemLevel+10) >= level) then
+			food = 10
+		else
+			food = 5
+		end
+
+	end
+
+		player_hunger_table[player:GetGUIDLow()] = player_hunger_table[player:GetGUIDLow()]+food
+		if (hunger > max_hunger) then
+		player_hunger_table[player:GetGUIDLow()] = max_hunger
+		end
+
+	update_display_hunger(AIO.Msg(), player,true):Send(player)
+end
+
+
+local function OnItemUse(event, player, item, target)
+	local max_hunger = (player:GetLevel() * 5) + 100
+	local itemLevel = item:GetItemLevel()
+		player_hunger_itemused[player:GetGUIDLow()] = itemLevel
+
+	if (player:IsMoving() == false) then
+		player:RegisterEvent(fill_hunger, 5000, 6)
+	else
+		player:SendBroadcastMessage("You can't do that while moving.")
+	end
+end
+
+
 
 -- drink = {159, 1179, 1205, 1645, 1708, 2136, 2288, 3772, 4791, 5350, 8077, 8078, 8079, 8766, 9451, 10841, 
 --17404, 18300, 19299, 19300, 22018, 27860, 28399, 29395, 29401, 29454, 30457, 30703, 32453, 32455, 32668, 33042, 
@@ -151,6 +150,21 @@ end
 
 
 
+local function OnLoginPlayer(event, player) -- load hunger from table, works ok
+	local guid = player:GetGUIDLow()
+	local char_query = CharDBQuery("select hunger from character_saved_hunger where guid = "..guid)
+	local player_hunger = 100
+	if char_query == nil then
+		CharDBExecute("INSERT INTO character_saved_hunger(guid, hunger) VALUES("..guid..",100)")	
+	else
+		--print("Successfully loaded from table")
+		player_hunger = char_query:GetInt32(0)
+	end
+	player_hunger_table[guid] = player_hunger
+	AIO.Handle(player, "HungerBar", "OnLogin")
+	player:RegisterEvent(hunger_ticker, 78000, 0) -- register deal damage function
+	update_display_hunger(AIO.Msg(), player,false):Send(player)
+end
 
 local function OnLogoutPlayer(event ,player)
 	local guid = player:GetGUIDLow()

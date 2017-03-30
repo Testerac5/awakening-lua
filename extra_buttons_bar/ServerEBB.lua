@@ -12,7 +12,7 @@ local Reset_Level = {
     [30] = {50000,150000,3250},
     [40] = {150000,300000,9250},
     [50] = {300000,1000000,10550},
-    [60] = {500000,2500000,20000},
+    [60] = {350000,1500000,20000},
     [70] = {500000,2500000,20000},
     [80] = {500000,2500000,20000},
 }
@@ -38,6 +38,9 @@ for k,v in pairs(Reset_Level) do
     	end
 
         local talent_cost = Reset_Level[k][purgemissing] + Reset_Level[k][3]*(player:GetLevel()-k+mult*2)
+        if (talent_cost>Reset_Level[k][purgemissing]*1.75) then
+        	talent_cost = Reset_Level[k][purgemissing]*1.75
+        end
         return talent_cost,TalentMult,SpellMult
     end
 end
@@ -448,7 +451,7 @@ function MyHandlers.ResetSpells(player)
 				
 					if player:HasSpell(spellid) == true then
 						player:RemoveSpell(spellid)
-												--player:AddItem(spell_essence, AE_cost)
+						player:AddItem(spell_essence, AE_cost)
 						if TE_cost ~= 0 then
 							player:Additem(talent_essence, TE_cost)
 						end
@@ -459,8 +462,8 @@ function MyHandlers.ResetSpells(player)
 				end
 			end
 			--custom mult part
-			player:RemoveItem(spell_essence, player:GetItemCount(spell_essence))
-			player:AddItem(spell_essence, player:GetLevel())
+			--player:RemoveItem(spell_essence, player:GetItemCount(spell_essence))
+			--player:AddItem(spell_essence, player:GetLevel())
 			CharDBExecute("UPDATE custom_resets SET ability_resets = ability_resets+1 WHERE char_guid = "..player:GetGUIDLow()..";")
 			local temp_cost, temp_t_mult, temp_a_mult = GetMoneyForReset(player, 1)
 			resetFrame_Refresh(AIO.Msg(), player,temp_t_mult, temp_a_mult+1):Send(player)
@@ -518,7 +521,7 @@ function MyHandlers.ResetTalents(player)
 					end
 
 					if spell_removed == true then
-						--player:AddItem(talent_essence, (rank_removed*TE_cost))
+						player:AddItem(talent_essence, (rank_removed*TE_cost))
 						if AE_cost ~= 0 then
 							player:AddItem(spell_essence, (rank_removed*AE_cost))
 						end
@@ -526,8 +529,8 @@ function MyHandlers.ResetTalents(player)
 				end
 			end
 			--custom mult part
-			player:RemoveItem(talent_essence, player:GetItemCount(talent_essence))
-			player:AddItem(talent_essence, player:GetLevel()-9)
+			--player:RemoveItem(talent_essence, player:GetItemCount(talent_essence))
+			--player:AddItem(talent_essence, player:GetLevel()-9)
 			CharDBExecute("UPDATE custom_resets SET talent_resets = talent_resets+1 WHERE char_guid = "..player:GetGUIDLow()..";")
 			local temp_cost, temp_t_mult, temp_a_mult = GetMoneyForReset(player, 1)
 			resetFrame_Refresh(AIO.Msg(), player,temp_t_mult+1, temp_a_mult):Send(player)

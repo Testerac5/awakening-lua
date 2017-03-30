@@ -15,6 +15,7 @@ end
 
 local function maxLevel(event, delay, pCall, player)
 	player:SetLevel(60)
+	player:AddItem(978021)
 	player:AdvanceAllSkills(300)
 	player:AdvanceSkill(176, 300)
 	player:RegisterEvent(fixTalents, 500, 1, player)

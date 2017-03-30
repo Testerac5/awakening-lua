@@ -14,7 +14,8 @@ local prohibited_items = {
 977021,
 5863,
 }
-local dropmodifier = 4
+local dropmodifier = 5
+local item_looted = {}
 --local playerdeath = true
 --local creaturedeath = true
 --local leveldiff = 6
@@ -95,7 +96,9 @@ local function EntropyPvP(event, pKiller, pKilled)
 					local amountofdroppeditems = math.ceil(pKilled:GetLevel()/dropmodifier)
 						if (amountofdroppeditems >= 1) then
 							--list of items player have
-							for slot = 0,38 do
+							for i = 1, 8 do
+							math.random(1,10)
+							slot = math.random(0,38)
 								if (pKilled:GetItemByPos(255, slot)) then
 									if not(pKilled:HasQuestForItem(pKilled:GetItemByPos(255, slot):GetEntry())) and not(pKilled:GetItemByPos(255, slot):IsBag()==true) then
 									table.insert(items_droplist, {255,slot})
@@ -114,6 +117,7 @@ local function EntropyPvP(event, pKiller, pKilled)
 							-- list is done
 							if (items_droplist[1]) then
 							for i = 1, amountofdroppeditems do
+								math.random(1,10)
 							local itemslot_temp = math.random(1,#items_droplist)
 							local item = pKilled:GetItemByPos(items_droplist[itemslot_temp][1],items_droplist[itemslot_temp][2])
 								if (item) then
@@ -340,6 +344,10 @@ function MyHandlers.AddPlayerItem(player, itemEntry, itemCount, object)
 end
 
 local function Container_Interact(event, player, object)
+	if (item_looted[object:GetGUIDLow()]) then
+		return false
+	end
+	table.insert(item_looted, object:GetGUIDLow())
 	Init_FullLootFrame(event, player, object)
 	object:Despawn()
 	object:RemoveFromWorld(false)
