@@ -5,12 +5,18 @@ local AIO = AIO or require ("AIO")
 local tTHandler = AIO.AddHandlers ("TooltipAIO", {})
 
 function tTHandler.HasSpellID(player, spellid)
+	if not(DataTypeCheck({"number"}, spellid)) then
+		return false
+	end
 	local y = player:HasSpell(spellid)
 	AIO.Handle(player, "TooltipAIO", "ReceiveIDCheck", y)
 	
 end
 
 function tTHandler.CostGrabber(player, spellid)
+	if not(DataTypeCheck({"number"}, spellid)) then
+		return false
+	end
 	local y = player:GetSpellCost(spellid)
 	local x = player:GetSpellCooldown(spellid)
 	local z = player:GetSpellRange(spellid)
