@@ -27,9 +27,9 @@ rogue_assassination_talents_tab = 8
 
 
 rogue_combat_spells = {{1752, 2, 0, 1}, {53, 2, 0, 4}, {1776, 2, 0, 6}, {5277, 2, 0, 8}, {2983, 2, 0, 10},
-{1766, 2, 0, 12}, {1966, 2, 0, 16}, {5938, 2, 0, 70}}
+{1766, 2, 0, 12}, {1966, 2, 0, 16}, {5938, 2, 0, 70}, {51723, 2, 0, 80}}
 
-rogue_combat_spells_count = 8
+rogue_combat_spells_count = 9
 rogue_combat_bgs = {"Interface\\TalentFrame\\RogueCombat-TopLeft", "Interface\\TalentFrame\\RogueCombat-TopRight",
 "Interface\\TalentFrame\\RogueCombat-BottomLeft", "Interface\\TalentFrame\\RogueCombat-BottomRight"}
 
