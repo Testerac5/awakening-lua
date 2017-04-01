@@ -1,3 +1,26 @@
+--[[LIST OF FUNCTIONS WE HAVE client->Server for this protection to be enabled.
+TheClassMaskingSolution/TooltipCorrectorServer.lua
+tTHandler.HasSpellID(player, spellid) -- done
+tTHandler.CostGrabber(player, spellid) -- done
+
+EnchantReRoll/EnchantReRollS.lua
+MyHandlers.ReforgeItem(player,bag,slot)
+MyHandlers.ReforgeItem_Prep(player,bag,slot)
+MyHandlers.SetItem(player,bag,slot)
+
+extra_buttons_bar/ServerEBB.lua
+MyHandlers.AddStats(player, stat, s_amount)
+MyHandlers.ReduceStats(player, stat, s_amount)
+MyHandlers.SendAmountOfSpells(player, class, Spec)
+MyHandlers.GetAllBGs(player, ClassSpec)
+MyHandlers.LearnThisTalent(player, attached_talent, indexAt,ClassSpec)
+MyHandlers.UnLearnThisTalent(player, attached_talent, indexAt,ClassSpec)
+MyHandlers.LearnThisSpell(player, got_spell, i,class,spec)
+MyHandlers.UnLearnThisSpell(player, got_spell, i,class,spec)
+
+hardcore_pvp/PvPServer.lua
+MyHandlers.AddPlayerItem(player, itemEntry, itemCount, object)
+]]--
 local valid_types = {
     ["nil"] = true,
     ["number"] = true,

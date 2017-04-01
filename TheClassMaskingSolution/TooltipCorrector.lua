@@ -1757,7 +1757,7 @@ function RequestSpellCost(spellid)
 
 		if(dataTable[spellid][8]) then 
 			AIO.Handle("TooltipAIO", "CostGrabber", spellid)
-			AIO.Handle("TooltipAIO", "CooldownGrabber", spellid)
+			--AIO.Handle("TooltipAIO", "CooldownGrabber", spellid) no shuch function in TooltipCorrectorServer
 			dataTable[spellid][8] = false
 			--print("updating values")
 			skipCheck = true
