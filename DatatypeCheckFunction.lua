@@ -4,9 +4,9 @@ tTHandler.HasSpellID(player, spellid) -- done
 tTHandler.CostGrabber(player, spellid) -- done
 
 EnchantReRoll/EnchantReRollS.lua
-MyHandlers.ReforgeItem(player,bag,slot)
-MyHandlers.ReforgeItem_Prep(player,bag,slot)
-MyHandlers.SetItem(player,bag,slot)
+MyHandlers.ReforgeItem(player,bag,slot) -- test
+MyHandlers.ReforgeItem_Prep(player,bag,slot) -- test
+MyHandlers.SetItem(player,bag,slot) -- test
 
 extra_buttons_bar/ServerEBB.lua
 MyHandlers.AddStats(player, stat, s_amount)

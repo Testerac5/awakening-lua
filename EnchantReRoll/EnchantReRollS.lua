@@ -84,7 +84,17 @@ function EnchantItemTier(item)
 end
 --MAIN SET ITEM FUNCTION
  function MyHandlers.SetItem(player,bag,slot)
+ 	--AIO ADDITIONAL CHECK--
+	local expectedData = {"number","number"}
+	local values = {bag,slot}
+	if not(DataTypeCheck(expectedData, values)) then
+		return false
+	end
+	--MAIN ACTION--
  local item = player:GetItemByPos(bag,slot)
+ 	if not(item) then
+ 		return false
+ 	end
 	if (EnchantItemCheck(player,item)) then
 	local itemlink = GetItemLink(item:GetEntry())
 	local effect = nil
@@ -107,7 +117,17 @@ end
 
 --MAIN REFORGE ITEM FUNCTION
 function MyHandlers.ReforgeItem_Prep(player,bag,slot)
+		--AIO ADDITIONAL CHECK--
+	local expectedData = {"number","number"}
+	local values = {bag,slot}
+	if not(DataTypeCheck(expectedData, values)) then
+		return false
+	end
+	--MAIN ACTION--
 local item = player:GetItemByPos(bag,slot)
+ 	if not(item) then
+ 		return false
+ 	end
 	if (EnchantItemCheck(player,item)) then
 		local cost = EnchantItemCost(item)
 
@@ -121,7 +141,17 @@ local item = player:GetItemByPos(bag,slot)
 end
 
 function MyHandlers.ReforgeItem(player,bag,slot)
+	--AIO ADDITIONAL CHECK--
+	local expectedData = {"number","number"}
+	local values = {bag,slot}
+	if not(DataTypeCheck(expectedData, values)) then
+		return false
+	end
+	--MAIN ACTION--
 	local item = player:GetItemByPos(bag,slot)
+	 	if not(item) then
+ 		return false
+ 	end
 	if (EnchantItemCheck(player,item)) then
 
 		local cost = EnchantItemCost(item)
