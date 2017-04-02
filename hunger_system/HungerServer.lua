@@ -82,7 +82,7 @@ local function hunger_ticker(event, timer, delay, player) -- deal damage if play
 		if (player:IsDead() == false) then	
 			player_hunger_table[player:GetGUIDLow()] = player_hunger_table[player:GetGUIDLow()] - (deficit)
 		end
-		if player_hunger_table[player:GetGUIDLow()] <= 0 and (player:GetGMRank() == 2) then
+		if player_hunger_table[player:GetGUIDLow()] <= 0 and (player:GetGMRank() == 0) then
 			player_hunger_table[player:GetGUIDLow()] = 0
 			player:DealDamage(player, damage_dealt, false, 7)
 		end
