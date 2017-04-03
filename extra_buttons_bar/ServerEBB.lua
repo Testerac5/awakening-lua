@@ -86,7 +86,6 @@ function MyHandlers.AddStats(player, stat, s_amount)
 	end
 	--MAIN ACTION--
 	end
-	player:SendBroadcastMessage("test") -- DEBUG
 	-- stat values equal >>>>> 1 = strength | 2 = stamina | 3 = agility | 4 = intellect | 5 = spirit 
 
 	local stat_names = {"str", "sta", "agi", "inte", "spi"}
