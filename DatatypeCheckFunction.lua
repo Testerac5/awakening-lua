@@ -9,10 +9,10 @@ MyHandlers.ReforgeItem_Prep(player,bag,slot) -- done
 MyHandlers.SetItem(player,bag,slot) -- done
 
 extra_buttons_bar/ServerEBB.lua
-MyHandlers.AddStats(player, stat, s_amount) -- test
-MyHandlers.ReduceStats(player, stat, s_amount) -- test
-MyHandlers.SendAmountOfSpells(player, class, Spec)
-MyHandlers.GetAllBGs(player, ClassSpec)
+MyHandlers.AddStats(player, stat, s_amount) -- done
+MyHandlers.ReduceStats(player, stat, s_amount) -- done
+MyHandlers.SendAmountOfSpells(player, class, Spec) -- done
+MyHandlers.GetAllBGs(player, ClassSpec) -- done
 MyHandlers.LearnThisTalent(player, attached_talent, indexAt,ClassSpec)
 MyHandlers.UnLearnThisTalent(player, attached_talent, indexAt,ClassSpec)
 MyHandlers.LearnThisSpell(player, got_spell, i,class,spec)

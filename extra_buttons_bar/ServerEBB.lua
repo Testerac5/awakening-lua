@@ -672,6 +672,13 @@ return spell_count, spell_list
 end
 
 function MyHandlers.SendAmountOfSpells(player, class, Spec)
+	--AIO ADDITIONAL CHECK--
+	local expectedData = {"string","string"}
+	local values = {class,Spec}
+	if not(DataTypeCheck(expectedData, values)) then
+		return false
+	end
+	--MAIN ACTION--
 
 	local pass_1, pass_2 = GetRightSpellTables(class,Spec)
 	sendAmountOfSpells(AIO.Msg(), player, pass_1, pass_2):Send(player)
@@ -692,6 +699,15 @@ end
 
 
 function MyHandlers.LearnThisSpell(player, got_spell, i,class,spec)
+
+	--AIO ADDITIONAL CHECK--
+	local expectedData = {{"number","number","number"},"number","string","string"}
+	local values = {got_spell,i,class,spec}
+	if not(DataTypeCheck(expectedData, values)) then
+		return false
+	end
+	--MAIN ACTION--
+
 	local successful = true
 	local player_has_currency = true
 
@@ -807,6 +823,15 @@ function MyHandlers.UnLearnThisSpell(player, got_spell, i,class,spec)
 end
 --end of unlearn this spell part--
 function MyHandlers.GetAllBGs(player, ClassSpec)
+
+	--AIO ADDITIONAL CHECK--
+	local expectedData = {"string"}
+	local values = {ClassSpec}
+	if not(DataTypeCheck(expectedData, values)) then
+		return false
+	end
+	--MAIN ACTION--
+
 	local bgList = {druid_balance_bgs, druid_feral_bgs, druid_restoration_bgs,
 	hunter_beastmastery_bgs, hunter_marksmanship_bgs, hunter_survival_bgs,
 	mage_arcane_bgs, mage_fire_bgs, mage_frost_bgs,
