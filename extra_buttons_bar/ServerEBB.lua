@@ -701,7 +701,7 @@ end
 function MyHandlers.LearnThisSpell(player, got_spell, i,class,spec)
 
 	--AIO ADDITIONAL CHECK--
-	local expectedData = {{"string","number","number"},"number","string","string"}
+	local expectedData = {{"number","number","number"},"number","string","string"}
 	local values = {got_spell,i,class,spec}
 	if not(DataTypeCheck(expectedData, values)) then
 		return false
