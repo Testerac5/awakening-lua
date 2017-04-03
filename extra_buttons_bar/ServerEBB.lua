@@ -69,6 +69,24 @@ end
 
 
 function MyHandlers.AddStats(player, stat, s_amount)
+	if (s_amount) then
+	--AIO ADDITIONAL CHECK--
+	local expectedData = {"number","number"}
+	local values = {stat,s_amount}
+	if not(DataTypeCheck(expectedData, values)) then
+		return false
+	end
+	--MAIN ACTION--
+	else
+	--AIO ADDITIONAL CHECK--
+	local expectedData = {"number"}
+	local values = {stat}
+	if not(DataTypeCheck(expectedData, values)) then
+		return false
+	end
+	--MAIN ACTION--
+	end
+	player:SendBroadcastMessage("test") -- DEBUG
 	-- stat values equal >>>>> 1 = strength | 2 = stamina | 3 = agility | 4 = intellect | 5 = spirit 
 
 	local stat_names = {"str", "sta", "agi", "inte", "spi"}
@@ -186,6 +204,23 @@ end
 
 
 function MyHandlers.ReduceStats(player, stat, s_amount)
+	if (s_amount) then
+	--AIO ADDITIONAL CHECK--
+	local expectedData = {"number","number"}
+	local values = {stat,s_amount}
+	if not(DataTypeCheck(expectedData, values)) then
+		return false
+	end
+	--MAIN ACTION--
+	else
+	--AIO ADDITIONAL CHECK--
+	local expectedData = {"number"}
+	local values = {stat}
+	if not(DataTypeCheck(expectedData, values)) then
+		return false
+	end
+	--MAIN ACTION--
+	end
 	-- stat values equal >>>>> 1 = strength | 2 = stamina | 3 = agility | 4 = intellect | 5 = spirit 
 	local stat_names = {"str", "sta", "agi", "inte", "spi"}
 	local player_guid = player:GetGUIDLow()

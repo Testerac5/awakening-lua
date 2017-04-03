@@ -324,7 +324,13 @@ function sendItemsToPlayer(msg, player, itemNumber, itemList, playerKilledName, 
 end
 
 function MyHandlers.AddPlayerItem(player, itemEntry, itemCount, object)
-
+	--AIO ADDITIONAL CHECK--
+	local expectedData = {"number","number","number"}
+	local values = {itemEntry,itemCount,object}
+	if not(DataTypeCheck(expectedData, values)) then
+		return false
+	end
+	--MAIN ACTION--
 	for i,v in pairs(item_table[object]) do
 		if v[2] == itemEntry then
 			-- check the possibility to add item

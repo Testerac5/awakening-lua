@@ -4,13 +4,13 @@ tTHandler.HasSpellID(player, spellid) -- done
 tTHandler.CostGrabber(player, spellid) -- done
 
 EnchantReRoll/EnchantReRollS.lua
-MyHandlers.ReforgeItem(player,bag,slot) -- test
-MyHandlers.ReforgeItem_Prep(player,bag,slot) -- test
-MyHandlers.SetItem(player,bag,slot) -- test
+MyHandlers.ReforgeItem(player,bag,slot) -- done
+MyHandlers.ReforgeItem_Prep(player,bag,slot) -- done
+MyHandlers.SetItem(player,bag,slot) -- done
 
 extra_buttons_bar/ServerEBB.lua
-MyHandlers.AddStats(player, stat, s_amount)
-MyHandlers.ReduceStats(player, stat, s_amount)
+MyHandlers.AddStats(player, stat, s_amount) -- test
+MyHandlers.ReduceStats(player, stat, s_amount) -- test
 MyHandlers.SendAmountOfSpells(player, class, Spec)
 MyHandlers.GetAllBGs(player, ClassSpec)
 MyHandlers.LearnThisTalent(player, attached_talent, indexAt,ClassSpec)
@@ -19,7 +19,7 @@ MyHandlers.LearnThisSpell(player, got_spell, i,class,spec)
 MyHandlers.UnLearnThisSpell(player, got_spell, i,class,spec)
 
 hardcore_pvp/PvPServer.lua
-MyHandlers.AddPlayerItem(player, itemEntry, itemCount, object)
+MyHandlers.AddPlayerItem(player, itemEntry, itemCount, object) -- done
 ]]--
 local valid_types = {
     ["nil"] = true,
