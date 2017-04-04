@@ -14,6 +14,10 @@ local prohibited_items = {
 977021,
 5863,
 22115,
+22048,
+21984,
+22047,
+22046,
 }
 local dropmodifier = 5
 local item_looted = {}
