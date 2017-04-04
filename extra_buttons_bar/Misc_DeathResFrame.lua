@@ -14,7 +14,7 @@ DeathCapitalTeleportButton:SetNormalTexture("Interface\\AddOns\\AwAddons\\Textur
 --font
 local DeathCapitalTeleportButton_text = DeathCapitalTeleportButton:CreateFontString("TicketMasterFrame_Title")
 DeathCapitalTeleportButton_text:SetFontObject(GameFontNormal)
-DeathCapitalTeleportButton_text:SetText("Ressurect\nin a capital city")
+DeathCapitalTeleportButton_text:SetText("Resurrect\nin a capital city")
 DeathCapitalTeleportButton_text:SetPoint("CENTER",32,0)
 --
 DeathCapitalTeleportButton:SetFontString(DeathCapitalTeleportButton_text)

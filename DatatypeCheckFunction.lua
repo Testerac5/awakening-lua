@@ -13,7 +13,7 @@ MyHandlers.AddStats(player, stat, s_amount) -- done
 MyHandlers.ReduceStats(player, stat, s_amount) -- done
 MyHandlers.SendAmountOfSpells(player, class, Spec) -- done
 MyHandlers.GetAllBGs(player, ClassSpec) -- done
-MyHandlers.LearnThisTalent(player, attached_talent, indexAt,ClassSpec)
+MyHandlers.LearnThisTalent(player, attached_talent, indexAt,ClassSpec) -- done
 MyHandlers.UnLearnThisTalent(player, attached_talent, indexAt,ClassSpec)
 MyHandlers.LearnThisSpell(player, got_spell, i,class,spec) -- done
 MyHandlers.UnLearnThisSpell(player, got_spell, i,class,spec) -- done
