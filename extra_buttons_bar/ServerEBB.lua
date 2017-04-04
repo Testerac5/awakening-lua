@@ -926,14 +926,13 @@ function MyHandlers.LearnThisTalent(player, attached_talent, indexAt,ClassSpec)
 		return false
 	end
 	for k,v in pairs(attached_talent[4]) do
-		expectedData = {"string"}
+		expectedData = {"number"}
 		values = v
 	if not(DataTypeCheck(expectedData, values)) then
 		return false
 	end
 	end
 	--MAIN ACTION--
-	player:SendBroadcastMessage("test")
 
 	local talentList = nil
 	local successful = true
