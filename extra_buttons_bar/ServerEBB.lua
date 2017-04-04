@@ -785,7 +785,7 @@ end
 function MyHandlers.UnLearnThisSpell(player, got_spell, i,class,spec)
 
 	--AIO ADDITIONAL CHECK--
-	local expectedData = {{"number","number","number"},"number","string","string"}
+	local expectedData = {"number","number","string","string"}
 	local values = {got_spell,i,class,spec}
 	if not(DataTypeCheck(expectedData, values)) then
 		return false
@@ -927,7 +927,7 @@ function MyHandlers.LearnThisTalent(player, attached_talent, indexAt,ClassSpec)
 	end
 	for k,v in pairs(attached_talent[4]) do
 		expectedData = {"number"}
-		values = v
+		values = {v}
 	if not(DataTypeCheck(expectedData, values)) then
 		return false
 	end
