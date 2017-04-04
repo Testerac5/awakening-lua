@@ -47,6 +47,14 @@ function MassPurgeCheck(event, player)
 							   warlock_affliction_spells, warlock_demonology_spells, warlock_destruction_spells,
 							   warrior_arms_spells, warrior_fury_spells, warrior_protection_spells}
 		
+		--FROM ServerEBB.lua MyHandlers.ResetSpells(player)
+		local noTEspells = {54785, 50589, 50581, 59671, 11417, 11420, 11418, 3567, 3566, 3563, 11419, 11416, 10059, 3565, 3562, 3561, 21849, 21850, 26991, 48470, 21562, 21564, 25782, 25916, 27141, 27681, 49360, 49359, 49361, 49358, 10143, 8121, 7763, 10937, 10938, 9884, 1373}
+			for s, sid in pairs(noTEspells) do
+				if player:HasSpell(sid) then
+					player:RemoveSpell(sid)
+				end
+			end
+		--
 		for listloc,spec in ipairs(all_spell_lists) do
 			for loc,spell in ipairs(spec) do
 				local spellid = spell[1]
