@@ -783,6 +783,15 @@ function sendButtonToChangeSpellsBack(msg, player, i,spellID,currency_one,curren
 end
 
 function MyHandlers.UnLearnThisSpell(player, got_spell, i,class,spec)
+
+	--AIO ADDITIONAL CHECK--
+	local expectedData = {{"number","number","number"},"number","string","string"}
+	local values = {got_spell,i,class,spec}
+	if not(DataTypeCheck(expectedData, values)) then
+		return false
+	end
+	--MAIN ACTION--
+
 	local successful = true
 
 	local currency_one = nil
@@ -910,6 +919,15 @@ end
 
 
 function MyHandlers.LearnThisTalent(player, attached_talent, indexAt,ClassSpec)
+	--AIO ADDITIONAL CHECK--
+	local expectedData = {{"number","number","number",{},"number"},"number","string"}
+	local values = {attached_talent,indexAt,ClassSpec}
+	if not(DataTypeCheck(expectedData, values)) then
+		return false
+	end
+	--MAIN ACTION--
+	player:SendBroadcastMessage("test")
+
 	local talentList = nil
 	local successful = true
 	local player_has_currency = true

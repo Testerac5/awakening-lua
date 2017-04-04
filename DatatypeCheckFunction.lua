@@ -15,8 +15,8 @@ MyHandlers.SendAmountOfSpells(player, class, Spec) -- done
 MyHandlers.GetAllBGs(player, ClassSpec) -- done
 MyHandlers.LearnThisTalent(player, attached_talent, indexAt,ClassSpec)
 MyHandlers.UnLearnThisTalent(player, attached_talent, indexAt,ClassSpec)
-MyHandlers.LearnThisSpell(player, got_spell, i,class,spec)
-MyHandlers.UnLearnThisSpell(player, got_spell, i,class,spec)
+MyHandlers.LearnThisSpell(player, got_spell, i,class,spec) -- done
+MyHandlers.UnLearnThisSpell(player, got_spell, i,class,spec) -- done
 
 hardcore_pvp/PvPServer.lua
 MyHandlers.AddPlayerItem(player, itemEntry, itemCount, object) -- done
