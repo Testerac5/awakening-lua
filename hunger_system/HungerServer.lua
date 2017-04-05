@@ -175,4 +175,5 @@ end
 end
 
 RegisterPlayerEvent(3, OnLoginPlayer)
+RegisterPlayerEvent(28, OnLoginPlayer)
 RegisterPlayerEvent(4, OnLogoutPlayer)
