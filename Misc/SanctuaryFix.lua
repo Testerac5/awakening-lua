@@ -20,8 +20,9 @@ if not(player:HasFlag(150,0x00000020)) and not(player:IsFFAPvP()) then
 		end
 	else
 		player:SetFFA(true)
-	end
+	else
 	player:SetFFA(true)
+end
 end
 
 if (player:HasFlag(150,0x00000020)) and (player:IsFFAPvP()) then
