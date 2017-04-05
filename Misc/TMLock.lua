@@ -38,4 +38,4 @@ local function TimingChecks_GM(event,player) -- rank 3 .gm vis off all the time
 	player:RegisterEvent(TMLock3, 2000, 0)
 end
 RegisterPlayerEvent(28, TimingChecks_GM)
-RegisterPlayerEvent(3, TimingChecks_GM)
+--RegisterPlayerEvent(3, TimingChecks_GM)

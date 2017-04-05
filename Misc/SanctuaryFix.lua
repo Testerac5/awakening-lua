@@ -14,10 +14,7 @@
 local function sanctuary_fix_2(eventId, delay, repeats, player) -- using to prevent saving flags after leaving the inn
 if not(player:HasFlag(150,0x00000020)) and not(player:IsFFAPvP()) then
 	if (player:GetLevel()<20) then
-		if not(player:IsPvPFlagged()) then
-			player:SetFFA(false)
-			return false
-		else
+		if player:IsPvPFlagged() then
 			player:SetFFA(true)
 		end
 	else
@@ -29,7 +26,7 @@ if (player:HasFlag(150,0x00000020)) and (player:IsFFAPvP()) then
 	player:SetFFA(false)
 end
 
-if (player:HasFlag(150,0x00000020)) and (player:GetLevel()<20) then
+if not(player:HasFlag(150,0x00000020)) and (player:GetLevel()<20) then
 	if not(player:IsPvPFlagged()) then
 			player:SetFFA(false)
 			return false
@@ -54,4 +51,4 @@ local function TimingChecks(event,player)
 	player:RegisterEvent(sanctuary_fix_2, 2000, 0)
 end
 RegisterPlayerEvent(28, TimingChecks)
-RegisterPlayerEvent(3, TimingChecks)
+--RegisterPlayerEvent(3, TimingChecks)
