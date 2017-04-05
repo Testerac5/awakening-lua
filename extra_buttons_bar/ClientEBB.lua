@@ -483,7 +483,7 @@ sideBar:SetFrameStrata("LOW")
         sideBarOpeningFrameButton:SetScript("OnHide", sideBar.StopMovingOrSizing)
         sideBarOpeningFrameButton:SetScript("OnDragStop", sideBar.StopMovingOrSizing)]]--
         LFDMicroButton:Hide()
-        local TOOLTIP_AWAKENING = "|cffFFFFFFOpen Character Upgrades|r\nUsing this menu you'll be\nable to reset your spells or talents,\nto get new abilities and allocate\nstats of your character"
+        local TOOLTIP_AWAKENING = "Using this menu you'll be\nable to reset your spells or talents,\nto get new abilities and allocate\nstats of your character"
         function togglesiderframe()
             TrainingFrame:Hide() StatFrame:Hide()
             if not(sideBar:IsVisible()) then
@@ -506,7 +506,8 @@ sideBar:SetFrameStrata("LOW")
             end)
         CharUpdatesMicroButton:SetScript("OnEnter",function(self)
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-            GameTooltip:SetText(TOOLTIP_AWAKENING)
+            GameTooltip:AddLine("|cffFFFFFFOpen Character Upgrades|r")
+            GameTooltip:AddLine(TOOLTIP_AWAKENING, 1, 1, 1, true)
             GameTooltip:Show()
             end)
         CharUpdatesMicroButton:SetScript("OnLeave",function(self)
