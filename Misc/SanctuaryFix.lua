@@ -22,12 +22,19 @@ if not(player:HasFlag(150,0x00000020)) and not(player:IsFFAPvP()) then
 		player:SetFFA(true)
 	else
 	player:SetFFA(true)
-end
+	end
 end
 
 if (player:HasFlag(150,0x00000020)) and (player:IsFFAPvP()) then
 	player:SetFFA(false)
 end
+
+if (player:HasFlag(150,0x00000020)) and (player:GetLevel()<20) then
+	if not(player:IsPvPFlagged()) then
+			player:SetFFA(false)
+			return false
+		end
+	end
 
 if (player:IsInCombat() and player:GetVictim()) then
 	if not(player:GetVictim():ToPlayer()) then
