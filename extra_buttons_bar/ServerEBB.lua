@@ -470,8 +470,10 @@ function MyHandlers.ResetSpells(player)
 		player:SendBroadcastMessage("You can't do that in Battlegrounds and Arenas.")
 	else
 		if player:HasItem(spell_reset_token) == true or free_spell_reset == true or (player:GetCoinage() >= cost) then
-		if (player:HasItem(spell_reset_token) == true or free_spell_reset == true) then		 
+		if (player:HasItem(spell_reset_token) == true or free_spell_reset == true) then		
+			if not(free_spell_reset) then
 			player:RemoveItem(spell_reset_token, 1)
+			end
 		else
 			player:ModifyMoney(-cost)
 		end
