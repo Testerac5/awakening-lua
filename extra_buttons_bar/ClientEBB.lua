@@ -886,6 +886,8 @@ end
             ResetFrame_TalentFrame_Cost:SetText(dialogText)
             ResetFrame_TalentFrame_NextCost:SetText(dialogText_2)
             elseif (typeofpurge == "ability") then
+
+                if not(UnitLevel("player") < 10) then
                 cost, nexcost = GetMoneyForReset(2)
             if (cost == "token") then
                 dialogText = "|cffE1AB18Reset: |TInterface\\Icons\\inv_custom_abilitypurge.blp:14:14:0:0|t|cffFFFFFFx1"
@@ -901,6 +903,10 @@ end
             end
             ResetFrame_AbilityFrame_Cost:SetText(dialogText)
             ResetFrame_AbilityFrame_NextCost:SetText(dialogText_2)
+                else
+                    ResetFrame_AbilityFrame_Cost:SetText("Free")
+                    ResetFrame_AbilityFrame_NextCost:SetText("Free")
+                end
         end
     end
 ---[[MAIN FRAME SETTINGS]]---
