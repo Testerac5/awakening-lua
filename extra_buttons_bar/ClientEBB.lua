@@ -231,7 +231,7 @@ sideBar:SetFrameStrata("LOW")
     --MainFrame.Text_Title:Hide()
 
    local sideBar_CloseButton = CreateFrame("Button", "sideBar_CloseButton", sideBar, "UIPanelCloseButton")
-    sideBar_CloseButton:SetPoint("TOPRIGHT", -123, -56) --edited
+    sideBar_CloseButton:SetPoint("TOPRIGHT", -121, -55) --edited
     sideBar_CloseButton:EnableMouse(true)
     --sideBar_CloseButton:SetSize(29, 29) --edited
     sideBar_CloseButton:SetScript("OnMouseUp", function()
