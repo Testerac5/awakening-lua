@@ -452,6 +452,10 @@ RegisterPlayerEvent(3, OnPlayerLogin)
 
 
 function MyHandlers.ResetSpells(player)
+	local free_spell_reset = false
+	if (player:GetLevel() < 10) then
+		free_spell_reset = true
+	end
 	local cost = GetMoneyForReset(player,2)
 	local all_spell_lists = {druid_balance_spells, druid_feral_spells, druid_restoration_spells,
 							   hunter_beastmastery_spells, hunter_marksmanship_spells, hunter_survival_spells,
