@@ -961,18 +961,19 @@ ResetFrame_main:SetBackdrop({
 })
 
 local ResetFrame_main_CloseButton = CreateFrame("Button", "ResetFrame_main_CloseButton", ResetFrame_main, "UIPanelCloseButton")
-ResetFrame_main_CloseButton:SetPoint("TOPRIGHT", -13, 10) 
+ResetFrame_main_CloseButton:SetPoint("TOPRIGHT", -13.5, 11) 
 ResetFrame_main_CloseButton:EnableMouse(true)
-ResetFrame_main_CloseButton:SetSize(29, 29) 
+--ResetFrame_main_CloseButton:SetSize(29, 29) 
 ResetFrame_main_CloseButton:SetScript("OnMouseUp", function()
     PlaySound("TalentScreenOpen")
     ResetFrame_main:Hide()
     end)
 local ResetFrame_main_TitleText = ResetFrame_main:CreateFontString("ResetFrame_main_TitleText")
-ResetFrame_main_TitleText:SetFont("Fonts\\MORPHEUS.TTF", 15)
-ResetFrame_main_TitleText:SetPoint("TOP", 0, 20)
-ResetFrame_main_TitleText:SetShadowOffset(0,0)
-ResetFrame_main_TitleText:SetText("|cff110011Reset Menu|r")
+ResetFrame_main_TitleText:SetFont("Fonts\\FRIZQT__.TTF", 12.2)
+ResetFrame_main_TitleText:SetFontObject(GameFontNormal)
+ResetFrame_main_TitleText:SetPoint("TOP", 0, 2)
+ResetFrame_main_TitleText:SetShadowOffset(1,-1)
+ResetFrame_main_TitleText:SetText("Reset Menu")
 
 local ResetFrame_main_TalentResetButton = CreateFrame("Button", "ResetFrame_main_TalentResetButton", ResetFrame_main, nil)
 ResetFrame_main_TalentResetButton:SetWidth(120) 
@@ -1326,9 +1327,9 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
 	--[[ StatFrame UI ]]
 	
     local StatFrame_CloseButton = CreateFrame("Button", "StatFrame_CloseButton", StatFrame, "UIPanelCloseButton")
-        StatFrame_CloseButton:SetPoint("TOPRIGHT", -38, -29)  --edited
+        StatFrame_CloseButton:SetPoint("TOPRIGHT", -40, -24.5)  --edited
         StatFrame_CloseButton:EnableMouse(true)
-        StatFrame_CloseButton:SetSize(29, 29) --edited
+        --StatFrame_CloseButton:SetSize(29, 29) --edited
         StatFrame_CloseButton:SetScript("OnMouseUp", function(self)
             PlaySound("igQuestCancel")
             BaseFrameFadeOut(StatFrame)
@@ -1346,10 +1347,11 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
         })
         StatFrame_TitleBar:SetPoint("TOP", 0, 9)]]-- edited
                 local StatFrame_TitleText = StatFrame:CreateFontString("StatFrame_TitleText") -- edited
-        StatFrame_TitleText:SetFont("Fonts\\MORPHEUS.TTF", 15) -- edited
+        StatFrame_TitleText:SetFont("Fonts\\FRIZQT__.TTF", 12.2) -- edited
+        StatFrame_TitleText:SetFontObject(GameFontNormal)
         StatFrame_TitleText:SetSize(190, 5)
-        StatFrame_TitleText:SetPoint("TOP", 0, -27) -- edited
-        StatFrame_TitleText:SetText("|cff110000Stat Allocation|r") -- edited
+        StatFrame_TitleText:SetPoint("TOP", 0, -37) -- edited
+        StatFrame_TitleText:SetText("Stat Allocation") -- edited
        
     local StatFrame_Panel_Str = CreateFrame("Frame", "StatFrame_Panel_Str", StatFrame, nil) -- edited
         StatFrame_Panel_Str:SetSize(450, 116) -- edited
@@ -1531,7 +1533,7 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
         Strength_Text:SetText("|cffE1AB18Strength|r")
 
         local Allocation_Fast_Text = StatFrame_Panel_Str:CreateFontString("Allocation_Fast_Text") -- edited
-        Allocation_Fast_Text:SetFont("Fonts\\FRIZQT__.TTF", 13) -- edited
+        Allocation_Fast_Text:SetFont("Fonts\\FRIZQT__.TTF", 11) -- edited
         Allocation_Fast_Text:SetSize(500, 5)
         Allocation_Fast_Text:SetPoint("TOP", 0, -10)
         Allocation_Fast_Text:SetText("|cffE1AB18Hold |cffFFFFFFShift|cffE1AB18 to allocate 10 points per stat|r")

@@ -12,8 +12,8 @@ local MyHandlers = AIO.AddHandlers("PvP", {})
 
 Framework = CreateFrame("Frame", "first_frame", UIParent, nil)
 local FullLootFrame = Framework
-FullLootFrame:SetSize(500, 500)
-FullLootFrame:SetScale(0.88) --making everything more or less fit standart sizes of blizz interfaces
+FullLootFrame:SetSize(416, 310)
+--FullLootFrame:SetScale(0.88) --making everything more or less fit standart sizes of blizz interfaces
 FullLootFrame:SetMovable(true)
 FullLootFrame:EnableMouse(true)
 FullLootFrame:RegisterForDrag("LeftButton")
@@ -21,21 +21,23 @@ FullLootFrame:SetPoint("BOTTOMRIGHT", -270, 60)
 FullLootFrame:SetToplevel(true)
 FullLootFrame:SetClampedToScreen(true)
 FullLootFrame:SetBackdrop({
-	bgFile = "Interface\\AddOns\\AwAddons\\Textures\\misc\\loot",})
+	bgFile = "Interface\\AddOns\\AwAddons\\Textures\\misc\\loot",
+	insets = { left = -30, right = -30, top = -101, bottom = -101}
+	})
 FullLootFrame:SetScript("OnDragStart", FullLootFrame.StartMoving)
 FullLootFrame:SetScript("OnHide", FullLootFrame.StopMovingOrSizing)
 FullLootFrame:SetScript("OnDragStop", FullLootFrame.StopMovingOrSizing)
 
 FullLootFrame_scroll = CreateFrame("ScrollFrame", nil, FullLootFrame)
-FullLootFrame_scroll:SetSize(500,400)
-FullLootFrame_scroll:SetPoint("CENTER", 0, -20)
+FullLootFrame_scroll:SetSize(500,198)
+FullLootFrame_scroll:SetPoint("CENTER", -25, -25)
 FullLootFrame_content = CreateFrame("Frame", nil, FullLootFrame)
 FullLootFrame_content:SetSize(FullLootFrame_scroll:GetSize())
 FullLootFrame_content:SetPoint("CENTER")
 
 FullLootscrollbar = CreateFrame("Slider", nil, FullLootFrame_scroll, "UIPanelScrollBarTemplate") 
-FullLootscrollbar:SetPoint("TOPLEFT", FullLootFrame, "TOPRIGHT", -100, -53) 
-FullLootscrollbar:SetPoint("BOTTOMLEFT", FullLootFrame, "BOTTOMRIGHT", -100, 30) 
+FullLootscrollbar:SetPoint("TOPLEFT", FullLootFrame, "TOPRIGHT", -79, -57) 
+FullLootscrollbar:SetPoint("BOTTOMLEFT", FullLootFrame, "BOTTOMRIGHT", -79, 33) 
 
 FullLootscrollbar:SetMinMaxValues(1, 1250) 
 FullLootscrollbar:SetValueStep(1) 
@@ -54,15 +56,16 @@ FullLootFrame_scroll:SetScrollChild(FullLootFrame_content)
 FullLootFrame:Hide()
 
 local FullLootFrame_TitleText = FullLootFrame:CreateFontString("FullLootFrame_TitleText")
-FullLootFrame_TitleText:SetFont("Fonts\\MORPHEUS.TTF", 15)
+FullLootFrame_TitleText:SetFont("Fonts\\FRIZQT__.TTF", 12.2)
 FullLootFrame_TitleText:SetSize(300, 5)
-FullLootFrame_TitleText:SetPoint("TOP", 0, -18)
-FullLootFrame_TitleText:SetShadowOffset(0, -1)
-FullLootFrame_TitleText:SetText("|cff230d21Unclaimed Belongings|r")
+FullLootFrame_TitleText:SetFontObject(GameFontNormal)
+FullLootFrame_TitleText:SetPoint("TOP", -10, -25)
+FullLootFrame_TitleText:SetShadowOffset(1, -1)
+FullLootFrame_TitleText:SetText("Unclaimed Belongings")
 local FullLootFrame_CloseButton = CreateFrame("Button", "FullLootFrame_CloseButton", FullLootFrame, "UIPanelCloseButton")
-FullLootFrame_CloseButton:SetPoint("TOPRIGHT", -75, -11)
+FullLootFrame_CloseButton:SetPoint("TOPRIGHT", -55, -12)
 FullLootFrame_CloseButton:EnableMouse(true)
-FullLootFrame_CloseButton:SetSize(31, 30)
+--FullLootFrame_CloseButton:SetSize(31, 30)
 
 
 
@@ -173,7 +176,7 @@ function MyHandlers.ReceiveItems(player,itemNumber, itemList, objectid)
 		
 	else
 	
-		FullLootFrame_TitleText:SetText("|cff230d21Unclaimed Belongings|r")
+		FullLootFrame_TitleText:SetText("Unclaimed Belongings")
 	
 	end
 	
@@ -201,7 +204,7 @@ function MyHandlers.ReceiveItems(player,itemNumber, itemList, objectid)
 			local FullLoot_Icon = FullLootIconTable[itemNumber]
 			
 			FullLoot_Button:SetSize(256, 52)
-			FullLoot_Button:SetPoint("TOP", 0, (0-((itemNumber-1)*64)))
+			FullLoot_Button:SetPoint("TOP", 0, (-10-((itemNumber-1)*64)))
 			FullLoot_Button:EnableMouse(true)
 			FullLoot_Button:SetHighlightTexture("Interface/Buttons/UI-Listbox-Highlight")
 			FullLoot_Button:SetBackdrop({
