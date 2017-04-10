@@ -722,10 +722,10 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         local function StatAllocation_button_pushed(self)
             PlaySound("igQuestCancel")
             if not(StatFrame:IsVisible()) then
-            BaseFrameFadeIn(StatFrame) TrainingFrame:Hide() ResetFrame_main:Hide()
+            StatFrame:Show() TrainingFrame:Hide() ResetFrame_main:Hide()
             AIO.Handle("sideBar", "ReceivePlayerStats")
         else
-            BaseFrameFadeOut(StatFrame)
+            StatFrame:Hide()
         end
         end
         StatAllocationButton:SetScript("OnMouseUp",StatAllocation_button_pushed)
@@ -768,7 +768,7 @@ local function ResetButtonFast_Tooltip_OnLeave(self)
         ResetUpgradesButton:SetScript("OnMouseUp", function()
             PlaySound("TalentScreenOpen")
                 if not(ResetFrame_main:IsVisible()) then
-                ResetFrame_main:Show() BaseFrameFadeOut(StatFrame) TrainingFrame:Hide()
+                ResetFrame_main:Show() StatFrame:Hide() TrainingFrame:Hide()
                 AIO.Handle("sideBar", "GetMults")
                 else
                 ResetFrame_main:Hide()
@@ -1305,7 +1305,7 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
         ResetButton_fast:SetScript("OnMouseUp", function()
             PlaySound("TalentScreenOpen")
                 if not(ResetFrame_main:IsVisible()) then
-                ResetFrame_main:Show() BaseFrameFadeOut(StatFrame) TrainingFrame:Hide()
+                ResetFrame_main:Show() StatFrame:Hide() TrainingFrame:Hide()
                 AIO.Handle("sideBar", "GetMults")
                 else
                 ResetFrame_main:Hide()
@@ -1332,7 +1332,7 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
         --StatFrame_CloseButton:SetSize(29, 29) --edited
         StatFrame_CloseButton:SetScript("OnMouseUp", function(self)
             PlaySound("igQuestCancel")
-            BaseFrameFadeOut(StatFrame)
+            StatFrame:Hide()
             end)
        
     --[[local StatFrame_TitleBar = CreateFrame("Frame", "StatFrame_TitleBar", StatFrame, nil)

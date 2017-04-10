@@ -59,13 +59,21 @@ local FullLootFrame_TitleText = FullLootFrame:CreateFontString("FullLootFrame_Ti
 FullLootFrame_TitleText:SetFont("Fonts\\FRIZQT__.TTF", 12.2)
 FullLootFrame_TitleText:SetSize(300, 5)
 FullLootFrame_TitleText:SetFontObject(GameFontNormal)
-FullLootFrame_TitleText:SetPoint("TOP", -10, -25)
+FullLootFrame_TitleText:SetPoint("TOP", -28, -25)
 FullLootFrame_TitleText:SetShadowOffset(1, -1)
 FullLootFrame_TitleText:SetText("Unclaimed Belongings")
 local FullLootFrame_CloseButton = CreateFrame("Button", "FullLootFrame_CloseButton", FullLootFrame, "UIPanelCloseButton")
 FullLootFrame_CloseButton:SetPoint("TOPRIGHT", -55, -12)
 FullLootFrame_CloseButton:EnableMouse(true)
 --FullLootFrame_CloseButton:SetSize(31, 30)
+
+ FullLootFrame:EnableMouseWheel(true)
+        FullLootFrame:SetScript("OnMouseWheel", function(self, delta)
+            if (FullLootscrollbar:IsVisible()) then
+        local value = FullLootscrollbar:GetValue()
+        FullLootscrollbar:SetValue(value-delta*50)
+    end
+        end)
 
 
 
