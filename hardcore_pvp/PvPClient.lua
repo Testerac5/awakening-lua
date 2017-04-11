@@ -59,7 +59,7 @@ local FullLootFrame_TitleText = FullLootFrame:CreateFontString("FullLootFrame_Ti
 FullLootFrame_TitleText:SetFont("Fonts\\FRIZQT__.TTF", 12.2)
 FullLootFrame_TitleText:SetSize(300, 5)
 FullLootFrame_TitleText:SetFontObject(GameFontNormal)
-FullLootFrame_TitleText:SetPoint("TOP", -28, -25)
+FullLootFrame_TitleText:SetPoint("TOP", -15, -25)
 FullLootFrame_TitleText:SetShadowOffset(1, -1)
 FullLootFrame_TitleText:SetText("Unclaimed Belongings")
 local FullLootFrame_CloseButton = CreateFrame("Button", "FullLootFrame_CloseButton", FullLootFrame, "UIPanelCloseButton")
