@@ -5,6 +5,8 @@ if AIO.AddAddon() then
     return
 end
 
+local TutAIO = AIO.AddHandlers("TutAIO", {})
+
 local TUTORIAL_TIPS = {
 {"Interface\\AddOns\\AwAddons\\Textures\\Tutorial\\tutorial_Tex1","|cffFFFFFFAscension is a progressive Classless project, starting from Vanilla progressing through the expansions. The realms vary from softcore: just the Vanilla world with Classless systems to hardcore with elements like Hunger, High risk death, and Randomly Enchanted items.|r"},
 {"Interface\\AddOns\\AwAddons\\Textures\\Tutorial\\tutorial_Addons","|cffFFFFFFIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using|r"},
@@ -35,7 +37,7 @@ local TUTORIAL_TIPS = {
 }
 
 local CURRENTTIP = 1
-local MAXTIPS = 13
+local MAXTIPS = 1
 
 local Ascension_TutorialFrame = CreateFrame("Frame", "Ascension_TutorialFrame", UIParent, nil)
 Ascension_TutorialFrame:SetSize(512,512)
@@ -152,3 +154,9 @@ Ascension_TutorialFrame:SetScript("OnUpdate", function(self)
         Ascension_TutorialFrame_TextBox:SetText(TUTORIAL_TIPS[CURRENTTIP][2])
     end
     end)
+
+ function TutAIO.InitFrame(player,currtip,maxtips) -- AIO
+    CURRENTTIP = currtip
+    MAXTIPS = maxtips
+    Ascension_TutorialFrame:Show()
+ end
