@@ -4,24 +4,18 @@ local AIO = AIO or require("AIO")
 local TutAIO = AIO.AddHandlers("TutAIO", {})
 
 local function TutorialStuff_SendHelp(event, player, oldLevel)
-local currtip = 1
-local maxtips = 1
 
 if (oldLevel == 1) then
-currtip = 7
-maxtips = 7
+TutorialAio(AIO.Msg(), player,7,7):Send(player)
 elseif (oldLevel == 4) then
-currtip = 8
-maxtips = 9
+TutorialAio(AIO.Msg(), player,8,9):Send(player)
 elseif (oldLevel == 9) then
-currtip = 10
-maxtips = 12
+TutorialAio(AIO.Msg(), player,10,12):Send(player)
 elseif (oldLevel == 19) then
-currtip = 13
-maxtips = 13
+TutorialAio(AIO.Msg(), player,13,13):Send(player)
 end
 
-TutorialAio(AIO.Msg(), player,currtip,maxtips):Send(player)
+
 end
 
 
