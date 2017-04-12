@@ -926,7 +926,7 @@ if (GetMoneyForReset(1) == "token") or (GetMoneyForReset(1) <= GetMoney()) then
 else
     ResetFrame_main_TalentResetButton:Disable()
     end
-if (GetMoneyForReset(2) == "token") or (GetMoneyForReset(2) <= GetMoney()) then
+if (GetMoneyForReset(2) == "token") or (GetMoneyForReset(2) <= GetMoney()) or (UnitLevel("player") < 10) then
     ResetFrame_main_AbilityResetButton:Enable()
 else
     ResetFrame_main_AbilityResetButton:Disable()
@@ -1533,7 +1533,7 @@ ResetFrame_AbilityFrame_NextCost:SetText("|cffE1AB18You are going to reset spell
         Strength_Text:SetText("|cffE1AB18Strength|r")
 
         local Allocation_Fast_Text = StatFrame_Panel_Str:CreateFontString("Allocation_Fast_Text") -- edited
-        Allocation_Fast_Text:SetFont("Fonts\\FRIZQT__.TTF", 11) -- edited
+        Allocation_Fast_Text:SetFont("Fonts\\FRIZQT__.TTF", 12) -- edited
         Allocation_Fast_Text:SetSize(500, 5)
         Allocation_Fast_Text:SetPoint("TOP", 0, -10)
         Allocation_Fast_Text:SetText("|cffE1AB18Hold |cffFFFFFFShift|cffE1AB18 to allocate 10 points per stat|r")
