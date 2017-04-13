@@ -504,6 +504,8 @@ sideBar:SetFrameStrata("LOW")
         CharUpdatesMicroButton:SetScript("OnClick",function(self)
              togglesiderframe()
              SetButtonPulse(CharUpdatesMicroButton, 0, 1);  --Stop the button pulse
+            SetButtonPulse(TrainingButton_fast, 0, 1);
+            SetButtonPulse(AllocateButton_fast, 0, 1);
             end)
         CharUpdatesMicroButton:SetScript("OnEnter",function(self)
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
@@ -517,11 +519,13 @@ sideBar:SetFrameStrata("LOW")
 
         --PULSE BUTTON IF PLAYER HAVE MORE THAN 2 ABILITY OR TALENT ESSENCES OR UNUSED STATS
         CharUpdatesMicroButton:RegisterEvent("PLAYER_LEVEL_UP")
-        CharUpdatesMicroButton:SetScript("OnEvent", function()
+        CharUpdatesMicroButton:SetScript("OnEvent", function(self,event,level)
             local itemCount_ability = GetItemCount(383080) or 0
             local itemCount_talent = GetItemCount(383081) or 0
-            if (itemCount_ability >= 2) or (itemCount_talent >= 1) then
+            if (itemCount_ability >= 2) or (itemCount_talent >= 1) or (level == 2) or (level == 10) then
             SetButtonPulse(CharUpdatesMicroButton, 60, 1);
+            SetButtonPulse(TrainingButton_fast, 60, 1);
+            SetButtonPulse(AllocateButton_fast, 60, 1);
             end
         end)
         --SetBinding("I", togglesiderframe())
@@ -693,6 +697,10 @@ sideBar:SetFrameStrata("LOW")
         TrainingButton:SetFontString(TrainingButton_text)
         --TrainingButton:SetPushedTexture("Interface/Buttons/CheckButtonHilight")
         local function Training_button_pushed(self)
+            SetButtonPulse(CharUpdatesMicroButton, 0, 1);  --Stop the button pulse
+            SetButtonPulse(TrainingButton_fast, 0, 1);
+            SetButtonPulse(AllocateButton_fast, 0, 1);
+
             if not(TrainingFrame:IsVisible()) then
                 PlaySound("Glyph_MinorCreate")
             TrainingFrame:Show() StatFrame:Hide() ResetFrame_main:Hide()
@@ -731,6 +739,9 @@ local StatAllocationButton_text = StatAllocationButton:CreateFontString("StatAll
         StatAllocationButton_text:SetText("Stat Allocation") -- edited
         StatAllocationButton:SetFontString(StatAllocationButton_text)
         local function StatAllocation_button_pushed(self)
+            SetButtonPulse(CharUpdatesMicroButton, 0, 1);  --Stop the button pulse
+            SetButtonPulse(TrainingButton_fast, 0, 1);
+            SetButtonPulse(AllocateButton_fast, 0, 1);
             PlaySound("igQuestCancel")
             if not(StatFrame:IsVisible()) then
             StatFrame:Show() TrainingFrame:Hide() ResetFrame_main:Hide()
