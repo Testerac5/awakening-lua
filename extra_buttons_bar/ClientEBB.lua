@@ -503,6 +503,7 @@ sideBar:SetFrameStrata("LOW")
         
         CharUpdatesMicroButton:SetScript("OnClick",function(self)
              togglesiderframe()
+             SetButtonPulse(CharUpdatesMicroButton, 0, 1);  --Stop the button pulse
             end)
         CharUpdatesMicroButton:SetScript("OnEnter",function(self)
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
@@ -513,6 +514,16 @@ sideBar:SetFrameStrata("LOW")
         CharUpdatesMicroButton:SetScript("OnLeave",function(self)
             GameTooltip:Hide()
             end)
+
+        --PULSE BUTTON IF PLAYER HAVE MORE THAN 2 ABILITY OR TALENT ESSENCES OR UNUSED STATS
+        CharUpdatesMicroButton:RegisterEvent("PLAYER_LEVEL_UP")
+        CharUpdatesMicroButton:SetScript("OnEvent", function()
+            local itemCount_ability = GetItemCount(383080) or 0
+            local itemCount_talent = GetItemCount(383081) or 0
+            if (itemCount_ability >= 2) or (itemCount_talent >= 1) then
+            SetButtonPulse(CharUpdatesMicroButton, 60, 1);
+            end
+        end)
         --SetBinding("I", togglesiderframe())
 
         --fast acces to frames--
