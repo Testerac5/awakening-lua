@@ -2017,3 +2017,181 @@ local function ModifyTip ()
 end
 
 GameTooltip:HookScript("OnShow", ModifyTip)
+
+
+
+--Standart interface Changes--
+
+local SpellCost_ActionButtonAscension = {
+} --data holding archive, spell entry = cost,powertype
+
+
+
+function UpdateUsableAscension (self)
+	local name = self:GetName();
+	local icon = _G[name.."Icon"];
+	local normalTexture = _G[name.."NormalTexture"];
+	local isUsable, notEnoughMana = IsUsableAction(self.action);
+
+	local type, id, subType, spellID = GetActionInfo(self.action)
+
+	if (SpellCost_ActionButtonAscension[spellID]) then
+		if UnitPower("player",SpellCost_ActionButtonAscension[spellID][2]) <= SpellCost_ActionButtonAscension[spellID][1] then
+			notEnoughMana = true
+			isUsable = false
+			--print("Not Enough Mana for Spell"..spellID)
+		end
+	end
+	--notEnoughMana = true
+	--isUsable = false
+	if ( isUsable ) then
+		icon:SetVertexColor(1.0, 1.0, 1.0);
+		normalTexture:SetVertexColor(1.0, 1.0, 1.0);
+	elseif ( notEnoughMana ) then
+		icon:SetVertexColor(0.5, 0.5, 1.0);
+		normalTexture:SetVertexColor(0.5, 0.5, 1.0);
+	else
+		icon:SetVertexColor(0.4, 0.4, 0.4);
+		normalTexture:SetVertexColor(1.0, 1.0, 1.0);
+	end
+end
+
+ActionButton_UpdateUsable = UpdateUsableAscension
+
+function ActionButtonAscension_OnUpdate (self, elapsed)
+	if ( ActionButton_IsFlashing(self) ) then
+		local flashtime = self.flashtime;
+		flashtime = flashtime - elapsed;
+		
+		if ( flashtime <= 0 ) then
+			local overtime = -flashtime;
+			if ( overtime >= ATTACK_BUTTON_FLASH_TIME ) then
+				overtime = 0;
+			end
+			flashtime = ATTACK_BUTTON_FLASH_TIME - overtime;
+
+			local flashTexture = _G[self:GetName().."Flash"];
+			if ( flashTexture:IsShown() ) then
+				flashTexture:Hide();
+			else
+				flashTexture:Show();
+			end
+		end
+		
+		self.flashtime = flashtime;
+	end
+	
+	-- Handle range indicator
+	local rangeTimer = self.rangeTimer;
+	if ( rangeTimer ) then
+		rangeTimer = rangeTimer - elapsed;
+
+		if ( rangeTimer <= 0 ) then
+			local count = _G[self:GetName().."HotKey"];
+			local valid = IsActionInRange(self.action);
+			if ( count:GetText() == RANGE_INDICATOR ) then
+				if ( valid == 0 ) then
+					count:Show();
+					count:SetVertexColor(1.0, 0.1, 0.1);
+				elseif ( valid == 1 ) then
+					count:Show();
+					count:SetVertexColor(0.6, 0.6, 0.6);
+				else
+					count:Hide();
+				end
+			else
+				if ( valid == 0 ) then
+					count:SetVertexColor(1.0, 0.1, 0.1);
+				else
+					count:SetVertexColor(0.6, 0.6, 0.6);
+				end
+			end
+			rangeTimer = TOOLTIP_UPDATE_TIME;
+		end
+		
+		self.rangeTimer = rangeTimer;
+	end
+	ActionButton_UpdateUsable(self)
+end
+ActionButton_OnUpdate = ActionButtonAscension_OnUpdate
+
+--Initalizate spell costs 
+function ActionButton_OnEventAscension (self, event, ...)
+	--Spell Cost Custom Thing--
+		local type, id, subType, spellID = GetActionInfo(self.action)
+			if (spellID) then
+				AIO.Handle("TooltipAIO", "SpellCostGrabber", spellid)
+			end
+	-- Spell Cost Custom Thing--
+	local arg1 = ...;
+	if ((event == "UNIT_INVENTORY_CHANGED" and arg1 == "player") or event == "LEARNED_SPELL_IN_TAB") then
+		if ( GameTooltip:GetOwner() == self ) then
+			ActionButton_SetTooltip(self);
+		end
+	end
+	if ( event == "ACTIONBAR_SLOT_CHANGED" ) then
+		if ( arg1 == 0 or arg1 == tonumber(self.action) ) then
+			ActionButton_Update(self);
+		end
+		return;
+	end
+	if ( event == "PLAYER_ENTERING_WORLD" or event == "UPDATE_SHAPESHIFT_FORM" ) then
+		-- need to listen for UPDATE_SHAPESHIFT_FORM because attack icons change when the shapeshift form changes
+		ActionButton_Update(self);
+		return;
+	end
+	if ( event == "ACTIONBAR_PAGE_CHANGED" or event == "UPDATE_BONUS_ACTIONBAR" ) then
+		ActionButton_UpdateAction(self);
+		return;
+	end
+	if ( event == "ACTIONBAR_SHOWGRID" ) then
+		ActionButton_ShowGrid(self);
+		return;
+	end
+	if ( event == "ACTIONBAR_HIDEGRID" ) then
+		ActionButton_HideGrid(self);
+		return;
+	end
+	if ( event == "UPDATE_BINDINGS" ) then
+		ActionButton_UpdateHotkeys(self, self.buttonType);
+		return;
+	end
+
+	-- All event handlers below this line are only set when the button has an action
+
+	if ( event == "PLAYER_TARGET_CHANGED" ) then
+		self.rangeTimer = -1;
+	elseif ( (event == "ACTIONBAR_UPDATE_STATE") or
+		((event == "UNIT_ENTERED_VEHICLE" or event == "UNIT_EXITED_VEHICLE") and (arg1 == "player")) or
+		((event == "COMPANION_UPDATE") and (arg1 == "MOUNT")) ) then
+		ActionButton_UpdateState(self);
+	elseif ( event == "ACTIONBAR_UPDATE_USABLE" ) then
+		ActionButton_UpdateUsable(self);
+	elseif ( event == "ACTIONBAR_UPDATE_COOLDOWN" ) then
+		ActionButton_UpdateCooldown(self);
+	elseif ( event == "TRADE_SKILL_SHOW" or event == "TRADE_SKILL_CLOSE" ) then
+		ActionButton_UpdateState(self);
+	elseif ( event == "PLAYER_ENTER_COMBAT" ) then
+		if ( IsAttackAction(self.action) ) then
+			ActionButton_StartFlash(self);
+		end
+	elseif ( event == "PLAYER_LEAVE_COMBAT" ) then
+		if ( IsAttackAction(self.action) ) then
+			ActionButton_StopFlash(self);
+		end
+	elseif ( event == "START_AUTOREPEAT_SPELL" ) then
+		if ( IsAutoRepeatAction(self.action) ) then
+			ActionButton_StartFlash(self);
+		end
+	elseif ( event == "STOP_AUTOREPEAT_SPELL" ) then
+		if ( ActionButton_IsFlashing(self) and not IsAttackAction(self.action) ) then
+			ActionButton_StopFlash(self);
+		end
+	end
+end
+
+ActionButton_OnEvent = ActionButton_OnEventAscension
+
+local function GetSpellCost(player,Cost,Type,spellid)
+	SpellCost_ActionButtonAscension[spellid] = {Cost, Type}
+	end

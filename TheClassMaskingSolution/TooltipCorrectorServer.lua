@@ -42,6 +42,12 @@ function tTHandler.SendRefresh(event, player, spellid)
 	AIO.Handle(player, "TooltipAIO", "RefreshTable")
 end
 
+function tTHandler.SpellCostGrabber(player,spellid)
+	local Cost = player:GetSpellCost(spellid)
+	local Type = player:GetSpellPowerType(spellid)
+
+AIO.Handle(player, "TooltipAIO", "GetSpellCost", Cost,Type,spellid)
+end
 
 RegisterPlayerEvent(45, tTHandler.SendRefresh)
 
