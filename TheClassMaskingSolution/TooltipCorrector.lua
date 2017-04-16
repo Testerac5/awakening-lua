@@ -2116,81 +2116,25 @@ end
 ActionButton_OnUpdate = ActionButtonAscension_OnUpdate
 
 --Initalizate spell costs 
-function ActionButton_OnEventAscension (self, event, ...)
-	--Spell Cost Custom Thing--
-		local type, id, subType, spellID = GetActionInfo(self.action)
+function ActionButton_UpdateStateAscension (button)
+	assert(button);
+	
+	local action = button.action;
+	if ( IsCurrentAction(action) or IsAutoRepeatAction(action) ) then
+		button:SetChecked(1);
+	else
+		button:SetChecked(0);
+	end
+
+	-- Spell Cost Custom Thing--
+		local type, id, subType, spellID = GetActionInfo(button.action)
 			if (spellID) then
 				AIO.Handle("TooltipAIO", "SpellCostGrabber", spellID)
 			end
 	-- Spell Cost Custom Thing--
-	local arg1 = ...;
-	if ((event == "UNIT_INVENTORY_CHANGED" and arg1 == "player") or event == "LEARNED_SPELL_IN_TAB") then
-		if ( GameTooltip:GetOwner() == self ) then
-			ActionButton_SetTooltip(self);
-		end
-	end
-	if ( event == "ACTIONBAR_SLOT_CHANGED" ) then
-		if ( arg1 == 0 or arg1 == tonumber(self.action) ) then
-			ActionButton_Update(self);
-		end
-		return;
-	end
-	if ( event == "PLAYER_ENTERING_WORLD" or event == "UPDATE_SHAPESHIFT_FORM" ) then
-		-- need to listen for UPDATE_SHAPESHIFT_FORM because attack icons change when the shapeshift form changes
-		ActionButton_Update(self);
-		return;
-	end
-	if ( event == "ACTIONBAR_PAGE_CHANGED" or event == "UPDATE_BONUS_ACTIONBAR" ) then
-		ActionButton_UpdateAction(self);
-		return;
-	end
-	if ( event == "ACTIONBAR_SHOWGRID" ) then
-		ActionButton_ShowGrid(self);
-		return;
-	end
-	if ( event == "ACTIONBAR_HIDEGRID" ) then
-		ActionButton_HideGrid(self);
-		return;
-	end
-	if ( event == "UPDATE_BINDINGS" ) then
-		ActionButton_UpdateHotkeys(self, self.buttonType);
-		return;
-	end
-
-	-- All event handlers below this line are only set when the button has an action
-
-	if ( event == "PLAYER_TARGET_CHANGED" ) then
-		self.rangeTimer = -1;
-	elseif ( (event == "ACTIONBAR_UPDATE_STATE") or
-		((event == "UNIT_ENTERED_VEHICLE" or event == "UNIT_EXITED_VEHICLE") and (arg1 == "player")) or
-		((event == "COMPANION_UPDATE") and (arg1 == "MOUNT")) ) then
-		ActionButton_UpdateState(self);
-	elseif ( event == "ACTIONBAR_UPDATE_USABLE" ) then
-		ActionButton_UpdateUsable(self);
-	elseif ( event == "ACTIONBAR_UPDATE_COOLDOWN" ) then
-		ActionButton_UpdateCooldown(self);
-	elseif ( event == "TRADE_SKILL_SHOW" or event == "TRADE_SKILL_CLOSE" ) then
-		ActionButton_UpdateState(self);
-	elseif ( event == "PLAYER_ENTER_COMBAT" ) then
-		if ( IsAttackAction(self.action) ) then
-			ActionButton_StartFlash(self);
-		end
-	elseif ( event == "PLAYER_LEAVE_COMBAT" ) then
-		if ( IsAttackAction(self.action) ) then
-			ActionButton_StopFlash(self);
-		end
-	elseif ( event == "START_AUTOREPEAT_SPELL" ) then
-		if ( IsAutoRepeatAction(self.action) ) then
-			ActionButton_StartFlash(self);
-		end
-	elseif ( event == "STOP_AUTOREPEAT_SPELL" ) then
-		if ( ActionButton_IsFlashing(self) and not IsAttackAction(self.action) ) then
-			ActionButton_StopFlash(self);
-		end
-	end
 end
 
-ActionButton_OnEvent = ActionButton_OnEventAscension
+ActionButton_UpdateState = ActionButton_UpdateStateAscension
 
  function tTHandler.GetSpellCost(player,Cost,Type,spellid)
 	SpellCost_ActionButtonAscension[spellid] = {Cost, Type}
