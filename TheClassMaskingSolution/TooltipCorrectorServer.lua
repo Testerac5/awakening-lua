@@ -43,9 +43,17 @@ function tTHandler.SendRefresh(event, player, spellid)
 end
 
 function tTHandler.SpellCostGrabber(player,spellid)
+	--AIO ADDITIONAL CHECK--
+	local expectedData = {"number"}
+	local values = {spellid}
+	if not(DataTypeCheck(expectedData, values)) then
+		return false
+	end
+	--MAIN ACTION--
+
 	local Cost = player:GetSpellCost(spellid)
 	local Type = player:GetSpellPowerType(spellid)
-
+	
 AIO.Handle(player, "TooltipAIO", "GetSpellCost", Cost,Type,spellid)
 end
 

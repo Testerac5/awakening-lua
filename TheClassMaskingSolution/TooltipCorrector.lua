@@ -2020,7 +2020,7 @@ GameTooltip:HookScript("OnShow", ModifyTip)
 
 
 
---Standart interface Changes--
+--Standart interface Changes----Standart interface Changes----Standart interface Changes----Standart interface Changes----Standart interface Changes----Standart interface Changes----Standart interface Changes----Standart interface Changes----Standart interface Changes----Standart interface Changes----Standart interface Changes--
 
 local SpellCost_ActionButtonAscension = {
 } --data holding archive, spell entry = cost,powertype
@@ -2120,7 +2120,7 @@ function ActionButton_OnEventAscension (self, event, ...)
 	--Spell Cost Custom Thing--
 		local type, id, subType, spellID = GetActionInfo(self.action)
 			if (spellID) then
-				AIO.Handle("TooltipAIO", "SpellCostGrabber", spellid)
+				AIO.Handle("TooltipAIO", "SpellCostGrabber", spellID)
 			end
 	-- Spell Cost Custom Thing--
 	local arg1 = ...;
@@ -2192,6 +2192,6 @@ end
 
 ActionButton_OnEvent = ActionButton_OnEventAscension
 
-local function GetSpellCost(player,Cost,Type,spellid)
+ function tTHandler.GetSpellCost(player,Cost,Type,spellid)
 	SpellCost_ActionButtonAscension[spellid] = {Cost, Type}
 	end
