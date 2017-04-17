@@ -2039,7 +2039,10 @@ function UpdateUsableAscension (self)
 		if UnitPower("player",SpellCost_ActionButtonAscension[spellID][2]) <= SpellCost_ActionButtonAscension[spellID][1] then
 			notEnoughMana = true
 			isUsable = false
-			print("Not Enough Resource for Spell "..spellID.." of type "..SpellCost_ActionButtonAscension[spellID][2].."\n Current amount of this resource: "..UnitPower("player",SpellCost_ActionButtonAscension[spellID][2]))
+			print("Not Enough Resource for Spell "..spellID.." of type "..SpellCost_ActionButtonAscension[spellID][2].."\n Current amount of this resource: "..UnitPower("player",SpellCost_ActionButtonAscension[spellID][2]).." Needed: "..SpellCost_ActionButtonAscension[spellID][1])
+		else
+			notEnoughMana = false
+			isUsable = true
 		end
 	end
 	--notEnoughMana = true
