@@ -2036,10 +2036,18 @@ function UpdateUsableAscension (self)
 	local type, id, subType, spellID = GetActionInfo(self.action)
 
 	if (SpellCost_ActionButtonAscension[spellID]) then
-		if UnitPower("player",SpellCost_ActionButtonAscension[spellID][2]) <= SpellCost_ActionButtonAscension[spellID][1] then
+		local resource = 0
+			-- rage exception 
+			if (SpellCost_ActionButtonAscension[spellID][2] == 1) then
+				resource = SpellCost_ActionButtonAscension[spellID][1]/10
+			else
+				resource = SpellCost_ActionButtonAscension[spellID][1]
+			end
+			-- end of rage exception
+		if UnitPower("player",SpellCost_ActionButtonAscension[spellID][2]) < resource then
 			notEnoughMana = true
 			isUsable = false
-			print("Not Enough Resource for Spell "..spellID.." of type "..SpellCost_ActionButtonAscension[spellID][2].."\n Current amount of this resource: "..UnitPower("player",SpellCost_ActionButtonAscension[spellID][2]).." Needed: "..SpellCost_ActionButtonAscension[spellID][1])
+			--print("Not Enough Resource for Spell "..spellID.." of type "..SpellCost_ActionButtonAscension[spellID][2].."\n Current amount of this resource: "..UnitPower("player",SpellCost_ActionButtonAscension[spellID][2]).." Needed: "..SpellCost_ActionButtonAscension[spellID][1])
 		else
 			notEnoughMana = false
 			isUsable = true
@@ -2141,5 +2149,5 @@ ActionButton_UpdateState = ActionButton_UpdateStateAscension
 
  function tTHandler.GetSpellCost(player,Cost,Type,Range,spellid)
 	SpellCost_ActionButtonAscension[spellid] = {Cost, Type,Range}
-	print("spellid "..spellid.." of Type "..Type)
+	--print("spellid "..spellid.." of Type "..Type)
 	end
