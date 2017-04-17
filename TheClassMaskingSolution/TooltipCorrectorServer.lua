@@ -53,8 +53,9 @@ function tTHandler.SpellCostGrabber(player,spellid)
 
 	local Cost = player:GetSpellCost(spellid)
 	local Type = player:GetSpellPowerType(spellid)
+	local Range = player:GetSpellRange(spellid)
 	
-AIO.Handle(player, "TooltipAIO", "GetSpellCost", Cost,Type,spellid)
+AIO.Handle(player, "TooltipAIO", "GetSpellCost", Cost,Type,Range,spellid)
 end
 
 RegisterPlayerEvent(45, tTHandler.SendRefresh)
