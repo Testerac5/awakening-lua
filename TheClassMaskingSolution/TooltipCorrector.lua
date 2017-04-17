@@ -2103,6 +2103,8 @@ function ActionButtonAscension_OnUpdate (self, elapsed)
 			 	local type, id, subType, spellID = GetActionInfo(self.action)
 	           	if (SpellCost_ActionButtonAscension[spellID]) then
 	           		if (SpellCost_ActionButtonAscension[spellID][3] > ActionButtonRange) then
+	           			valid = 1
+	           		else
 	           			valid = 0
 	           		end
 	           	end
