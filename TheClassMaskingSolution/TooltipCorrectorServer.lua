@@ -58,5 +58,12 @@ function tTHandler.SpellCostGrabber(player,spellid)
 AIO.Handle(player, "TooltipAIO", "GetSpellCost", Cost,Type,Range,spellid)
 end
 
+function tTHandler.GetDistance(player)
+	if (player:GetVictim()) then
+	local dist = player:GetDistance(player:GetVictim())
+	AIO.Handle(player, "TooltipAIO", "Distance", dist) 
+end
+end
+
 RegisterPlayerEvent(45, tTHandler.SendRefresh)
 

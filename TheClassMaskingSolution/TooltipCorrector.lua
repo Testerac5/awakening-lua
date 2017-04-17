@@ -2025,7 +2025,7 @@ GameTooltip:HookScript("OnShow", ModifyTip)
 local SpellCost_ActionButtonAscension = {
 } --data holding archive, spell entry = cost,powertype,range
 
-
+local ActionButtonRange = 0
 
 function UpdateUsableAscension (self)
 	local name = self:GetName();
@@ -2149,5 +2149,19 @@ ActionButton_UpdateState = ActionButton_UpdateStateAscension
 
  function tTHandler.GetSpellCost(player,Cost,Type,Range,spellid)
 	SpellCost_ActionButtonAscension[spellid] = {Cost, Type,Range}
+	--print("spellid "..spellid.." of Type "..Type)
+	end
+
+--super fucked up shit for range indicator--
+local RangeFrame = CreateFrame("Frame", "RangeFrame",UIParent,nil)
+RangeFrame:SetScript("OnUpdate", function()
+	if (UnitExists("target")) and not(UnitIsUnit("target", "player")) then
+	AIO.Handle("TooltipAIO", "GetDistance")
+	end
+	end)
+
+  function tTHandler.Distance(player,dist)
+	ActionButtonRange = dist
+	print(dist)
 	--print("spellid "..spellid.." of Type "..Type)
 	end
