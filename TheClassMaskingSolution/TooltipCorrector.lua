@@ -2138,4 +2138,5 @@ ActionButton_UpdateState = ActionButton_UpdateStateAscension
 
  function tTHandler.GetSpellCost(player,Cost,Type,Range,spellid)
 	SpellCost_ActionButtonAscension[spellid] = {Cost, Type,Range}
+	print("spellid "..spellid.." of Type "..Type)
 	end
