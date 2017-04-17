@@ -2099,7 +2099,14 @@ function ActionButtonAscension_OnUpdate (self, elapsed)
 
 		if ( rangeTimer <= 0 ) then
 			local count = _G[self:GetName().."HotKey"];
-			local valid = IsActionInRange(self.action);
+			local valid = IsActionInRange(self.action); -- fuck you, valid function. Exception for our solution below
+			 	local type, id, subType, spellID = GetActionInfo(self.action)
+	           	if (SpellCost_ActionButtonAscension[spellID]) then
+	           		if (SpellCost_ActionButtonAscension[spellID][3] > ActionButtonRange) then
+	           			valid = 0
+	           		end
+	           	end
+		         --
 			if ( count:GetText() == RANGE_INDICATOR ) then
 				if ( valid == 0 ) then
 					count:Show();
@@ -2162,6 +2169,5 @@ RangeFrame:SetScript("OnUpdate", function()
 
   function tTHandler.Distance(player,dist)
 	ActionButtonRange = dist
-	print(dist)
 	--print("spellid "..spellid.." of Type "..Type)
 	end
