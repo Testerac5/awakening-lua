@@ -27,6 +27,13 @@ local Guard_Factions = {
 	150, -- theramore
 	877, -- sen'jin watchers
 	1515, -- warsong guard (barrens)
+	854, --Everlook
+	121, --Gadgetzan
+	1857, --Light's Hope Argent Dawn
+	475, --Steamwheel
+	1254, -- Cenarion Circle
+	1475, -- Thormium Point
+	
 }
 for k, v in pairs(Guard_Factions) do 
 	local entry = WorldDBQuery("SELECT entry FROM creature_template WHERE faction = "..v..";")
@@ -66,7 +73,7 @@ local function Guard_MainAction(event, killer, killed)
 					creature:AttackStart(killer)
 					creature:RegisterEvent(Guard_Back, 2000, 0)
 					if ((killer:GetLevel()-creature:GetLevel()) > 5) then
-						creature:AddAura(26662, creature)
+						creature:AddAura(266602, creature)
 					end
 				end
 			end
