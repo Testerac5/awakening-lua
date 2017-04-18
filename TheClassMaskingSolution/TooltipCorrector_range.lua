@@ -2159,7 +2159,9 @@ end
 ActionButton_UpdateState = ActionButton_UpdateStateAscension
 
  function tTHandler.GetSpellCost(player,Cost,Type,Range,spellid)
+ 	if Cost and Type and Range and spellid then
 	SpellCost_ActionButtonAscension[spellid] = {Cost, Type,Range}
+end
 	--print("spellid "..spellid.." of Type "..Type)
 	end
 
@@ -2175,5 +2177,6 @@ RangeFrame:SetScript("OnUpdate", function()
 
   function tTHandler.Distance(player,dist)
 	ActionButtonRange = dist
+	print(dist)
 	--print("spellid "..spellid.." of Type "..Type)
 	end
