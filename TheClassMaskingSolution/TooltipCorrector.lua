@@ -2104,7 +2104,7 @@ function ActionButtonAscension_OnUpdate (self, elapsed)
 	           	if (SpellCost_ActionButtonAscension[spellID]) then
 	           		if (SpellCost_ActionButtonAscension[spellID][3] > ActionButtonRange) then
 	           			valid = 1
-	           		elseif (SpellCost_ActionButtonAscension[spellID][3] < ActionButtonRange)
+	           		else
 	           			valid = 0
 	           		end
 	           	end
@@ -2167,7 +2167,7 @@ RangeFrame:SetScript("OnUpdate", function()
 	if (UnitExists("target")) and not(UnitIsUnit("target", "player")) then
 	AIO.Handle("TooltipAIO", "GetDistance")
 	else
-		ActionButtonRange = nil
+		ActionButtonRange = 0
 	end
 	end)
 
