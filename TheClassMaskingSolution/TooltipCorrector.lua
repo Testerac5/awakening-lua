@@ -2166,8 +2166,6 @@ local RangeFrame = CreateFrame("Frame", "RangeFrame",UIParent,nil)
 RangeFrame:SetScript("OnUpdate", function()
 	if (UnitExists("target")) and not(UnitIsUnit("target", "player")) then
 	AIO.Handle("TooltipAIO", "GetDistance")
-	else
-		ActionButtonRange = 0
 	end
 	end)
 
