@@ -2100,6 +2100,14 @@ function ActionButtonAscension_OnUpdate (self, elapsed)
 		if ( rangeTimer <= 0 ) then
 			local count = _G[self:GetName().."HotKey"];
 			local valid = IsActionInRange(self.action); -- fuck you, valid function. Exception for our solution below
+
+			---!!!!---Ask server for distance and try not to overload it
+			if (UnitExists("target")) and not(UnitIsFriend("target", "player")) then
+				AIO.Handle("TooltipAIO", "GetDistance")
+					else
+				ActionButtonRange = nil
+			end
+			---!!!!---
 			 	local type, id, subType, spellID = GetActionInfo(self.action)
 	           	if (SpellCost_ActionButtonAscension[spellID]) then
 	           		if (ActionButtonRange ~= nil) then
@@ -2166,17 +2174,7 @@ end
 	end
 
 --super fucked up shit for range indicator--
-local RangeFrame = CreateFrame("Frame", "RangeFrame",UIParent,nil)
-RangeFrame:SetScript("OnUpdate", function()
-	if (UnitExists("target")) and not(UnitIsUnit("target", "player")) and not(UnitIsFriend("target", "player")) then
-	AIO.Handle("TooltipAIO", "GetDistance")
-	else
-		ActionButtonRange = nil
-	end
-	end)
-
   function tTHandler.Distance(player,dist)
 	ActionButtonRange = dist
-	print(dist)
 	--print("spellid "..spellid.." of Type "..Type)
 	end
