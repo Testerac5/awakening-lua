@@ -2109,7 +2109,9 @@ function ActionButtonAscension_OnUpdate (self, elapsed)
 			end
 			---!!!!---
 			 	local type, id, subType, spellID = GetActionInfo(self.action)
+			 	local spellname = GetSpellInfo(spellID)
 	           	if (SpellCost_ActionButtonAscension[spellID]) then
+	           		if not(IsHelpfulSpell(spellname)) then
 	           		if (ActionButtonRange ~= nil) then
 	           		if (SpellCost_ActionButtonAscension[spellID][3] > ActionButtonRange) then
 	           			valid = 1
@@ -2117,6 +2119,7 @@ function ActionButtonAscension_OnUpdate (self, elapsed)
 	           			valid = 0
 	           		end
 	           	end
+	           end
 	           	end
 		         --
 			if ( count:GetText() == RANGE_INDICATOR ) then
