@@ -59,8 +59,8 @@ AIO.Handle(player, "TooltipAIO", "GetSpellCost", Cost,Type,Range,spellid)
 end
 
 function tTHandler.GetDistance(player)
-	if (player:GetVictim()) then
-	local dist = player:GetDistance(player:GetVictim())
+	if (player:GetPlayerTarget()) then
+	local dist = player:GetDistance(player:GetPlayerTarget())
 	AIO.Handle(player, "TooltipAIO", "Distance", dist) 
 end
 end
