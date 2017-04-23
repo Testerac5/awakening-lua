@@ -1883,11 +1883,11 @@ function tTHandler.UpdateTooltips()
 	GameTooltip:ClearLines ()
 	while i <= 35 do
 		if(i <= 13) then
-			GameTooltip:AddDoubleLine (tab[i], tab[i+1])
+			GameTooltip:AddDoubleLine ("|cffFFFFFF"..tab[i].."|r", "|cffFFFFFF"..tab[i+1].."|r")
 			i = i + 2
 
 		elseif (tab[i]) then
-			GameTooltip:AddLine (tab[i], 1, 1, 1, true)
+			GameTooltip:AddLine (tab[i], NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, true)
 			i = i + 1
 			else
 			i = i + 1
@@ -1951,11 +1951,11 @@ function locUpdateTooltips()
 
 	while i <= 35 do
 		if(i <= 13) then
-			GameTooltip:AddDoubleLine (tab[i], tab[i+1])
+			GameTooltip:AddDoubleLine ("|cffFFFFFF"..tab[i].."|r", "|cffFFFFFF"..tab[i+1].."|r")
 			i = i + 2
 
 		elseif (tab[i]) then
-			GameTooltip:AddLine (tab[i], 1, 1, 1, true)
+			GameTooltip:AddLine (tab[i], NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, true)
 			i = i + 1
 			else
 			i = i + 1
