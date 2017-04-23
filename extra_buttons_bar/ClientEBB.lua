@@ -3289,6 +3289,10 @@ TrainingFrame:SetScript("OnUpdate" , function()
             TrainingFrame_SelectedTitle_Glow:Hide()
         end
             end)
+
+TrainingFrame:SetScript("OnHide" , function()
+    display_stuff(GeneralStuff)
+    end)
         
 		
 		
