@@ -11,6 +11,7 @@ local MicroButtons = {
         SocialsMicroButton,
         PVPMicroButton,
         LFDMicroButton,
+        CharUpdatesMicroButton,
         MainMenuMicroButton,
         HelpMicroButton
 }
@@ -35,12 +36,13 @@ end
     FriendsFrameTab2:Hide()
     end
     
-    if (LFDMicroButton:IsVisible()) then
+    --[[if (LFDMicroButton:IsVisible()) then
         LFDMicroButton:Hide()
         CharUpdatesMicroButton:Show()
-    end
+    end]]
     if (TalentMicroButton:IsVisible()) then
         TalentMicroButton:Hide()
+        CharUpdatesMicroButton:Show()
         --moving all buttons to right
         for i = 1, #MicroButtons do
             if (i == 1) then
