@@ -9,12 +9,13 @@ local MicroButtons = {
         AchievementMicroButton,
         QuestLogMicroButton,
         SocialsMicroButton,
-        PVPMicroButton,
+        PVPMicroButton
+}
+local MicroButtons2 = {
         LFDMicroButton,
-        CharUpdatesMicroButton,
         MainMenuMicroButton,
         HelpMicroButton
-}
+    }
 
 BI_i = CreateFrame("Frame", nil, UIParent)
 BI_i:SetScript("OnUpdate", function()
@@ -44,6 +45,7 @@ end
         TalentMicroButton:Hide()
         CharUpdatesMicroButton:Show()
         --moving all buttons to right
+        LFDMicroButton:Show()
         for i = 1, #MicroButtons do
             if (i == 1) then
                 MicroButtons[i]:SetPoint("BOTTOMLEFT", SpellbookMicroButton, "BOTTOMRIGHT", -3, 0)
@@ -51,6 +53,16 @@ end
             MicroButtons[i]:SetPoint("BOTTOMLEFT", MicroButtons[i-1], "BOTTOMRIGHT", -3, 0)
         end
         end
+
+        --shitty code, lol
+         for i = 1, #MicroButtons2 do
+            if (i == 1) then
+                MicroButtons2[i]:SetPoint("BOTTOMLEFT", CharUpdatesMicroButton, "BOTTOMRIGHT", -3, 0)
+            else
+            MicroButtons2[i]:SetPoint("BOTTOMLEFT", MicroButtons2[i-1], "BOTTOMRIGHT", -3, 0)
+        end
+        end
+
     end
 
     if (UnitLevel("player") >= 10) then
