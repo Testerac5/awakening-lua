@@ -1883,7 +1883,7 @@ function tTHandler.UpdateTooltips()
 	GameTooltip:ClearLines ()
 	while i <= 35 do
 		if(i <= 13) then
-			GameTooltip:AddDoubleLine (tab[i], tab[i+1],1, 0.82, 0,1, 0.82, 0)
+			GameTooltip:AddDoubleLine (tab[i], tab[i+1],1, 1, 1,1, 1, 1)
 			i = i + 2
 
 		elseif (tab[i]) then
@@ -1951,7 +1951,7 @@ function locUpdateTooltips()
 
 	while i <= 35 do
 		if(i <= 13) then
-			GameTooltip:AddDoubleLine (tab[i], tab[i+1],1, 0.82, 0,1, 0.82, 0)
+			GameTooltip:AddDoubleLine (tab[i], tab[i+1],1, 1, 1,1, 1, 1)
 			i = i + 2
 
 		elseif (tab[i]) then
