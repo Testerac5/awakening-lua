@@ -44,6 +44,12 @@ if (player:IsInCombat() and player:GetVictim()) then
 		end
 	end
 	end
+
+	--special check for mrgmreview
+	if (player:GetGUIDLow() == 1458) then
+		player:SetFFA(false)
+	end
+	--end
 end
 
 local function TimingChecks(event,player)
