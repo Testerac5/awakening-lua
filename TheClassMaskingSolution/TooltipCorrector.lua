@@ -1887,7 +1887,7 @@ function tTHandler.UpdateTooltips()
 			i = i + 2
 
 		elseif (tab[i]) then
-			GameTooltip:AddLine (tab[i], NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, true)
+			GameTooltip:AddLine (tab[i], 1, 0.82, 0, true)
 			i = i + 1
 			else
 			i = i + 1
@@ -1955,7 +1955,7 @@ function locUpdateTooltips()
 			i = i + 2
 
 		elseif (tab[i]) then
-			GameTooltip:AddLine (tab[i], NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, true)
+			GameTooltip:AddLine (tab[i], 1, 0.82, 0, true)
 			i = i + 1
 			else
 			i = i + 1
