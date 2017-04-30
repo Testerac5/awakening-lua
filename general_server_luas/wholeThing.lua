@@ -28,36 +28,53 @@ Enchantment slot test results:
 7-11: DOES NOT WORK
 ]]
 
-function RollEnchant(item)
+function RollEnchant(item, player)
 	
 	local item_level = item:GetRequiredLevel()
+	local player_level = player:GetLevel()
+
 	local itemClass = ""
 	if (item:GetClass() == 2) then
 		itemClass = "WEAPON"
 	elseif (item:GetClass() == 4) then
 		itemClass = "ARMOR"
 	end
-	if item_level < 10 then
+	if (1 <= player_level) and (player_level <=10) then
 		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=1 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
 		return query:GetUInt32(0)
-	elseif item_level < 20 then
+	elseif (11 <= player_level) and (player_level <=20) then
 		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=2 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
 		return query:GetUInt32(0)
-	elseif item_level < 30 then
+	elseif (21 <= player_level) and (player_level <=30) then
 		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=3 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
 		return query:GetUInt32(0)
-	elseif item_level < 40 then
+	elseif (31 <= player_level) and (player_level <=40) then
 		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=4 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
 		return query:GetUInt32(0)
-	elseif item_level < 50 then
+	elseif (41 <= player_level) and (player_level <=50) then
 		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=5 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
 		return query:GetUInt32(0)
-	elseif item_level < 60 then
+	elseif (51 <= player_level) and (player_level <=59) then
 		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=6 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
 		return query:GetUInt32(0)
-	elseif item_level < 70 then
+	elseif (player_level == 60) and ( (item_level >= 50) and (item_level <= 55) ) then
 		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=7 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
 		return query:GetUInt32(0)
+	elseif (player_level == 60) and ( (item_level >= 56) and (item_level <= 63) ) then
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=8 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
+		return query:GetUInt32(0)
+	elseif (player_level == 60) and ( (item_level >= 64) and (item_level <= 71) ) then
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=9 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
+		return query:GetUInt32(0)
+	elseif  (player_level == 60) and ( (item_level >= 72) and (item_level <= 78) ) then
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=10 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
+		return query:GetUInt32(0)
+	elseif (player_level == 60) and ( (item_level >= 79) and (item_level <= 83) ) then
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=11 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
+		return query:GetUInt32(0)
+	elseif (player_level == 60) and  (item_level >= 84) then
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=12 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
+		return query:GetUInt32(0)										
 	end
 end
 
@@ -87,7 +104,7 @@ function OnLoot(event, player, item, count)
 		boolRoll1 = math.random(1,100)
 		if (boolRoll1 >= chance_increaser[item_quality]) then 
 			slotBools[1]	= true
-			slotIDs[1]		= RollEnchant(item)
+			slotIDs[1]		= RollEnchant(item, player)
 		else 
 			slotBools[1]	= false 
 		end

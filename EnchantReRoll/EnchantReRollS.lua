@@ -62,23 +62,35 @@ function EnchantItemCost(item)
 	return cost
 end
 
-function EnchantItemTier(item)
+function EnchantItemTier(item, player)
 	local Tier = 1
-	local level = item:GetRequiredLevel()
-	if (1 <= level) and (level <=9) then
+	local plevel = player:GetLevel()
+	local ilevel = item:GetRequiredLevel()
+
+	if (1 <= plevel) and (plevel <=10) then
 		Tier = 1
-		elseif (10 <= level) and (level <=19) then
+		elseif (11 <= plevel) and (plevel <=20) then
 			Tier = 2
-			elseif (20 <= level) and (level <=29) then
+			elseif (21 <= plevel) and (plevel <=30) then
 				Tier = 3
-				elseif (30 <= level) and (level <=39) then
+				elseif (31 <= plevel) and (plevel <=40) then
 					Tier = 4
-					elseif (40 <= level) and (level <=49) then
+					elseif (41 <= plevel) and (plevel <=50) then
 						Tier = 5
-						elseif (50 <= level) and (level <=59) then
+						elseif (51 <= plevel) and (plevel <=59) then
 							Tier = 6
-							elseif (level >= 60) then
+							elseif (plevel == 60) and ( (ilevel >= 50) and (ilevel <= 55) ) then
 								Tier = 7
+								elseif (plevel == 60) and ( (ilevel >= 56) and (ilevel <= 63) ) then
+								Tier = 8
+								elseif (plevel == 60) and ( (ilevel >= 64) and (ilevel <= 71) ) then
+								Tier = 9
+								elseif (plevel == 60) and ( (ilevel >= 72) and (ilevel <= 78) ) then
+								Tier = 10
+								elseif (plevel == 60) and ( (ilevel >= 79) and (ilevel <= 83) ) then
+								Tier = 11
+								elseif (plevel == 60) and  (ilevel >= 84)  then
+								Tier = 12
 		end
 	return Tier
 end
@@ -156,7 +168,7 @@ function MyHandlers.ReforgeItem(player,bag,slot)
 
 		local cost = EnchantItemCost(item)
 		local class = item:GetClass()
-		local enchantTier = EnchantItemTier(item)
+		local enchantTier = EnchantItemTier(item, player)
 		local neweffect = math.random(1,10)
 		local neweffectSQL = nil
 

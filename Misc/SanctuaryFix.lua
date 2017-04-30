@@ -54,6 +54,7 @@ end
 
 local function TimingChecks(event,player)
 	player:RegisterEvent(sanctuary_fix_2, 2000, 0)
+	player:RegisterEvent(Asc_Glory_Check, 30000, 0)
 end
 RegisterPlayerEvent(28, TimingChecks)
 --RegisterPlayerEvent(3, TimingChecks)
