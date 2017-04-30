@@ -64,7 +64,7 @@ end
 
 function EnchantItemTier(item)
 	local Tier = 1
-	local level = item:GetItemLevel()
+	local level = item:GetItemlevel()
 	if (1 <= level) and (level <=24) then
 		Tier = 1
 		elseif (1 <= level) and (level <=40) then
