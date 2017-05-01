@@ -7,7 +7,7 @@ function update(event, player, msg, Type, lang)
 		if msg == "%push lua sargeras" then
 		
 			os.execute ('bash /home/develop/awake/main/bin/lua_scripts/update_lua.sh &')
-			player:SendBroadcastMessage("Successfully pushed Lua Scripts. Some Modules require restarts or .reload eluna")
+			player:SendBroadcastMessage("Successfully pushed Lua Scripts. This is a stable version push. Don't forget to merge changes in from master. Some Modules require restarts or .reload eluna")
 		
 		elseif msg == "%push log sargeras" then
 		
