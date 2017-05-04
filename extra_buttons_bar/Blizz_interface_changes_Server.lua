@@ -18,7 +18,7 @@ local MyHandlers = AIO.AddHandlers("DeathRessurect", {})
  		player:ResurrectPlayer(20, true)
  		player:DurabilityLossAll(100, true)
  		if player:IsAlliance() then
- 			player:Teleport(0, -8525, 851, 106.6, 3.8)
+ 			player:Teleport(0, -8525.72, 851.9157, 106.51, 3.8)
  		else
  			player:Teleport(1, 1451, -4181, 61.6, 1.05)
  		end
