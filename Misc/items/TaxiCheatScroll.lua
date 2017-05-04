@@ -3,7 +3,7 @@ local function TaxiCheatScroll(event, player, item, target)
 	player:SendNotification("|cffFF6600 You're now free to choose any flight path you want! |r")
 	player:CastSpell(player, 70571, false)
 	player:RemoveAura(70571)
-	if not(CharDBQuery("SELECT .* FROM custom_taxicheat WHERE guid = "..player:GetGUIDLow()..";") then
+	if not(CharDBQuery("SELECT .* FROM custom_taxicheat WHERE guid = "..player:GetGUIDLow()..";")) then
 		CharDBExecute("INSERT INTO custom_taxicheat VALUES ("..player:GetGUIDLow()..");")
 	end
 end
