@@ -11,7 +11,7 @@ end
 RegisterItemEvent(977025, 2, TaxiCheatScroll)
 
 RegisterPlayerEvent(3, function(event,player)
-	if CharDBQuery("SELECT .* FROM custom_taxicheat WHERE guid = "..player:GetGUIDLow()..";" then
+	if CharDBQuery("SELECT .* FROM custom_taxicheat WHERE guid = "..player:GetGUIDLow()..";") then
 		player:SetTaxiCheat(true)
 	end
 	end)
