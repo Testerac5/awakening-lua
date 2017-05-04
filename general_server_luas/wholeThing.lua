@@ -91,6 +91,12 @@ function OnLoot(event, player, item, count)
 		6 - red (not used?)
 		7 - gold (bind to account)
 	]]                     --  0   1   2   3   4  5
+
+	--scarlet crusade tabard exception
+	if (item:GetEntry() == 23192) then
+		return false
+	end
+	--
 	local chance_increaser = {101, 95, 30, 20, 0, 0} -- chances for each quality to get random_enchantments, the lower the number the higher the chance
 	
 	local slotBools		= {}
