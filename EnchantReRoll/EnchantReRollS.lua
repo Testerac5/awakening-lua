@@ -209,7 +209,7 @@ function MyHandlers.ReforgeItem(player,bag,slot)
 		end
 	end]]--
 		--neweffect = neweffectSQL:GetInt32(0)
-		item:SetEnchantment(enchant, 5)
+		item:SetEnchantment(1005000, 5) -- ATTEMPT TO FIND A REASON OF CRASHES
 		enchantReRoll_Reforge(AIO.Msg(),player,item):Send(player)
 	else
 		player:SendBroadcastMessage("Reforge Failed")
