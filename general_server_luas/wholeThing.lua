@@ -32,6 +32,8 @@ function RollEnchant(item, player)
 	
 	local item_level = item:GetItemLevel()
 	local player_level = item:GetRequiredLevel()
+	local tier = 1
+	local effect = nil
 	--local req_level = item
 
 	local itemClass = ""
@@ -40,45 +42,52 @@ function RollEnchant(item, player)
 	elseif (item:GetClass() == 4) then
 		itemClass = "ARMOR"
 	end
-	if itemClass ~= "" then
+
 	if (1 <= player_level) and (player_level <=10) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=1 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
-		return query:GetUInt32(0)
+		tier = 1
+		
 	elseif (11 <= player_level) and (player_level <=20) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=2 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
-		return query:GetUInt32(0)
+		tier = 2
+		
 	elseif (21 <= player_level) and (player_level <=30) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=3 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
-		return query:GetUInt32(0)
+		tier = 3
+		
 	elseif (31 <= player_level) and (player_level <=40) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=4 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
-		return query:GetUInt32(0)
+		tier = 4
+		
 	elseif (41 <= player_level) and (player_level <=50) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=5 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
-		return query:GetUInt32(0)
+		tier = 5
+		
 	elseif (51 <= player_level) and (player_level <=59) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=6 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
-		return query:GetUInt32(0)
+		tier = 6
+		
 	elseif (player_level == 60) and ( (item_level >= 50) and (item_level <= 55) ) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=7 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
-		return query:GetUInt32(0)
+		tier = 7
+		
 	elseif (player_level == 60) and ( (item_level >= 56) and (item_level <= 63) ) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=8 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
-		return query:GetUInt32(0)
+		tier = 8
+		
 	elseif (player_level == 60) and ( (item_level >= 64) and (item_level <= 71) ) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=9 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
-		return query:GetUInt32(0)
+		tier = 9
+		
 	elseif  (player_level == 60) and ( (item_level >= 72) and (item_level <= 78) ) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=10 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
-		return query:GetUInt32(0)
+		tier = 10
+		
 	elseif (player_level == 60) and ( (item_level >= 79) and (item_level <= 83) ) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=11 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
-		return query:GetUInt32(0)
+		tier = 11
+		
 	elseif (player_level == 60) and  (item_level >= 84) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=12 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
-		return query:GetUInt32(0)										
+		tier = 12
+												
+	end	
+
+	if itemClass ~= "" then
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier="..tier.." AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
+			if (query) then
+				effect = query:GetInt32(0)
+			end
 	end
-end
+	return effect
 end
 
 function OnLoot(event, player, item, count)
