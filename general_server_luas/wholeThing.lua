@@ -40,6 +40,7 @@ function RollEnchant(item, player)
 	elseif (item:GetClass() == 4) then
 		itemClass = "ARMOR"
 	end
+	if itemClass ~= "" then
 	if (1 <= player_level) and (player_level <=10) then
 		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=1 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
 		return query:GetUInt32(0)
@@ -77,6 +78,7 @@ function RollEnchant(item, player)
 		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=12 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
 		return query:GetUInt32(0)										
 	end
+end
 end
 
 function OnLoot(event, player, item, count)
