@@ -32,7 +32,7 @@ function RollEnchant(item, player)
 	
 	local item_level = item:GetItemLevel()
 	local player_level = item:GetRequiredLevel()
-	local req_level = item
+	--local req_level = item
 
 	local itemClass = ""
 	if (item:GetClass() == 2) then
