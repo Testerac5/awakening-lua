@@ -41,40 +41,40 @@ function RollEnchant(item, player)
 		itemClass = "ARMOR"
 	end
 	if (1 <= player_level) and (player_level <=10) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=1 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=1 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
 		return query:GetUInt32(0)
 	elseif (11 <= player_level) and (player_level <=20) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=2 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=2 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
 		return query:GetUInt32(0)
 	elseif (21 <= player_level) and (player_level <=30) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=3 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=3 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
 		return query:GetUInt32(0)
 	elseif (31 <= player_level) and (player_level <=40) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=4 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=4 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
 		return query:GetUInt32(0)
 	elseif (41 <= player_level) and (player_level <=50) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=5 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=5 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
 		return query:GetUInt32(0)
 	elseif (51 <= player_level) and (player_level <=59) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=6 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=6 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
 		return query:GetUInt32(0)
 	elseif (player_level == 60) and ( (item_level >= 50) and (item_level <= 55) ) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=7 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=7 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
 		return query:GetUInt32(0)
 	elseif (player_level == 60) and ( (item_level >= 56) and (item_level <= 63) ) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=8 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=8 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
 		return query:GetUInt32(0)
 	elseif (player_level == 60) and ( (item_level >= 64) and (item_level <= 71) ) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=9 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=9 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
 		return query:GetUInt32(0)
 	elseif  (player_level == 60) and ( (item_level >= 72) and (item_level <= 78) ) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=10 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=10 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
 		return query:GetUInt32(0)
 	elseif (player_level == 60) and ( (item_level >= 79) and (item_level <= 83) ) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=11 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=11 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
 		return query:GetUInt32(0)
 	elseif (player_level == 60) and  (item_level >= 84) then
-		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=12 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1")
+		local query = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier=12 AND (class='"..itemClass.."' OR class='ANY') ORDER BY RAND() LIMIT 1;")
 		return query:GetUInt32(0)										
 	end
 end
