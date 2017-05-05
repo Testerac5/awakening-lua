@@ -30,8 +30,9 @@ Enchantment slot test results:
 
 function RollEnchant(item, player)
 	
-	local item_level = item:GetRequiredLevel()
-	local player_level = player:GetLevel()
+	local item_level = item:GetItemLevel()
+	local player_level = item:GetRequiredLevel()
+	local req_level = item
 
 	local itemClass = ""
 	if (item:GetClass() == 2) then
