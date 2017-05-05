@@ -62,7 +62,7 @@ function EnchantItemCost(item)
 	return cost
 end
 
-function EnchantItemTier(item, player)
+--[[function EnchantItemTier(item, player)
 	local Tier = 1
 	local plevel = player:GetLevel()
 	local ilevel = item:GetRequiredLevel()
@@ -93,7 +93,7 @@ function EnchantItemTier(item, player)
 								Tier = 12
 		end
 	return Tier
-end
+end]]--
 --MAIN SET ITEM FUNCTION
  function MyHandlers.SetItem(player,bag,slot)
  	--AIO ADDITIONAL CHECK--
@@ -167,16 +167,17 @@ function MyHandlers.ReforgeItem(player,bag,slot)
 	if (EnchantItemCheck(player,item)) then
 
 		local cost = EnchantItemCost(item)
-		local class = item:GetClass()
-		local enchantTier = EnchantItemTier(item, player)
-		local neweffect = math.random(1,10)
-		local neweffectSQL = nil
+		local enchant = nil
+		--local class = item:GetClass()
+		--local enchantTier = EnchantItemTier(item, player)
+		--local neweffect = math.random(1,10)
+		--local neweffectSQL = nil
 
-		if (class == 4) then
+		--[[if (class == 4) then
 			class = "ANY"
 			elseif (class == 2) then
 				class = "WEAPON"
-			end
+			end]]--
 
 		if (cost > player:GetCoinage()) then
 			player:SendBroadcastMessage("You don't have enough money to do that")
@@ -193,20 +194,22 @@ function MyHandlers.ReforgeItem(player,bag,slot)
 		enchantTier = enchantTierSQL:GetInt32(0)
 		end]]--
 
-		if (class == "ANY") then
+		--[[if (class == "ANY") then
 			neweffectSQL = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier = "..enchantTier.." AND class = '"..class.."';")
 		else
 			neweffectSQL = WorldDBQuery("SELECT enchantID FROM item_enchantment_random_tiers WHERE tier = "..enchantTier..";")
-		end
+		end]]--
 		--choosing random row from our query
-		if (neweffectSQL) then
-			if (neweffectSQL:GetRowCount()>1) then
+
+		enchant = RollEnchant(item, player)
+		if (enchant) then
+			--[[if (neweffectSQL:GetRowCount()>1) then
 		for i = 1, math.random(1, (neweffectSQL:GetRowCount()-1)) do
 			neweffectSQL:NextRow()
 		end
-	end
-		neweffect = neweffectSQL:GetInt32(0)
-		item:SetEnchantment(neweffect, 5)
+	end]]--
+		--neweffect = neweffectSQL:GetInt32(0)
+		item:SetEnchantment(enchant, 5)
 		enchantReRoll_Reforge(AIO.Msg(),player,item):Send(player)
 	else
 		player:SendBroadcastMessage("Reforge Failed")

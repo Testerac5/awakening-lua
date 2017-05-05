@@ -115,7 +115,7 @@ function OnLoot(event, player, item, count)
 			slotBools[1]	= false 
 		end
 		
-		if (slotBools[1] == true) then
+		if (slotBools[1] == true) and (slotIDs[1] ~= nil) then
 			item:SetEnchantment(slotIDs[1], 5)
 		end
 	end
