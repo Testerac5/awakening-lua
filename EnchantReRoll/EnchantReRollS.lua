@@ -64,32 +64,32 @@ end
 
 --[[function EnchantItemTier(item, player)
 	local Tier = 1
-	local plevel = player:GetLevel()
+	local rlevel = item:GetItemLevel()
 	local ilevel = item:GetRequiredLevel()
 
-	if (1 <= plevel) and (plevel <=10) then
+	if (1 <= rlevel) and (rlevel <=10) then
 		Tier = 1
-		elseif (11 <= plevel) and (plevel <=20) then
+		elseif (11 <= rlevel) and (rlevel <=20) then
 			Tier = 2
-			elseif (21 <= plevel) and (plevel <=30) then
+			elseif (21 <= rlevel) and (rlevel <=30) then
 				Tier = 3
-				elseif (31 <= plevel) and (plevel <=40) then
+				elseif (31 <= rlevel) and (rlevel <=40) then
 					Tier = 4
-					elseif (41 <= plevel) and (plevel <=50) then
+					elseif (41 <= rlevel) and (rlevel <=50) then
 						Tier = 5
-						elseif (51 <= plevel) and (plevel <=59) then
+						elseif (51 <= rlevel) and (rlevel <=59) then
 							Tier = 6
-							elseif (plevel == 60) and ( (ilevel >= 50) and (ilevel <= 55) ) then
+							elseif (rlevel == 60) and ( (ilevel >= 50) and (ilevel <= 55) ) then
 								Tier = 7
-								elseif (plevel == 60) and ( (ilevel >= 56) and (ilevel <= 63) ) then
+								elseif (rlevel == 60) and ( (ilevel >= 56) and (ilevel <= 63) ) then
 								Tier = 8
-								elseif (plevel == 60) and ( (ilevel >= 64) and (ilevel <= 71) ) then
+								elseif (rlevel == 60) and ( (ilevel >= 64) and (ilevel <= 71) ) then
 								Tier = 9
-								elseif (plevel == 60) and ( (ilevel >= 72) and (ilevel <= 78) ) then
+								elseif (rlevel == 60) and ( (ilevel >= 72) and (ilevel <= 78) ) then
 								Tier = 10
-								elseif (plevel == 60) and ( (ilevel >= 79) and (ilevel <= 83) ) then
+								elseif (rlevel == 60) and ( (ilevel >= 79) and (ilevel <= 83) ) then
 								Tier = 11
-								elseif (plevel == 60) and  (ilevel >= 84)  then
+								elseif (rlevel == 60) and  (ilevel >= 84)  then
 								Tier = 12
 		end
 	return Tier
