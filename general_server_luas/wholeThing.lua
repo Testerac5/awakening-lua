@@ -87,7 +87,6 @@ function RollEnchant(item, player)
 				effect = query:GetInt32(0)
 			end
 	end
-	player:SendBroadcastMessage("tier "..tier.." effect "..effect) -- DEBUG
 	return effect
 end
 
