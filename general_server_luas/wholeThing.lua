@@ -59,7 +59,7 @@ function RollEnchant(item, player)
 		tier = 5
 		
 	--elseif (46 <= player_level) and (player_level <=54) then
-		tier = 6
+	--	tier = 6
 		
 	elseif ( (item_level >= 50) and (item_level <= 55) ) then
 		tier = 7
