@@ -43,40 +43,40 @@ function RollEnchant(item, player)
 		itemClass = "ARMOR"
 	end
 
-	if (1 <= player_level) and (player_level <=10) then
+	if (1 <= player_level) and (player_level <=9) then
 		tier = 1
 		
-	elseif (11 <= player_level) and (player_level <=20) then
+	elseif (10 <= player_level) and (player_level <=18) then
 		tier = 2
 		
-	elseif (21 <= player_level) and (player_level <=30) then
+	elseif (19 <= player_level) and (player_level <=27) then
 		tier = 3
 		
-	elseif (31 <= player_level) and (player_level <=40) then
+	elseif (28 <= player_level) and (player_level <=36) then
 		tier = 4
 		
-	elseif (41 <= player_level) and (player_level <=50) then
+	elseif (37 <= player_level) and (player_level <=44) then
 		tier = 5
 		
-	elseif (51 <= player_level) and (player_level <=59) then
-		tier = 6
+	--elseif (46 <= player_level) and (player_level <=54) then
+	--	tier = 6
 		
-	elseif (player_level == 60) and ( (item_level >= 50) and (item_level <= 55) ) then
+	elseif ( (item_level >= 50) and (item_level <= 55) ) then
 		tier = 7
 		
-	elseif (player_level == 60) and ( (item_level >= 56) and (item_level <= 63) ) then
+	elseif ( (item_level >= 56) and (item_level <= 63) ) then
 		tier = 8
 		
-	elseif (player_level == 60) and ( (item_level >= 64) and (item_level <= 71) ) then
+	elseif ( (item_level >= 64) and (item_level <= 71) ) then
 		tier = 9
 		
-	elseif  (player_level == 60) and ( (item_level >= 72) and (item_level <= 78) ) then
+	elseif ( (item_level >= 72) and (item_level <= 78) ) then
 		tier = 10
 		
-	elseif (player_level == 60) and ( (item_level >= 79) and (item_level <= 83) ) then
+	elseif ( (item_level >= 79) and (item_level <= 83) ) then
 		tier = 11
 		
-	elseif (player_level == 60) and  (item_level >= 84) then
+	elseif (item_level >= 84) then
 		tier = 12
 												
 	end	
