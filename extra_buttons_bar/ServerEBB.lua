@@ -465,7 +465,7 @@ function MyHandlers.ResetSpells(player)
 							   rogue_assassination_spells, rogue_combat_spells, rogue_subtlety_spells,
 							   shaman_elemental_spells, shaman_enhancement_spells, shaman_restoration_spells,
 							   warlock_affliction_spells, warlock_demonology_spells, warlock_destruction_spells,
-							   warrior_arms_spells, warrior_fury_spells, warrior_protection_spells}
+							   warrior_arms_spells, warrior_fury_spells, warrior_protection_spells, general_spells}
 	if (player:InArena() ==	true or player:InBattleground() == 	true) then
 		player:SendBroadcastMessage("You can't do that in Battlegrounds and Arenas.")
 	else
