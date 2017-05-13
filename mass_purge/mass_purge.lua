@@ -133,9 +133,7 @@ RegisterPlayerEvent(30,add_player_list)
 
 --Purge Command--
 local function Asc_Purgeplayer(event, player, msg, Type, lang)
-if msg ~= "%purgeplayer" then
-	return false
-end
+if msg == "%purgeplayer" then
 
 if (player:GetGMRank() ~= 3) then
 	if (player:GetGMRank() < 5) then
@@ -159,6 +157,7 @@ CharDBExecute("DELETE FROM purge_players WHERE guid =  "..player:GetGUIDLow().."
 player:SendBroadcastMessage("Your target kicked from game for relog. Purge is done")
 Target:KickPlayer()
 
+end
 end
 
 	RegisterPlayerEvent(18,Asc_Purgeplayer)
