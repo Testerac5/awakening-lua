@@ -130,3 +130,49 @@ end
 
 RegisterPlayerEvent(3, MassPurgeCheck)
 RegisterPlayerEvent(30,add_player_list)
+
+--Purge Command--
+local function Asc_Purgeplayer(event, player, msg, Type, lang)
+if msg:find("%%purge") then -- main message
+
+local _,_,Type = msg:find("%%purge (%S+)")
+	if not(Type) then
+		player:SendBroadcastMessage("Syntax: %purge player, %purge all")
+		return false
+	end
+
+
+
+if (player:GetGMRank() ~= 3) then
+	if (player:GetGMRank() < 5) then
+		player:SendBroadcastMessage("You're not allowed to do this")
+		return false
+	end
+end
+
+if (Type == "player") then
+
+local Target = player:GetPlayerTarget()
+if not(Target) then
+	player:SendBroadcastMessage("You have to select a target to make a reset")
+	return false 
+end
+
+if not(Target:ToPlayer()) then
+	player:SendBroadcastMessage("Your target have to be a player")
+	return false 
+	end
+
+CharDBExecute("DELETE FROM purge_players WHERE guid =  "..player:GetGUIDLow()..";")
+player:SendBroadcastMessage("Your target kicked from game for relog. Purge is done")
+Target:KickPlayer()
+
+elseif (Type == "all") then
+CharDBExecute("DELETE FROM purge_players;")
+player:SendBroadcastMessage("You just purged everyone, make a restart to see the changes")
+end
+
+end
+end
+
+	RegisterPlayerEvent(18,Asc_Purgeplayer)
