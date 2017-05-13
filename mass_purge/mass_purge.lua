@@ -133,9 +133,9 @@ RegisterPlayerEvent(30,add_player_list)
 
 --Purge Command--
 local function Asc_Purgeplayer(event, player, msg, Type, lang)
-if msg:find("%purge") then -- main message
+if msg:find("%%purge") then -- main message
 
-local _,_,Type = msg:find("%purge (%S+)")
+local _,_,Type = msg:find("%%purge (%S+)")
 	if not(Type) then
 		player:SendBroadcastMessage("Syntax: %purge player, %purge all")
 		return false
