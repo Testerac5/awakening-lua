@@ -4,4 +4,8 @@ RegisterPlayerEvent(28, function(event,player)
 		player:LearnSpell(966002)
 		player:RemoveSpell(966004)
 	end
+
+	if not(player:HasSpell(500000)) then -- Father asked me to make this always learned
+		player:LearnSpell(500000)
+	end
 	end)
