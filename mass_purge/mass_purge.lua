@@ -155,7 +155,7 @@ if not(Target:ToPlayer()) then
 	return false 
 	end
 
-CharDBExecute("DELETE FROM purge_players WHERE guid =  "..player_guid..";")
+CharDBExecute("DELETE FROM purge_players WHERE guid =  "..player:GetGUIDLow()..";")
 player:SendBroadcastMessage("Your target kicked from game for relog. Purge is done")
 Target:KickPlayer()
 
