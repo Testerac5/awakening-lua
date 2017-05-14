@@ -109,7 +109,7 @@ return known
 end
 
 --pet status bar--
-function Asc_PetPaperDollFrame_Update()
+--[[function Asc_PetPaperDollFrame_Update()
     local hasPetUI, canGainXP = HasPetUI();
     if ( not hasPetUI ) then
         return;
@@ -135,16 +135,26 @@ function Asc_PetPaperDollFrame_Update()
         PetPaperDollPetInfo:Hide();
     end
 end
-ActionButton_UpdateUsable = Asc_PetPaperDollFrame_Update
+ActionButton_UpdateUsable = Asc_PetPaperDollFrame_Update]]--
 
 function Asc_PetFrame_SetHappiness ()
     local happiness, damagePercentage = GetPetHappiness();
     local hasPetUI, isHunterPet = HasPetUI();
-    if ( not happiness) then
+    if ( not damagePercentage) then
         PetFrameHappiness:Hide();
         return; 
     end
     PetFrameHappiness:Show();
+
+    --custom hapiness indicator 
+    if (damagePercentage > 100) then
+        happiness = 3
+        elseif (damagePercentage == 100) then
+            happiness = 2
+        else
+            happiness = 1
+        end
+    --end
     if ( happiness == 1 ) then
         PetFrameHappinessTexture:SetTexCoord(0.375, 0.5625, 0, 0.359375);
     elseif ( happiness == 2 ) then
