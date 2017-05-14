@@ -48,8 +48,7 @@ function MassPurgeCheck(event, player)
 							   warrior_arms_spells, warrior_fury_spells, warrior_protection_spells}
 		
 		--FROM ServerEBB.lua MyHandlers.ResetSpells(player)
-		local noTEspells = {54785, 50589, 50581, 59671, 11417, 11420, 11418, 3567, 3566, 3563, 11419, 11416, 10059, 3565, 3562, 3561, 21849, 21850, 26991, 48470, 21562, 21564, 25782, 25916, 27141, 27681, 49360, 49359, 49361, 49358, 10143, 8121, 7763, 10937, 10938, 9884, 1373}
-			for s, sid in pairs(noTEspells) do
+		for s, sid in pairs(noTEspells) do -- noTEspells are now only in ServerEBB.lua
 				if player:HasSpell(sid) then
 					player:RemoveSpell(sid)
 				end
