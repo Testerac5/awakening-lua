@@ -137,7 +137,7 @@ end
 end
 ActionButton_UpdateUsable = Asc_PetPaperDollFrame_Update]]--
 
-function Asc_PetFrame_SetHappiness ()
+--[[function Asc_PetFrame_SetHappiness ()
     local happiness, damagePercentage = GetPetHappiness();
     local hasPetUI, isHunterPet = HasPetUI();
     if ( not damagePercentage) then
@@ -166,4 +166,4 @@ function Asc_PetFrame_SetHappiness ()
     PetFrameHappiness.tooltipDamage = format(PET_DAMAGE_PERCENTAGE, damagePercentage);
 end
 
-PetFrame_SetHappiness = Asc_PetFrame_SetHappiness
+PetFrame_SetHappiness = Asc_PetFrame_SetHappiness]]--
