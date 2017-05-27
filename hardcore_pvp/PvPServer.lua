@@ -68,6 +68,19 @@ local function PVP_ItemCheck(item, target)
 end
 
 local function EntropyPvP(event, pKiller, pKilled)
+	--PLAYER_EVENT_ON_KILLED_BY_CREATURE
+	if pKiller:ToCreature() then
+		if not(pKiller:GetOwner()) then
+			return false
+		end
+
+		if not(pKiller:GetOwner():ToPlayer()) then
+			return false
+		end
+
+		pKiller = pKiller:GetOwner():ToPlayer()
+	end
+	--PLAYER_EVENT_ON_KILLED_BY_CREATURE
 	math.random(1,10)
 	local check_safe = false
 	local pKiller_loc = pKiller:GetMapId()
@@ -374,7 +387,7 @@ local function Container_Interact(event, player, object)
 end
 
 
-
+RegisterPlayerEvent(8, EntropyPvP)
 RegisterPlayerEvent(6, EntropyPvP)	
 RegisterGameObjectGossipEvent(818001, 1, Container_Interact)
 
