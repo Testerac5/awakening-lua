@@ -67,7 +67,10 @@ end
 
     if (UnitLevel("player") >= 10) then
     if (UnitIsGhost("player")) and not(DeathCapitalTeleportButton:IsVisible()) then
-        DeathCapitalTeleportButton:Show()
+            local zonenamename, zonetype = GetInstanceInfo()
+            if not(zonetype == "pvp") then
+            DeathCapitalTeleportButton:Show()
+            end
         elseif not(UnitIsGhost("player")) and (DeathCapitalTeleportButton:IsVisible()) then
         DeathCapitalTeleportButton:Hide()
     end
