@@ -63,6 +63,27 @@ function update(event, player, msg, Type, lang)
 		
 			os.execute ('bash /home/develop/compile_andorhal.sh &')
 			player:SendBroadcastMessage("Successfully started compiling core. This requires a restart but please wait a few minutes for compiling to finish.")
+
+
+		elseif msg == "%push lua tichondrius" then
+		
+			os.execute ('bash /home/develop/awake/tichondrius/bin/lua_scripts/update_lua.sh &')
+			player:SendBroadcastMessage("Successfully pushed Lua Scripts. Some Modules require restarts or .reload eluna")
+		
+		elseif msg == "%push log tichondrius" then
+		
+			os.execute ('bash /home/develop/awake/tichondrius/bin/lua_scripts/push_log.sh &')
+			player:SendBroadcastMessage("Successfully pushed Lua Log")
+		
+		elseif msg == "%push dbc tichondrius" then
+		
+			os.execute ('bash /home/develop/awake/tichondrius/bin/lua_scripts/update_dbc.sh &')
+			player:SendBroadcastMessage("Successfully pushed DBC Files. This requires a restart")
+			
+		elseif msg == "%push core tichondrius" then
+		
+			os.execute ('bash /home/develop/compile_tichondrius.sh &')
+			player:SendBroadcastMessage("Successfully started compiling core. This requires a restart but please wait a few minutes for compiling to finish.")
 			
 			
 
