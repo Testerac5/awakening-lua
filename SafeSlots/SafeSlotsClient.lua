@@ -6,7 +6,7 @@ if AIO.AddAddon() then
 end
 
 
-local SlotIsurance = AIO.AddHandlers("SlotIsurance", {})
+local SlotIsuranceClient = AIO.AddHandlers("SlotIsurance", {})
 
 local Slots = {
     [1] = {"Head", "SafeSlot1", false},
@@ -14,7 +14,7 @@ local Slots = {
     [3] = {"Shoulder", "SafeSlot3", false},
     [4] = {"Body", "SafeSlot6", false},
     [5] = {"Chest", "SafeSlot5", false},
-    [6] = {"Waist", "SafeSlot10", true},
+    [6] = {"Waist", "SafeSlot10", false},
     [7] = {"Legs", "SafeSlot11", false},
     [8] = {"Feet", "SafeSlot12", false},
     [9] = {"Wrist", "SafeSlot8", false},
@@ -312,10 +312,6 @@ SafeSlots_Main_BlankAnim:SetScript("OnPlay", function()
     BaseFrameFadeIn(SafeSlots_Main_Complete_Dialog)
     end)
 
---END OF ANIMATIONS--
-
-                                                                                                --AIO STUFF--
-
 local function SafeSlots_Init()
     SafeSlots_Main_PlayerModel:SetUnit("player")
     SafeSlots_Main_PlayerModel:SetCamera(1) -- model settings
@@ -334,7 +330,14 @@ local function SafeSlots_Init()
 
     end
 end
-SafeSlots_Main:SetScript("OnShow", SafeSlots_Init)
+--END OF ANIMATIONS--
+
+                                                                                                --AIO STUFF, SENDING PART--
+
+
+SafeSlots_Main:SetScript("OnShow", function()
+    AIO.Handle("SlotIsurance", "GetSlotList")
+    end)
 
 SafeSlots_Main_Confirm_UnInsureButton:SetScript("OnMouseDown",function(self)
     --AIO STUFF GOING HERE
@@ -347,3 +350,9 @@ SafeSlots_Main_Confirm_InsureButton:SetScript("OnMouseDown",function(self)
     --AIO STUFF GOING HERE
     end
     end)
+
+                                                                                                --AIO STUFF, GETTING PART--
+function SlotIsuranceClient.SafeSlots_GetList(player, slotlist)
+    Slots = slotlist
+    SafeSlots_Init()
+end
