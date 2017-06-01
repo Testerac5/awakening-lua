@@ -107,7 +107,7 @@ function SlotIsuranceServer.InsureSlot(player,slot)
         CharDBExecute("INSERT IGNORE INTO custom_iteminsurance (playerguid, slot"..slot..") VALUES ("..player:GetGUIDLow()..", 1);")
     end
 
-    SlotIsuranceServer.GetSlotList(player)
+    --SlotIsuranceServer.GetSlotList(player)
     end
 
 function SlotIsuranceServer.UnInsureSlot(player,slot)
@@ -132,5 +132,5 @@ function SlotIsuranceServer.UnInsureSlot(player,slot)
 
     CharDBExecute("UPDATE custom_iteminsurance SET slot"..slot.." = 0 WHERE playerguid = "..player:GetGUIDLow()..";")
     player:AddItem(InsureCurrency)
-    SlotIsuranceServer.GetSlotList(player)
+    --SlotIsuranceServer.GetSlotList(player)
 end
