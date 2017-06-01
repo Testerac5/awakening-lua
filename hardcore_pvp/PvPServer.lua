@@ -48,6 +48,12 @@ local item_looted = {}
 	item_table[object:GetGUIDLow()] = nil
 	print("Chest removed from world")
 end]]--
+local SafeCostModifier = 885
+function SafeSlotGetLostCost(item)
+	local cost = nil
+	cost = item:GetItemLevel() * SafeCostModifier -- Temporary was 2285
+	return cost
+end
 
 local function PVP_ItemCheck(item, target)
 					for k,v in pairs(prohibited_items) do
@@ -149,18 +155,28 @@ local function EntropyPvP(event, pKiller, pKilled)
 								if (item) then
 								local itemcount = math.random(1,item:GetCount())
 									if (PVP_ItemCheck(item,pKilled)) then
-									-- loot part
-										if (item:GetClass() == 2 or item:GetClass() == 4) then
+									-- Get Money for item part--
+
+											--SQL CHECK IF ITEM IS "SAFE"
+											local SafeSQL = CharDBQuery("SELECT slot"..items_droplist[itemslot_temp][2].." FROM custom_iteminsurance WHERE playerguid = "..player:GetGUIDLow()..";")
+											local DropSafeCost = SafeSlotGetLostCost(item)
+											if (SafeSQL and (SlotSQL:GetInt32(0) == 1) and (pKilled:GetCoinage() >= DropSafeCost)) then
+												pKilled:ModifyMoney(-DropSafeCost)
+												pKiller:ModifyMoney(DropSafeCost)
+												pKiller:SendBroadcastMessage("You got gold reward for killing this person")
+											else
+											if (item:GetClass() == 2 or item:GetClass() == 4) then
 											if (item:GetEnchantmentId(5) == 0 or item:GetEnchantmentId(5) == nil) then
 											table.insert (item_table[FullLootContainer:GetGUIDLow()], {item:GetItemLink(), item:GetEntry(), itemcount, pKilled:GetName()})
 											else
 											table.insert (item_table[FullLootContainer:GetGUIDLow()], {item:GetItemLink(), item:GetEntry(), itemcount, pKilled:GetName(), item:GetEnchantmentId(5)})
 											end
-										else
-										table.insert (item_table[FullLootContainer:GetGUIDLow()], {item:GetItemLink(), item:GetEntry(), itemcount, pKilled:GetName()})
+											else
+											table.insert (item_table[FullLootContainer:GetGUIDLow()], {item:GetItemLink(), item:GetEntry(), itemcount, pKilled:GetName()})
+											end
+											pKilled:RemoveItem(item:GetEntry(), itemcount)
 										end
-										pKilled:RemoveItem(item:GetEntry(), itemcount)
-										-- end of loot part
+
 									else
 									amountofdroppeditems = amountofdroppeditems+1
 									end
