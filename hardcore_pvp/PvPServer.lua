@@ -163,7 +163,7 @@ local function EntropyPvP(event, pKiller, pKilled)
 												SafeSQL = CharDBQuery("SELECT slot"..items_droplist[itemslot_temp][2].." FROM custom_iteminsurance WHERE playerguid = "..pKilled:GetGUIDLow()..";")
 											end
 											local DropSafeCost = SafeSlotGetLostCost(item)
-											if (SafeSQL and (SlotSQL:GetInt32(0) == 1) and (pKilled:GetCoinage() >= DropSafeCost)) then
+											if (SafeSQL and (SafeSQL:GetInt32(0) == 1) and (pKilled:GetCoinage() >= DropSafeCost)) then
 												pKilled:ModifyMoney(-DropSafeCost)
 												pKiller:ModifyMoney(DropSafeCost)
 												pKiller:SendBroadcastMessage("You got gold reward for killing this person")
