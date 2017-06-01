@@ -87,7 +87,7 @@ function SlotIsuranceServer.InsureSlot(player,slot)
         return false
     end
     --MAIN ACTION--
-    local slot = slot - 1 
+    slot = slot - 1 
     if (player:GetItemCount(InsureCurrency) < 1) then
         player:SendBroadcastMessage("You don't have enough Demon's Tears to do that!")
         return false
@@ -118,6 +118,7 @@ function SlotIsuranceServer.UnInsureSlot(player,slot)
         return false
     end
     --MAIN ACTION--
+    slot = slot - 1 
     local SlotSQL = CharDBQuery("SELECT slot"..slot.." FROM custom_iteminsurance WHERE playerguid = "..player:GetGUIDLow()..";")
 
     if not(SlotSQL) then
