@@ -7,7 +7,38 @@ local SlotIsuranceServer = AIO.AddHandlers("SlotIsurance", {})
 --Slot table Structure:
 --PLAYERGUID, head, neck, shoulder etc (0 or 1)
 local InsureCurrency = 17
---local SafeCostModifier = 885
+
+--[[
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for custom_iteminsurance
+-- ----------------------------
+DROP TABLE IF EXISTS `custom_iteminsurance`;
+CREATE TABLE `custom_iteminsurance` (
+  `playerguid` int(30) NOT NULL DEFAULT '0',
+  `slot0` int(1) NOT NULL DEFAULT '0',
+  `slot1` int(1) NOT NULL DEFAULT '0',
+  `slot2` int(1) NOT NULL DEFAULT '0',
+  `slot3` int(1) NOT NULL DEFAULT '0',
+  `slot4` int(1) NOT NULL DEFAULT '0',
+  `slot5` int(1) NOT NULL DEFAULT '0',
+  `slot6` int(1) NOT NULL DEFAULT '0',
+  `slot7` int(1) NOT NULL DEFAULT '0',
+  `slot8` int(1) NOT NULL DEFAULT '0',
+  `slot9` int(1) NOT NULL DEFAULT '0',
+  `slot10` int(1) NOT NULL DEFAULT '0',
+  `slot11` int(1) NOT NULL DEFAULT '0',
+  `slot12` int(1) NOT NULL DEFAULT '0',
+  `slot13` int(1) NOT NULL DEFAULT '0',
+  `slot14` int(1) NOT NULL DEFAULT '0',
+  `slot15` int(1) NOT NULL DEFAULT '0',
+  `slot16` int(1) NOT NULL DEFAULT '0',
+  `slot17` int(1) NOT NULL DEFAULT '0',
+  `slot18` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`playerguid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+]]--
 
 function SlotIsuranceServer.GetSlotList(player)
    local Slots = { -- Empty ARRAY
@@ -80,15 +111,25 @@ function SlotIsuranceServer.InsureSlot(player,slot)
     end
 
 function SlotIsuranceServer.UnInsureSlot(player,slot)
+    --AIO ADDITIONAL CHECK--
+    local expectedData = {"number"}
+    local values = {slot}
+    if not(DataTypeCheck(expectedData, values)) then
+        return false
+    end
+    --MAIN ACTION--
     local SlotSQL = CharDBQuery("SELECT slot"..slot.." FROM custom_iteminsurance WHERE playerguid = "..player:GetGUIDLow()..";")
-    if (SlotSQL and (SlotSQL:GetInt32(0) == 0)) then
+
+    if not(SlotSQL) then
+        return false
+    end
+
+    if (SlotSQL:GetInt32(0) == 0) then
         player:SendBroadcastMessage("You have already removed insurance from that slot")
         return false
     end
-    if (SlotSQL) then
-        CharDBExecute("UPDATE custom_iteminsurance SET slot"..slot.." = 0 WHERE playerguid = "..player:GetGUIDLow()..";")
-    end
 
+    CharDBExecute("UPDATE custom_iteminsurance SET slot"..slot.." = 0 WHERE playerguid = "..player:GetGUIDLow()..";")
     player:AddItem(InsureCurrency)
     SlotIsuranceServer.GetSlotList(player)
 end
