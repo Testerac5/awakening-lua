@@ -342,6 +342,7 @@ SafeSlots_Main:SetScript("OnShow", function()
 SafeSlots_Main_Confirm_UnInsureButton:SetScript("OnMouseDown",function(self)
     if (SafeSlots_Main_Confirm_ItemIcon.slot) then
         AIO.Handle("SlotIsurance", "UnInsureSlot", SafeSlots_Main_Confirm_ItemIcon.slot)
+        SafeSlots_Init()
         end
     end)
 SafeSlots_Main_Confirm_InsureButton:SetScript("OnMouseDown",function(self)
@@ -350,6 +351,7 @@ SafeSlots_Main_Confirm_InsureButton:SetScript("OnMouseDown",function(self)
     SafeSlots_Main_Animgroup:Play()
         if (SafeSlots_Main_Confirm_ItemIcon.slot) then
         AIO.Handle("SlotIsurance", "InsureSlot", SafeSlots_Main_Confirm_ItemIcon.slot)
+        SafeSlots_Init()
         end
     end
     end)
