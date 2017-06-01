@@ -158,7 +158,7 @@ local function EntropyPvP(event, pKiller, pKilled)
 									-- Get Money for item part--
 
 											--SQL CHECK IF ITEM IS "SAFE"
-											local SafeSQL = CharDBQuery("SELECT slot"..items_droplist[itemslot_temp][2].." FROM custom_iteminsurance WHERE playerguid = "..player:GetGUIDLow()..";")
+											local SafeSQL = CharDBQuery("SELECT slot"..items_droplist[itemslot_temp][2].." FROM custom_iteminsurance WHERE playerguid = "..pKilled:GetGUIDLow()..";")
 											local DropSafeCost = SafeSlotGetLostCost(item)
 											if (SafeSQL and (SlotSQL:GetInt32(0) == 1) and (pKilled:GetCoinage() >= DropSafeCost)) then
 												pKilled:ModifyMoney(-DropSafeCost)
