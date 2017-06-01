@@ -298,6 +298,7 @@ SafeSlots_Main_Complete_Dialog:Hide()
 local function SafeSlots_Main_Animgroup_End()
     BaseFrameFadeOut(SafeSlots_Main_Complete)
     BaseFrameFadeOut(SafeSlots_Main_Complete_Dialog)
+    AIO.Handle("SlotIsurance", "GetSlotList")
 end
 SafeSlots_Main_Animgroup = SafeSlots_Main:CreateAnimationGroup()
 local SafeSlots_Main_BlankAnim = SafeSlots_Main_Animgroup:CreateAnimation("Scale")
@@ -341,8 +342,9 @@ SafeSlots_Main:SetScript("OnShow", function()
 
 SafeSlots_Main_Confirm_UnInsureButton:SetScript("OnMouseDown",function(self)
     if (SafeSlots_Main_Confirm_ItemIcon.slot) then
+        SafeSlots_Main_Animgroup:Stop()
+        SafeSlots_Main_Animgroup:Play()
         AIO.Handle("SlotIsurance", "UnInsureSlot", SafeSlots_Main_Confirm_ItemIcon.slot)
-        SafeSlots_Init()
         end
     end)
 SafeSlots_Main_Confirm_InsureButton:SetScript("OnMouseDown",function(self)
@@ -351,7 +353,6 @@ SafeSlots_Main_Confirm_InsureButton:SetScript("OnMouseDown",function(self)
     SafeSlots_Main_Animgroup:Play()
         if (SafeSlots_Main_Confirm_ItemIcon.slot) then
         AIO.Handle("SlotIsurance", "InsureSlot", SafeSlots_Main_Confirm_ItemIcon.slot)
-        SafeSlots_Init()
         end
     end
     end)
