@@ -362,3 +362,11 @@ function SlotIsuranceClient.SafeSlots_GetList(player, slotlist)
     Slots = slotlist
     SafeSlots_Init()
 end
+
+function SlotIsuranceClient.SafeSlots_Close(player)
+    SafeSlots_Main:Hide()
+end
+
+function SlotIsuranceClient.SafeSlots_Init(player)
+    SafeSlots_Main:Show()
+end

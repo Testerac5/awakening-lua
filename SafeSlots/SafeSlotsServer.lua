@@ -41,6 +41,10 @@ CREATE TABLE `custom_iteminsurance` (
 ]]--
 
 function SlotIsuranceServer.GetSlotList(player)
+    if not(GreedyDemonCheck(player)) then
+      return false
+    end
+
    local Slots = { -- Empty ARRAY
     [1] = {"Head", "SafeSlot1", false},
     [2] = {"Neck", "SafeSlot2", false},
@@ -87,6 +91,10 @@ function SlotIsuranceServer.InsureSlot(player,slot)
         return false
     end
     --MAIN ACTION--
+    if not(GreedyDemonCheck(player)) then
+      return false
+    end
+
     slot = slot - 1 
     if (player:GetItemCount(InsureCurrency) < 1) then
         player:SendBroadcastMessage("You don't have enough Demon's Tears to do that!")
@@ -118,6 +126,10 @@ function SlotIsuranceServer.UnInsureSlot(player,slot)
         return false
     end
     --MAIN ACTION--
+    if not(GreedyDemonCheck(player)) then
+      return false
+    end
+
     slot = slot - 1 
     local SlotSQL = CharDBQuery("SELECT slot"..slot.." FROM custom_iteminsurance WHERE playerguid = "..player:GetGUIDLow()..";")
 
@@ -134,3 +146,43 @@ function SlotIsuranceServer.UnInsureSlot(player,slot)
     player:AddItem(InsureCurrency)
     --SlotIsuranceServer.GetSlotList(player)
 end
+
+
+--GOSSIP PART
+local GreedyDemon = 75120
+local GreedyDemon_menu = 45004
+
+   function SafeSlots_CloseMenu(msg,player)
+  return msg:Add("SlotIsurance", "SafeSlots_Close")
+end
+
+   function SafeSlots_OpenMenu(msg,player)
+  return msg:Add("SlotIsurance", "SafeSlots_Init")
+end
+
+local function OnGossipHello_GreedyDemon(event, player, Demon)
+player:GossipClearMenu()
+if (Demon:GetOwner() == player) then
+SafeSlots_OpenMenu(AIO.Msg(), player):Send(player)
+end
+player:GossipSendMenu(1, Demon, GreedyDemon_menu) 
+player:GossipComplete()
+end
+RegisterCreatureGossipEvent(GreedyDemon, 1, OnGossipHello_GreedyDemon)
+
+ function GreedyDemonCheck(player)
+  local Demon = nil
+  Demon = player:GetNearestCreature(3, GreedyDemon)
+  if (Demon) and (Demon:GetOwner() == player) then
+    return true
+  end
+  SafeSlots_CloseMenu(AIO.Msg(), player):Send(player)
+  return false
+  end
+
+local function PlayerIsFar(event, creature, unit)
+  for k,player in pairs(creature:GetPlayersInRange(20)) do
+    GreedyDemonCheck(player)
+  end
+end
+ RegisterCreatureEvent(GreedyDemon, 27, PlayerIsFar)
