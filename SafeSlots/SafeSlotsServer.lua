@@ -6,7 +6,7 @@ local SlotIsuranceServer = AIO.AddHandlers("SlotIsurance", {})
 
 --Slot table Structure:
 --PLAYERGUID, head, neck, shoulder etc (0 or 1)
-local InsureCurrency = 17
+local InsureCurrency = 98461
 
 --[[
 SET FOREIGN_KEY_CHECKS=0;

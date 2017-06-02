@@ -30,7 +30,7 @@ local Slots = {
     [19] = {"Tabard", "SafeSlot7", false},
 }
 --name, button, is slot currently activated
-local InsureCurrency = 17
+local InsureCurrency = 98461
 local SafeCostModifier = 885
 local function SafeSlotGetLostCost(itemlink)
     local cost = nil
