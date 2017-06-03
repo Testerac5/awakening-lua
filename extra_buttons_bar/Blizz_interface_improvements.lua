@@ -67,7 +67,10 @@ end
 
     if (UnitLevel("player") >= 10) then
     if (UnitIsGhost("player")) and not(DeathCapitalTeleportButton:IsVisible()) then
-        DeathCapitalTeleportButton:Show()
+            local zonenamename, zonetype = GetInstanceInfo()
+            if not(zonetype == "pvp") then
+            DeathCapitalTeleportButton:Show()
+            end
         elseif not(UnitIsGhost("player")) and (DeathCapitalTeleportButton:IsVisible()) then
         DeathCapitalTeleportButton:Hide()
     end
@@ -107,3 +110,63 @@ function IsSpellLearned(entry)
     end
 return known
 end
+
+--pet status bar--
+--[[function Asc_PetPaperDollFrame_Update()
+    local hasPetUI, canGainXP = HasPetUI();
+    if ( not hasPetUI ) then
+        return;
+    end
+    PetModelFrame:SetUnit("pet");
+    if ( UnitCreatureFamily("pet") ) then
+        PetLevelText:SetFormattedText(UNIT_TYPE_LEVEL_TEMPLATE,UnitLevel("pet"),UnitCreatureFamily("pet"));
+    end
+    if ( PetPaperDollFramePetFrame:IsShown() ) then
+        PetNameText:SetText(UnitName("pet"));
+    end
+    PetExpBar_Update();
+    PetPaperDollFrame_SetResistances();
+    PetPaperDollFrame_SetStats();
+    PaperDollFrame_SetDamage(PetDamageFrame, "Pet");
+    PaperDollFrame_SetArmor(PetArmorFrame, "Pet");
+    PaperDollFrame_SetAttackPower(PetAttackPowerFrame, "Pet");
+    PetPaperDollFrame_SetSpellBonusDamage();
+
+    if ( GetPetFoodTypes() ) then
+        PetPaperDollPetInfo:Show();
+    else
+        PetPaperDollPetInfo:Hide();
+    end
+end
+ActionButton_UpdateUsable = Asc_PetPaperDollFrame_Update]]--
+
+--[[function Asc_PetFrame_SetHappiness ()
+    local happiness, damagePercentage = GetPetHappiness();
+    local hasPetUI, isHunterPet = HasPetUI();
+    if ( not damagePercentage) then
+        PetFrameHappiness:Hide();
+        return; 
+    end
+    PetFrameHappiness:Show();
+
+    --custom hapiness indicator 
+    if (damagePercentage > 100) then
+        happiness = 3
+        elseif (damagePercentage == 100) then
+            happiness = 2
+        else
+            happiness = 1
+        end
+    --end
+    if ( happiness == 1 ) then
+        PetFrameHappinessTexture:SetTexCoord(0.375, 0.5625, 0, 0.359375);
+    elseif ( happiness == 2 ) then
+        PetFrameHappinessTexture:SetTexCoord(0.1875, 0.375, 0, 0.359375);
+    elseif ( happiness == 3 ) then
+        PetFrameHappinessTexture:SetTexCoord(0, 0.1875, 0, 0.359375);
+    end
+    PetFrameHappiness.tooltip = _G["PET_HAPPINESS"..happiness];
+    PetFrameHappiness.tooltipDamage = format(PET_DAMAGE_PERCENTAGE, damagePercentage);
+end
+
+PetFrame_SetHappiness = Asc_PetFrame_SetHappiness]]--
