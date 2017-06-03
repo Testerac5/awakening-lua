@@ -31,7 +31,7 @@ local Slots = {
 }
 --name, button, is slot currently activated
 local InsureCurrency = 98461
-local SafeCostModifier = 885
+local SafeCostModifier = 3540
 local function SafeSlotGetLostCost(itemlink)
     local cost = nil
     local _, _, _, iLevel = GetItemInfo(itemlink)
