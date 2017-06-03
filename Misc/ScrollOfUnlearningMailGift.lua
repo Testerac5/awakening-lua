@@ -1,4 +1,4 @@
-local Gift_Text = "Your feats in Azeroth will never be forgotten $N. and we hope that this humble reward will help you along your way!"
+local Gift_Text = "Your feats in Azeroth will never be forgotten. We hope that this humble reward will help you along your way!"
 local Gift_Subject = "To the Great Hero of Azeroth!"
 local function ScrollGift(event, player, oldLevel)
 	if ((oldLevel+1)%10 == 0) then
