@@ -48,7 +48,7 @@ local item_looted = {}
 	item_table[object:GetGUIDLow()] = nil
 	print("Chest removed from world")
 end]]--
-local SafeCostModifier = 885
+local SafeCostModifier = 3540
 function SafeSlotGetLostCost(item)
 	local cost = nil
 	cost = item:GetItemLevel() * SafeCostModifier -- Temporary was 2285
