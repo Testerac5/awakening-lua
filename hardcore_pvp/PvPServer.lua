@@ -75,7 +75,9 @@ local function PVP_ItemCheck(item, target)
 					return true
 end
 
-local function EntropyPvP(event, pKiller, pKilled)
+local function EntropyPvP(event, pKiller
+pKilled, pKiller
+pKilled)
 	--PLAYER_EVENT_ON_KILLED_BY_CREATURE
 	if pKiller:ToCreature() then
 		if not(pKiller:GetOwner()) then
@@ -96,6 +98,7 @@ local function EntropyPvP(event, pKiller, pKilled)
 	local items_droplist = {}
 	local spawnType = 2
 	local instanceID = pKiller:GetInstanceId()
+	local DropGold = 0
 	for i,v in ipairs(safety_ids) do
 		if v == pKiller_loc then
 			check_safe = true
@@ -168,7 +171,7 @@ local function EntropyPvP(event, pKiller, pKilled)
 											if (SafeSQL and (SafeSQL:GetInt32(0) == 1) and (pKilled:GetCoinage() >= DropSafeCost)) then
 												pKilled:ModifyMoney(-DropSafeCost)
 												pKiller:ModifyMoney(DropSafeCost)
-												pKiller:SendBroadcastMessage("You got gold reward for killing this person")
+												DropGold = DropGold + DropSafeCost
 											else
 											if (item:GetClass() == 2 or item:GetClass() == 4) then
 											if (item:GetEnchantmentId(5) == 0 or item:GetEnchantmentId(5) == nil) then
@@ -201,6 +204,12 @@ local function EntropyPvP(event, pKiller, pKilled)
 		else
 			pKilled:SendBroadcastMessage("You have commited suicide, none of your items were lost")
 		end -- end of suicide check
+
+		if (DropGold > 0) then
+			local gold,silver,copper = GetGoldForMoney(DropGold)
+			pKiller:SendBroadcastMessage("You recieved |cffFFFFFF"..gold.."|TInterface\\MONEYFRAME\\UI-GoldIcon.blp:11:11:0:-1|t "..silver.."|TInterface\\MONEYFRAME\\UI-SilverIcon.blp:11:11:0:-1|t "..copper.."|TInterface\\MONEYFRAME\\UI-CopperIcon.blp:11:11:0:-1|t|r from killing this player")
+			pKilled:SendBroadcastMessage("You lost |cffFFFFFF"..gold.."|TInterface\\MONEYFRAME\\UI-GoldIcon.blp:11:11:0:-1|t "..silver.."|TInterface\\MONEYFRAME\\UI-SilverIcon.blp:11:11:0:-1|t "..copper.."|TInterface\\MONEYFRAME\\UI-CopperIcon.blp:11:11:0:-1|t|r but saved your items by Fel Commutation")
+		end
 end
 
 --[[local function CreatureDeath (event, pKiller, pKilled)
@@ -413,7 +422,7 @@ RegisterPlayerEvent(6, EntropyPvP)
 RegisterGameObjectGossipEvent(818001, 1, Container_Interact)
 
 
---Demonic rune fix
+--[[Demonic rune fix
 local function DemonicRuneFix(event, player, spell, skipCheck)
 	if not(spell:GetEntry() == 16666) then
 		return false
@@ -424,4 +433,4 @@ local function DemonicRuneFix(event, player, spell, skipCheck)
 	end
 
 end
-RegisterPlayerEvent(5, DemonicRuneFix)
+RegisterPlayerEvent(5, DemonicRuneFix)]]--
