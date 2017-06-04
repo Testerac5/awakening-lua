@@ -70,7 +70,7 @@ SafeSlots_Main_TitleText:SetFont("Fonts\\FRIZQT__.TTF", 11)
 SafeSlots_Main_TitleText:SetFontObject(GameFontNormal)
 SafeSlots_Main_TitleText:SetPoint("TOP", 0, -55)
 SafeSlots_Main_TitleText:SetShadowOffset(1,-1)
-SafeSlots_Main_TitleText:SetText("Item Slot Insurance")
+SafeSlots_Main_TitleText:SetText("Fel Commutation")
 
 SafeSlots_Main:Hide()
                                                                                         --END OF MAIN FRAME
@@ -201,7 +201,7 @@ SafeSlots_Main_Confirm_UnInsureButton:SetWidth(120)
 SafeSlots_Main_Confirm_UnInsureButton:SetHeight(21) 
 SafeSlots_Main_Confirm_UnInsureButton:SetPoint("CENTER", 0,-54) 
 SafeSlots_Main_Confirm_UnInsureButton:RegisterForClicks("AnyUp") 
-SafeSlots_Main_Confirm_UnInsureButton:SetText("Remove Insurance")
+SafeSlots_Main_Confirm_UnInsureButton:SetText("Remove Commutation")
 
 
 local SafeSlots_Main_Confirm_InsureButton = CreateFrame("Button", "SafeSlots_Main_Confirm_InsureButton", SafeSlots_Main_Confirm, "UIPanelButtonTemplate")
@@ -209,7 +209,7 @@ SafeSlots_Main_Confirm_InsureButton:SetWidth(120)
 SafeSlots_Main_Confirm_InsureButton:SetHeight(21) 
 SafeSlots_Main_Confirm_InsureButton:SetPoint("CENTER", 0,-54) 
 SafeSlots_Main_Confirm_InsureButton:RegisterForClicks("AnyUp") 
-SafeSlots_Main_Confirm_InsureButton:SetText("Insure slot")
+SafeSlots_Main_Confirm_InsureButton:SetText("Commute slot")
 
 
 SafeSlots_Main_Confirm_ItemIcon = CreateFrame("Button", "SafeSlots_Main_Confirm_ItemIcon", SafeSlots_Main_Confirm, "SecureActionButtonTemplate")
@@ -236,7 +236,7 @@ SafeSlots_Main_Confirm:SetScript("OnUpdate", function(self)
         local _, _, _, _, _, _, _, _, _, texture = GetItemInfo(Link)
         local gold,silver,copper = GetGoldForMoney(SafeSlotGetLostCost(Link))
         SafeSlots_Main_Confirm_ItemIcon:SetNormalTexture(texture)
-        SafeSlots_Main_CostText:SetText("Lost of this item\nwill cost you|r\n\n|cffFFFFFF"..gold.."|TInterface\\MONEYFRAME\\UI-GoldIcon.blp:11:11:0:-1|t "..silver.."|TInterface\\MONEYFRAME\\UI-SilverIcon.blp:11:11:0:-1|t "..copper.."|TInterface\\MONEYFRAME\\UI-CopperIcon.blp:11:11:0:-1|t|r")
+        SafeSlots_Main_CostText:SetText("Losing this item\nwill cost you|r\n\n|cffFFFFFF"..gold.."|TInterface\\MONEYFRAME\\UI-GoldIcon.blp:11:11:0:-1|t "..silver.."|TInterface\\MONEYFRAME\\UI-SilverIcon.blp:11:11:0:-1|t "..copper.."|TInterface\\MONEYFRAME\\UI-CopperIcon.blp:11:11:0:-1|t|r")
     else
         SafeSlots_Main_Confirm_ItemIcon:SetNormalTexture("Interface\\PaperDoll\\UI-Backpack-EmptySlot")
         SafeSlots_Main_CostText:SetText("This slot is empty")
