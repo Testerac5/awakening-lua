@@ -413,3 +413,15 @@ RegisterPlayerEvent(6, EntropyPvP)
 RegisterGameObjectGossipEvent(818001, 1, Container_Interact)
 
 
+--Demonic rune fix
+local function DemonicRuneFix(event, player, spell, skipCheck)
+	if not(spell:GetEntry() == 16666) then
+		return false
+	end
+
+	if player:IsDead() then
+		print("you died by using demonic rune")
+	end
+
+end
+RegisterPlayerEvent(5, DemonicRuneFix)
