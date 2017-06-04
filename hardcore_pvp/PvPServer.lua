@@ -75,9 +75,7 @@ local function PVP_ItemCheck(item, target)
 					return true
 end
 
-local function EntropyPvP(event, pKiller
-pKilled, pKiller
-pKilled)
+local function EntropyPvP(event, pKiller, pKilled)
 	--PLAYER_EVENT_ON_KILLED_BY_CREATURE
 	if pKiller:ToCreature() then
 		if not(pKiller:GetOwner()) then
