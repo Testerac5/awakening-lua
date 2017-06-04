@@ -246,7 +246,7 @@ SafeSlots_Main_Confirm:SetScript("OnUpdate", function(self)
     SafeSlots_Main_Confirm_InsureButton:Hide()
      else-- player has not insured slot
         SafeSlots_Main_Confirm_ItemIcon:SetNormalTexture("Interface\\icons\\inv_custom_demonstears")
-        SafeSlots_Main_CostText:SetText("Insure cost:\n\n|cffa335ee[Demon's Tears]|r |cffFFFFFFx1|r")
+        SafeSlots_Main_CostText:SetText("Commutation cost:\n\n|cffa335ee[Demon's Tears]|r |cffFFFFFFx1|r")
             SafeSlots_Main_Confirm_UnInsureButton:Hide()
             SafeSlots_Main_Confirm_InsureButton:Show()
      end
