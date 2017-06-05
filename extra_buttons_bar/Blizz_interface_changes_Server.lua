@@ -30,8 +30,8 @@ end
 
  function GetGoldForMoney(cost)
     local c_gold,c_silver,c_copper = 0
-            c_gold = floor(abs(cost / 10000))
-            c_silver = floor(abs(mod(cost / 100, 100)))
-            c_copper = floor(abs(mod(cost, 100)))
+            c_gold = math.floor(math.abs(cost / 10000))
+            c_silver = math.floor(math.abs(math.fmod(cost / 100, 100)))
+            c_copper = math.floor(math.abs(math.fmod(cost, 100)))
             return c_gold,c_silver,c_copper
 end
